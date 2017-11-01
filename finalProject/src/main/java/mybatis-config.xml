@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+ <configuration>
+ 	<mappers>
+ 		<mapper resource="sql/foodSql.xml"/>
+ 		<mapper resource="sql/culSql.xml"/>
+ 		<mapper resource="sql/tourSql.xml"/>
+	 	<mapper resource="sql/complainSql.xml" />
+ 		<mapper resource="sql/adminSql.xml" />
+ 		<mapper resource="sql/blackSql.xml" />
+ 		<mapper resource="sql/superHostSql.xml" />
+ 	</mappers>
+ </configuration>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.complain">
+	<!-- select -->
+	<select id="complainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain order by idx ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+   </select>
+   
+   
+     <select id="totalCnt" resultType="int" >
+       select count(*) from complain
+       
+   </select>
+   
+   	<select id="complainContent" resultType="korea.complain.model.ComplainDTO" parameterType="int">
+ 
+	select * from complain where idx = #{idx} 
+
+   </select>
+   
+   <update id="complainUpdateSql" parameterType="map">
+   		update complain set incharge = #{incharge} , resdate = sysdate, resContent = #{resContent} , res=1  where idx = #{idx} 
+   </update>
+   
+   
+   
+</mapper>

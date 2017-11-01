@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.superHost">
+	<!-- select -->
+	<select id="superHostSql" resultType="korea.superHost.model.SuperHostDTO" parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from superHost where type = #{type} ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+   </select>
+   
+   
+     <select id="superHostTotalCntSql" resultType="int" >
+       select count(*) from superHost
+       
+   </select>
+   
+
+   
+   
+   
+</mapper>

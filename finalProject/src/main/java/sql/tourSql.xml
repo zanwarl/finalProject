@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.tour">
+	<!-- select -->
+		<select id="tourCmtList" parameterType="String" resultType="korea.tour.model.tourCmtDTO">
+			select * 
+			from tour_comment 
+			where tour_cmt_pidx = #{tour_cmt_pidx}
+		</select>
+		
+		
+	<!-- insert -->
+		<select id="tourCmtWrite" parameterType="korea.tour.model.tourCmtDTO" resultType="korea.tour.model.tourCmtDTO">
+			insert into tour_comment values(tour_cmt_idx.nextval,#{tour_cmt_pidx},'1','둘리',#{tour_cmt_content},sysdate)
+		</select>
+</mapper>
