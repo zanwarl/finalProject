@@ -215,7 +215,7 @@ public class TourController {
 	@RequestMapping("/tourCmtWrite.do")
 	public ModelAndView replyWrite(HttpServletRequest hsr, tourCmtDTO cmtdto) {
 		System.out.println("내용 : " + cmtdto.getTour_cmt_content());
-		System.out.println(hsr.getRequestURI());
+		//System.out.println(hsr.getRequestURI());
 
 		
 		ModelAndView mav = new ModelAndView();
