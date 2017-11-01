@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>index.jsp 입니다</h1>
+<h1>index.jsp 입니다(11-02)</h1>
 <ul>
 	<li><a href="tour.do">여행지</a></li>
 	<li><a href="home.do">숙소</a></li>
