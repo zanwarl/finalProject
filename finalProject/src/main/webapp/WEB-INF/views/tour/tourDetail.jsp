@@ -119,8 +119,7 @@
 		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
 		<input type="hidden" name="tour_cmt_pidx" value="${contentId }">
-		<input type="text" name="url" value=" ${ pageContext.request.requestURL }">
-		<input type="text" name="url" value=" ${ param.parameterName }">
+		<input type="hidden" name="queryStr" value="${pageContext.request.queryString}">
 		
 	</form>
 	<c:if test="${empty list }">
@@ -131,6 +130,8 @@
 	내용 : ${list.tour_cmt_content }
 	작성일 : ${list.tour_cmt_writeDate }
 	 </c:forEach>
+	 <br>
+	 ${page }
 	</div>
 	<!-- <div id="map">지도영역</div> -->
 

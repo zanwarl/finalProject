@@ -24,6 +24,13 @@ public class AdminController {
 	AdminDAO adao ; 
 	
 	
+	@RequestMapping (value="/sideBar.do")
+	public String sideBar(){
+		return "admin/sideBar";
+		
+	}
+	
+	
 	@RequestMapping(value="/adminLogin.do", method= RequestMethod.GET)
 	public String adminLoginFm (){
 		return "admin/adminLoginFm";

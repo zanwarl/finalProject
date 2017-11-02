@@ -4,5 +4,5 @@
 <script>
 	window.alert('${msg}');
 	
-	location.href="index.do";
+	location.href= "${url}";
 </script>

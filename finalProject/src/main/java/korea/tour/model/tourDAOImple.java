@@ -1,5 +1,6 @@
 package korea.tour.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -18,9 +19,21 @@ public class tourDAOImple implements tourDAO {
 		int result = sqlMap.insert("tourCmtWrite", cmtdto);
 		return result;
 	}
-	public List<tourCmtDTO> tourcmtList(String tour_cmt_pidx) {
+	
+	public int totalCnt(String contentId) {
+		int result = sqlMap.selectOne("tourTotalCnt", contentId);
+		System.out.println("otalcnt" + result);
+		return result;
+	}
+	public List<tourCmtDTO> tourcmtList(String tour_cmt_pidx, int cp, int pageRow) {
 		//System.out.println("sql : " + tour_cmt_pidx);
-		List<tourCmtDTO> list = sqlMap.selectList("tourCmtList", tour_cmt_pidx);
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("tour_cmt_pidx", tour_cmt_pidx);
+		map.put("cp", cp);
+		map.put("pageRow", pageRow);
+		
+		List<tourCmtDTO> list = sqlMap.selectList("tourCmtList", map);
 		return list;
 	}
 }
