@@ -77,7 +77,11 @@ public class ComplainDAOImple implements ComplainDAO {
 		
 	}
 
-
+	public int comReqWrite(ComplainDTO dto){
+		System.out.println("³»¿ë: " + dto.getContent());
+		int result = sqlMap.insert("comReqWrite",dto);
+		return result;
+	}	
 
 
 

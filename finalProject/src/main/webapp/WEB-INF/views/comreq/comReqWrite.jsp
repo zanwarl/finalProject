@@ -16,15 +16,15 @@
 <table>
 	<tr>
 		<th>신고자</th>
-		<td><input type="text" name="sender_idx"></td>
+		<td><input type="text" name="sender"></td>
 	</tr>
 	<tr>
 		<th>신고대상자</th>
-		<td><input type="text" name="recever_idx"></td>
+		<td><input type="text" name="receiver"></td>
 	</tr>
 	<tr>
 		<th>분류</th>
-		<td><select name="comreq_cate">
+		<td><select name="type">
 			<option value="1">호스트->게스트</option>
 			<option value="2">게스트->호스트</option>
 			<option value="3">일반</option>
@@ -32,7 +32,7 @@
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td><textarea rows="10" cols="30" name="comreq_con"></textarea></td>
+		<td><textarea rows="10" cols="30" name="content"></textarea></td>
 	</tr>
 	<tr>
 		<td colspan="2">
