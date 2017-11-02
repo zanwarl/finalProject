@@ -97,10 +97,30 @@
 	<tfoot>
 		<tr>
 		
-			<td colspan="7">
+			<td colspan="7" align="center">
 				${pageStr }
 			
 			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="7" align="center">
+				<form action="complainSearch.do" method="get">
+					<select>
+						<option value="1">idx</option>
+						<option value="2">신고자</option>
+						<option value="3">피신고자</option>
+						<option value="4">담당자</option>
+
+					</select>
+					
+					
+					<input type="text" name="val">
+					<input type="submit" value="검색">
+				
+				</form>
+			</td>
+			
 		</tr>
 	
 	</tfoot>
