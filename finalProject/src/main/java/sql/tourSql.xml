@@ -20,9 +20,16 @@
 	
 	<!-- select end -->
 		
-		
 	<!-- insert -->
 		<select id="tourCmtWrite" parameterType="korea.tour.model.tourCmtDTO" resultType="korea.tour.model.tourCmtDTO">
 			insert into tour_comment values(tour_cmt_idx.nextval,#{tour_cmt_pidx},'1','둘리',#{tour_cmt_content},sysdate)
 		</select>
+	<!-- insert end -->
+	
+	<!-- delete start -->
+		<select id="tourCmtDel" parameterType="int" resultType="int">
+			delete tour_comment where tour_cmt_midx = 1 and tour_cmt_idx = #{idx}
+		</select>
+	<!-- delete end -->
+	
 </mapper>

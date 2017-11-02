@@ -15,8 +15,13 @@ public class tourDAOImple implements tourDAO {
 	}
 	
 	public int tourcmtWrite(tourCmtDTO cmtdto) {
-		System.out.println("코드번호 " + cmtdto.getTour_cmt_pidx());
 		int result = sqlMap.insert("tourCmtWrite", cmtdto);
+		return result;
+	}
+	
+	public int tourcmtDel(int idx) {
+		System.out.println("000000" + idx);
+		int result = sqlMap.delete("tourCmtDel", idx);
 		return result;
 	}
 	
