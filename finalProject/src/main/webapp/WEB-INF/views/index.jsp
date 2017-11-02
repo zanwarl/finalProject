@@ -12,6 +12,7 @@
 	<li><a href="tour.do">여행지</a></li>
 	<li><a href="home.do">숙소</a></li>
 	<li><a href="food.do">레스토랑</a></li>
+	<li><a href="foodReq.do">레스토랑예약</a></li>
 	<li><a href="plan.do">여행일정</a></li>
 	<li><a href="plan.do">여행일정</a></li>
 	<li><a href="comReq.do">신고하기</a></li>
