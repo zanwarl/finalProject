@@ -13,10 +13,10 @@
 			#{receiver},
 			#{content},
 			sysdate,
-			1,
-			sysdate,
-			2,
+			0,
+			'',
+			'',
 			#{type},
-			' ')
+			'')
 	</insert>
 </mapper>
