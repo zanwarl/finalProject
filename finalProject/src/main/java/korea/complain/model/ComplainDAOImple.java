@@ -77,7 +77,42 @@ public class ComplainDAOImple implements ComplainDAO {
 		
 	}
 
+	public int comReqWrite(ComplainDTO dto){
+		System.out.println("³»¿ë: " + dto.getContent());
+		int result = sqlMap.insert("comReqWrite",dto);
+		return result;
+	}
 
+
+
+	public List<ComplainDTO> noAnsComplainList(int cp, int listSize) {
+		// TODO Auto-generated method stub
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+	 	
+		int startNum = (cp-1)*listSize+1;
+		int endNum = cp*listSize;
+		 
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		List <ComplainDTO> list = sqlMap.selectList("noAnsComplainList", map);
+		return list; 
+		
+		
+		
+		
+		//noAnsComplainList
+	
+	}
+
+
+
+	public int getTOtalCnt(boolean isAns) {
+		// TODO A
+		int res = sqlMap.selectOne("noAnsTotalCnt");
+		return res ;
+		//noAnsTotalCnt
+	}	
 
 
 

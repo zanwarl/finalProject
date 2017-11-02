@@ -124,6 +124,34 @@ public class ComplainController {
 		return mav ; 
 	}
 	
+	@RequestMapping("/noAnsComplainList.do")
+	public ModelAndView noAnsComplainList(@RequestParam(value = "cp", defaultValue ="1") int cp ){
+		
+		
+		int totalCnt = comdao.getTOtalCnt(); 
+		
+		int listSize = 5;
+		int pageSize = 5;
+		
+		
+		
+		List<ComplainDTO> list = comdao.noAnsComplainList(cp, listSize);
+		
+		
+		String pageStr = korea.page.PageModule.makePage("noAnsComplainList.do", totalCnt, listSize, pageSize, cp);
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		
+		mav.setViewName("complain/noAnsComplainList");
+		
+		return mav ; 
+	}
+	
 	
 	
 	@RequestMapping ("/complainContent.do")
@@ -142,5 +170,28 @@ public class ComplainController {
 		return mav; 
 		
 	}
+	
 
-}
+		@RequestMapping("/comReq.do")
+			
+		public String comReq() {
+			
+			return "comreq/comReqWrite";
+		}
+		
+		@RequestMapping("/comReqWrite.do")
+
+			public ModelAndView comReqWrite(ComplainDTO dto){
+				ModelAndView mav = new ModelAndView();
+				int result = comdao.comReqWrite(dto);
+				String msg = result>0?"등록성공":"등록실패";
+				mav.setViewName("comreq/comReqOk");
+				mav.addObject("msg", msg);
+				return mav;
+			}
+		}
+		
+
+	
+
+
