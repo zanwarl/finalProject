@@ -8,7 +8,7 @@ public interface ComplainDAO {
 	public ComplainDTO complainContetn ( int idx);
 	
 	public int complainAns (String incharge, String resContent, int idx ); 
-	
+	public int givePenalty(int idx);
 	
 	
 	

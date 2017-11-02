@@ -8,6 +8,21 @@
 <head>
 <meta charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+
+function mailPopup(){
+	window.open ('sendMail.do', 'sendMail', 'width= 500, height= 500');
+}
+/* 
+function userInfoPopup(x){
+	window.open('x', 'userInfo','width=500, height= 500');
+}
+ */
+ 
+ 
+</script>
+
 </head>
 <body>
 
@@ -26,9 +41,23 @@ complain info
 <c:set var ="dto" value=  "${con}"></c:set>
 <tr>
 	<th>신고자</th>
-	<td>${dto.sender }</td>
-		<th>피신고자</th>
-	<td>${dto.receiver }</td>
+	<c:url value="userInfo.do" var= "userInfoURL">
+		<c:param name="idx" value="${dto.sender }"></c:param>
+	
+	</c:url>
+	
+	
+	<td> <a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.sender } </a><input type="button" value="메일" onclick="mailPopup()">  </td>
+		<th>피신고자</th> 
+		
+		
+	<td>
+		<c:url value="userInfo.do" var= "userInfoURL">
+		<c:param name="idx" value="${dto.receiver }"></c:param>
+	
+	</c:url>
+	
+	<a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.receiver } </a><input type="button" value="메일" onclick="mailPopup()">  </td>
 		<th>상태</th>
 	<td>${dto.res }</td>
 
@@ -38,7 +67,7 @@ complain info
 	<td>
 		<c:if test="${empty dto.incharge }">
 		
-		<input type="text" name="incharge" value ="  ${sId }">
+		<input type="text" name="incharge" value ="${sId }" readonly="readonly">
 		
 		</c:if>
 		<c:if test="${not empty dto.incharge }">

@@ -26,6 +26,11 @@
    		update complain set incharge = #{incharge} , resdate = sysdate, resContent = #{resContent} , res=1  where idx = #{idx} 
    </update>
    
+
+<update id="givePenaltySql" parameterType="int" >
+	update member set member_host_grade = member_host_grade-1 where member_idx= #{idx}
+
+</update>
    
    
 </mapper>

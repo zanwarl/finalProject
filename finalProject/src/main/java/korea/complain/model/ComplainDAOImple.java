@@ -69,4 +69,17 @@ public class ComplainDAOImple implements ComplainDAO {
 
 
 
+	public int givePenalty(int idx) {
+		int res = sqlMap.update("givePenaltySql", idx);
+		return res ; 
+		
+		
+		
+	}
+
+
+
+
+
+
 }

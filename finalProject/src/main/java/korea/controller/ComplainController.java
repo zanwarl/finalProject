@@ -19,6 +19,53 @@ public class ComplainController {
 	private ComplainDAO comdao;
 	
 	
+/*	@RequestMapping (value ="/sendMail.do", method=RequestMethod.GET)
+	public String sendMailFm(){
+		return "complain/mailForm";
+		
+	}*/
+	
+	
+	
+	
+	@RequestMapping(value="/userInfo.do")
+	public ModelAndView userInfo (@RequestParam (value="idx")int idx){
+	//	int res = comdao.givePenalty(idx);
+	//	String msg = res>0? "success": "fail";
+	//	String goURL ="complainList.do";
+		
+		ModelAndView mav= new ModelAndView(); 
+		mav.setViewName("complain/userInfo");
+		mav.addObject("idx", idx);
+		
+		
+		return mav; 
+		
+		
+		
+		
+		
+	}
+	
+	@RequestMapping(value="/givePenalty.do")
+	public ModelAndView givePenalty (@RequestParam (value="idx")int idx){
+		int res = comdao.givePenalty(idx);
+		String msg = res>0? "success": "fail";
+		String goURL ="complainList.do";
+		
+		ModelAndView mav= new ModelAndView(); 
+		mav.setViewName("admin/closeMsg");
+		mav.addObject("msg", msg);
+		
+		return mav; 
+		
+		
+		
+		
+		
+	}
+	
+	
 	@RequestMapping (value = "/complainAns.do", method= RequestMethod.POST)
 	public ModelAndView complainAns (){
 
