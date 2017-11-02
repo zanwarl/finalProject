@@ -6,13 +6,24 @@
 	<!-- select -->
 	<select id="complainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
   <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from complain order by idx ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  select * from (select rownum rnum,a.* from (select * from complain order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+   </select>
+	
+	<select id="noAnsComplainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain order by idx desc where res=0 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
    ]]>
    </select>
    
    
      <select id="totalCnt" resultType="int" >
        select count(*) from complain
+       
+   </select>
+     <select id="noAnsTotalCnt" resultType="int" >
+       select count(*) from complain where res = 0
        
    </select>
    
@@ -31,6 +42,9 @@
 	update member set member_host_grade = member_host_grade-1 where member_idx= #{idx}
 
 </update>
-   
+
+
+
+
    
 </mapper>
