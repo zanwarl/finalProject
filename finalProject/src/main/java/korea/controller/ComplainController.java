@@ -142,5 +142,28 @@ public class ComplainController {
 		return mav; 
 		
 	}
+	
 
-}
+		@RequestMapping("/comReq.do")
+			
+		public String comReq() {
+			
+			return "comreq/comReqWrite";
+		}
+		
+		@RequestMapping("/comReqWrite.do")
+
+			public ModelAndView comReqWrite(ComplainDTO dto){
+				ModelAndView mav = new ModelAndView();
+				int result = comdao.comReqWrite(dto);
+				String msg = result>0?"등록성공":"등록실패";
+				mav.setViewName("comreq/comReqOk");
+				mav.addObject("msg", msg);
+				return mav;
+			}
+		}
+		
+
+	
+
+

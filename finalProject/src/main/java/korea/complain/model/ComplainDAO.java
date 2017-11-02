@@ -9,6 +9,7 @@ public interface ComplainDAO {
 	
 	public int complainAns (String incharge, String resContent, int idx ); 
 	public int givePenalty(int idx);
+	public int comReqWrite(ComplainDTO dto);
 	
 	
 	
