@@ -85,7 +85,14 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
+	
+	<bean id="comReqDAO" class="korea.comreq.model.ComReqDAOImple">
+	<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>	
+	</bean>
 
+	
 
 	<!-- views -->
 	<bean id="viewResolver"
