@@ -1,4 +1,4 @@
-package comreq.model;
+package korea.comreq.model;
 
 import java.sql.Date;
 

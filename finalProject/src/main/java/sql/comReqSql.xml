@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comreq.model">
+	<!-- insert -->
+	<insert id="comReqWrite" parameterType="korea.comreq.model.ComReqDTO">
+		insert into
+				complain_req
+			values(
+			comreq_idx.nextval,
+			#{sender_idx},
+			#{recever_idx},
+			#{comreq_con},
+			sysdate,
+			#{comreq_cate})
+	</insert>
+</mapper>
