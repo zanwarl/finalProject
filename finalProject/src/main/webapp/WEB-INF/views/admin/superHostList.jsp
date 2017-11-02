@@ -6,6 +6,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
 <meta  charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -21,7 +24,17 @@
 </div>
 
 
-superHost
+<!-- Page Content -->
+<div style="margin-left:25%">
+
+<div class="w3-container w3-teal">
+  <h1>슈퍼호스트</h1>
+</div>
+
+
+
+<div class="w3-container">
+
 
 <form action="superHostList.do">
 	
@@ -87,6 +100,32 @@ superHost
 
 
 </table>
+
+
+
+</div>
+
+</div>
+      
+
+
+<jsp:include page="loginInfo.jsp"></jsp:include>
+ <c:if test="${empty sId }">
+	
+	<a href="adminLogin.do">로그인</a>
+
+</c:if>
+<c:if test="${!empty sId }">
+	${sId }님 로그인중 ...<a href="adminLogout.do">로그아웃</a>
+</c:if>
+  
+	<a href="adminLogin.do">관리자로그인</a>
+	
+
+
+
+
+
 
 
 

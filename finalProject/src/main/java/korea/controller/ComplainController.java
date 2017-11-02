@@ -67,10 +67,32 @@ public class ComplainController {
 	
 	
 	@RequestMapping (value = "/complainAns.do", method= RequestMethod.POST)
-	public ModelAndView complainAns (){
+	public ModelAndView complainAns (
+			@RequestParam (value="incharge")String incharge, 
+			@RequestParam (value="resContent")String resContent, 
+			@RequestParam (value="idx")int idx
+			
+			
+			//String incharge, String resContent, int idx
+			
+			){
 
+		
+		int res = comdao.complainAns(incharge, resContent, idx);
+		String msg = res>0? "성공":"실패";
+		String goURL = res>0? "complainList.do":"complainContent.do?idx="+idx;
+		
+		
+		
+		
+		
+		
 		ModelAndView mav = new ModelAndView();
 
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+		
+		mav.setViewName("admin/adminMsg");
 		return mav ; 
 	}
 	
@@ -104,7 +126,7 @@ public class ComplainController {
 	
 	
 	
-	@RequestMapping ("/complainContent")
+	@RequestMapping ("/complainContent.do")
 	public ModelAndView complainContent (@RequestParam("idx")int idx){
 		
 		ComplainDTO dto = comdao.complainContetn(idx);
