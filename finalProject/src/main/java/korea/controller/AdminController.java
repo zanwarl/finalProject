@@ -91,7 +91,7 @@ public class AdminController {
 		session.invalidate();
 		
 		
-		return "admin/adminMain";
+		return "admin/adminLoginFm";
 		
 	}
 	
