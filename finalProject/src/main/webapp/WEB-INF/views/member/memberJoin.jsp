@@ -28,7 +28,7 @@ function pwd(){
 <table align="center" style="text-align: left;">
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="member_id"  maxlength="16" readonly>
+		<td><input type="text" name="member_id" placeholder="아이디" maxlength="16" readonly>
 		<input type="button" value="중복확인" onclick="openMemberCheck()"></td>
 	</tr>
 	
