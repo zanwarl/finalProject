@@ -97,16 +97,17 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
-<<<<<<< HEAD
 	<bean id="PlanDAO" class="korea.plan.model.PlanDAOImple">
-=======
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
 	<bean id="msgDAO" class="korea.msg.model.MsgDAOImple">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
 	<bean id="memberDAO" class="korea.member.model.MemberDAOImple">
->>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
