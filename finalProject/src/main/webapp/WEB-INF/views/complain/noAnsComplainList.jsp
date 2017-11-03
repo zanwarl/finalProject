@@ -51,7 +51,7 @@
 </div>
 
 
-a
+
 <div class="w3-container">
 <table>
 	<thead>
@@ -119,7 +119,8 @@ a
 					<input type="submit" value="검색">
 				
 				</form>
-				<a href="noAnsComplainList.do">미처리신고</a>
+				<a href="complainList.do">목록으로</a>
+			
 			</td>
 			
 		</tr>

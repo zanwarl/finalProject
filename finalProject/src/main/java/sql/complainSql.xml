@@ -12,7 +12,7 @@
 	
 	<select id="noAnsComplainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
   <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from complain order by idx desc where res=0 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  select * from (select rownum rnum,a.* from (select * from complain where res = 0 order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
    
    ]]>
    </select>
