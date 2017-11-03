@@ -85,6 +85,11 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
+	<bean id="msgDAO" class="korea.msg.model.MsgDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
 
 	
 
