@@ -4,16 +4,25 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<script>
-	$( function() {
-	$( "#datepicker" ).datepicker();
-	});
+  <link rel="stylesheet" href="/resources/demos/style.css">
 
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+  <script>
+
+  $( function() {
+
+    $( "#datepicker" ).datepicker();
+
+  } );
+
+  </script>
+
+  <script>
 	window.onload = function TimeBtn(){
 		var timediv = document.getElementById("reqTime");
 		for(var i=0;i<10;i++){
@@ -21,11 +30,12 @@
 		}
 	}
 
-  /* function change(num){
+  function change(num){
 	  var max=10;
 	  var p_num= document.getElementById("p_num");
 	  var pas_num = Number(p_num.innerHTML);
 	  var result = pas_num+num;
+	  document.culreqCon1.p_num.value += 1;
 	  p_num.innerHTML = result;
 	  
 	  if(result<1){
@@ -36,43 +46,21 @@
 		  result--;
 		  p_num.innerHTML=result;
 	  }
-  } */
-  
-
-function addNum(){
-	var frm = document.culreqCon1;
-	var p_num = frm.p_num.value;
-	
-	if(Number(p_num) > 10){
-		alert("최대 10명까지 예약할 수 있습니다.");
-	}else{
-		frm.p_num.value = Number(p_num) + 1;
-	}
-}
-  
-function subNum(){
-	var frm = document.culreqCon1;
-	var p_num = frm.p_num.value;
-	
-	if(Number(p_num) < 2){
-		alert("최소 1명 이상 선택해야 합니다.");
-	}else{
-		frm.p_num.value = Number(p_num) - 1;  
-	}
-}
-</script>
+  }
+  </script>
 <title>Insert title here</title>
 </head>
 <body>
-<h2>문화/체험 예약</h2>
-<form name="culreqCon1" action="culreqCon1.do">
+	<h2>문화/체험 예약</h2>
+	<form name="culreqCon1" action="culreqCon1.do">
    	<table>
+            
          <tr>
          	<th>예약인원</th>
          	<td>
-         	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="p_num" value="1" style="width:17px;">
-  			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
+         	<input type="button" id="minus" value="－" onclick="change(-1)">
+ 			<input type="text" name="p_num" value="1">
+  			<input type="button" id="plus" value="＋" onclick="change(1)">
   			</td>
          </tr>
          
@@ -86,10 +74,11 @@ function subNum(){
          </tr>
          <tr>
             <td colspan="2" align="center">
-               <input type="submit" value="예약확인">
+               <input type="submit" value="예약확인">            
             </td>
          </tr>
       </table>
+   </fieldset>
 </form>
 </body>
 </html>

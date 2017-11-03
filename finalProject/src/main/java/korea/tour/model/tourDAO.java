@@ -4,13 +4,13 @@ import java.util.List;
 
 public interface tourDAO {
 	
-	//ì—¬í–‰ì§€ ëŒ“ê¸€ ì‘ì„±
+	//?—¬?–‰ì§? ?Œ“ê¸? ?‘?„±
 	public int tourcmtWrite(tourCmtDTO cmtdto);
-	//ì—¬í–‰ì§€ ëŒ“ê¸€ ì‚­ì œ
+	//?—¬?–‰ì§? ?Œ“ê¸? ?‚­? œ
 	public int tourcmtDel(int idx);		
-	//í•´ë‹¹ ì—¬í–‰ì§€ì˜ ëŒ“ê¸€ ìˆ˜
+	//?•´?‹¹ ?—¬?–‰ì§??˜ ?Œ“ê¸? ?ˆ˜
 	public int totalCnt(String contentId);		
-	//ì—¬í–‰ì§€ ëŒ“ê¸€ ë¦¬ìŠ¤íŠ¸
+	//?—¬?–‰ì§? ?Œ“ê¸? ë¦¬ìŠ¤?Š¸
 	public List<tourCmtDTO> tourcmtList(String tour_cmt_pidx, int cp, int pageRow);	
 	
 }

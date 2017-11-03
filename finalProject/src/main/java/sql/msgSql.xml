@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.msg">
+
+	<select id="msgListSql" parameterType="map" resultType="korea.msg.model.MsgDTO">
+	
+	 <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from msg where idx in (
+		select max (idx) from msg where sender = #{userIdx} or receiver = #{userIdx} group by msgIdx ) order by idx desc ) a)b 
+		where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+	
+	
+	
+<!-- 	select * from msg where idx in (
+		select max (idx) from msg where sender = #{userIdx} or receiver = #{userIdx} group by msgIdx ) order by idx desc	 -->
+	
+	</select>
+	
+	<select id="msgTotalCnt" resultType="int" parameterType="int">
+<!-- 	  select count (*) from (
+select distinct msgIdx from msg where sender = #{userIdx} or receiver= #{userIdx} ) -->
+	  
+	  
+         select count(*) from (select * from msg where idx in (select max (idx) from msg where sender = #{userIdx} or receiver = #{userIdx} group by msgIdx ) order by idx desc)
+         
+   </select>
+</mapper>

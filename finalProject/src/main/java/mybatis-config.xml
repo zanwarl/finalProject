@@ -12,7 +12,12 @@
  		<mapper resource="sql/blackSql.xml" />
  		<mapper resource="sql/superHostSql.xml" />
  		<mapper resource="sql/comReqSql.xml"/>
+<<<<<<< HEAD
  		<mapper resource="sql/planSql.xml"/>
  		
+=======
+ 		<mapper resource="sql/msgSql.xml"/>
+ 		<mapper resource="sql/memberSql.xml"/>
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
  	</mappers>
  </configuration>

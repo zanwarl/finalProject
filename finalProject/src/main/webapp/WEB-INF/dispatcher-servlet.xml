@@ -12,7 +12,19 @@
 	<context:component-scan base-package="korea" use-default-filters="false">
 		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
 	</context:component-scan>
-
+	<context:component-scan base-package="culreq" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<context:component-scan base-package="food" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<context:component-scan base-package="foodreq" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	<context:component-scan base-package="home" use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
 	<bean
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 	<!-- aop등록을 위해 id는 multipartResolver 고정 -->
@@ -85,7 +97,16 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
+<<<<<<< HEAD
 	<bean id="PlanDAO" class="korea.plan.model.PlanDAOImple">
+=======
+	<bean id="msgDAO" class="korea.msg.model.MsgDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+	<bean id="memberDAO" class="korea.member.model.MemberDAOImple">
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
