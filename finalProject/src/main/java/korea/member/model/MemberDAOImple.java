@@ -11,7 +11,7 @@ public class MemberDAOImple implements MemberDAO {
 	public MemberDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap = sqlMap;
-	}
+	} 
 
 	public int memberJoin(MemberDTO dto) {
 		int count=sqlMap.insert("memberInsert", dto);
