@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.plan">
+	<!-- select start -->
+		<select id="planList" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main
+		</select>
+		
+	<!-- select end -->
+		
+	<!-- insert start -->
+	<!-- insert end -->
+	
+	<!-- update start -->
+	<!-- update end -->
+
+
+	<!-- delete start -->
+	<!-- delete end -->
+	
+	
+	
+</mapper>

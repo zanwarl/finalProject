@@ -31,14 +31,14 @@
 	        	   var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
 
 	        	   //총 게시물 수 myItem.length + 페이징처리 
+                   var output = '';
 	        	   for(var i=1; i<=listSize; i++){
-	                    var output = '';
 	                    output += '<h4>'+myItem[i].title+'</h4>';
 	                    output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+
 	                    		'&contentId='+myItem[i].contentid+'"><img src="'+myItem[i].firstimage+'" width="150"></a>';
 	                    output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
-	                    document.body.innerHTML += output;
 	                }
+	        	   $(".panel").html(output);
 	        	   $(".page").html(pageStr);
 	           },
 	           error : function(xhr, status, error) {
@@ -49,6 +49,8 @@
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div id="contents">
 <form>
 	<table>
 		<thead>
@@ -61,8 +63,11 @@
 			</tr>
 		</thead>
 	</table>
+	<div class="panel"></div>
 	<div class="page">
 	</div>
 </form>
+</div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

@@ -12,5 +12,7 @@
  		<mapper resource="sql/blackSql.xml" />
  		<mapper resource="sql/superHostSql.xml" />
  		<mapper resource="sql/comReqSql.xml"/>
+ 		<mapper resource="sql/planSql.xml"/>
+ 		
  	</mappers>
  </configuration>

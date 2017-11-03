@@ -89,6 +89,7 @@
 </script>
 </head>
 <body onload="initxy()">
+<%@ include file="../header.jsp" %>
 <form>
 	<table>
 		<thead>
