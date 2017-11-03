@@ -9,6 +9,7 @@
 <body>
 <h1>index.jsp 입니다(ignore)</h1>
 <ul>
+	<li><a href="memberJoin.do">회원가입</a></li>
 	<li><a href="tour.do">여행지</a></li>
 	<li><a href="home.do">숙소</a></li>
 	<li><a href="food.do">레스토랑</a></li>
