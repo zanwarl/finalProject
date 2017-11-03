@@ -10,9 +10,11 @@
    ]]>
    </select>
 	
+
 	<select id="noAnsComplainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
   <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from complain order by idx desc where res=0 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  select * from (select rownum rnum,a.* from (select * from complain where res = 0 order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
    
    ]]>
    </select>
@@ -43,6 +45,62 @@
 
 </update>
 
+
+<!-- 검색 -->
+
+	<select id="searchIdxSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where idx = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+	<select id="searchSenderSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where sender = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+	<select id="searchReceiverSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where receiver = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+	<select id="searchInchargeSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where incharge = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+   
+      <select id="searchIdxTotalCnt" resultType="int" parameterType="int" >
+       select count(*) from complain where idx= #{val}
+       
+   </select>
+   
+      <select id="searchSenderTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where sender= #{val}
+       
+   </select>
+   
+      <select id="searchReceiverTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where receiver= #{val}
+       
+   </select>
+   
+      <select id="searchInchargeTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where incharge= #{val}
+       
+   </select>
+   
 
 
 

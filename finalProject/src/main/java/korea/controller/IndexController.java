@@ -11,4 +11,10 @@ public class IndexController {
 		
 		return "index";
 	}
+	
+	@RequestMapping("/main.do")
+	public String main() {
+		
+		return "main";
+	}
 }

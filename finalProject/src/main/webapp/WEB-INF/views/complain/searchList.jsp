@@ -66,6 +66,7 @@
 			<th>담당자</th>
 		</tr>
 	</thead>
+	
 	<tbody>
 		<c:if test="${empty list}">
       <tr>
@@ -95,6 +96,7 @@
 	</tbody>
 	
 	<tfoot>
+		
 		<c:if test="${not empty list}">
 		
 		
@@ -108,7 +110,7 @@
 		
 		
 		</c:if>
-		
+
 		<tr>
 			<td colspan="7" align="center">
 				<form action="complainSearch.do" method="get">

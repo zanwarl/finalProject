@@ -95,18 +95,24 @@
 	</tbody>
 	
 	<tfoot>
-		<tr>
+		<c:if test="${not empty list}">
 		
+		
+		<tr>
 			<td colspan="7" align="center">
 				${pageStr }
 			
 			</td>
 		</tr>
 		
+		
+		
+		</c:if>
+		
 		<tr>
 			<td colspan="7" align="center">
 				<form action="complainSearch.do" method="get">
-					<select>
+					<select name="key">
 						<option value="1">idx</option>
 						<option value="2">신고자</option>
 						<option value="3">피신고자</option>

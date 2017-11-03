@@ -124,6 +124,9 @@ public class ComplainController {
 		return mav ; 
 	}
 	
+	
+	
+	
 	@RequestMapping("/noAnsComplainList.do")
 	public ModelAndView noAnsComplainList(@RequestParam(value = "cp", defaultValue ="1") int cp ){
 		
@@ -148,6 +151,44 @@ public class ComplainController {
 		mav.addObject("pageStr", pageStr);
 		
 		mav.setViewName("complain/noAnsComplainList");
+		
+		return mav ; 
+	}
+	
+	
+	
+	@RequestMapping("/complainSearch.do")
+	public ModelAndView complainSearchList(@RequestParam(value = "cp", defaultValue ="1") int cp ,
+			@RequestParam(value = "key", defaultValue ="1") int key ,
+			@RequestParam(value = "val", defaultValue ="") String val  
+			
+			){
+		
+		
+		
+
+		int listSize = 5;
+		int pageSize = 5;
+		
+		
+		int totalCnt =comdao.getTOtalCnt(key, val);
+		
+		List<ComplainDTO> list =comdao.searchComplainList(cp, listSize, key, val);
+		
+
+		//searchComplainList
+		
+		
+		String pageStr = korea.page.PageModule.makePage("complainSearch.do", totalCnt, listSize, pageSize, cp);
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		
+		mav.setViewName("complain/searchList");
 		
 		return mav ; 
 	}
