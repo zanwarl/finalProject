@@ -20,6 +20,11 @@ public class BlackController {
 	
 	@RequestMapping ("/blackList.do")
 	public ModelAndView blackList (@RequestParam(value="cp", defaultValue="1") int cp){
+		
+		
+		int res= blackdao.updateBlackList();
+		
+		
 		int totalCnt = blackdao.getTotalCnt(); 
 		int listSize = 5;
 		int pageSize = 5; 
