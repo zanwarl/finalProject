@@ -2,9 +2,14 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="culreq.model">
-	<!-- select -->
+<mapper namespace="culreq">
 	<select id="culreqList" resultType="culreq.model.CulreqDTO">
-		select * from culreq 
+		select * from culreq order by useridx
+	</select>
+	<insert id="culreqInsert" parameterType="culreq.model.CulreqDTO">
+		insert into culreq values (#{crep_idx},useridx.nextval,#{c_idx},#{c_count},#{c_reqDate},#{c_reqTime};
+	</insert>
+	<select id="culreqContent" parameterType="int" resultType="culreq.model.CulreqDTO">
+		select * from culreq where crep_idx = #{idx}
 	</select>
 </mapper>

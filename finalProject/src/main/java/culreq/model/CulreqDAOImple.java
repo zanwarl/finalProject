@@ -18,4 +18,16 @@ public class CulreqDAOImple implements CulreqDAO {
 		List <CulreqDTO> list = sqlMap.selectList("culreqList"); 
 		return list;
 	}
+
+	public int culreaAdd(CulreqDTO crdto) {
+		
+		int count = sqlMap.insert("culreqInsert", crdto);
+		return count;
+	}
+
+	public CulreqDTO culreqContent(int idx) {
+	
+		CulreqDTO crdto = sqlMap.selectOne("culreqContent", idx);
+		return crdto;
+	}
 }

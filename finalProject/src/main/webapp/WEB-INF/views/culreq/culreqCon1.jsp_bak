@@ -35,6 +35,7 @@
 	  var p_num= document.getElementById("p_num");
 	  var pas_num = Number(p_num.innerHTML);
 	  var result = pas_num+num;
+	  document.culreqCon1.p_num.value += 1;
 	  p_num.innerHTML = result;
 	  
 	  if(result<1){
@@ -47,28 +48,36 @@
 	  }
   }
   </script>
-  </head>
+<title>Insert title here</title>
+</head>
 <body>
-<h2>식당정보</h2>
-<form name="foodreq" action="foodreqWrite.do">
-   <fieldset>
-     
-         	<label>예약인원</label>
-         	
-         	<input type="button" id="minus" value="－" onclick="change(-1)">
- 			<span id="p_num">1</span>
-  			<input type="button" id="plus" value="＋" onclick="change(1)">
-  			
-         
-            <label>예약날짜</label>
-            <input type="button" onclick="showDate()"> 
-            <input type="text" name="c_reqDate" id="datepicker">
-         
-            <label>예약시간</label>
-            <input type="text" name="c_reqTime">
-         
-            <input type="submit" value="예약하기">           
+	<h2>문화/체험 예약</h2>
+	<form name="culreqCon1" action="culreqCon1.do">
+   	<table>
             
+         <tr>
+         	<th>예약인원</th>
+         	<td>
+         	<input type="button" id="minus" value="－" onclick="change(-1)">
+ 			<input type="text" name="p_num" value="1">
+  			<input type="button" id="plus" value="＋" onclick="change(1)">
+  			</td>
+         </tr>
+         
+         <tr>
+            <th>예약날짜</th>
+            <td><input type="text" name="c_reqDate" id="datepicker"></td>
+         </tr>
+         <tr>
+            <th>예약시간</th>
+            <td><input type="text" name="c_reqTime"></td>
+         </tr>
+         <tr>
+            <td colspan="2" align="center">
+               <input type="submit" value="예약확인">            
+            </td>
+         </tr>
+      </table>
    </fieldset>
 </form>
 </body>

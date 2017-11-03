@@ -1,4 +1,4 @@
-package culreq.controller;
+
 
 import java.util.List;
 
@@ -17,8 +17,8 @@ public class CulreqController {
 	@Autowired
 	private CulreqDAO crdao;
 	
-	@RequestMapping("culreqList.do")
-	public ModelAndView foodreq(){
+	@RequestMapping("culreqList/.do")
+	public ModelAndView food(){
 		
 		List<CulreqDTO> list = crdao.culreqList();
 		ModelAndView mav = new ModelAndView();
@@ -32,38 +32,21 @@ public class CulreqController {
 	@RequestMapping("/culreqCon1Form.do")
 	public ModelAndView culreqCon1Form(){
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("culreq/culreqCon1");
-		
-		return mav;
-	}
-	
-	@RequestMapping("/culreqCon1.do")
-	public ModelAndView culreqCon1(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("culreq/culreqCon1");
+		mav.setViewName("culreq/culreqCon1Form");
 		
 		return mav;
 	}
 	
 	
-	@RequestMapping("/culreqCon2Form.do")
-	public ModelAndView culreqCon2Form(@RequestParam("idx")int idx){
+	@RequestMapping("/culreqContent.do")
+	public ModelAndView culreqContent(@RequestParam("idx")int idx){
 		
 		CulreqDTO crdto = crdao.culreqContent(idx);
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("crdto",crdto);
-		mav.setViewName("culreq/culreqCon2");
+		mav.setViewName("culreq/culreqContent");
 		 
-		return mav;
-	}
-
-	
-	@RequestMapping("/payMent.do")
-	public ModelAndView payMent(){
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("pay/payMent");
-		
 		return mav;
 	}
 }
