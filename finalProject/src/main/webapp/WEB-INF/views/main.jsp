@@ -79,7 +79,7 @@ a {text-decoration:none; color:#000;}
 	<div id="top_menu">
 		<ul>
 			<li><a href="#">로그인</a></li>
-			<li><a href="#">회원가입</a></li>
+			<li><a href="memberJoin.do">회원가입</a></li>
 			<li><a href="#">언어설정</a></li>
 			<li><a href="#">환율</a></li>
 			<li><input class="search" type="text" name="search"> <input type="button" value="검색" onclick="search()"></li>
