@@ -40,7 +40,6 @@
            success : function(msg) {
         	  // console.log(msg.response.body.items.item);
         	   var myItem = msg.response.body.items.item;
-        	   
         	   //내용 작성 추후 한 div에 담기
 					var output = '';
 					var img = '';
@@ -65,12 +64,18 @@
            error : function(xhr, status, error) {
                  alert("에러발생!!");
            }
-     });
-}
+    	 });
+	}
+	
+	function cmtDel(idx,contentId,contentTypeId) {
+		var str = '${pageContext.request.queryString}';
+		//window.alert(str);
+		location.href="tourCmtDel.do?idx=" + idx + "&contentTypeId=" + contentTypeId + "&contentId=" + contentId;
+	}
 </script>
 <script>
 	function initMap() {
-		//window.alert("initmap")
+	//window.alert("1")
   	  var uluru = {lat: 37.5321644636, lng: 126.8605049692};
   	  var map = new google.maps.Map(document.getElementById('map'), {
   	    zoom: 15,
@@ -129,6 +134,7 @@
 	작성자 : ${list.tour_cmt_writer } <br>
 	내용 : ${list.tour_cmt_content }
 	작성일 : ${list.tour_cmt_writeDate }
+	<input type="button" name="cmtDel" value="삭제" onclick="cmtDel('${list.tour_cmt_idx}','${contentId}','${contentTypeId}')"> <br>
 	 </c:forEach>
 	 <br>
 	 ${page }

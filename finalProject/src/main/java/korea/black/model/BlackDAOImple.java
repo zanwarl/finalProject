@@ -37,9 +37,19 @@ public class BlackDAOImple implements BlackDAO{
 	}
 
 
-	public int addBlackList(int userIdx) {
-		// TODO Auto-generated method stub
-		return 0;
+//	public int addBlackList(int userIdx) {
+//		// TODO Auto-generated method stub
+//		return 0;
+//	}
+
+
+	public int updateBlackList() {
+	//updateBlackListSql
+		int res= sqlMap.insert("updateBlackListSql");
+		return res ; 
+		
+		
+		
 	}
 
 }

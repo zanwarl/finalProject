@@ -47,6 +47,7 @@
 		</thead>
 	</table>
 	<div id="panel">
+	도시 목록
 	</div>
 </form>
 </body>

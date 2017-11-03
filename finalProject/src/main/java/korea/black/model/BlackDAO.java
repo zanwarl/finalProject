@@ -6,7 +6,8 @@ public interface BlackDAO {
 	
 	public List<BlackDTO> blackList (int cp , int listSize);
 	public int getTotalCnt () ; 
-	public int addBlackList (int userIdx ) ; 
+	//public int addBlackList (int userIdx ) ; 
+	public int updateBlackList () ; 
 	
 	
 	
