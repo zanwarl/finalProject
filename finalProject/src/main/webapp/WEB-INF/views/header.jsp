@@ -42,7 +42,7 @@ a {text-decoration:none; color:#000;}
 
 
 /*컨텐츠영역*/
-#contents {min-height:100%; margin:0; background:#0FC;}
+#contents {min-height:100%; margin:0; background:#B2EBF4;}
 
 /*하단푸터영역*/
 #footer {clear:both; background:#c0c0c0;color:#808080;}

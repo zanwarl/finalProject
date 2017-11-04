@@ -63,9 +63,9 @@ public class TourController {
 	//JSON
 	@RequestMapping("/areaCode.do")
 	public ModelAndView areaCode() throws Exception {
-		
+		System.out.println("타니");
 		tour_code = "areaCode";
-		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
+		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
