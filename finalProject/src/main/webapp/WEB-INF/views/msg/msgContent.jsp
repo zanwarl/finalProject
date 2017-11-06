@@ -22,7 +22,8 @@
 	
 		<tr>
 			<th>idx</th>
-			<th>대화상대</th>
+			<th>보낸사람</th>
+			<th>받는사람</th>
 			<th>내용</th>
 			<th>날짜</th>
 			
@@ -31,7 +32,7 @@
 	<tbody>
 		<c:if test="${empty list}">
       <tr>
-         <td colspan="4" align="center">
+         <td colspan="5" align="center">
          메시지가 없습니다. 
  		 </td>
       </tr>
@@ -44,20 +45,12 @@
       
        
          <td>${dto.idx}</td>
-         <c:if test="${dto.sender == 1 }">
-         	<td>${dto.receiver } </td>
-         </c:if>
-         <c:if test="${dto.sender != 1 }">
-         	<td>${dto.sender } </td>
-         </c:if>
-         
-         <c:url value="msgContent.do"  var="msgContentURL">
-         	<c:param name="msgIdx" value="${dto.msgIdx}"></c:param>
-         
-         </c:url>
+         <td>${dto.sender }</td>
+         <td>${dto.receiver }</td>
          
 
-         <td><a href="${msgContentURL}">${dto.content}</a></td>
+
+         <td>${dto.content}</td>
          <td>${dto.writedate}</td>
        
       </tr>
@@ -70,7 +63,7 @@
 		
 		
 		<tr>
-			<td colspan="4" align="center">
+			<td colspan="5" align="center">
 				${pageStr }
 			
 			</td>

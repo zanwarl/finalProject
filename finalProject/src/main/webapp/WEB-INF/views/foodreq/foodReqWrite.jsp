@@ -5,30 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-
-  <link rel="stylesheet" href="/resources/demos/style.css">
-
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-  <script>
-
-  $( function() {
-
-    $( "#datepicker" ).datepicker();
-
-  } );
-
-  </script>
-
-  <script>
-	window.onload = function TimeBtn(){
-		var timediv = document.getElementById("reqTime");
-		for(var i=0;i<10;i++){
-			timediv.innerHTML += '<input type="button" name="t_btn'+i+'" value="'+i+'"> ';
-		}
-	}
+<script>
 
   function change(num){
 	  var max=10;
@@ -62,7 +39,6 @@
          
             <label>예약날짜</label>
             <input type="button" onclick="showDate()"> 
-            <input type="text" name="c_reqDate" id="datepicker">
          
             <label>예약시간</label>
             <input type="text" name="c_reqTime">

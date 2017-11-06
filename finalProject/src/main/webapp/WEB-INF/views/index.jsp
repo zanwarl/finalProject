@@ -23,6 +23,7 @@
 	<li><a href="complainList.do">신고관리</a></li>
 	<li><a href="adminLogin.do">관리자로그인</a></li>
 	<li><a href="msgList.do">메세지리스트</a></li>
+	<li><a href="sendMsg.do?receiver=5">메세지보내기</a></li>
 	
 </ul>
 </body>

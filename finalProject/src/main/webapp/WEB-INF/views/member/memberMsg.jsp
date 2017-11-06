@@ -2,5 +2,5 @@
     pageEncoding="EUC-KR"%>
 <script>
 	window.alert('${memberDTO.member_id}ดิ ${msg}');
-	location.href='index.do';
+	location.href='main.do';
 </script>
