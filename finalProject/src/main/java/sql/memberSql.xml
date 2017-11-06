@@ -14,6 +14,10 @@
 	select member_email from member where member_idx = #{memIdx}
 	
 	</select>
+	
+	<select id="memberloginSql" resultType="String" parameterType="String">
+   select member_pwd from member where member_id= #{member_id, jdbcType=VARCHAR}
+   </select>
 
 
 </mapper>

@@ -1,6 +1,9 @@
 package korea.controller;
 
-
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -58,6 +61,66 @@ public class MemberController {
 			mav.setViewName("member/idCheck_ok");
 		}
 		return mav;
+	}
+	
+	@RequestMapping(value="/memberLogin.do", method= RequestMethod.GET)
+	public String memberLoginFm (){
+		return "member/memberLogin";
+	}
+
+	
+	@RequestMapping(value = "/memberLogin.do", method = RequestMethod.POST)
+	public ModelAndView adminLogin (@RequestParam("member_id")String member_id, 
+			@RequestParam("member_pwd")String member_pwd,
+			HttpServletRequest req, 
+			HttpServletResponse resp, 
+			@RequestParam (value="saveId", required=false)String saveId
+			) {
+		
+		boolean res = memberDao.login(member_id, member_pwd);
+		
+		if (res ){
+			HttpSession session = req.getSession();
+			session.setAttribute("sId", member_id);
+			
+			
+			
+		}
+		
+		Cookie ck = new Cookie( "saveId", member_id);
+		if(saveId==null ||saveId.equals("") ){
+			ck.setMaxAge(0);
+			
+		}
+		else {
+			ck.setMaxAge(60*5);
+		}
+		resp.addCookie(ck);
+		
+		String msg = res? "환영합니다^^": "fail";
+		String goURL = res? "main.do": "memberLogin.do";
+		
+		ModelAndView mav= new ModelAndView(); 
+		mav.setViewName("member/loginMsg");
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+		
+		return mav; 
+	}
+	
+	
+
+	
+	
+	@RequestMapping ("/memberLogout.do")
+	public String adminLogout (HttpServletRequest req, HttpServletResponse resp){
+		
+		HttpSession session = req.getSession(); 
+		session.invalidate();
+		
+		
+		return "main";
+		
 	}
 	
 }
