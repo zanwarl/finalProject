@@ -11,30 +11,30 @@
   float: left;
   width: 300px;
   height: 950px;
-  z-index:100;
 }
 #map {
+  width: auto;
   height: 950px;
   position:relative;
-  z-index:1;
-  width: auto;
  }
 #select_detail_view_city{
-	width:300px;
-	position:relative;
-	left:10px;
-	top:10px;
+	position:absolute;
+	width:310px;
+	height:auto;
+	left:310px;
+	top:380px;
 	padding-bottom:20px;
-	z-index:200;
 	background:#fff;
 	border-radius:5px;
+	display:none;
 }
 .detail_view_full_box{
-	position:relative;
+	z-index:130000000;
 }
 
-
-
+.cityItem:active .detail_view_full_box{
+	display:block;
+}
 
  
 </style>
@@ -52,7 +52,7 @@ $(document).ready(function() {
 			        	   
 			var output = '';
 			for(var i=0; i<myItem.length; i++){
-			output += '<h4>'+myItem[i].name+'</h4>';
+			output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
 			}
 			$("#cityList").html(output);
 			},
@@ -101,22 +101,23 @@ function initMap() {
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div id="contents">
+<div id="contents"><!-- contents -->
 
-	<div id="cityList">
-	</div>
+	<div id="cityList"><!-- cityList -->
+	</div><!-- cityList -->
 	<div id="map" style="overflow:auto;">
-	</div>
+	</div><!-- map -->
 	<div id="select_detail_view_city">
 		<div class="detail_view_full_box">
 			zzfffff
-			fffff
-			ffff
+				fffff
+				ffff
+			</div>
 		</div>
-	</div>
-</div>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
-</script>
+</div><!-- contents -->
+
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
+	</script>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>

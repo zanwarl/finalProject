@@ -28,7 +28,7 @@ a {text-decoration:none; color:#000;}
 
 /*여행지,숙소,음식점 등 메인메뉴*/
 #main_menu {
-z-index:200;
+z-index:130000000;
 position:relative;
 margin:0 auto;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
