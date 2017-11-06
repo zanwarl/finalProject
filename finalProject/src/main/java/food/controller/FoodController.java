@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import food.model.FoodDAO;
 import food.model.FoodDTO;
+import food.model.FoodTimeDTO;
 
 @Controller
 public class FoodController {
@@ -40,7 +41,7 @@ public class FoodController {
 	@RequestMapping("/addFood.do")
 	public ModelAndView addFood(FoodDTO fdto){
 		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"? ˆ?Š¤?† ?ž‘ ?“±ë¡? ?„±ê³?!":"? ˆ?Š¤?† ?ž‘ ?“±ë¡? ?‹¤?Œ¨!";
+		String msg = result>0?"?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ï¿½?!":"?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½!";
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("msg",msg);
@@ -60,4 +61,17 @@ public class FoodController {
 		 
 		return mav;
 	}
+	
+	@RequestMapping("/foodList.do")
+	public ModelAndView foodList() {
+		int fidx = 2;
+		System.out.println(fidx);
+		List<FoodTimeDTO> list = fdao.foodList(fidx);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("food/foodList");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	
 }
