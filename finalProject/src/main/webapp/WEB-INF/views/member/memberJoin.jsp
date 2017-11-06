@@ -79,9 +79,9 @@ function pwd(){
 	</tr>
 	<tr>
 		<th>주소</th>
-		<td><input type="text" name="member_addr" id="sample6_postcode" placeholder="우편번호">
+		<td><input type="text" name="member_addr" id="sample6_postcode" placeholder="우편번호" readonly>
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-<input type="text" name="member_addr" id="sample6_address" placeholder="주소">
+<input type="text" name="member_addr" id="sample6_address" placeholder="주소" readonly>
 <input type="text" name="member_addr" id="sample6_address2" placeholder="상세주소">
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
