@@ -22,6 +22,7 @@ public interface MsgDAO {
 	public int getMsgIdx (int sender, int receiver );
 	public int sendMsg(MsgDTO dto);
 	
+	public int readMsg (int msgIdx);
 	
 	
 }

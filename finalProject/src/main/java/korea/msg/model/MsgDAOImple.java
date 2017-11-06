@@ -121,6 +121,15 @@ public class MsgDAOImple implements MsgDAO{
 		return res; 
 		
 		
+		
+	}
+	
+	
+	
+	public int readMsg(int msgIdx ){
+		int res = sqlMap.update("readMsgSql", msgIdx);
+		return res; 
+		
 	}
 
 }

@@ -6,4 +6,6 @@ public interface MemberDAO {
 
 	public int memberJoin(MemberDTO dto);
 	public boolean memberSelect(String userid);
+	public String getUserEmail (int memIdx);
+	
 }

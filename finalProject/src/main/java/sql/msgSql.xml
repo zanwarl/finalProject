@@ -91,7 +91,7 @@ select count (*) from (
 		or receiver =#{sender}
 	</select>
 
-	<select id="sendMsgSql" parameterType="korea.msg.model.MsgDTO">
+	<insert id="sendMsgSql" parameterType="korea.msg.model.MsgDTO">
 
 		insert into msg values (
 
@@ -100,11 +100,19 @@ select count (*) from (
 		#{sender},
 		#{receiver},
 		#{content},
-		sysdate
+		sysdate, 
+		0
 
 		)
 
-	</select>
+	</insert>
 
+
+<update id="readMsgSql" parameterType="int" >
+	update msg 
+	set isRead = 1  
+	where msgIdx = #{msgIdx}
+
+</update>
 
 </mapper>
