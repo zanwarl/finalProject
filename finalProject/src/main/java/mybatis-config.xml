@@ -15,5 +15,6 @@
  		<mapper resource="sql/planSql.xml"/>
  		<mapper resource="sql/msgSql.xml"/>
  		<mapper resource="sql/memberSql.xml"/>
+ 		<mapper resource="sql/noticeSql.xml"/>
  	</mappers>
  </configuration>

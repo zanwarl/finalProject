@@ -73,7 +73,7 @@
 
 	<tfoot>
 		<tr>
-			<td>${pateStr }</td>
+			<td>${pageStr}</td>
 		</tr>
 	
 	</tfoot>

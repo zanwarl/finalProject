@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.notice">
+
+<insert id="noticeWriteSql" parameterType="korea.notice.model.NoticeDTO" >
+	insert into notice values (
+		noticeIdx.nextval ,
+		#{title},
+		#{writer}, 
+		#{content}, 
+		sysdate
+	)
+</insert>
+
+
+
+   	<select id="noticeListSql" parameterType="map" resultType="korea.notice.model.NoticeDTO">
+	
+	 <![CDATA[ 
+    select * from (select rownum rnum,a.* from (select * from notice order by noticeidx desc  ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+     ]]>
+		<!-- select * from msg where idx in ( select max (idx) from msg where sender 
+			= #{userIdx} or receiver = #{userIdx} group by msgIdx ) order by idx desc -->
+
+	</select>
+	
+	
+	
+	   
+     <select id="noticeTotalCnt" resultType="int" >
+       select count(*) from notice
+       
+   </select>
+   <select id="noticeContentSql" resultType="korea.notice.model.NoticeDTO" parameterType="int">
+    	select * from notice where noticeidx = #{idx}
+   </select>
+
+	<update id="noticeUpdateSql" parameterType="korea.notice.model.NoticeDTO" >
+		update notice set 
+		
+		title =#{title},
+		writer = #{writer}, 
+	content =	#{content}, 
+		writedate = sysdate
+		
+		where noticeidx= #{noticeIdx}
+	</update>
+   
+   
+</mapper>

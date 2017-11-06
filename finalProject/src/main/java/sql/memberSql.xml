@@ -9,6 +9,11 @@
 	<select id="memberSelect" resultType="String" parameterType="String">
 	select member_id from member where member_id = #{userid, jdbcType=VARCHAR}
 	</select>
+	
+	<select id="getUserEmail" parameterType="int" resultType="String">
+	select member_email from member where member_idx = #{memIdx}
+	
+	</select>
 
 
 </mapper>

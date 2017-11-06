@@ -27,6 +27,13 @@ public class MemberDAOImple implements MemberDAO {
 		}
 	}
 
+	public String getUserEmail(int memIdx) {
+		String res = sqlMap.selectOne("getUserEmail", memIdx);
+		
+		return res; 
+		
+	}
+
 	
 
 }

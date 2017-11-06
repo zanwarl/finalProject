@@ -112,6 +112,11 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
+	<bean id="noticeDAO" class="korea.notice.model.NoticeDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
 
 	
 
@@ -149,6 +154,5 @@
       </property>
  
    </bean>
-
 
 </beans>
