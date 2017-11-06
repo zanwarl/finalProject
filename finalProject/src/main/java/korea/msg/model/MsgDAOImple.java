@@ -32,6 +32,23 @@ public class MsgDAOImple implements MsgDAO{
 		
 		
 	}
+	
+	public List<MsgDTO> msgContent(int cp, int listSize, int msgIdx) {
+		
+		Map<String, Object> map = new HashMap<String, Object>();
+		
+		int startNum = (cp-1)*listSize+1;
+		int endNum = cp*listSize;
+		
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		map.put("msgIdx", msgIdx);
+		
+		List <MsgDTO> list = sqlMap.selectList("msgContentSql", map);
+		return list; 
+		
+		
+	}
 
 
 	public int getTotalCnt(int userIdx) {	
@@ -40,6 +57,18 @@ public class MsgDAOImple implements MsgDAO{
 		int res = sqlMap.selectOne("msgTotalCnt", userIdx);
 	//	System.out.println("res"+res);
 		return res ;
+	}
+
+
+	public int getMsgContentTotalCnt(int msgIdx) {
+		// TODO Auto-generated method stub
+		//msgContentTotalCnt
+		//	public int getTotalCnt(int userIdx);
+
+		int res = sqlMap.selectOne("msgContentTotalCnt", msgIdx);
+		
+		return res ; 
+		
 	}
 
 }
