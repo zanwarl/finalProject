@@ -61,6 +61,47 @@ public class MsgController {
 		return mav ; 
 	}
 	
+	@RequestMapping("/msgContent.do")
+	public ModelAndView msgContent(
+			@RequestParam(value = "cp", defaultValue ="1") int cp ,
+			@RequestParam(value = "msgIdx") int msgIdx ,
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			){
+		
+		//sId
+		//	HttpSession session = req.getSession(); 
+		
+		//int userIdx =(Integer) session.getAttribute("sId");
+		
+		int userIdx = 1 ;
+		
+		int totalCnt = mdao.getMsgContentTotalCnt(msgIdx);
+		
+				
+		
+		int listSize = 5;
+		int pageSize = 5;
+		
+		
+		
+		List<MsgDTO> list = mdao.msgContent(cp, listSize, msgIdx);
+		
+		
+		String pageStr = korea.page.PageModule.makePage("msgContent.do", totalCnt, listSize, pageSize, cp);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		
+		mav.setViewName("msg/msgContent");
+		
+		return mav ; 
+	}
+	
 	
 	
 	

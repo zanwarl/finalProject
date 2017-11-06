@@ -82,7 +82,7 @@
       
       <tr>
       
-         <td><a href="${contentURL}"> ${dto.idx}</a></td>
+         <td><a href="${contentURL}">${dto.idx}</a></td>
          <td>${dto.sender}</td>
          <td>${dto.receiver}</td>
          <td>${dto.type}</td>
