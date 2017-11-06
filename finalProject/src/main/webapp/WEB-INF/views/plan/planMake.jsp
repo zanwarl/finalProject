@@ -11,15 +11,31 @@
   float: left;
   width: 300px;
   height: 950px;
+  z-index:100;
 }
 #map {
   height: 950px;
+  position:relative;
+  z-index:1;
   width: auto;
  }
 #select_detail_view_city{
-width:300px;position:absolute;left:10px;top:10px;padding-bottom:20px;z-index:999;background:#fff;border-radius:5px;}
-.detail_view_full_box{width:337px;background:url('/res/map/detail_bg.png');position:relative;
+	width:300px;
+	position:relative;
+	left:10px;
+	top:10px;
+	padding-bottom:20px;
+	z-index:200;
+	background:#fff;
+	border-radius:5px;
 }
+.detail_view_full_box{
+	position:relative;
+}
+
+
+
+
  
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -86,11 +102,18 @@ function initMap() {
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-<div id="select_detail_view_city"></div>
-<div id="cityList" style="overflow:auto;">
-</div>
-<div id="map" style="overflow:auto;">
-</div>
+
+	<div id="cityList">
+	</div>
+	<div id="map" style="overflow:auto;">
+	</div>
+	<div id="select_detail_view_city">
+		<div class="detail_view_full_box">
+			zzfffff
+			fffff
+			ffff
+		</div>
+	</div>
 </div>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
 </script>

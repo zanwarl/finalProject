@@ -7,8 +7,6 @@
     <!--Title-->
     <title>대한민국 길잡이</title>
 
-<<<<<<< HEAD
-=======
 <style>
 *{margin:0; padding:0;}
 html,body {
@@ -57,7 +55,6 @@ a {text-decoration:none; color:#000;}
 </style>
 
 
->>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 	<!--Required libraries-->
     <script src="js/min/jquery-v1.10.2.min.js" type="text/javascript"></script>
     <script src="js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
