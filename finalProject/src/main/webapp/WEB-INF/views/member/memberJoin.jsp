@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script>
 function openMemberCheck(){
-	window.open('memberCheckForm.do','memberCheck','width=350,height=200');
+	window.open('memberCheckForm.do','memberCheck','width=450,height=200');
 }
 function pwd(){
 	var member_pwd = document.getElementById("member_pwd").value;
