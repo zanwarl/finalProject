@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,6 +22,94 @@ import korea.msg.model.MsgDTO;
 public class MsgController {
 	@Autowired 
 	private MsgDAO mdao; 
+	
+	
+	
+	
+	@RequestMapping (value="/sendMsg.do" , method=RequestMethod.GET )
+	public String sendMsgFm(
+			@RequestParam (value = "receiver" )int receiver ,
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			){
+		//
+		receiver = 2 ; 
+		
+		return "msg/sendMsg";
+		
+		
+		
+	}
+	
+	
+	@RequestMapping (value="/sendMsg.do" , method=RequestMethod.POST )
+	public ModelAndView sendMsg(
+			@RequestParam (value = "receiver")int receiver ,
+			MsgDTO dto ,
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			){
+		
+		int sender = 1 ; 
+		
+		//기존에 대화가 있는지 찾기
+		
+		int msgIdx = 0 ; 
+		boolean isFirst= mdao.isFirst(sender, receiver);
+		if (isFirst){
+			//기존 대화가 있으면
+			msgIdx = mdao.getMsgIdx(sender, receiver);
+			
+			
+		}
+		else {
+			msgIdx=mdao.getMaxMsgIdx(sender);
+			
+		}
+		
+		dto.setMsgIdx(msgIdx);
+		
+		
+/*		int msgIdx = mdao.getMsgIdx(sender, receiver)==null?
+				mdao.getMaxMsgIdx(sender):mdao.getMsgIdx(sender, receiver);
+		
+		
+				System.out.println("msgIdx"+msgIdx);
+		dto.setMsgIdx(msgIdx);
+	*/
+		
+		
+		dto.setSender(sender);
+		dto.setReceiver(receiver);
+		
+		ModelAndView mav = new ModelAndView();
+		int res = mdao.sendMsg(dto);
+		String goURL = res>0? "msgList.do":"/sendMsg.do?receiver="+receiver; 
+		String msg =res>0?"성공":"실패	";
+		mav.addObject("msg", msg);
+	
+		mav.addObject("goURL", goURL);
+		
+		
+		mav.setViewName("admin/adminMsg");
+		
+		
+		
+		
+		
+		return mav; 
+		
+		
+		
+		
+		
+		//
+	
+		
+		
+		
+	}
+	
 	
 	@RequestMapping("/msgList.do")
 	public ModelAndView msgList(
@@ -37,7 +126,7 @@ public class MsgController {
 		int userIdx = 1 ;
 	
 		int totalCnt = mdao.getTotalCnt(userIdx);
-	System.out.println("totalCnt "+totalCnt);
+//	System.out.println("totalCnt "+totalCnt);
 		
 		
 		int listSize = 5;

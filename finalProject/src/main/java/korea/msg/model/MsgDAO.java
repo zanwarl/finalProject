@@ -13,4 +13,15 @@ public interface MsgDAO {
 //msgContentTotalCnt
 	public List <MsgDTO> msgContent (int cp, int listSize, int msgIdx); 
 	public int getMsgContentTotalCnt(int msgIdx);
+	
+	
+	//send msg 
+	
+	public boolean isFirst(int sender, int receiver);
+	public int getMaxMsgIdx(int sender);
+	public int getMsgIdx (int sender, int receiver );
+	public int sendMsg(MsgDTO dto);
+	
+	
+	
 }

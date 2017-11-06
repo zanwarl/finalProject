@@ -71,4 +71,56 @@ public class MsgDAOImple implements MsgDAO{
 		
 	}
 
+	// send msg 
+	
+	public boolean isFirst(int sender, int receiver) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("sender",sender );
+		map.put("receiver", receiver);
+		
+		int res =  sqlMap.selectOne("isFirstSql", map );
+		
+		if (res>0){
+			return true ; 
+			//이미 대화가 있음
+		}
+		else return false; 
+		//지금 대화 없음 
+		
+	
+	}
+
+
+	//새로운 대화 번호를 찾는 것 
+	public int getMaxMsgIdx(int sender) {
+		
+		int res = sqlMap.selectOne("getMaxMsgIdxSql", sender)	;
+		return res+1; 
+		
+	}
+	//기존 대화 번호 찾는거 
+	public int getMsgIdx (int sender, int receiver ){
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("sender",sender );
+		map.put("receiver", receiver);
+		
+		int res =  sqlMap.selectOne("getMsgIdxSql", map );
+		return res;
+		
+		
+	}
+
+
+	public int sendMsg(MsgDTO dto) {
+	
+		int res = sqlMap.insert("sendMsgSql", dto);
+		return res; 
+		
+		
+	}
+
 }
