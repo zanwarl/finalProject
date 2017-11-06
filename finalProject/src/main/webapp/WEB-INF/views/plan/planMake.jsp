@@ -52,7 +52,8 @@ $(document).ready(function() {
 			        	   
 			var output = '';
 			for(var i=0; i<myItem.length; i++){
-			output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
+			//output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
+			output += '<span id="plan_open" onclick="plan_display()">'+myItem[i].name+'</span><br>';
 			}
 			$("#cityList").html(output);
 			},
@@ -97,6 +98,20 @@ function initMap() {
     	});
     }
 }
+
+function plan() {
+	window.alert("zzz");
+}
+
+function plan_display() {
+	var con = document.getElementById("select_detail_view_city");
+	
+	if(con.style.display=='none'){
+		con.style.display = 'block';
+	}else{
+		con.style.display = 'none';
+	}
+}
 </script>
 </head>
 <body>
@@ -109,9 +124,8 @@ function initMap() {
 	</div><!-- map -->
 	<div id="select_detail_view_city">
 		<div class="detail_view_full_box">
-			zzfffff
-				fffff
-				ffff
+			<div class="detail_plan_name">도시이름~~<span id="plan_close" onclick="plan_display()">&nbsp;[x]</span></div>
+			<div class="detail_plan_make" onclick="plan()">상세 일정 만들기</div>
 			</div>
 		</div>
 </div><!-- contents -->
