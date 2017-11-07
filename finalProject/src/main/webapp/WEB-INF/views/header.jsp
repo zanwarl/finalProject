@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -80,7 +81,18 @@ a {text-decoration:none; color:#000;}
 <div id="nav">
 	<div id="top_menu">
 			<ul>
-				<li><a href="#">로그인</a></li>
+				<li>
+				<c:if test="${empty sId }">
+	
+	<a href="memberLogin.do" onclick="loginPopup(); return false; ">로그인</a>
+
+</c:if>
+
+<c:if test="${!empty sId }">
+	<a href="memberLogout.do">${sId }님 로그인중 .. 로그아웃</a>
+</c:if>
+
+</li>
 				<li><a href="memberJoin.do">회원가입</a></li>
 				<li><a href="#">언어설정</a></li>
 				<li><a href="#">환율</a></li>

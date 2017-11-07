@@ -1,5 +1,7 @@
 package korea.member.model;
 
+import java.util.List;
+
 import korea.member.model.MemberDTO;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -34,6 +36,15 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
-	
+	public boolean login(String member_id, String member_pwd) {
+		
+		List<Object> pwd = sqlMap.selectList("memberloginSql", member_id);
+		if (pwd.get(0).equals(member_pwd)){
+			return true;
+		}
+		else return false; 
+		
+	}
+
 
 }
