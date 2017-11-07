@@ -109,4 +109,22 @@ public class PlanController {
 		}
 	}
 	
+	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
+	@RequestMapping("/planDetail.do")
+	public ModelAndView planDetail(PlanDTO pdto) {
+		
+		int result = pdao.planMainWrite(pdto);
+		System.out.println(result);
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("plan/planDetail");
+		return mav;
+	}
+	
+	
+	@RequestMapping("/test.do")
+	public String test() {
+		return "plan/test";
+	}
+	
 }	
