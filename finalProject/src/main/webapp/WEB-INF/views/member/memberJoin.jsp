@@ -13,10 +13,10 @@ function pwd(){
 	var member_pwd = document.getElementById("member_pwd").value;
 	var member_pwd2 = document.getElementById("member_pwd2").value;
 	
-	if(member_pwd == member_pwd2){
+	if(member_pwd == member_pwd2 && member_pwd2 != null){
 		document.getElementById("pwd3").value = "비밀번호가 일치합니다.";
-	}else if(member_pw2 != "" && member_pwd != member_pw2){
-		document.getElementById("pwd3").value = "비밀번호가 일치하지 않습니다.";
+	}else{
+		document.getElementById("pwd3").value = "일치하지 않습니다.";
 	}
 }
 
@@ -34,12 +34,12 @@ function pwd(){
 	
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호" onkeyup="pwd()"></td>
+		<td><input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호"></td>
 	</tr>
 	<tr>
 		<th>비밀번호확인</th>
 		<td><input type="password" id="member_pwd2" name="member_pwd2" placeholder="비밀번호확인" onkeyup="pwd()">&nbsp;
-		<input type="text" id="pwd3" name="pwd3" readonly style="background-color:transparent;border:0 solid black;text-align:left; color: #FF6000; font: 8pt 돋움;">
+		<input type="text" id="pwd3" name="pwd3" readonly style="background-color:transparent;border:0 solid black;text-align:left; color: #FF6000; font: 7pt 돋움;">
 		
 		</td>
 	</tr>
