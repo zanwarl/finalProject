@@ -127,4 +127,13 @@ public class PlanController {
 		return "plan/test";
 	}
 	
+	@RequestMapping("/myPlan.do")
+	public ModelAndView myPlanList() {
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.setViewName("plan/myPlanList");
+		return mav;
+	}
+	
 }	

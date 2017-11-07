@@ -12,7 +12,7 @@
 
 <style>
 #cityList {
-  background: #FFBB00;
+  background: #FFFFC6;
   float: left;
   width: 300px;
   height: 950px;
@@ -58,6 +58,7 @@ $(document).ready(function() {
 			var myItem = msg.response.body.items.item;
 			        	   
 			var output = '';
+			
 			//도시 리스트 뿌려주는 div 배열
 			for(var i=0; i<myItem.length; i++){
 				//output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
@@ -173,20 +174,20 @@ $('#test2').on('click',function(){
 	alert("z");
 });
 
-$('#datepicker').on('click',function(){
+$('datepicker2').on('click',function(){
 	alert("z");
 });
-/* 
+
 var picker = new Pikaday(
-{
-    field: document.getElementById('#datepicker'),
-    firstDay: 1,
-    minDate: new Date(),
-    maxDate: new Date(2020, 12, 31),
-    yearRange: [2000,2020]
-	})
-	;
- */
+	    {
+	        field: document.getElementById('datepicker2'),
+	        firstDay: 1,
+	        minDate: new Date(),
+	        maxDate: new Date(2020, 12, 31),
+	        yearRange: [2000,2020]
+	    })
+	    ;
+ 
 </script>
 </head>
 <body>

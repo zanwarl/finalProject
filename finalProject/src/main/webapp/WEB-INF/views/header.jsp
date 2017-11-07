@@ -141,6 +141,7 @@ a {text-decoration:none; color:#000;}
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
 	     	<li class='last'><a href='#'><span>공유된일정보기</span></a></li>
+	     	<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
 	   </ul>
    </li>
    <li class='has-sub'><a href='#'><span>고객센터</span></a>
