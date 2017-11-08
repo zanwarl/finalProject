@@ -17,6 +17,9 @@ public interface NoticeDAO {
 	
 	public NoticeDTO noticeContent ( int idx );
 	
+	public int noticeDelete (int idx);
+	
+	
 
 	
 	

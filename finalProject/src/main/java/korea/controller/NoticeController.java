@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -135,6 +136,49 @@ public class NoticeController {
 		return mav; 
 		
 
+	}
+	
+	
+	@RequestMapping (value="noticeDeleteConfirm.do" , method= RequestMethod .GET)
+	public ModelAndView noticeDeleteConfirm (@RequestParam ("idx")int idx){
+		ModelAndView mav = new ModelAndView();
+		String confirmMsg= "삭제하시겠습니까?";
+		String yesURL = "noticeDelete.do?idx="+idx; 
+		String noURL = "noticeContent.do?idx="+idx	;
+		
+	
+		
+		mav.addObject("confirmMsg", confirmMsg	);
+		mav.addObject("yesURL", yesURL	);
+		mav.addObject("noURL", noURL	);
+		mav.setViewName("admin/confirmMsg");
+		
+		return mav ; 
+		
+	}
+	
+	
+	@RequestMapping (value="/noticeDelete.do" )
+	public ModelAndView noticeDelete (@RequestParam ("idx")int idx){
+		
+		int res =ndao.noticeDelete(idx);
+		
+		//String confirmMsg ="글을 삭제하시겠습니까";
+		
+		String msg = res>0? "글이 삭제되었습니다.": "실패";
+		String goURL = res>0?"noticeList.do":"noticeContent.do?idx="+idx;
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+	//	mav.addObject("confirmMsg", confirmMsg);
+		
+		
+		
+		mav.setViewName("admin/adminMsg");
+		
+		return mav; 
+		
 	}
 	
 	

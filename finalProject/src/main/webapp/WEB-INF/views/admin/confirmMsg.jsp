@@ -3,9 +3,19 @@
 <script>
    
    
-   if (confirm ("${confirmMsg}"))
+   if (confirm ("${confirmMsg}")){
+	  
+	   
+	   location.href='${yesURL}';
+
+	   
+   }
    
-   window.alert('${msg}');
-   
-   location.href='${goURL}';
+   else {
+	   location.href ='${noURL}'
+	
+		   
+   }
+
+  
 </script>
