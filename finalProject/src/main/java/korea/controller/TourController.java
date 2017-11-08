@@ -118,7 +118,7 @@ public class TourController {
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
-
+		System.out.println("zz");
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
 		JSONObject json = (JSONObject) jsonObject.get("response");

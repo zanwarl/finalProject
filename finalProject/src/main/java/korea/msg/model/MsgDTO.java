@@ -13,6 +13,38 @@ private int	receiver ;
 private	String content ;
 private	Date writedate ;
 
+private boolean isRead ;
+
+
+
+public boolean isRead() {
+	return isRead;
+}
+
+
+
+
+public void setRead(boolean isRead) {
+	this.isRead = isRead;
+}
+
+
+
+
+public MsgDTO(int idx, int msgIdx, int sender, int receiver, String content, Date writedate, boolean isRead) {
+	super();
+	this.idx = idx;
+	this.msgIdx = msgIdx;
+	this.sender = sender;
+	this.receiver = receiver;
+	this.content = content;
+	this.writedate = writedate;
+	this.isRead = isRead;
+}
+
+
+
+
 public MsgDTO(int idx, int msgIdx, int sender, int receiver, String content, Date writedate) {
 	
 	super();

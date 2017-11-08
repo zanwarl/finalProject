@@ -8,7 +8,7 @@ font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 font-weight: 300;
 background-color: #fff;}
 
-#contents { height:100%;}
+#contents {clear:both; height:100%; }
 a {text-decoration:none; color:#000;}
 
 /*상단,메인메뉴를 감싸고 있는 영역*/
@@ -28,9 +28,8 @@ a {text-decoration:none; color:#000;}
 
 /*여행지,숙소,음식점 등 메인메뉴*/
 #main_menu {
-z-index:200;
+z-index:130000000;
 position:relative;
-width:900px;
 margin:0 auto;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
   font-size: 15px; /*폰트사이즈설정*/
@@ -46,7 +45,7 @@ margin:0 auto;
   
   background: #ffffff;/*배경색*/
   border: 1px solid #ece6e8; /*겉테두리*/
-  border-bottom: 3px solid #d9d9d9; /*아래 테두리*/
+
   /*테두리끝 둥글게 2px*/
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
@@ -68,8 +67,8 @@ margin:0 auto;
   float: right;
 }
 #main_menu > ul li.has-sub {
-	margin-left:23px;
- 	margin-right:23px;
+	margin-left:5px;
+ 	margin-right:5px;
   	position: relative;
 }
 #main_menu > ul li.has-sub:hover ul {
@@ -158,6 +157,7 @@ margin:0 auto;
 
 }
 }
+/*슬라이드*/
 .flicker-example{z-index:100;}
 /*컨텐츠영역*/
 #contents {min-height:100%; margin:0; background:#0FC;}

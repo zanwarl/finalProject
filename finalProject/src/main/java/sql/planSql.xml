@@ -11,6 +11,10 @@
 	<!-- select end -->
 		
 	<!-- insert start -->
+		<select id="planMainWrite" parameterType="korea.plan.model.PlanDTO" resultType="int">
+			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum) values
+			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0)	
+		</select>
 	<!-- insert end -->
 	
 	<!-- update start -->

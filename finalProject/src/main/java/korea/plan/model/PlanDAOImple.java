@@ -24,6 +24,12 @@ public class PlanDAOImple implements PlanDAO {
 	public List<PlanDTO> planList(int cp, int pageRow) {
 		return null;
 	}
+	
+	public int planMainWrite(PlanDTO pdto) {
+		int result = sqlMap.insert("planMainWrite", pdto);
+		return result;
+	}
+	
 
 	public int planWrite() {
 		return 0;

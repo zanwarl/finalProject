@@ -12,7 +12,7 @@
 
 <style>
 #cityList {
-  background: #FFFFC6;
+  background: #FFBB00;
   float: left;
   width: 300px;
   height: 950px;
@@ -48,24 +48,33 @@
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {	
+	var cp = 1;
 	$.ajax({
-		url:"areaCode.do",
-		type:"POST",
-		dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-		
-		success : function(msg) {
-			// console.log(msg.response.body.items.item);
-			var myItem = msg.response.body.items.item;
-			        	   
-			var output = '';
-			
-			//도시 리스트 뿌려주는 div 배열
-			for(var i=0; i<myItem.length; i++){
-				//output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
-				output += '<div class="wrap_cityList">'+ myItem[i].name +
-						  '<div class="remodal-bg"><a href="#modal"><img src="img/plan/add_button.png" width="17"></a></div></div><br>';
-			}
-			
+		url:"areaBasedList.do?areaCode=1&cp="+cp,
+		 type:"GET",
+         dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+         success : function(msg) {
+        	 // console.log(msg.response.body.items.item);
+      	   var myItem = msg.response.body.items.item;
+      	   
+      	   //page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
+      	   
+      	   var totalCnt = msg.response.body.totalCount;
+      	   var pageName = 'city.do?areaCode='+ 1;
+      	   var listSize = 5;
+      	   var pageSize = 5;
+      	   
+      	   var queryStr = '123123';
+      	   //alert(queryStr);
+      	   //var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
+      	   //총 게시물 수 myItem.length + 페이징처리 
+             var output = '';
+      	   for(var i=1; i<=listSize; i++){
+                  output += '<h4>'+myItem[i].title+'</h4>';
+                  output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+
+                  		'&contentId='+myItem[i].contentid+'"><img src="'+myItem[i].firstimage+'" width="150"></a>';
+                  output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
+              }
 			$("#cityList").html(output);
 			},
 		error : function(xhr, status, error) {
@@ -174,20 +183,20 @@ $('#test2').on('click',function(){
 	alert("z");
 });
 
-$('datepicker2').on('click',function(){
+$('#datepicker').on('click',function(){
 	alert("z");
 });
-
+/* 
 var picker = new Pikaday(
-	    {
-	        field: document.getElementById('datepicker2'),
-	        firstDay: 1,
-	        minDate: new Date(),
-	        maxDate: new Date(2020, 12, 31),
-	        yearRange: [2000,2020]
-	    })
-	    ;
- 
+{
+    field: document.getElementById('#datepicker'),
+    firstDay: 1,
+    minDate: new Date(),
+    maxDate: new Date(2020, 12, 31),
+    yearRange: [2000,2020]
+	})
+	;
+ */
 </script>
 </head>
 <body>
@@ -230,7 +239,6 @@ var picker = new Pikaday(
 									<!-- 작성자,areacode -->
 									<input type="hidden" name="plan_writer" value="1">
 									<input type="hidden" name="area_code" value="1">
-									
 								</td>
 							</tr>
 						</tfoot>

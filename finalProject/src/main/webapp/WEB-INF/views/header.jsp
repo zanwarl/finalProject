@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,6 @@
     <!--Title-->
     <title>대한민국 길잡이</title>
 
-<<<<<<< HEAD
-=======
 <style>
 *{margin:0; padding:0;}
 html,body {
@@ -57,7 +56,6 @@ a {text-decoration:none; color:#000;}
 </style>
 
 
->>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 	<!--Required libraries-->
     <script src="js/min/jquery-v1.10.2.min.js" type="text/javascript"></script>
     <script src="js/min/modernizr-custom-v2.7.1.min.js" type="text/javascript"></script>
@@ -83,7 +81,18 @@ a {text-decoration:none; color:#000;}
 <div id="nav">
 	<div id="top_menu">
 			<ul>
-				<li><a href="#">로그인</a></li>
+				<li>
+				<c:if test="${empty sId }">
+	
+	<a href="memberLogin.do" onclick="loginPopup(); return false; ">로그인</a>
+
+</c:if>
+
+<c:if test="${!empty sId }">
+	<a href="memberLogout.do">${sId }님 로그인중 .. 로그아웃</a>
+</c:if>
+
+</li>
 				<li><a href="memberJoin.do">회원가입</a></li>
 				<li><a href="#">언어설정</a></li>
 				<li><a href="#">환율</a></li>
@@ -132,6 +141,7 @@ a {text-decoration:none; color:#000;}
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
 	     	<li class='last'><a href='#'><span>공유된일정보기</span></a></li>
+	     	<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
 	   </ul>
    </li>
    <li class='has-sub'><a href='#'><span>고객센터</span></a>

@@ -15,8 +15,8 @@
 <script type="text/javascript">
 
 
-function mailPopup(){
-	window.open ('sendMail.do', 'sendMail', 'width= 500, height= 500');
+function mailPopup(receiver){
+	window.open ('sendMail.do?receiver='+receiver, 'sendMail', 'width= 500, height= 500');
 }
 /* 
 function userInfoPopup(x){
@@ -80,7 +80,8 @@ function userInfoPopup(x){
 	</c:url>
 	
 	
-	<td> <a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.sender } </a><input type="button" value="메일" onclick="mailPopup()">  </td>
+	<td> <a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.sender } </a>
+	<input type="button" value="메일" onclick="mailPopup(${dto.sender})">  </td>
 		<th>피신고자</th> 
 		
 		
@@ -90,7 +91,8 @@ function userInfoPopup(x){
 	
 	</c:url>
 	
-	<a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.receiver } </a><input type="button" value="메일" onclick="mailPopup()">  </td>
+	<a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.receiver } </a>
+	<input type="button" value="메일" onclick="mailPopup(${dto.receiver})">  </td>
 		<th>상태</th>
 	<td>${dto.res }</td>
 
@@ -100,7 +102,7 @@ function userInfoPopup(x){
 	<td>
 		<c:if test="${empty dto.incharge }">
 		
-		<input type="text" name="incharge" value ="${sId }" readonly="readonly">
+		<input type="text" name="incharge" value ="${sId}" readonly="readonly">
 		
 		</c:if>
 		<c:if test="${not empty dto.incharge }">
