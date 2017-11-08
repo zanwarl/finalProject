@@ -39,7 +39,14 @@
 				<tr>
 				
 					<td>${dto.noticeIdx }</td>
-					<td>${dto.title }</td>
+					<c:url  value = "noticeContent.do" var ="contentURL">
+						<c:param name="idx" value = "${dto.noticeIdx }"></c:param>
+						
+					</c:url>
+					
+				
+					
+					<td><a href="${contentURL}">${dto.title }</a></td>
 					<td>${dto.writer }</td>
 					<td>${dto.writedate }</td>
 				</tr>

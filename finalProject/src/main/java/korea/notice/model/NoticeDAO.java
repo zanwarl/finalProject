@@ -15,5 +15,7 @@ public interface NoticeDAO {
 	public int getTotalCnt () ; 
 	public int noticeUpdate (NoticeDTO dto );
 	
+	public NoticeDTO noticeContent ( int idx);
+	
 	
 }

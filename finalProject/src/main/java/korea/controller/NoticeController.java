@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.black.model.BlackDTO;
+import korea.complain.model.ComplainDTO;
 import korea.notice.model.NoticeDAO;
 import korea.notice.model.NoticeDTO;
 
 @Controller
-
 public class NoticeController {
 	
 	@Autowired 
@@ -77,6 +77,27 @@ public class NoticeController {
 		
 		
 	}
+	
+	@RequestMapping ("/noticeContent.do")
+	public ModelAndView noticeContent (@RequestParam("idx")int idx){
+		
+		NoticeDTO dto = ndao.noticeContent(idx);
+		
+		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("con", dto);
+		mav.setViewName("notice/noticeContent");
+		
+		
+		return mav; 
+		
+	}
+	
+	
+			
 	
 	
 	
