@@ -60,6 +60,14 @@ public class NoticeDAOImple implements NoticeDAO{
 		
 	}
 
+	public int noticeDelete(int idx) {
+		// TODO A
+
+		int res = sqlMap.delete("noticeDeleteSql", idx);
+		return res; 
+		
+	}
+
 
 	
 }

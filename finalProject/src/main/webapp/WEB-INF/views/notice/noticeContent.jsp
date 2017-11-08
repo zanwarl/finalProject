@@ -59,7 +59,13 @@
 				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
 			</c:url>
 			
-			<a href="${noticeUpdateURL }">수정</a>
+			<c:url var ="noticeDeleteURL" value="noticeDeleteConfirm.do">
+				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
+			</c:url>
+			
+			
+			<a href="${noticeUpdateURL }">수정</a>|
+			<a href="${noticeDeleteURL }">삭제</a>|
 			</td>
 		</tr>
 	</tfoot>	
