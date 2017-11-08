@@ -30,6 +30,10 @@ public class PlanDAOImple implements PlanDAO {
 		return result;
 	}
 	
+	public PlanDTO lastSaveIdx(PlanDTO pdto) {
+		pdto = sqlMap.selectOne("lastSaveIdx", pdto);
+		return pdto;
+	}
 
 	public int planWrite() {
 		return 0;
