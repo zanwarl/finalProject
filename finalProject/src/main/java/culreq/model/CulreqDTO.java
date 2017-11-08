@@ -4,76 +4,104 @@ import java.util.*;
 
 public class CulreqDTO {
 
-	private int crep_idx;
-	private int useridx;
+	private int creq_idx;
+	private String user_id;
 	private int c_idx;
 	private int c_count;
 	
-	private Date c_reqDate;
-	private Date c_reqTime;
+	private String c_reqDate;
+	private String c_date;
+	private String c_reqTime;
 		
 	
 	public CulreqDTO() {
 			// TODO Auto-generated constructor stub
 	}
 
-	public CulreqDTO(int crep_idx, int useridx, int c_idx, int c_count, Date c_reqDate, Date c_reqTime) {
-		super();
-		this.crep_idx = crep_idx;
-		this.useridx = useridx;
-		this.c_idx = c_idx;
-		this.c_count = c_count;
-		this.c_reqDate = c_reqDate;
-		this.c_reqTime = c_reqTime;
+
+	public int getCreq_idx() {
+		return creq_idx;
 	}
 
-	public int getCrep_idx() {
-		return crep_idx;
+
+	public void setCreq_idx(int creq_idx) {
+		this.creq_idx = creq_idx;
 	}
 
-	public void setCrep_idx(int crep_idx) {
-		this.crep_idx = crep_idx;
+
+	public String getUser_id() {
+		return user_id;
 	}
 
-	public int getUseridx() {
-		return useridx;
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
 	}
 
-	public void setUseridx(int useridx) {
-		this.useridx = useridx;
-	}
 
 	public int getC_idx() {
 		return c_idx;
 	}
 
+
 	public void setC_idx(int c_idx) {
 		this.c_idx = c_idx;
 	}
+
 
 	public int getC_count() {
 		return c_count;
 	}
 
+
 	public void setC_count(int c_count) {
 		this.c_count = c_count;
 	}
 
-	public Date getC_reqDate() {
+
+	public String getC_reqDate() {
 		return c_reqDate;
 	}
 
-	public void setC_reqDate(Date c_reqDate) {
+
+	public void setC_reqDate(String c_reqDate) {
 		this.c_reqDate = c_reqDate;
 	}
 
-	public Date getC_reqTime() {
+
+	public String getC_date() {
+		return c_date;
+	}
+
+
+	public void setC_date(String c_date) {
+		this.c_date = c_date;
+	}
+
+
+	public String getC_reqTime() {
 		return c_reqTime;
 	}
 
-	public void setC_reqTime(Date c_reqTime) {
+
+	public void setC_reqTime(String c_reqTime) {
 		this.c_reqTime = c_reqTime;
-	} 
+	}
+
+
+	public CulreqDTO(int creq_idx, String user_id, int c_idx, int c_count, String c_reqDate, String c_date,
+			String c_reqTime) {
+		super();
+		this.creq_idx = creq_idx;
+		this.user_id = user_id;
+		this.c_idx = c_idx;
+		this.c_count = c_count;
+		this.c_reqDate = c_reqDate;
+		this.c_date = c_date;
+		this.c_reqTime = c_reqTime;
+	}
+	
+	
 	
 	
 	
