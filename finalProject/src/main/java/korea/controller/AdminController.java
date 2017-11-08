@@ -20,7 +20,15 @@ public class AdminController {
 	
 	
 	@Autowired
+	
 	AdminDAO adao ; 
+	
+	
+	@RequestMapping (value="/sideBar.do")
+	public String sideBar(){
+		return "admin/sideBar";
+		
+	}
 	
 	
 	@RequestMapping(value="/adminLogin.do", method= RequestMethod.GET)
@@ -83,7 +91,7 @@ public class AdminController {
 		session.invalidate();
 		
 		
-		return "admin/adminMain";
+		return "admin/adminLoginFm";
 		
 	}
 	

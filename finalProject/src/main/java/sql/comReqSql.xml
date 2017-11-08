@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="complain.model">
+	<!-- insert -->
+	<insert id="comReqWrite" parameterType="korea.complain.model.ComplainDTO">
+		insert into
+				complain
+			values(
+			complainidx.nextval,
+			#{sender},
+			#{receiver},
+			#{content},
+			sysdate,
+			0,
+			'',
+			'',
+			#{type},
+			'')
+	</insert>
+</mapper>

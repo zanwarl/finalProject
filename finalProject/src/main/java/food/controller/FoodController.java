@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import food.model.FoodDAO;
 import food.model.FoodDTO;
+import food.model.FoodTimeDTO;
 
 @Controller
 public class FoodController {
@@ -47,8 +48,14 @@ public class FoodController {
 	}
 	
 	@RequestMapping("/addFood.do")
+<<<<<<< HEAD
 	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException,
     IOException{
+=======
+	public ModelAndView addFood(FoodDTO fdto){
+		int result = fdao.foodAdd(fdto);
+		String msg = result>0?"?��?��?��?�� ?���? ?���?!":"?��?��?��?�� ?���? ?��?��!";
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject.git
 		ModelAndView mav = new ModelAndView();
 		fdao.foodAdd(fdto);
 		 
@@ -95,4 +102,19 @@ public class FoodController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
+=======
+	@RequestMapping("/foodList.do")
+	public ModelAndView foodList() {
+		int fidx = 2;
+		System.out.println(fidx);
+		List<FoodTimeDTO> list = fdao.foodList(fidx);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("food/foodList");
+		mav.addObject("list", list);
+		return mav;
+	}
+	
+	
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject.git
 }

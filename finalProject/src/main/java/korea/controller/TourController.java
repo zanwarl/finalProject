@@ -42,7 +42,7 @@ public class TourController {
 
 	// rest api 주소 실행하는 method
 	private static String readUrl(String tour_api_url) throws Exception {
-		System.out.println(tour_api_url);
+		//System.out.println(tour_api_url);
 		BufferedInputStream reader = null;
 		try {
 			URL url = new URL(tour_api_url);
@@ -63,9 +63,9 @@ public class TourController {
 	//JSON
 	@RequestMapping("/areaCode.do")
 	public ModelAndView areaCode() throws Exception {
-
+		System.out.println("타니");
 		tour_code = "areaCode";
-		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
+		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
@@ -75,7 +75,7 @@ public class TourController {
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
 
-		 System.out.println("총 지역 수 : " +totalCount);
+		//System.out.println("총 지역 수 : " +totalCount);
 		//System.out.println(jsonObject);
 		json = (JSONObject) json.get("items");
 		JSONArray list = (JSONArray) json.get("item");
@@ -109,16 +109,16 @@ public class TourController {
 
 	// JSON
 	@RequestMapping("/areaBasedList.do")
-	public ModelAndView areaBasedList(@RequestParam(value = "areaCode") String areaCode) throws Exception {
-		System.out.println("areaCode : " + areaCode);
+	public ModelAndView areaBasedList(@RequestParam(value = "areaCode") String areaCode,@
+			RequestParam(value="cp",required=false,defaultValue="1")int cp) throws Exception {
 		tour_code = "areaBasedList";
 		param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
 				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
-				+ "TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=1";
+				+ "TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=" + cp;
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
-
+		System.out.println("zz");
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
 		JSONObject json = (JSONObject) jsonObject.get("response");
@@ -126,6 +126,7 @@ public class TourController {
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
 
 		 System.out.println("총 지역 수 : " +totalCount);
+		 
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
 				+ tour_code
@@ -144,12 +145,16 @@ public class TourController {
 
 	// 실제 페이지 이동
 	@RequestMapping("/city.do")
-	public ModelAndView cityList(@RequestParam(value = "areaCode") String areaCode) throws Exception {
+	public ModelAndView cityList(@RequestParam(value = "areaCode") String areaCode,
+			@RequestParam(value="cp",required=false,defaultValue="1")int cp) throws Exception {
 
 			ModelAndView mav = new ModelAndView();
 			
+			System.out.println("현재 페이지 : " + cp);
+			
 			mav.setViewName("tour/cityList");
 			mav.addObject("areaCode",areaCode);
+			mav.addObject("cp",cp);
 			return mav;
 		}
 	
@@ -176,16 +181,28 @@ public class TourController {
 
 	}
 
+	//여행지 페이지 상세 정보 + 댓글 리스트
 	@RequestMapping("/tourDetail.do")
-	public ModelAndView tourDetail(@RequestParam(value = "contentId") String contentId, 
-			@RequestParam(value = "contentTypeId") String contentTypeId) {
+	public ModelAndView tourDetail(@RequestParam(value = "contentId",required=false,defaultValue="") String contentId, 
+			@RequestParam(value = "contentTypeId",required=false,defaultValue="") String contentTypeId, @RequestParam(value="cp",required=false,defaultValue="1")int cp,
+			@RequestParam(value="queryStr",required=false,defaultValue="")String queryStr) {
 		
-		List<tourCmtDTO> list = tDAO.tourcmtList(contentId);
 		ModelAndView mav = new ModelAndView();
 		
+		int totalCnt = tDAO.totalCnt(contentId);
+		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
+		
+		String url = "tourDetail.do?contentTypeId=" + contentTypeId + "&contentId=" + contentId;
+		String page = korea.page.PageModule.page(url,totalCnt,listSize,pageSize,cp,url);
+		
+		List<tourCmtDTO> list = tDAO.tourcmtList(contentId,cp,listSize);
+		System.out.println("-------" + contentTypeId);
 		mav.setViewName("tour/tourDetail");
 		mav.addObject("contentId", contentId);
+		mav.addObject("contentTypeId", contentTypeId);
 		mav.addObject("list", list);
+		mav.addObject("page", page);
 		return mav;
 	}
 	
@@ -202,7 +219,6 @@ public class TourController {
 	
 	@RequestMapping("/tourMap.do")
 	public ModelAndView tourMap(@RequestParam(value="mapx") String mapx, @RequestParam(value="mapy") String mapy) {
-		System.out.println(mapx + "/" + mapy);
 		
 		ModelAndView mav = new ModelAndView();
 		
@@ -212,19 +228,46 @@ public class TourController {
 		return mav;
 	}
 	
+	//댓글 작성 + 작성 후 원래 페이지로 이동
 	@RequestMapping("/tourCmtWrite.do")
-	public ModelAndView replyWrite(HttpServletRequest hsr, tourCmtDTO cmtdto) {
-		System.out.println("내용 : " + cmtdto.getTour_cmt_content());
-		//System.out.println(hsr.getRequestURI());
-
+	public ModelAndView replyWrite(String queryStr, tourCmtDTO cmtdto) {
 		
 		ModelAndView mav = new ModelAndView();
-		int result = tDAO.tourcmtWrite(cmtdto);
-		String msg = result>0?"댓글 작성 완료":"댓글 작성 실패";
-		mav.addObject("msg", msg);
-		mav.setViewName("tour/tourMsgOk");
-		return mav;
 		
+		//댓글 작성 후 돌아갈 페이지 주소 설정
+		queryStr = "tourDetail.do?" + queryStr;
+		
+		int result = tDAO.tourcmtWrite(cmtdto);
+		
+		String msg = result>0?"댓글 작성 완료":"댓글 작성 실패";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("url", queryStr);
+		mav.setViewName("tour/tourMsgOk");
+		
+		return mav;
 	}
-
+	
+	//댓글 삭제 + 삭제 후 원래 페이지로 이동
+	@RequestMapping("/tourCmtDel.do")
+	public ModelAndView repleyDelete(int idx, String contentTypeId, String contentId) {
+	
+		ModelAndView mav = new ModelAndView();
+		
+		
+		//댓글 작성 후 돌아갈 페이지 주소 설정
+		
+		System.out.println(idx);
+		
+		String queryStr = "tourDetail.do?contentTypeId=" + contentTypeId + "&contentId=" + contentId;
+		int result = tDAO.tourcmtDel(idx);
+		
+		String msg = result>0?"댓글 삭제 완료":"댓글 삭제 실패";
+		
+		mav.addObject("msg", msg);
+		mav.addObject("url", queryStr);
+		mav.setViewName("tour/tourMsgOk");
+		
+		return mav;
+	}
 }

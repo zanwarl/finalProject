@@ -6,13 +6,26 @@
 	<!-- select -->
 	<select id="complainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
   <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from complain order by idx ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  select * from (select rownum rnum,a.* from (select * from complain order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+   </select>
+	
+
+	<select id="noAnsComplainList" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where res = 0 order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
    ]]>
    </select>
    
    
      <select id="totalCnt" resultType="int" >
        select count(*) from complain
+       
+   </select>
+     <select id="noAnsTotalCnt" resultType="int" >
+       select count(*) from complain where res = 0
        
    </select>
    
@@ -26,6 +39,72 @@
    		update complain set incharge = #{incharge} , resdate = sysdate, resContent = #{resContent} , res=1  where idx = #{idx} 
    </update>
    
+
+<update id="givePenaltySql" parameterType="int" >
+	update member set member_host_grade = member_host_grade-1 where member_idx= #{idx}
+
+</update>
+
+
+<!-- 검색 -->
+
+	<select id="searchIdxSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where idx = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
    
+   ]]>
+   </select>
+   
+	<select id="searchSenderSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where sender = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+	<select id="searchReceiverSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where receiver = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+	<select id="searchInchargeSql" resultType="korea.complain.model.ComplainDTO" parameterType="map">
+ 
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from complain where incharge = #{val} order by idx desc ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   
+   ]]>
+   </select>
+   
+   
+      <select id="searchIdxTotalCnt" resultType="int" parameterType="int" >
+       select count(*) from complain where idx= #{val}
+       
+   </select>
+   
+      <select id="searchSenderTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where sender= #{val}
+       
+   </select>
+   
+      <select id="searchReceiverTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where receiver= #{val}
+       
+   </select>
+   
+      <select id="searchInchargeTotalCnt" resultType="int" parameterType="String" >
+       select count(*) from complain where incharge= #{val}
+       
+   </select>
+   
+   
+
+
+
+
    
 </mapper>

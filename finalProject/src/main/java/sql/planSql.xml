@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.plan">
+	<!-- select start -->
+		<select id="planList" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main
+		</select>
+		
+	<!-- select end -->
+		
+	<!-- insert start -->
+		<select id="planMainWrite" parameterType="korea.plan.model.PlanDTO" resultType="int">
+			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum) values
+			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0)	
+		</select>
+	<!-- insert end -->
+	
+	<!-- update start -->
+	<!-- update end -->
+
+
+	<!-- delete start -->
+	<!-- delete end -->
+	
+	
+	
+</mapper>

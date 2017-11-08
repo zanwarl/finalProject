@@ -44,6 +44,8 @@ function areaCode() {
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div id="contents">
 <form method="post">
 	<table>
 		<thead>
@@ -59,6 +61,8 @@ function areaCode() {
 	<div>
 	</div>
 </form>
+</div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
 

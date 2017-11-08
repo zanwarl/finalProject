@@ -17,14 +17,11 @@
 	        	  // console.log(msg.response.body.items.item);
 	        	   var myItem = msg.response.body.items.item;
 	        	   
-	        	   for(var i=0; myItem.length; i++){
-	                    var output = '';
+                   var output = '';
+	        	   for(var i=0; i<myItem.length; i++){
 	                    output += '<h4><a href="city.do?areaCode='+myItem[i].code+'">'+myItem[i].name+'</a></h4>';
-	                    $("#content").html(output);
-	                    
-	                    document.body.innerHTML += output;
 	                }
-	        	   
+	        	   $(".panel").html(output);
 	           },
 	           error : function(xhr, status, error) {
 	                 alert("에러발생");
@@ -34,6 +31,8 @@
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div id="contents">
 <form>
 	<table>
 		<thead>
@@ -46,8 +45,10 @@
 			</tr>
 		</thead>
 	</table>
-	<div id="panel">
+	<div class="panel">
 	</div>
 </form>
+</div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

@@ -6,18 +6,66 @@
 <!DOCTYPE html >
 <html>
 <head>
+
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+
 <meta charset=UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+
+
+function mailPopup(receiver){
+	window.open ('sendMail.do?receiver='+receiver, 'sendMail', 'width= 500, height= 500');
+}
+/* 
+function userInfoPopup(x){
+	window.open('x', 'userInfo','width=500, height= 500');
+}
+ */
+ 
+ 
+</script>
+
 </head>
 <body>
 
-<c:if test="${!empty sId }">
-	${sId }님 로그인중 ...<a href="adminLogout.do">로그아웃</a>
+
+
+<!-- Sidebar -->
+
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+  <h3 class="w3-bar-item">
+
+
+<c:if test="${empty sId }">
+	
+	<a href="#" onclick="loginPopup(); return false; ">로그인</a>
+
 </c:if>
-<br>
+<c:if test="${!empty sId }">
+	${sId }님 로그인중 ...<h5><a href="adminLogout.do">로그아웃</a></h5>
+</c:if>
 
-complain info 
 
+</h3>
+  <a href="complainList.do" class="w3-bar-item w3-button">신고관리</a>
+  <a href="blackList.do" class="w3-bar-item w3-button">블랙리스트</a>
+  <a href="superHostList.do" class="w3-bar-item w3-button">슈퍼호스트</a>
+</div>
+
+
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+
+<div class="w3-container w3-teal">
+  <h1>신고관리</h1>
+</div>
+
+
+
+<div class="w3-container">
 
 <form action="complainAns.do" method="post">
 
@@ -26,9 +74,25 @@ complain info
 <c:set var ="dto" value=  "${con}"></c:set>
 <tr>
 	<th>신고자</th>
-	<td>${dto.sender }</td>
-		<th>피신고자</th>
-	<td>${dto.receiver }</td>
+	<c:url value="userInfo.do" var= "userInfoURL">
+		<c:param name="idx" value="${dto.sender }"></c:param>
+	
+	</c:url>
+	
+	
+	<td> <a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.sender } </a>
+	<input type="button" value="메일" onclick="mailPopup(${dto.sender})">  </td>
+		<th>피신고자</th> 
+		
+		
+	<td>
+		<c:url value="userInfo.do" var= "userInfoURL">
+		<c:param name="idx" value="${dto.receiver }"></c:param>
+	
+	</c:url>
+	
+	<a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=300, height =500'); return false", target="_blank"> ${dto.receiver } </a>
+	<input type="button" value="메일" onclick="mailPopup(${dto.receiver})">  </td>
 		<th>상태</th>
 	<td>${dto.res }</td>
 
@@ -38,7 +102,7 @@ complain info
 	<td>
 		<c:if test="${empty dto.incharge }">
 		
-		<input type="text" name="incharge" value ="  ${sId }">
+		<input type="text" name="incharge" value ="${sId }" readonly="readonly">
 		
 		</c:if>
 		<c:if test="${not empty dto.incharge }">
@@ -94,11 +158,33 @@ ${dto.content }
 
 </table>
 
-<input type="submit" value="ok">
+<input type="hidden" name="idx" value="${dto.idx }">
+
+			<c:if test="${dto.res eq 0  }">
+			<input type="submit" value="ok">
+			</c:if>
+
+
 
 
 
 </form>
+
+
+
+
+</div>
+
+</div>
+      
+
+
+
+
+
+
+
+
 
 
 

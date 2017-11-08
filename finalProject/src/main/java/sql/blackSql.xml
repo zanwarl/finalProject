@@ -16,6 +16,13 @@
        
    </select>
    
+   
+   <insert id="updateBlackListSql"  >
+    <![CDATA[
+	 insert into blackList (select member_idx from member where member_host_grade<-2 and member_idx not in (select useridx from blacklist))
+   ]]>
+   </insert>
+   
 
    
    

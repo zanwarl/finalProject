@@ -33,6 +33,10 @@
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
+<div id="contents">
 해당 도시 정보 보여주기
+</div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
