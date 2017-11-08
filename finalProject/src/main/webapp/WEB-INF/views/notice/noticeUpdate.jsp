@@ -14,12 +14,32 @@
 <body>
 
 
+<!-- Sidebar -->
+
+<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
+<jsp:include page="/adminMenu.do"></jsp:include>
+
+
+</div>
+
+
+
+<!-- Page Content -->
+<div style="margin-left:25%">
+
+<div class="w3-container w3-teal">
+  <h1>공지사항 수정</h1>
+</div>
+
+
+
+<div class="w3-container">
 
 
 
 
 
-  <h1>공지사항수정</h1>
+
 <form action="noticeUpdate.do" method="post">
 
 
@@ -63,6 +83,17 @@
 
 </table>
 </form>
+
+
+
+</div>
+
+</div>
+      
+
+
+
+
 
 
 

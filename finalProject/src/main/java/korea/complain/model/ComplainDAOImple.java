@@ -212,6 +212,27 @@ public class ComplainDAOImple implements ComplainDAO {
 		MemberDTO dto = sqlMap.selectOne("getUserInfoSql", member_idx); 
 		return dto ; 
 		
+	}
+
+
+
+	public List<ComplainDTO> writeComplainList(int userIdx) {
+		List <ComplainDTO> list = sqlMap.selectList("writeComplainListSql", userIdx);
+	
+	
+		return list; 
+		
+	}
+
+
+
+	public List<ComplainDTO> receiveComplainList(int userIdx) {
+		// TODO Auto-ge
+		//receiveComplainListSql	
+		List <ComplainDTO> list = sqlMap.selectList("receiveComplainListSql", userIdx);
+
+		return list ; 
+		
 	}	
 
 

@@ -41,23 +41,23 @@
 
 function addNum(){
 	var frm = document.culreqCon1;
-	var p_num = frm.p_num.value;
+	var c_count = frm.c_count.value;
 	
-	if(Number(p_num) > 10){
+	if(Number(c_count) > 10){
 		alert("최대 10명까지 예약할 수 있습니다.");
 	}else{
-		frm.p_num.value = Number(p_num) + 1;
+		frm.c_count.value = Number(c_count) + 1;
 	}
 }
   
 function subNum(){
 	var frm = document.culreqCon1;
-	var p_num = frm.p_num.value;
+	var c_count = frm.c_count.value;
 	
-	if(Number(p_num) < 2){
+	if(Number(c_count) < 2){
 		alert("최소 1명 이상 선택해야 합니다.");
 	}else{
-		frm.p_num.value = Number(p_num) - 1;  
+		frm.c_count.value = Number(c_count) - 1;  
 	}
 }
 </script>
@@ -71,14 +71,14 @@ function subNum(){
          	<th>예약인원</th>
          	<td>
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="p_num" value="1" style="width:17px;">
+ 			<input type="text" name="c_count" value="1" style="width:17px;">
   			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
   			</td>
          </tr>
          
          <tr>
             <th>예약날짜</th>
-            <td><input type="text" name="c_reqDate" id="datepicker"></td>
+            <td><input type="text" name="c_date" id="datepicker"></td>
          </tr>
          <tr>
             <th>예약시간</th>

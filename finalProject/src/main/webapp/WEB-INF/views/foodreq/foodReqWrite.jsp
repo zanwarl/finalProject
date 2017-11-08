@@ -15,6 +15,10 @@
 <!-- <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
 <script>
+$( function() {
+$( "#datepicker" ).datepicker();
+});
+
 function showTime(){
 	window.open('foodTime.do','dateForm','width=350,height=200');
 }

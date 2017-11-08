@@ -19,12 +19,12 @@
 	<c:forEach var="crdto" items="${list}">
 		<tr>
 		<c:url var="Url" value="culreqCon2.do">
-			<c:param name="idx" value="${crdto.crep_idx}"></c:param>
+			<c:param name="idx" value="${crdto.creq_idx}"></c:param>
 		</c:url>
-			<td><a href="${Url}">${crdto.useridx}</a></td>
+			<td><a href="${goURL}">${crdto.user_id}</a></td>
 		</tr>	
 	</c:forEach>
 </table>
-<a href="culreqCon1.do">상세보기</a>
+<a href="culreqCon2.do">상세보기</a>
 </body>
 </html>
