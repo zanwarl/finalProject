@@ -3,41 +3,33 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<style>
-#p_num {border:0px; width:30px;}
-
-
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
-</style>
+<style>
+#pcount {border:0; width:15px;}
 
+</style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	$( function() {
-	$( "#datepicker" ).datepicker();
-	});
-
-</script>
 
 <script>
 function showTime(){
 	window.open('foodTime.do','dateForm','width=350,height=200');
 }
 function addNum(){
-	var foodreq = document.culreqCon1;
+	var foodreq = document.foodreq;
 	var pcount = foodreq.pcount.value;
 	
 	if(Number(pcount) > 10){
 		alert("최대 10명까지 예약할 수 있습니다.");
 	}else{
-		foodreq.p_num.value = Number(pcount) + 1;
+		foodreq.pcount.value = Number(pcount) + 1;
 	}
 }
   
 function subNum(){
-	var foodreq = document.culreqCon1;
+	var foodreq = document.foodreq;
 	var pcount = foodreq.pcount.value;
 	
 	if(Number(pcount) < 2){
@@ -56,7 +48,7 @@ function subNum(){
          	<label>예약인원</label>
          	
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="pcount" value="1" style="width:17px;">
+ 			<input type="text" name="pcount" id="pcount" value="1">
   			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
   			
          

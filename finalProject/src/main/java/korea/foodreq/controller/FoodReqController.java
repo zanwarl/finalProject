@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import food.model.FoodDAO;
+import food.model.FoodNdateDTO;
 import food.model.FoodTimeDTO;
 
 @Controller
@@ -32,6 +33,18 @@ public class FoodReqController {
 		return mav;
 	}
 	
+	
+	@RequestMapping("/foodReq.do")
+	public ModelAndView foodNdate(){
+		int fidx = 1;
+		System.out.println(fidx);
+		List<FoodNdateDTO> list = fdao.foodNdate(fidx);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("foodreq/foodTime");
+		mav.addObject("list", list);
+		return mav;
+		
+	}
 	
 	
 }
