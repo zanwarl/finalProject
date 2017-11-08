@@ -39,13 +39,13 @@
 		select * from notice where noticeidx = #{idx}
 	</select>
 
-	<update id="noticeUpdateSql" parameterType="korea.notice.model.NoticeDTO">
+	<update id="noticeUpdateSql" parameterType="map">
 		update notice set
 
 		title =#{title},
-		writer = #{writer},
-		content = #{content},
-		writedate = sysdate
+	
+		content = #{content}
+
 
 		where noticeidx= #{noticeIdx}
 	</update>

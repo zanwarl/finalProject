@@ -19,12 +19,12 @@
 
 
 
-  <h1>공지사항내용</h1>
-
-
+  <h1>공지사항수정</h1>
+<form action="noticeUpdate.do" method="post">
 
 
 <table>
+
 <c:set var ="dto" value=  "${con}"></c:set>
 
 	<thead>
@@ -42,10 +42,10 @@
       
       <tr>
       
-         <td>${dto.noticeIdx}</td>
-         <td>${dto.title}</td>
+         <td><input type="text" name="noticeIdx" value="${dto.noticeIdx}" readonly="readonly"> </td>
+         <td><input type="text" name="title" value="${dto.title}"> </td>
          <td>${dto.writer}</td>
-         <td>${dto.content}</td>
+         <td><input type="text" name="content" value="${dto.content}"> </td>
          <td>${dto.writedate}</td>
       </tr>
 
@@ -55,17 +55,15 @@
 	
 		<tr>
 			<td>
-			<c:url var ="noticeUpdateURL" value="noticeUpdate.do">
-				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
-			</c:url>
-			
-			<a href="${noticeUpdateURL }">수정</a>
+			<input type="submit" value="수정하기">
 			</td>
 		</tr>
 	</tfoot>	
 
 
 </table>
+</form>
+
 
 
 
