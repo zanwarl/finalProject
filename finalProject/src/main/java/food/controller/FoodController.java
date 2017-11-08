@@ -1,11 +1,20 @@
 package food.controller;
 
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import food.model.FoodDAO;
@@ -38,19 +47,44 @@ public class FoodController {
 	}
 	
 	@RequestMapping("/addFood.do")
-	public ModelAndView addFood(FoodDTO fdto){
-		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"?젅?뒪?넗?옉 ?벑濡? ?꽦怨?!":"?젅?뒪?넗?옉 ?벑濡? ?떎?뙣!";
+	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException,
+    IOException{
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("msg",msg);
-		mav.setViewName("food/msg");
-		
-		return mav;
+		fdao.foodAdd(fdto);
+		 
+		String realFolder = "d:/upload2/";
+	        File dir = new File(realFolder);
+	        if (!dir.isDirectory()) {
+	            dir.mkdirs();
+	     }
+	        List<MultipartFile> mf = mhsq.getFiles("uploadFile");
+	        if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
+	             
+	        } else {
+	            for (int i = 0; i < mf.size(); i++) {
+	                // 파일 중복명 처리
+	                String genId = UUID.randomUUID().toString();
+	                // 본래 파일명
+	                String oName = mf.get(i).getOriginalFilename();
+	                 
+	                String fimagename = genId + "." + oName;
+	                // 저장되는 파일 이름
+	 
+	                String savePath = realFolder + fimagename; // 저장 될 파일 경로
+	 
+	                long fileSize = mf.get(i).getSize(); // 파일 사이즈
+	 
+	                mf.get(i).transferTo(new File(savePath)); // 파일 저장
+	 
+	                fdao.fImageUpload(oName, fimagename, fileSize);
+	            }
+	        }
+	       
+	      return new ModelAndView("redirect:food.do");
 	}
 	
 	@RequestMapping("/foodContent.do")
-	public ModelAndView foodContent(@RequestParam("idx")int idx){
+	public ModelAndView foodContent(@RequestParam("foodidx")int idx){
 		
 		FoodDTO fdto = fdao.foodContent(idx);
 		ModelAndView mav = new ModelAndView();
@@ -60,4 +94,5 @@ public class FoodController {
 		 
 		return mav;
 	}
+	
 }

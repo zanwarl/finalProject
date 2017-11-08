@@ -1,137 +1,151 @@
 package food.model;
 
 public class FoodDTO {
-	private int useridx;
+	
+	private int fidx;
 	private String fname;
+	private String user_id;
+	private int fpay;
 	private String opentime;
 	private String closetime;
+	private String postcode;
 	private String addr1;
 	private String addr2;
-	private String image;
-	private int foodpay;
-	private String content;
-	private String abletime;
 	private int pcount;
-	private int score;
+	private String fcontent;
+
 	
 	public FoodDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FoodDTO(int useridx, String fname, String opentime, String closetime, String addr1, String addr2,
-			String image, int foodpay, String content, String abletime, int pcount, int score) {
+
+	public FoodDTO(int fidx, String fname, String user_id, int fpay, String opentime, String closetime, String postcode,
+			String addr1, String addr2, int pcount, String fcontent) {
 		super();
-		this.useridx = useridx;
+		this.fidx = fidx;
 		this.fname = fname;
+		this.user_id = user_id;
+		this.fpay = fpay;
 		this.opentime = opentime;
 		this.closetime = closetime;
+		this.postcode = postcode;
 		this.addr1 = addr1;
 		this.addr2 = addr2;
-		this.image = image;
-		this.foodpay = foodpay;
-		this.content = content;
-		this.abletime = abletime;
 		this.pcount = pcount;
-		this.score = score;
+		this.fcontent = fcontent;
 	}
 
 
-
-	public int getUseridx() {
-		return useridx;
+	public int getFidx() {
+		return fidx;
 	}
 
-	public void setUseridx(int useridx) {
-		this.useridx = useridx;
+
+	public void setFidx(int fidx) {
+		this.fidx = fidx;
 	}
+
 
 	public String getFname() {
 		return fname;
 	}
 
+
 	public void setFname(String fname) {
 		this.fname = fname;
 	}
+
+
+	public String getUser_id() {
+		return user_id;
+	}
+
+
+	public void setUser_id(String user_id) {
+		this.user_id = user_id;
+	}
+
+
+	public int getFpay() {
+		return fpay;
+	}
+
+
+	public void setFpay(int fpay) {
+		this.fpay = fpay;
+	}
+
 
 	public String getOpentime() {
 		return opentime;
 	}
 
+
 	public void setOpentime(String opentime) {
 		this.opentime = opentime;
 	}
+
 
 	public String getClosetime() {
 		return closetime;
 	}
 
+
 	public void setClosetime(String closetime) {
 		this.closetime = closetime;
 	}
+
+
+	public String getPostcode() {
+		return postcode;
+	}
+
+
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
 
 	public String getAddr1() {
 		return addr1;
 	}
 
+
 	public void setAddr1(String addr1) {
 		this.addr1 = addr1;
 	}
+
 
 	public String getAddr2() {
 		return addr2;
 	}
 
+
 	public void setAddr2(String addr2) {
 		this.addr2 = addr2;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public int getFoodpay() {
-		return foodpay;
-	}
-
-	public void setFoodpay(int foodpay) {
-		this.foodpay = foodpay;
-	}
-
-	public String getContent() {
-		return content;
-	}
-
-	public void setContent(String content) {
-		this.content = content;
-	}
-
-	public String getAbletime() {
-		return abletime;
-	}
-
-	public void setAbletime(String abletime) {
-		this.abletime = abletime;
-	}
 
 	public int getPcount() {
 		return pcount;
 	}
 
+
 	public void setPcount(int pcount) {
 		this.pcount = pcount;
 	}
 
-	public int getScore() {
-		return score;
+
+	public String getFcontent() {
+		return fcontent;
 	}
 
-	public void setScore(int score) {
-		this.score = score;
+
+	public void setFcontent(String fcontent) {
+		this.fcontent = fcontent;
 	}
+	
 	
 	
 }

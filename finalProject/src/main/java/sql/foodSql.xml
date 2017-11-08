@@ -4,12 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="food">
 	<insert id="foodInsert" parameterType="food.model.FoodDTO">
-	insert into food values (food_idx.nextval,#{fname},#{opentime},#{closetime},#{addr1},#{addr2},#{image},#{foodpay},#{content},#{abletime},#{pcount},0)
+	insert into food values (food_idx.nextval,#{fname},#{user_id},#{fpay},#{opentime},#{closetime},#{postcode},#{addr1},#{addr2},#{pcount},#{fcontent})
+	</insert>
+	<insert id="uploadFile" parameterType="HashMap">
+    insert into foodimage VALUES (fimage_idx.nextval, #{oname}, #{fimagename}, #{fimagesize}, food_idx.currval)
 	</insert>
 	<select id="foodList" resultType="food.model.FoodDTO">
-	select * from food order by useridx
+	select * from food order by fidx
 	</select>
 	<select id="foodContent" parameterType="int" resultType="food.model.FoodDTO">
-	select * from food where useridx = #{idx}
+	select * from food where fidx = #{idx}
 	</select>
 </mapper>
