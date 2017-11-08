@@ -48,5 +48,10 @@ public class FoodDAOImple implements FoodDAO {
 		    sqlMap.insert("uploadFile",hm);
 	}
 
+	public List<FoodTimeDTO> foodList(int fidx) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 
 }
