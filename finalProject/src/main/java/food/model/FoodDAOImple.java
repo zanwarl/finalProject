@@ -31,6 +31,7 @@ public class FoodDAOImple implements FoodDAO {
 		FoodDTO fdto = sqlMap.selectOne("foodContent",idx);
 		return fdto;
 	}
+
 	
 	
 	public List<FoodTimeDTO> foodTime(int fidx) {
@@ -39,6 +40,12 @@ public class FoodDAOImple implements FoodDAO {
 		return list;
 	}
 
+	
+	public List<FoodNdateDTO> foodNdate(int fidx){
+		List<FoodNdateDTO> list = sqlMap.selectList("foodNdate",fidx);
+		return list;
+	}
+	
 	public void fImageUpload(String oName, String fimagename, long fileSize) {
 		 HashMap<String, Object> hm = new HashMap<String, Object>();
 		    hm.put("originalfileName", oName);
@@ -52,6 +59,8 @@ public class FoodDAOImple implements FoodDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+
 
 
 }

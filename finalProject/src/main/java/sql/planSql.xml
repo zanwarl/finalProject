@@ -8,6 +8,12 @@
 			select * from plan_main
 		</select>
 		
+		<select id="lastSaveIdx" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main  
+			where rownum = 1 and plan_writer = 1
+			order by plan_idx desc
+		</select>
+		
 	<!-- select end -->
 		
 	<!-- insert start -->
