@@ -24,9 +24,10 @@ public class AdminController {
 	AdminDAO adao ; 
 	
 	
-	@RequestMapping (value="/sideBar.do")
+	
+	@RequestMapping (value="/adminMenu.do")
 	public String sideBar(){
-		return "admin/sideBar";
+		return "admin/adminMenu";
 		
 	}
 	
