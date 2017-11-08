@@ -15,9 +15,8 @@
 <!-- <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
 <script>
-$( function() {
-$( "#datepicker" ).datepicker();
-});
+
+var holiday = '';
 
 function showTime(){
 	window.open('foodTime.do','dateForm','width=350,height=200');
@@ -46,24 +45,29 @@ function subNum(){
 
 $(document).ready(function() {
 	var fidx = 1;
+	var arr = '';
 
-
-	$(function() {
-		$( "#datepicker" ).datepicker();
-		
-	});
-	
     $.ajax({
    	      url:"foodndate.do?fidx=1",
 	   	  dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨	
           type:"POST",
+          async:false, // 이 한줄만 추가해주시면 됩니다.
           success : function(msg) {
-        	  alert(msg.time);
+        	  holiday = msg.time; 
           },
           error : function(xhr, status, error) {
                 alert("에러발생");
           }
     });
+    
+    function holidayfn(holiday) {
+    	holiday = ['11/10/2017'];
+      return [true, ''];
+    }
+    
+    $( function() {
+    	$("#datepicker").datepicker({ beforeShowDay : holidayfn});
+    	});
 }); 
 
 

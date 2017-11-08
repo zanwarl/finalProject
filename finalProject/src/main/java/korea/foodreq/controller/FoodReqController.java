@@ -51,11 +51,14 @@ public class FoodReqController {
 		holiday = fdao.foodNdate(fidx);
 		
 		JSONObject json = new JSONObject();
-		
+		JSONArray jArray = new JSONArray();//배열이 필요할때
+
 		Iterator<String> it = holiday.keySet().iterator();  // 키 집합 자료를 가진 이터레이터 객체 생성
 
+		
+		System.out.println(holiday.size());
 		String temp = "";
-		while(it.hasNext()){                 // 다음 자료가 더 있는지 검사
+		while(it.hasNext()) {                 // 다음 자료가 더 있는지 검사
 			temp = it.next();
 			System.out.println(temp + " : " + holiday.get(temp));
 			/*FoodNdateDTO s = holiday.get(it.next());  // 자료를 순서대로 스트링 변수에 저장 
@@ -64,7 +67,7 @@ public class FoodReqController {
 		}		
 		
 		
-	 	//System.out.printf(json.toString());
+	 	System.out.printf(json.toString());
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("foodreq/foodnDate");
