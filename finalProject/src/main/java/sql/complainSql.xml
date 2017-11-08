@@ -102,6 +102,12 @@
    </select>
    
    
+      <select id="getUserInfoSql" parameterType="int" resultType="korea.member.model.MemberDTO">
+   		select * from member where member_idx = #{memberIdx}
+   
+   </select>
+   
+
 
 
 

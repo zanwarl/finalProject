@@ -9,4 +9,6 @@ public interface MemberDAO {
 	public String getUserEmail (int memIdx);
 	public boolean login (String member_id, String member_pwd);
 
+	public MemberDTO getUserInfo (int idx);
+	
 }
