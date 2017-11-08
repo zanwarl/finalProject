@@ -14,7 +14,7 @@
 	</select>
 	
 	
-	<select id="foodList2" parameterType="int" resultType="food.model.FoodTimeDTO">
+	<select id="foodTime" parameterType="int" resultType="food.model.FoodTimeDTO">
 		select * from food_time where fidx = #{fidx}
 	</select>
 </mapper>

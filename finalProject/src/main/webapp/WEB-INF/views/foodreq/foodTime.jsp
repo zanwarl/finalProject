@@ -6,11 +6,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script>
+function choiceTime(){
+	opener.document.foodreq.frtime.value='aa';
+	window.self.close();
+}
+</script>
 </head>
 <body>
-<c:forEach var="list" items="${list }">
-${list.fidx } <br>
-<input type="button" value="${list.ftime }" onclick="ss()">
+<h2>예약시간 선택</h2>
+<c:forEach var="list" items="${list}">
+<input type="button" value="${list.ftime}" onclick="choiceTime()">
 </c:forEach>
 </body>
 </html>

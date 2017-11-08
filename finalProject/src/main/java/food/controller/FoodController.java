@@ -41,7 +41,7 @@ public class FoodController {
 	@RequestMapping("/addFood.do")
 	public ModelAndView addFood(FoodDTO fdto){
 		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"?��?��?��?�� ?���? ?���?!":"?��?��?��?�� ?���? ?��?��!";
+		String msg = result>0?"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙占�?!":"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙!";
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("msg",msg);
@@ -62,16 +62,7 @@ public class FoodController {
 		return mav;
 	}
 	
-	@RequestMapping("/foodList.do")
-	public ModelAndView foodList() {
-		int fidx = 2;
-		System.out.println(fidx);
-		List<FoodTimeDTO> list = fdao.foodList(fidx);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("food/foodList");
-		mav.addObject("list", list);
-		return mav;
-	}
+
 	
 	
 }

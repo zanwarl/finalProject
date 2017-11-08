@@ -8,5 +8,5 @@ public interface FoodDAO {
 	public List<FoodDTO> foodList(); 
 	public FoodDTO foodContent(int idx);
 
-	public List<FoodTimeDTO> foodList(int fidx);
+	public List<FoodTimeDTO> foodTime(int fidx);
 }
