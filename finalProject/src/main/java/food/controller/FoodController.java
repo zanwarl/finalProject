@@ -48,14 +48,12 @@ public class FoodController {
 	}
 	
 	@RequestMapping("/addFood.do")
-<<<<<<< HEAD
-	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException,
-    IOException{
-=======
-	public ModelAndView addFood(FoodDTO fdto){
+
+	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
+
 		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½ï¿½?!":"?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½?ï¿½ï¿½ ?ï¿½ï¿½ï¿½? ?ï¿½ï¿½?ï¿½ï¿½!";
->>>>>>> branch 'master' of https://github.com/zanwarl/finalProject.git
+		String msg = result>0?"?å ì™ì˜™?å ì™ì˜™?å ì™ì˜™?å ì™ì˜™ ?å ì™ì˜™å ï¿½? ?å ì™ì˜™å ï¿½?!":"?å ì™ì˜™?å ì™ì˜™?å ì™ì˜™?å ì™ì˜™ ?å ì™ì˜™å ï¿½? ?å ì™ì˜™?å ì™ì˜™!";
+
 		ModelAndView mav = new ModelAndView();
 		fdao.foodAdd(fdto);
 		 
@@ -69,19 +67,19 @@ public class FoodController {
 	             
 	        } else {
 	            for (int i = 0; i < mf.size(); i++) {
-	                // ÆÄÀÏ Áßº¹¸í Ã³¸®
+	                // íŒŒì¼ ì¤‘ë³µëª… ì²˜ë¦¬
 	                String genId = UUID.randomUUID().toString();
-	                // º»·¡ ÆÄÀÏ¸í
+	                // ë³¸ë˜ íŒŒì¼ëª…
 	                String oName = mf.get(i).getOriginalFilename();
 	                 
 	                String fimagename = genId + "." + oName;
-	                // ÀúÀåµÇ´Â ÆÄÀÏ ÀÌ¸§
+	                // ì €ì¥ë˜ëŠ” íŒŒì¼ ì´ë¦„
 	 
-	                String savePath = realFolder + fimagename; // ÀúÀå µÉ ÆÄÀÏ °æ·Î
+	                String savePath = realFolder + fimagename; // ì €ì¥ ë  íŒŒì¼ ê²½ë¡œ
 	 
-	                long fileSize = mf.get(i).getSize(); // ÆÄÀÏ »çÀÌÁî
+	                long fileSize = mf.get(i).getSize(); // íŒŒì¼ ì‚¬ì´ì¦ˆ
 	 
-	                mf.get(i).transferTo(new File(savePath)); // ÆÄÀÏ ÀúÀå
+	                mf.get(i).transferTo(new File(savePath)); // íŒŒì¼ ì €ì¥
 	 
 	                fdao.fImageUpload(oName, fimagename, fileSize);
 	            }
@@ -102,8 +100,7 @@ public class FoodController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
-=======
+
 	@RequestMapping("/foodList.do")
 	public ModelAndView foodList() {
 		int fidx = 2;
@@ -116,5 +113,4 @@ public class FoodController {
 	}
 	
 	
->>>>>>> branch 'master' of https://github.com/zanwarl/finalProject.git
 }
