@@ -96,8 +96,46 @@ public class NoticeController {
 		
 	}
 	
+	@RequestMapping (value="/noticeUpdate.do" , method=RequestMethod.GET)
+	public ModelAndView noticeUpdateFm (@RequestParam ("idx" )int idx){
+		
+		NoticeDTO dto = ndao.noticeContent(idx);
+		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("con", dto);
+		
+		mav.setViewName("notice/noticeUpdate");
+		
+		
+		return mav; 
+		
+	}
+	
 	
 			
+	@RequestMapping (value="/noticeUpdate.do" , method=RequestMethod.POST)
+	public ModelAndView noticeUpdate  (int noticeIdx , String title,String content){
+		
+//		NoticeDTO dto = ndao.noticeContent(idx);
+		//dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
+		
+		int res =ndao.noticeUpdate(noticeIdx, title, content);
+	
+		String msg = res>0? "글이 수정되었습니다": "실패";
+		String goURL = res>0?"noticeList.do":"noticeUpdate.do?idx="+noticeIdx;
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+		
+		
+		mav.setViewName("admin/adminMsg");
+		
+		return mav; 
+		
+
+	}
 	
 	
 	
