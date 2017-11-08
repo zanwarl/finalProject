@@ -50,7 +50,7 @@
 $(document).ready(function() {	
 	var cp = 1;
 	$.ajax({
-		url:"areaBasedList.do?areaCode=1&cp="+cp,
+		 url:"areaBasedList.do?areaCode=1&cp="+cp,
 		 type:"GET",
          dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
          success : function(msg) {

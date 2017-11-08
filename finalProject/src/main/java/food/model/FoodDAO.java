@@ -1,5 +1,6 @@
 package food.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,9 @@ public interface FoodDAO {
 	
 	public List<FoodTimeDTO> foodTime(int fidx);
 	public List<FoodTimeDTO> foodList(int fidx);
-	public List<FoodNdateDTO> foodNdate(int fidx);
+	
+	
+	public HashMap<String, FoodNdateDTO> foodNdate(int fidx);
+	
 
 }

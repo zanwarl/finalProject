@@ -12,6 +12,7 @@
 </style>
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<!-- <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
 
 <script>
 function showTime(){
@@ -38,6 +39,30 @@ function subNum(){
 		foodreq.pcount.value = Number(pcount) - 1;  
 	}
 }
+
+$(document).ready(function() {
+	var fidx = 1;
+
+
+	$(function() {
+		$( "#datepicker" ).datepicker();
+		
+	});
+	
+    $.ajax({
+   	      url:"foodndate.do?fidx=1",
+	   	  dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨	
+          type:"POST",
+          success : function(msg) {
+        	  alert(msg.time);
+          },
+          error : function(xhr, status, error) {
+                alert("에러발생");
+          }
+    });
+}); 
+
+
 </script>
   </head>
 <body>

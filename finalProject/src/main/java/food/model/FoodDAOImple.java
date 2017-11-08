@@ -1,6 +1,7 @@
 package food.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 
@@ -41,9 +42,26 @@ public class FoodDAOImple implements FoodDAO {
 	}
 
 	
-	public List<FoodNdateDTO> foodNdate(int fidx){
+	public HashMap<String, FoodNdateDTO> foodNdate(int fidx) {
 		List<FoodNdateDTO> list = sqlMap.selectList("foodNdate",fidx);
-		return list;
+		
+		HashMap<String, FoodNdateDTO> holiday = new HashMap<String, FoodNdateDTO>();
+		
+		for(FoodNdateDTO i : list) {
+			holiday.put(i.getFndate(),i);
+		}
+		
+		/*Iterator<String> it = holiday.keySet().iterator();  // 키 집합 자료를 가진 이터레이터 객체 생성
+
+		System.out.println(holiday.toString());  // 해시맵 내용 출력 
+		System.out.println(holiday.keySet());   // 해시맵 키 출력
+		
+		while(it.hasNext()){                 // 다음 자료가 더 있는지 검사
+			FoodNdateDTO s = holiday.get(it.next());  // 자료를 순서대로 스트링 변수에 저장 
+			//System.out.println(s);        // 자료를 출력
+		}		*/
+		
+		return holiday;
 	}
 	
 	public void fImageUpload(String oName, String fimagename, long fileSize) {
