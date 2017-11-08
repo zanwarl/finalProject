@@ -51,9 +51,6 @@ public class FoodController {
 
 	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
 
-		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙占�?!":"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙!";
-
 		ModelAndView mav = new ModelAndView();
 		fdao.foodAdd(fdto);
 		 
