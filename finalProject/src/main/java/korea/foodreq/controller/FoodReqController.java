@@ -34,17 +34,5 @@ public class FoodReqController {
 	}
 	
 	
-	@RequestMapping("/foodReq.do")
-	public ModelAndView foodNdate(){
-		int fidx = 1;
-		System.out.println(fidx);
-		List<FoodNdateDTO> list = fdao.foodNdate(fidx);
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("foodreq/foodTime");
-		mav.addObject("list", list);
-		return mav;
-		
-	}
-	
 	
 }
