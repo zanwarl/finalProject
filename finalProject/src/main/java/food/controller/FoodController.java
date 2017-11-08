@@ -48,12 +48,15 @@ public class FoodController {
 	}
 	
 	@RequestMapping("/addFood.do")
+<<<<<<< HEAD
+	public ModelAndView addFood(FoodDTO fdto){
+		int result = fdao.foodAdd(fdto);
+		String msg = result>0?"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙占�?!":"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙!";
+=======
 
 	public ModelAndView addFood(FoodDTO fdto,MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException{
 
-		int result = fdao.foodAdd(fdto);
-		String msg = result>0?"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙占�?!":"?占쏙옙?占쏙옙?占쏙옙?占쏙옙 ?占쏙옙占�? ?占쏙옙?占쏙옙!";
-
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 		ModelAndView mav = new ModelAndView();
 		fdao.foodAdd(fdto);
 		 
@@ -100,6 +103,9 @@ public class FoodController {
 		return mav;
 	}
 	
+<<<<<<< HEAD
+
+=======
 
 	@RequestMapping("/foodList.do")
 	public ModelAndView foodList() {
@@ -111,6 +117,7 @@ public class FoodController {
 		mav.addObject("list", list);
 		return mav;
 	}
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 	
 	
 }

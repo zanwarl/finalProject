@@ -33,8 +33,9 @@ public class FoodDAOImple implements FoodDAO {
 	}
 	
 	
-	public List<FoodTimeDTO> foodList(int fidx) {
-		List<FoodTimeDTO> list = sqlMap.selectList("foodList2", fidx);
+	public List<FoodTimeDTO> foodTime(int fidx) {
+		System.out.println("-----------");
+		List<FoodTimeDTO> list = sqlMap.selectList("foodTime", fidx);
 		return list;
 	}
 

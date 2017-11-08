@@ -13,6 +13,10 @@ public interface FoodDAO {
 	public void fImageUpload(String oName,String fimagename,long fileSize);
 
 
+<<<<<<< HEAD
+	public List<FoodTimeDTO> foodTime(int fidx);
+=======
 	public List<FoodTimeDTO> foodList(int fidx);
 
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject
 }

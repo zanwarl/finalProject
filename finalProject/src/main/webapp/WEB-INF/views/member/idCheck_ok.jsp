@@ -4,4 +4,5 @@
 window.alert('${msg}');
 opener.document.memberJoin.member_id.value='${userid}';
 window.self.close();
+
 </script>
