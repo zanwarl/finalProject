@@ -45,6 +45,13 @@ public class NoticeDAOImple implements NoticeDAO{
 		int res = sqlMap.update("noticeUpdateSql", dto );
 		return res ; 
 		}
+
+	public NoticeDTO noticeContent(int idx) {
+		NoticeDTO dto = sqlMap.selectOne("noticeContentSql", idx);
+		return dto ; 
+		
+		
+	}
 	   
 
 	

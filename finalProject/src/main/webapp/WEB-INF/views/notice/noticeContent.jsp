@@ -25,6 +25,8 @@
 
 
 <table>
+<c:set var ="dto" value=  "${con}"></c:set>
+
 	<thead>
 	
 		<tr>
@@ -40,16 +42,27 @@
       
       <tr>
       
-         <td>${list.noticeIdx}</td>
-         <td>${list.title}</td>
-         <td>${list.writer}</td>
-         <td>${list.content}</td>
+         <td>${dto.noticeIdx}</td>
+         <td>${dto.title}</td>
+         <td>${dto.writer}</td>
+         <td>${dto.content}</td>
          <td>${dto.writedate}</td>
       </tr>
 
 	</tbody>
 	
+	<tfoot>
 	
+		<tr>
+			<td>
+			<c:url var ="noticeUpdateURL" value="noticeUpdate.do">
+			</c:url>
+			
+			<a href="noticeUpdate.do?">수정</a>
+			</td>
+		</tr>
+	</tfoot>	
+
 
 </table>
 

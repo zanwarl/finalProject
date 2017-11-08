@@ -102,7 +102,7 @@ function userInfoPopup(x){
 	<td>
 		<c:if test="${empty dto.incharge }">
 		
-		<input type="text" name="incharge" value ="${sId }" readonly="readonly">
+		<input type="text" name="incharge" value ="${sId}" readonly="readonly">
 		
 		</c:if>
 		<c:if test="${not empty dto.incharge }">
