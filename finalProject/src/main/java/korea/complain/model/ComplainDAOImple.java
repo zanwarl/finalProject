@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import korea.member.model.MemberDTO;
+
 public class ComplainDAOImple implements ComplainDAO {
 	
 
@@ -199,6 +201,16 @@ public class ComplainDAOImple implements ComplainDAO {
 		
 		int res = sqlMap.selectOne(sql, key==1 ?Integer.parseInt(val):val);
 		return res ;
+		
+	}
+
+
+
+	public MemberDTO getUserInfo(int member_idx) {
+		
+		//getUserInfoSql
+		MemberDTO dto = sqlMap.selectOne("getUserInfoSql", member_idx); 
+		return dto ; 
 		
 	}	
 

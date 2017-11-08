@@ -11,6 +11,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import korea.complain.model.ComplainDAO;
 import korea.complain.model.ComplainDTO;
+import korea.member.model.MemberDAO;
+import korea.member.model.MemberDTO;
 
 @Controller
 public class ComplainController {
@@ -18,6 +20,9 @@ public class ComplainController {
 	@Autowired 
 	private ComplainDAO comdao;
 	
+/*	@Autowired 
+	private MemberDAO memdao;
+	*/
 	
 /*	@RequestMapping (value ="/sendMail.do", method=RequestMethod.GET)
 	public String sendMailFm(){
@@ -34,24 +39,25 @@ public class ComplainController {
 	//	String msg = res>0? "success": "fail";
 	//	String goURL ="complainList.do";
 		
+		MemberDTO dto = comdao.getUserInfo(idx);
+		
+		
 		ModelAndView mav= new ModelAndView(); 
 		mav.setViewName("complain/userInfo");
 		mav.addObject("idx", idx);
+		mav.addObject("userInfo", dto);
+		
 		
 		
 		return mav; 
-		
-		
-		
-		
-		
+	
 	}
 	
 	@RequestMapping(value="/givePenalty.do")
 	public ModelAndView givePenalty (@RequestParam (value="idx")int idx){
 		int res = comdao.givePenalty(idx);
 		String msg = res>0? "success": "fail";
-		String goURL ="complainList.do";
+	//	String goURL ="complainList.do";
 		
 		ModelAndView mav= new ModelAndView(); 
 		mav.setViewName("admin/closeMsg");

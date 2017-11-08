@@ -46,5 +46,11 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
+	public MemberDTO getUserInfo(int idx) {
+		//   <select id="getUserInfoSql" parameterType="int" resultMap="korea.member.model.MemberDTO">
+		MemberDTO dto =sqlMap.selectOne("getUserInfoSql", idx);
+		return dto ; 
+	}
+
 
 }
