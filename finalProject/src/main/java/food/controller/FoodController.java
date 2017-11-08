@@ -102,17 +102,6 @@ public class FoodController {
       return mav;
    }
    
-
-   @RequestMapping("/foodTime.do")
-   public ModelAndView foodTime() {
-   	int fidx = 2;
-   	System.out.println(fidx);
-   	List<FoodTimeDTO> list = fdao.foodTime(fidx);
-   	ModelAndView mav = new ModelAndView();
-   	mav.setViewName("food/foodTime");
-   	mav.addObject("list", list);
-   	return mav;
-   }
    
     public Map fileUpload(HttpServletRequest req, HttpServletResponse rep) { 
            //파일이 저장될 path 설정 
