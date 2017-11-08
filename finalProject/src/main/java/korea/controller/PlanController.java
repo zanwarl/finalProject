@@ -11,6 +11,7 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
@@ -110,11 +111,29 @@ public class PlanController {
 	}
 	
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
-	@RequestMapping("/planDetail.do")
-	public ModelAndView planDetail(PlanDTO pdto) {
+	@RequestMapping(value="/planMainSaveDb.do", method=RequestMethod.POST)
+	public ModelAndView planMainSaveDb(PlanDTO pdto) {
 		
 		int result = pdao.planMainWrite(pdto);
 		System.out.println(result);
+		ModelAndView mav = new ModelAndView();
+		
+		String str = "planDetail.do";
+		
+		mav.setViewName("plan/planDetailOk");
+		mav.addObject("url", str);
+		return mav;
+	}
+	
+	/**세부 일정 작성*/ 
+	@RequestMapping("/planDetail.do")
+	public ModelAndView planDetail(PlanDTO pdto) {
+		
+		pdto = pdao.lastSaveIdx(pdto);
+		
+		System.out.println("마지막 idx : " + pdto.getPlan_idx());
+		System.out.println(pdto.getPlan_subject());
+		
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("plan/planDetail");
@@ -127,6 +146,7 @@ public class PlanController {
 		return "plan/test";
 	}
 	
+	/**내가 작성한 일정 목록 (+페이징)*/
 	@RequestMapping("/myPlan.do")
 	public ModelAndView myPlanList() {
 		

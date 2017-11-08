@@ -189,60 +189,73 @@ var picker = new Pikaday(
 	    ;
  
 </script>
+<script type="text/javascript">
+if (window.history && window.history.pushState) {
+    $('remodal').on('show.bs.modal', function (e) {
+        window.history.pushState('forward', null, '');
+    });
+
+    $(window).on('popstate', function () {
+        $('remodal').modal('hide');
+    });
+}
+</script>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents"><!-- contents -->
-
-	<div id="cityList" style="overflow:auto;"><!-- cityList -->
-	</div><!-- cityList -->
-	<div id="map" style="overflow:auto;">
-	</div><!-- map -->
-	<div id="select_detail_view_city">
-		<div class="plan_full_box">
-			<div class="plan_main_name"></div>
-			<div class="plan_main_make" onclick="plan()"></div>
-		</div>
+	<div id="contents_header">
+		<a href="plan.do">닫기</a>
 	</div>
-
-<!-- modal div start -->
-<div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
-	<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
-		<div>
-			<h2 id="modal1Title">출발일 선택</h2>
-			<div class="modal_content">
-				<form name="plan_make" action="planDetail.do">
-					<table>
-						<tbody>
-							<tr>
-								<th>여행 제목</th>
-								<td><input type="text" name="plan_subject"></td>
-							</tr>
-							<tr>
-								<th>출발일</th>
-								<td><input type="text" name="plan_start" id="datepicker"></td>
-							</tr>
-						</tbody>
-						<tfoot>
-							<tr>	
-								<td>
-									<!-- form에서 넘겨줘야 할 데이터 -->
-									<!-- 작성자,areacode -->
-									<input type="hidden" name="plan_writer" value="1">
-									<input type="hidden" name="area_code" value="1">
-									
-								</td>
-							</tr>
-						</tfoot>
-					</table>
-				<button data-remodal-action="cancel" class="remodal-cancel">취소</button>
-				<button class="remodal-confirm">완료</button>
-				<!-- <a class="remodal-confirm" href="planDetail.do">완료</a> -->
-				</form>
+		<div id="cityList" style="overflow:auto;"><!-- cityList -->
+		</div><!-- cityList -->
+		<div id="map" style="overflow:auto;">
+		</div><!-- map -->
+		<div id="select_detail_view_city">
+			<div class="plan_full_box">
+				<div class="plan_main_name"></div>
+				<div class="plan_main_make" onclick="plan()"></div>
 			</div>
 		</div>
-</div>
-<!-- modal div end -->
+
+		<!-- modal div start -->
+		<div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
+			<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+				<div>
+					<h2 id="modal1Title">출발일 선택</h2>
+					<div class="modal_content">
+						<form name="plan_make" action="planMainSaveDb.do" method="post">
+							<table>
+								<tbody>
+									<tr>
+										<th>여행 제목</th>
+										<td><input type="text" name="plan_subject"></td>
+									</tr>
+									<tr>
+										<th>출발일</th>
+										<td><input type="text" name="plan_start" id="datepicker"></td>
+									</tr>
+								</tbody>
+								<tfoot>
+									<tr>	
+										<td>
+											<!-- form에서 넘겨줘야 할 데이터 -->
+											<!-- 작성자,areacode -->
+											<input type="hidden" name="plan_writer" value="1">
+											<input type="hidden" name="area_code" value="1">
+											
+										</td>
+									</tr>
+								</tfoot>
+							</table>
+						<button data-remodal-action="cancel" class="remodal-cancel">취소</button>
+						<button class="remodal-confirm">완료</button>
+						<!-- <a class="remodal-confirm" href="planDetail.do">완료</a> -->
+						</form>
+					</div>
+				</div>
+		</div>
+		<!-- modal div end -->
 </div><!-- contents -->
 
 	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">

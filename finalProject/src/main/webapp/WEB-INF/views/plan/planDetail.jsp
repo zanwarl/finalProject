@@ -57,11 +57,10 @@ $(document).ready(function() {
         	 // console.log(msg.response.body.items.item);
       	   var myItem = msg.response.body.items.item;
       	   
-      	   //page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
       	   
       	   var totalCnt = msg.response.body.totalCount;
       	   var pageName = 'city.do?areaCode='+ 1;
-      	   var listSize = 5;
+      	   var listSize = 10;
       	   var pageSize = 5;
       	   
       	   var queryStr = '123123';

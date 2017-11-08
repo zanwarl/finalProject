@@ -104,7 +104,7 @@ a {text-decoration:none; color:#000;}
 	</div>
 	<div id="main_menu">
 	<ul>
-  	 	<li class='has-sub'><a href='#'><span>여행지</span></a>
+  	 	<li class='has-sub'><a href='tour.do'><span>여행지</span></a>
    			<ul>
 		         <li><a href='#'><span>서울경기</span></a></li>
 		         <li><a href='#'><span>강원도</span></a></li>
