@@ -2,6 +2,8 @@ package korea.complain.model;
 
 import java.util.List;
 
+import korea.member.model.MemberDTO;
+
 public interface ComplainDAO {
 	
 	public List <ComplainDTO> complainList (int cp, int listSize); 
@@ -21,7 +23,7 @@ public interface ComplainDAO {
 	public int givePenalty(int idx);
 	public int comReqWrite(ComplainDTO dto);
 
-	
+	public MemberDTO getUserInfo (int member_idx ); 
 	
 	
 	

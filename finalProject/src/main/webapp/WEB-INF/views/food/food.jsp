@@ -22,7 +22,7 @@
 	<c:forEach var="fdto" items="${list}">
 		<tr>
 		<c:url var="Url" value="foodContent.do">
-			<c:param name="idx" value="${fdto.useridx}"></c:param>
+			<c:param name="foodidx" value="${fdto.fidx}"></c:param>
 		</c:url>
 			<td><a href="${Url}">${fdto.fname}</a></td>
 		</tr>	

@@ -4,19 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.notice">
 
-<insert id="noticeWriteSql" parameterType="korea.notice.model.NoticeDTO" >
-	insert into notice values (
+	<insert id="noticeWriteSql" parameterType="korea.notice.model.NoticeDTO">
+		insert into notice values (
 		noticeIdx.nextval ,
 		#{title},
-		#{writer}, 
-		#{content}, 
+		#{writer},
+		#{content},
 		sysdate
-	)
-</insert>
+		)
+	</insert>
 
 
 
-   	<select id="noticeListSql" parameterType="map" resultType="korea.notice.model.NoticeDTO">
+	<select id="noticeListSql" parameterType="map"
+		resultType="korea.notice.model.NoticeDTO">
 	
 	 <![CDATA[ 
     select * from (select rownum rnum,a.* from (select * from notice order by noticeidx desc  ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
@@ -25,28 +26,34 @@
 			= #{userIdx} or receiver = #{userIdx} group by msgIdx ) order by idx desc -->
 
 	</select>
-	
-	
-	
-	   
-     <select id="noticeTotalCnt" resultType="int" >
-       select count(*) from notice
-       
-   </select>
-   <select id="noticeContentSql" resultType="korea.notice.model.NoticeDTO" parameterType="int">
-    	select * from notice where noticeidx = #{idx}
-   </select>
 
-	<update id="noticeUpdateSql" parameterType="korea.notice.model.NoticeDTO" >
-		update notice set 
-		
+
+
+
+	<select id="noticeTotalCnt" resultType="int">
+		select count(*) from notice
+
+	</select>
+	<select id="noticeContentSql" resultType="korea.notice.model.NoticeDTO"
+		parameterType="int">
+		select * from notice where noticeidx = #{idx}
+	</select>
+
+	<update id="noticeUpdateSql" parameterType="map">
+		update notice set
+
 		title =#{title},
-		writer = #{writer}, 
-	content =	#{content}, 
-		writedate = sysdate
-		
+	
+		content = #{content}
+
+
 		where noticeidx= #{noticeIdx}
 	</update>
-   
-   
+	
+	
+	<delete id="noticeDeleteSql" parameterType="int">
+		delete from notice where noticeIdx = #{noticeIdx}
+	</delete>
+
+
 </mapper>

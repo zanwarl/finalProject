@@ -12,6 +12,16 @@ private	String title ;
 private	String writer ;
 private	Date writedate ;
 
+
+
+
+public NoticeDTO(int noticeIdx, String content, String title) {
+	super();
+	this.noticeIdx = noticeIdx;
+	this.content = content;
+	this.title = title;
+}
+
 public NoticeDTO() {
 	// TODO Auto-generated constructor stub
 }

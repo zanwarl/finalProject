@@ -13,7 +13,15 @@ public interface NoticeDAO {
 	
 //	public List<NoticeDTO> NoticeDTO dto  (int cp , int listSize);
 	public int getTotalCnt () ; 
-	public int noticeUpdate (NoticeDTO dto );
+	public int noticeUpdate (int idx , String title, String content );
+	
+	public NoticeDTO noticeContent ( int idx );
+	
+	public int noticeDelete (int idx);
+	
+	
+
+	
 	
 	
 }

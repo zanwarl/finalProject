@@ -10,7 +10,7 @@
 <body>
 <c:forEach var="list" items="${list }">
 ${list.fidx } <br>
-<input type="button" value="${list.ftime }" onclick="()">
+<input type="button" value="${list.ftime }" onclick="ss()">
 </c:forEach>
 </body>
 </html>
