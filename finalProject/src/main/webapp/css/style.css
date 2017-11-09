@@ -28,12 +28,14 @@ a {text-decoration:none; color:#000;}
 
 /*여행지,숙소,음식점 등 메인메뉴*/
 #main_menu {
+width:900px;
 z-index:130000000;
 position:relative;
 margin:0 auto;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
   font-size: 15px; /*폰트사이즈설정*/
   line-height: 15px; /*수직가운데정렬*/
+  margin-bottom:10px;
 }
 #main_menu > ul {
   width: auto; /*가로자동*/
@@ -59,6 +61,7 @@ margin:0 auto;
 
 }
 #main_menu > ul li {
+	
   display: inline-block;
   *display: inline;
   zoom: 1;
@@ -67,16 +70,17 @@ margin:0 auto;
   float: right;
 }
 #main_menu > ul li.has-sub {
-	margin-left:5px;
- 	margin-right:5px;
+  width:139px;
+	text-align:center;
   	position: relative;
+ 
 }
 #main_menu > ul li.has-sub:hover ul {
   display: block;
 }
 #main_menu > ul li.has-sub ul {
   display: none;
-  width: 250px;
+  width:300px;
   position: absolute;
   margin: 0;
   padding: 0;
@@ -87,6 +91,7 @@ margin:0 auto;
   border-top: 0 none;
 }
 #main_menu > ul li.has-sub ul li {
+
   display: block;
 }
 
