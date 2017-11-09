@@ -8,13 +8,10 @@
 </head>
 <body>
 
-
-
 <form name="roomReqFm" action="roomReq.do" method="post">
    <fieldset>
      
-         	<label>예약인원</label>
-         	
+         	<label>예약인원</label>         	
 
  			<input type="number" name="count" value="1">
   			
@@ -24,16 +21,13 @@
   			
          
             <label>check out </label>
-            <input type="date" name="checkoutDate"> 
-         	
+            <input type="date" name="checkoutDate">          	
 
          
             <input type="submit" value="예약하기">           
             
    </fieldset>
 </form>
-
-
 
 
 
