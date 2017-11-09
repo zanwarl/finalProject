@@ -9,8 +9,8 @@ public interface BlackDAO {
 	//public int addBlackList (int userIdx ) ; 
 	public int updateBlackList () ; 
 	
-	
-	
+
+
 	
 
 }

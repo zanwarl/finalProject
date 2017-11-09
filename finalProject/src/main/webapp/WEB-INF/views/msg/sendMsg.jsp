@@ -14,7 +14,7 @@
 
 ${param.receiver}
 <form action="sendMsg.do" method="post">
-sender	<input type="text" name="sender" value="1">
+sender	<input type="text" name="sender" value="${sender}" readonly="readonly">
 
 <br>
 receiver

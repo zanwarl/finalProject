@@ -20,4 +20,8 @@
 	<select id="foodTime" parameterType="int" resultType="food.model.FoodTimeDTO">
 		select * from food_time where fidx = #{fidx}
 	</select>
+	
+	<select id="foodNdate" parameterType="int" resultType="food.model.FoodNdateDTO">
+		select * from food_ndate where fidx = #{fidx} order by fndate asc
+	</select>
 </mapper>

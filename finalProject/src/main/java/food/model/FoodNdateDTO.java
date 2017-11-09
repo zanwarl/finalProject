@@ -5,30 +5,29 @@ import java.sql.Date;
 public class FoodNdateDTO {
 	
 	private int fidx;
-	private Date fndate;
+	private String fndate;
 	
 	public FoodNdateDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
-	public FoodNdateDTO(int fidx, Date fndate) {
+	
+	public FoodNdateDTO(int fidx, String fndate) {
 		super();
 		this.fidx = fidx;
 		this.fndate = fndate;
 	}
+
 	public int getFidx() {
 		return fidx;
 	}
 	public void setFidx(int fidx) {
 		this.fidx = fidx;
 	}
-	public Date getFndate() {
+	public String getFndate() {
 		return fndate;
 	}
-	public void setFndate(Date fndate) {
+	public void setFndate(String fndate) {
 		this.fndate = fndate;
 	}
-	
-	
 	
 }

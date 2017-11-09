@@ -13,6 +13,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+  <h1>공지사항 리스트</h1>
+
+
+
 
 
 <table>
@@ -59,13 +63,19 @@
 			<td>${pageStr}</td>
 		</tr>
 	
-		<tr>
+	<!-- 	<tr>
 			<td><a href="noticeWrite.do">글쓰기</a></td>
 		</tr>
-	
+	 -->
 	</tfoot>
 
 </table>
+
+
+
+
+
+
 
 
 

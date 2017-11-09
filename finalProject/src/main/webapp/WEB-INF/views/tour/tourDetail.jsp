@@ -31,39 +31,38 @@
 	}
 	
 	function initxy() {
-		//window.alert("1");
-	
-     $.ajax({
-   		   url:"tourDetailJSON.do?contentTypeId=${contentTypeId}&contentId=${contentId}",
-           type:"GET",
-           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-           success : function(msg) {
-        	  // console.log(msg.response.body.items.item);
-        	   var myItem = msg.response.body.items.item;
-        	   //내용 작성 추후 한 div에 담기
-					var output = '';
-					var img = '';
-					var map = '';
-						
-						mapx = myItem.mapy;
-						mapy = myItem.mapx;
-						img += '<img src="'+myItem.firstimage+'" width="500">';
-						output += '<h4>개요</h4>';
-						output += myItem.overview +'<br>';
-						       
-							if(myItem.contenttypeid!=25) {
-							output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
-							output += '<h4>전화번호</h4>' + myItem.tel;
-							output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
-							}
-						$(".info").html(output);
-						$(".content").html(img);
-						//document.body.innerHTML += output;
-        	   
-           },
-           error : function(xhr, status, error) {
-                 alert("에러발생!!");
-           }
+		$.ajax({
+	   		   url:"tourDetailJSON.do?contentTypeId=${contentTypeId}&contentId=${contentId}",
+	           type:"GET",
+	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+	           async:false, // 이 한줄만 추가해주시면 됩니다.
+	           success : function(msg) {
+	        	  // console.log(msg.response.body.items.item);
+	        	   var myItem = msg.response.body.items.item;
+	        	   //내용 작성 추후 한 div에 담기
+						var output = '';
+						var img = '';
+						var map = '';
+							
+							mapx = myItem.mapy;
+							mapy = myItem.mapx;
+							img += '<img src="'+myItem.firstimage+'" width="500">';
+							output += '<h4>개요</h4>';
+							output += myItem.overview +'<br>';
+							       
+								if(myItem.contenttypeid!=25) {
+								output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
+								output += '<h4>전화번호</h4>' + myItem.tel;
+								output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
+								}
+							$(".info").html(output);
+							$(".content").html(img);
+							//document.body.innerHTML += output;
+	        	   
+	           },
+	           error : function(xhr, status, error) {
+	                 alert("에러발생!!");
+	           }
     	 });
 	}
 	
@@ -75,20 +74,22 @@
 </script>
 <script>
 	function initMap() {
-	//window.alert("1")
-  	  var uluru = {lat: 37.5321644636, lng: 126.8605049692};
-  	  var map = new google.maps.Map(document.getElementById('map'), {
-  	    zoom: 15,
-  	    center: uluru
-  	  });
-  	  var marker = new google.maps.Marker({
-  	    position: uluru,
-  	    map: map
-  	  });
+	
+	initxy();
+	
+	var uluru = {lat: mapx, lng: mapy};
+	var map = new google.maps.Map(document.getElementById('map'), {
+		zoom: 15,
+		center: uluru
+	});
+	var marker = new google.maps.Marker({
+		position: uluru,
+		map: map
+	});
   	}
 </script>
 </head>
-<body onload="initxy()">
+<body>
 <%@ include file="../header.jsp" %>
 <form>
 	<table>

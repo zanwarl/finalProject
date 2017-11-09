@@ -9,6 +9,8 @@ public interface ComplainDAO {
 	public List <ComplainDTO> complainList (int cp, int listSize); 
 	public List <ComplainDTO> noAnsComplainList (int cp, int listSize); 
 	public List <ComplainDTO> searchComplainList (int cp, int listSize, int key, String val); 
+	public List <ComplainDTO> writeComplainList (int userIdx ); 
+	public List <ComplainDTO> receiveComplainList (int userIdx ); 
 	
 	
 	

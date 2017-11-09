@@ -14,6 +14,16 @@
 			order by plan_idx desc
 		</select>
 		
+		<select id="myPlanList" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main where plan_writer = 2
+		</select>
+		
+		<select id="planDetail" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">
+			select * from plan_detail 
+			where pland_pidx = #{pidx}
+			order by pland_day asc, pland_order asc
+		</select>
+		
 	<!-- select end -->
 		
 	<!-- insert start -->

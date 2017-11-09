@@ -12,11 +12,11 @@
 	<c:set var="arr" value="${crdto}"/>
 		<tr>
 			<th>예약인원수</th>
-			<th>${arr.p_num}</th>
+			<th>${arr.c_count}</th>
 		</tr>
 		<tr>
 			<th>예약날짜</th>
-			<th>${arr.c_reqDate}</th>
+			<th>${arr.c_date}</th>
 		</tr>
 		<tr>
 			<th>예약시간</th>

@@ -8,23 +8,27 @@ public class PlanDetailDTO {
 	private int pland_day;			//여행 일자(1..2..3..)
 	private String pland_memo;		//메모
 	private int pland_order;		//일정 노출 순서(변경 가능)
+	private String pland_subject; 	//여행지 이름
 	private String pland_typeid;	//여행지 api contenttypeid
 	private String pland_code;		//여행지 api contentid
+	private String pland_img;
 	
 	public PlanDetailDTO() {
 		super();
 	}
 
 	public PlanDetailDTO(int pland_idx, int pland_pidx, int pland_day, String pland_memo, int pland_order,
-			String pland_typeid, String pland_code) {
+			String pland_subject, String pland_typeid, String pland_code, String pland_img) {
 		super();
 		this.pland_idx = pland_idx;
 		this.pland_pidx = pland_pidx;
 		this.pland_day = pland_day;
 		this.pland_memo = pland_memo;
 		this.pland_order = pland_order;
+		this.pland_subject = pland_subject;
 		this.pland_typeid = pland_typeid;
 		this.pland_code = pland_code;
+		this.pland_img = pland_img;
 	}
 
 	public int getPland_idx() {
@@ -67,6 +71,14 @@ public class PlanDetailDTO {
 		this.pland_order = pland_order;
 	}
 
+	public String getPland_subject() {
+		return pland_subject;
+	}
+
+	public void setPland_subject(String pland_subject) {
+		this.pland_subject = pland_subject;
+	}
+
 	public String getPland_typeid() {
 		return pland_typeid;
 	}
@@ -82,5 +94,13 @@ public class PlanDetailDTO {
 	public void setPland_code(String pland_code) {
 		this.pland_code = pland_code;
 	}
-	
+
+	public String getPland_img() {
+		return pland_img;
+	}
+
+	public void setPland_img(String pland_img) {
+		this.pland_img = pland_img;
+	}
+
 }

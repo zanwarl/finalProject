@@ -4,8 +4,8 @@ import java.util.List;
 
 public interface CulreqDAO {
 
-		public List <CulreqDTO> culreqList();
-		public int culreaAdd(CulreqDTO crdto);
-		public CulreqDTO culreqContent(int idx);
+		public List<CulreqDTO> culreqList();
+		public int culreqAdd(CulreqDTO crdto); 
+		public CulreqDTO culreqCon2(int idx);
 		
 }

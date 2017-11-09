@@ -17,8 +17,8 @@ public class CulreqController {
 	@Autowired
 	private CulreqDAO crdao;
 	
-	@RequestMapping("culreqList.do")
-	public ModelAndView foodreq(){
+	@RequestMapping("/culreqList.do")
+	public ModelAndView culreq(){
 		
 		List<CulreqDTO> list = crdao.culreqList();
 		ModelAndView mav = new ModelAndView();
@@ -38,18 +38,30 @@ public class CulreqController {
 	}
 	
 	@RequestMapping("/culreqCon1.do")
-	public ModelAndView culreqCon1(){
+	public ModelAndView culreqCon1(CulreqDTO crdto){
+		
+		int result = crdao.culreqAdd(crdto);
+
+		String goURL = "culreqCon2.do?idx="+crdto.getCreq_idx();
+		System.out.println(crdto.getCreq_idx());
+		
+		String msg = result>0? "예약완료":"다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("culreq/culreqCon1");
+		
+		mav.addObject("reqmsg",msg);
+		mav.setViewName("culreq/reqmsg");		
+
+		mav.addObject("goURL",goURL);
+		mav.setViewName("culreq/culreqCon2");
 		
 		return mav;
 	}
 	
 	
-	@RequestMapping("/culreqCon2Form.do")
-	public ModelAndView culreqCon2Form(@RequestParam("idx")int idx){
+	@RequestMapping(value="/culreqCon2.do")
+	public ModelAndView culreqCon2(@RequestParam(value="idx")int idx){
 		
-		CulreqDTO crdto = crdao.culreqContent(idx);
+		CulreqDTO crdto = crdao.culreqCon2(idx);
 		ModelAndView mav = new ModelAndView();
 		
 		mav.addObject("crdto",crdto);
@@ -59,12 +71,12 @@ public class CulreqController {
 	}
 
 	
-	@RequestMapping("/payMent.do")
+	/*@RequestMapping("/payMent.do")
 	public ModelAndView payMent(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pay/payMent");
 		
 		return mav;
-	}
+	}*/
 }
 

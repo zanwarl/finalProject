@@ -50,7 +50,7 @@
 $(document).ready(function() {	
 	var cp = 1;
 	$.ajax({
-		url:"areaBasedList.do?areaCode=1&cp="+cp,
+		 url:"areaBasedList.do?areaCode=1&cp="+cp,
 		 type:"GET",
          dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
          success : function(msg) {
@@ -70,8 +70,7 @@ $(document).ready(function() {
              var output = '';
       	   for(var i=1; i<=listSize; i++){
                   output += '<h4>'+myItem[i].title+'</h4>';
-                  output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+
-                  		'&contentId='+myItem[i].contentid+'"><img src="'+myItem[i].firstimage+'" width="150"></a>';
+                  output += '<img src="'+myItem[i].firstimage+'" width="150">';
                   output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
               }
 			$("#cityList").html(output);
