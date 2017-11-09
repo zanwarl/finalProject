@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.jcraft.jsch.Session;
+
 
 import korea.msg.model.MsgDAO;
 import korea.msg.model.MsgDTO;

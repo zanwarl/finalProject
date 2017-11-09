@@ -1,17 +1,12 @@
 package korea.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import culreq.model.CulreqDAO;
-import culreq.model.CulreqDTO;
-import korea.roomreq.model.RoomreqDAO;
-import korea.roomreq.model.RoomreqDTO;
+@Controller
+import java.util.List;
+
 
 	@Controller
 	public class RoomReqController {
@@ -61,15 +56,26 @@ import korea.roomreq.model.RoomreqDTO;
 		}
 
 		
-	/*	@RequestMapping("/payMent.do")
+	@RequestMapping("/payMent.do")
 		public ModelAndView payMent(){
 			ModelAndView mav = new ModelAndView();
 			mav.setViewName("pay/payMent");
 			
 			return mav;
 		}
+	
+	@RequestMapping (value = "/roomReqList.do")
+	public ModelAndView roomReqList() {
+		
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("roomReq/roomReqList");
+		return mav; 
+		
+		
+	}
+	
+	
 
-	*/	
 		
 		
 	}
