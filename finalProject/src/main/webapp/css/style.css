@@ -1,6 +1,7 @@
 @CHARSET "UTF-8";
 @import url(http://fonts.googleapis.com/css?family=Open+Sans:400,600,300);
 *{margin:0; padding:0;}
+img {border:0;}
 html,body {
 height:100%;  
 /*폰트설정*/
@@ -72,7 +73,7 @@ margin:0 auto;
 }
 #main_menu > ul li.has-sub ul {
   display: none;
-  width:200px;
+  width:170px;
   position: absolute;
   margin: 0;
   padding: 0;
@@ -142,6 +143,8 @@ margin:0 auto;
   #main_menu > ul li.has-sub > a {
     background-image: none;
   }
+  
+
 }
 /* Make sure they show even if hidden in mobile view by JS */
 @media (min-width: 600px) {
