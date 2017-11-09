@@ -22,7 +22,11 @@ public interface MsgDAO {
 	public int getMsgIdx (int sender, int receiver );
 	public int sendMsg(MsgDTO dto);
 	
-	public int readMsg (int msgIdx);
+	public int readMsg (int msgIdx, int userIdx);
+	public String getUserId(int userIdx); 
+	public int getUserIdx(String userId); 
+	
+	//read msg 
 	
 	
 }

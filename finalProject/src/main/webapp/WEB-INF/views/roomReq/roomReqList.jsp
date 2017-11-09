@@ -28,6 +28,7 @@
 			<th>신청일</th>
 			<th>체크인</th>
 			<th>체크아웃</th>
+			<th>상태</th>
 		</tr>
 	</thead>
 		
@@ -54,9 +55,10 @@
 					<td>${dto.reqDate }</td>
 					<td>${dto.checkindate }</td>
 					<td>${dto.checkoutdate }</td>
+					<td>${dto.paid }</td>
+
 				</tr>
 				<tr>
-					<td colspan="6">
 					
 					<!--	@RequestMapping (value = "/roomCancel.do")
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {  -->
@@ -64,9 +66,14 @@
 						<c:param name="reqIdx" value="${dto.reqidx}"></c:param>
 					
 					</c:url>
+					<c:if test="${dto.paid !=-1 }">
+					<td colspan="6">
 					<a href="${roomCancelURL }">취소하기</a>
 					</td>
-				</tr>
+				
+					</c:if>
+					
+					</tr>
 			</c:forEach>
 		
 	</tbody>	

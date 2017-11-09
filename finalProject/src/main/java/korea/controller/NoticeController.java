@@ -79,6 +79,28 @@ public class NoticeController {
 		
 	}
 	
+	@RequestMapping ("/noticeListAdmin.do")
+	public ModelAndView noticeListAdmin (@RequestParam(value="cp", defaultValue="1") int cp){
+		
+		int totalCnt = ndao.getTotalCnt(); 
+		
+		int listSize = 5;
+		int pageSize = 5; 
+		
+		List<NoticeDTO> list =ndao.noticeList(cp, listSize);
+		
+		String pageStr = korea.page.PageModule.makePage("noticeListAdmin.do", totalCnt, listSize, pageSize, cp);
+		
+		ModelAndView mav = new  ModelAndView();
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("list", list);
+		mav.setViewName("notice/noticeListAdmin");
+		return mav; 
+		
+		
+		
+	}
+	
 	@RequestMapping ("/noticeContent.do")
 	public ModelAndView noticeContent (@RequestParam("idx")int idx){
 		

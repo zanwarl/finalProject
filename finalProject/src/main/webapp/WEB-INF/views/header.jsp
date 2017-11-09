@@ -96,6 +96,11 @@ a {text-decoration:none; color:#000;}
 				<li><a href="memberJoin.do">회원가입</a></li>
 				<li><a href="#">언어설정</a></li>
 				<li><a href="#">환율</a></li>
+				<li><a href="msgList.do">메세지</a></li>
+				<li><a href="mypageMain.do">마이페이지</a></li>
+				
+
+				
 				<li><input class="search" type="text" name="search"> <input type="button" value="검색" onclick="search()"></li>
 			</ul>
 	</div>
@@ -146,7 +151,7 @@ a {text-decoration:none; color:#000;}
    </li>
    <li class='has-sub'><a href='#'><span>고객센터</span></a>
    	  <ul>
-         <li><a href='#'><span>공지사항</span></a></li>
+         <li><a href='noticeList.do'><span>공지사항</span></a></li>
          <li class='last'><a href='#'><span>질문답변</span></a></li>
       </ul>
    </li>

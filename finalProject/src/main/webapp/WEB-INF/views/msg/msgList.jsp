@@ -25,6 +25,7 @@
 			<th>대화상대</th>
 			<th>내용</th>
 			<th>날짜</th>
+			<th></th>
 			
 		</tr>
 	</thead>
@@ -59,6 +60,13 @@
 
          <td><a href="${msgContentURL}">${dto.content}</a></td>
          <td>${dto.writedate}</td>
+         <td>
+	<td>
+	<c:if test="${dto.isRead == 0}">
+		new ! 		
+	</c:if>
+
+</td>
        
       </tr>
    </c:forEach>

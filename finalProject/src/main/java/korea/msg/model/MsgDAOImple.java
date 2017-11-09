@@ -126,9 +126,34 @@ public class MsgDAOImple implements MsgDAO{
 	
 	
 	
-	public int readMsg(int msgIdx ){
-		int res = sqlMap.update("readMsgSql", msgIdx);
+	public int readMsg(int msgIdx , int userIdx){
+HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		
+		map.put("msgIdx",msgIdx);
+		map.put("userIdx", userIdx);
+		
+		
+		
+		int res = sqlMap.update("readMsgSql", map);
 		return res; 
+		
+	}
+
+
+	public String getUserId(int userIdx) {
+		// TODO Auto-generated method stub
+
+		String userId = sqlMap.selectOne("getUserIdSql", userIdx);
+		return userId; 
+		
+	}
+	
+	public int getUserIdx(String userId) {
+		// TODO Auto-generated method stub
+		
+		int userIdx = sqlMap.selectOne("getUserIdxSql", userId);
+		return userIdx; 
 		
 	}
 
