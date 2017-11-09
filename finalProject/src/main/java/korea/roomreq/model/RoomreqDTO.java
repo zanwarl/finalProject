@@ -11,8 +11,7 @@ public class RoomreqDTO {
 		
 	private String reqDate;
 	private String checkindate;
-	private String checkoutdate;	
-		
+	private String checkoutdate;			
 	
 	public RoomreqDTO() {
 		// TODO Auto-generated constructor stub
