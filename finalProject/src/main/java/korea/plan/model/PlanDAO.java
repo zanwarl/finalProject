@@ -7,7 +7,17 @@ public interface PlanDAO {
 	//일정 리스트
 	public List<PlanDTO> planList();		
 	//일정 리스트 + 페이징
-	public List<PlanDTO> planList(int cp, int pageRow);		
+	public List<PlanDTO> planList(int cp, int pageRow);
+	
+	
+	//내 일정 리스트
+	public List<PlanDTO> myPlanList();
+	//내 일정 리스트 + 페이징
+	public List<PlanDTO> myPlanList(int cp, int pageRow);
+	
+	//일정 내용 보여주기
+	public List<PlanDetailDTO> planDetail(int pidx);
+	
 	//일정 메인 테이블 작성
 	public int planMainWrite(PlanDTO pdto);					
 	

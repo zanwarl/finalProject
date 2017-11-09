@@ -34,6 +34,21 @@ public class PlanDAOImple implements PlanDAO {
 		pdto = sqlMap.selectOne("lastSaveIdx", pdto);
 		return pdto;
 	}
+	
+	public List<PlanDTO> myPlanList() {
+		List<PlanDTO> list = sqlMap.selectList("myPlanList");
+		return list;
+	}
+	
+	public List<PlanDTO> myPlanList(int cp, int pageRow) {
+		return null;
+	}
+	
+	public List<PlanDetailDTO> planDetail(int pidx) {
+		System.out.println("-------");
+		List<PlanDetailDTO> pddto = sqlMap.selectList("planDetail", pidx);
+		return pddto;
+	}
 
 	public int planWrite() {
 		return 0;

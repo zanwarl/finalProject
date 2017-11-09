@@ -36,7 +36,7 @@ a {text-decoration:none; color:#000;}
 #logo{clear:both; width:100px; height:100px; margin:0 auto; margin-top:20px; background:#fff;}
 
 /*여행지,숙소,음식점 등 메인메뉴*/
-#main_menu {width:1100px;height:50px; margin:0 auto;}
+#main_menu {width:1100px;height:50px; margin:0 auto; text-align:center;}
 #main_menu li {width:160px; background:#fff; margin-left:10px;margin-right:10px; text-align:center;}
 
 #main_menu .main_h {font-size:19px; font-weight:700;}
@@ -122,7 +122,7 @@ a {text-decoration:none; color:#000;}
 	         <li class='last'><a href='#'><span>게스트하우스</span></a></li>
      	 </ul>
    </li>
-   <li class='has-sub'><a href='#'><span>음식점</span></a>
+<!--    <li class='has-sub'><a href='#'><span>음식점</span></a>
    		<ul>
 	         <li><a href='#'><span>한식</span></a></li>
 	         <li><a href='#'><span>일식</span></a></li>
@@ -137,7 +137,7 @@ a {text-decoration:none; color:#000;}
 	         <li><a href='#'><span>스포츠</span></a></li>
 	         <li class='last'><a href='#'><span>그외</span></a></li>
 	  	</ul>
-   </li>
+   </li> -->
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
 	     	<li class='last'><a href='#'><span>공유된일정보기</span></a></li>

@@ -70,8 +70,7 @@ $(document).ready(function() {
              var output = '';
       	   for(var i=1; i<=listSize; i++){
                   output += '<h4>'+myItem[i].title+'</h4>';
-                  output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+
-                  		'&contentId='+myItem[i].contentid+'"><img src="'+myItem[i].firstimage+'" width="150"></a>';
+                  output += '<img src="'+myItem[i].firstimage+'" width="150">';
                   output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
               }
 			$("#cityList").html(output);

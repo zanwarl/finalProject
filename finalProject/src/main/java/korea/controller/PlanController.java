@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
+import korea.plan.model.PlanDetailDTO;
 
 @Controller
 public class PlanController {
@@ -146,13 +147,31 @@ public class PlanController {
 		return "plan/test";
 	}
 	
+	/**일정 내용 보여주기*/
+	@RequestMapping("/planContent.do")
+	public ModelAndView planDetail(int pidx) {
+		
+		//pidx = 75;
+		System.out.println(pidx);
+		ModelAndView mav = new ModelAndView();
+		List<PlanDetailDTO> list = pdao.planDetail(pidx);	
+		
+		mav.addObject("list", list);
+		mav.setViewName("plan/planContent");
+		return mav;
+		
+	}
+	
+	
 	/**내가 작성한 일정 목록 (+페이징)*/
 	@RequestMapping("/myPlan.do")
 	public ModelAndView myPlanList() {
 		
 		ModelAndView mav = new ModelAndView();
+		List<PlanDTO> list = pdao.myPlanList();
 		
 		mav.setViewName("plan/myPlanList");
+		mav.addObject("list", list);
 		return mav;
 	}
 	
