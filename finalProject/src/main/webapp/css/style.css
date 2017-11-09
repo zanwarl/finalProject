@@ -24,7 +24,8 @@ a {text-decoration:none; color:#000;}
 #top_menu li a{display:block;height:37px;line-height:37px; font-size:12px;}
 
 /*로고*/
-#logo{clear:both; width:200px; height:164px; margin:0 auto; margin-top:20px; margin-bottom:20px;background:#fff;}
+#logo{clear:both; width:200px; height:164px; margin:0 auto; margin-top:20px; 
+margin-bottom:20px;background:#fff;}
 
 /*여행지,숙소,음식점 등 메인메뉴*/
 #main_menu {
@@ -33,26 +34,21 @@ z-index:130000000;
 position:relative;
 margin:0 auto;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
-  font-size: 15px; /*폰트사이즈설정*/
-  line-height: 15px; /*수직가운데정렬*/
-  margin-bottom:10px;
 }
 #main_menu > ul {
+  font-size: 20px; /*폰트사이즈설정*/
+  line-height: 20px; /*수직가운데정렬*/
+  font-weight:bold;
   width: auto; /*가로자동*/
   list-style-type: none; /*ul 리스트 구분기호 없애기*/
+  margin-bottom:30px;
   
   /*안쪽여백 바깥족여백 0*/
   padding: 0; 
   margin: 0;
   
   background: #ffffff;/*배경색*/
-  border: 1px solid #ece6e8; /*겉테두리*/
 
-  /*테두리끝 둥글게 2px*/
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -o-border-radius: 2px;
-  border-radius: 2px;
 }
 /*브라우저 사이즈 줄었을 때 보이는 메뉴, 최대화했을 때는 보이지 않게 숨기기*/
 #main_menu > ul li#responsive-tab {
@@ -66,12 +62,8 @@ margin:0 auto;
   *display: inline;
   zoom: 1;
 }
-#main_menu > ul li.right {
-  float: right;
-}
 #main_menu > ul li.has-sub {
-  width:139px;
-	text-align:center;
+  width:150px;
   	position: relative;
  
 }
@@ -80,7 +72,7 @@ margin:0 auto;
 }
 #main_menu > ul li.has-sub ul {
   display: none;
-  width:300px;
+  width:200px;
   position: absolute;
   margin: 0;
   padding: 0;
@@ -96,16 +88,18 @@ margin:0 auto;
 }
 
 #main_menu > ul li a {
+	
   display: block;
   padding: 12px 24px 11px 24px;
   text-decoration: none;
-  color: #747474;
+  color: #1f1f1f;
+    text-align:center;
   text-shadow: 0px 1px 0px #fff;
 }
 #main_menu > ul li a.active,
 #main_menu > ul li a:hover {
   background: #f4f4f4;
-  color: #000;
+ 
 }
 @media (max-width: 600px) {
   #main_menu > ul {
@@ -115,7 +109,7 @@ margin:0 auto;
     display: block;
   }
   #main_menu > ul li#responsive-tab a {
-    background: url('images/menu.png') no-repeat;
+    background: url('img/menu.png') no-repeat;
     background-position: 95% -35%;
   }
   #main_menu > ul li#responsive-tab a:hover {
@@ -143,7 +137,7 @@ margin:0 auto;
   }
   #main_menu > ul li.has-sub ul li a span {
     display: block;
-    padding-left: 24px;
+    
   }
   #main_menu > ul li.has-sub > a {
     background-image: none;
@@ -172,6 +166,6 @@ margin:0 auto;
 
 #footer_menu {width:1100px; height:100px;margin:0 auto;}
 #footer_menu ul {list-style:none; }
-#footer_menu ul li {float:left; margin-right:20px;  line-height:50px; }
+#footer_menu ul li {float:left; ine-height:50px;  margin-right:20px; }
 .copyright{clear:both;font-size:12px;}
 .flick-title, .flick-sub-text {text-shadow:2px 2px 2px gray;}
