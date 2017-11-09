@@ -4,10 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.roomreq">
 	<select id="roomreqList" resultType="korea.roomreq.model.RoomreqDTO" parameterType="String">
-		select * from roomreq where user_id = #{user_id}
+		select * from roomreq where userid = #{userid}
 	</select>
 	<insert id="roomreqInsert" parameterType="korea.roomreq.model.RoomreqDTO">
-		insert into roomreq values(reqidx.nextval,1,1,#{count}
+		insert into roomreq values(reqidx.nextval,#{userid},#{roomix},#{count},#{reqdate},#{checkindate},#{checkoutdate},0)
 	</insert>
 	<select id="roomreqCon2" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO">
 		select * from roomreq where reqidx = #{idx}
