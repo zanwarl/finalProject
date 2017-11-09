@@ -71,12 +71,12 @@ public class CulreqController {
 	}
 
 	
-	@RequestMapping("/payMent.do")
+	/*@RequestMapping("/payMent.do")
 	public ModelAndView payMent(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("pay/payMent");
 		
 		return mav;
-	}
+	}*/
 }
 

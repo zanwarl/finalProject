@@ -17,5 +17,6 @@
  		<mapper resource="sql/memberSql.xml"/>
  		<mapper resource="sql/noticeSql.xml"/>
  		<mapper resource="sql/roomSql.xml"/>
+ 		<mapper resource="sql/roomreqSql.xml"/>
  	</mappers>
  </configuration>
