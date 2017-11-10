@@ -45,7 +45,7 @@
 	<select id="msgContentSql" parameterType="int"
 		resultType="korea.msg.model.MsgDTO">
 		
-		select * from msg where msgIdx =#{msgIdx}  order by idx desc
+		select * from msg where msgIdx =#{msgIdx}  order by idx desc 
 		
 <!-- 		 <![CDATA[ 
   select * from 

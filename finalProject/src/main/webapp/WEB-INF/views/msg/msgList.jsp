@@ -8,6 +8,8 @@
 <head>
 
 
+
+
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -62,7 +64,7 @@
          <td>${dto.writedate}</td>
          <td>
 	<td>
-	<c:if test="${dto.isRead == 0 && dto.sender != sIdx}">
+	<c:if test="${dto.isRead == 0 && dto.sender != sId}">
 		new ! 		
 	</c:if>
 

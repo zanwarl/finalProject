@@ -56,7 +56,7 @@ public class AdminController {
 		
 		if (res ){
 			HttpSession session = req.getSession();
-			session.setAttribute("sId", idx);
+			session.setAttribute("adminIdx", idx);
 			
 			
 			

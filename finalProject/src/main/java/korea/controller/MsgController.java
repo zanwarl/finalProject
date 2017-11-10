@@ -70,7 +70,7 @@ public class MsgController {
 
 		ModelAndView mav = new ModelAndView();
 		int res = mdao.sendMsg(dto);
-		String goURL = res > 0 ? "msgList.do" : "/sendMsg.do?receiver=" + receiver;
+		String goURL = res > 0 ? "msgContent.do?msgIdx="+dto.getMsgIdx() : "/sendMsg.do?receiver=" + receiver;
 		String msg = res > 0 ? "성공" : "실패	";
 		mav.addObject("msg", msg);
 
@@ -87,7 +87,6 @@ public class MsgController {
 	@RequestMapping("/msgList.do")
 	public ModelAndView msgList(@RequestParam(value = "cp", defaultValue = "1") int cp, HttpServletRequest req,
 			HttpServletResponse resp) {
-
 		HttpSession session = req.getSession();
 		String userIdx = (String) session.getAttribute("sId");
 		// int userIdx = mdao.getUserIdx(userId);
