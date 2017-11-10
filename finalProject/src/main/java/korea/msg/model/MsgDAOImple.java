@@ -16,7 +16,7 @@ public class MsgDAOImple implements MsgDAO{
 	   }
 	   
 
-	public List<MsgDTO> msgList(int cp, int listSize, int userIdx) {
+	public List<MsgDTO> msgList(int cp, int listSize, String userIdx) {
 	
 		Map<String, Object> map = new HashMap<String, Object>();
 	 	
@@ -33,9 +33,9 @@ public class MsgDAOImple implements MsgDAO{
 		
 	}
 	
-	public List<MsgDTO> msgContent(int cp, int listSize, int msgIdx) {
+	public List<MsgDTO> msgContent( int msgIdx) {
 		
-		Map<String, Object> map = new HashMap<String, Object>();
+/*		Map<String, Object> map = new HashMap<String, Object>();
 		
 		int startNum = (cp-1)*listSize+1;
 		int endNum = cp*listSize;
@@ -43,15 +43,15 @@ public class MsgDAOImple implements MsgDAO{
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("msgIdx", msgIdx);
-		
-		List <MsgDTO> list = sqlMap.selectList("msgContentSql", map);
+		*/
+		List <MsgDTO> list = sqlMap.selectList("msgContentSql", msgIdx);
 		return list; 
 		
 		
 	}
 
 
-	public int getTotalCnt(int userIdx) {	
+	public int getTotalCnt(String userIdx) {	
 		//System.out.println(userIdx);
 		//userIdx
 		int res = sqlMap.selectOne("msgTotalCnt", userIdx);
@@ -73,7 +73,7 @@ public class MsgDAOImple implements MsgDAO{
 
 	// send msg 
 	
-	public boolean isFirst(int sender, int receiver) {
+	public boolean isFirst(String sender, String receiver) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		
@@ -94,14 +94,17 @@ public class MsgDAOImple implements MsgDAO{
 
 
 	//새로운 대화 번호를 찾는 것 
-	public int getMaxMsgIdx(int sender) {
+	public int getMaxMsgIdx(String sender) {
 		
-		int res = sqlMap.selectOne("getMaxMsgIdxSql", sender)	;
+		
+		
+		int res = (Integer)sqlMap.selectList("getMaxMsgIdxSql", sender).get(0)==null ? 1:  (Integer)sqlMap.selectList("getMaxMsgIdxSql", sender).get(0)	;
 		return res+1; 
 		
 	}
+	
 	//기존 대화 번호 찾는거 
-	public int getMsgIdx (int sender, int receiver ){
+	public int getMsgIdx (String sender, String receiver ){
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		
@@ -125,29 +128,24 @@ public class MsgDAOImple implements MsgDAO{
 	}
 	
 	
-	
-	public int readMsg(int msgIdx , int userIdx){
-HashMap<String, Object> map = new HashMap<String, Object>();
-		
-		
-		map.put("msgIdx",msgIdx);
+	public int readMsg(int msgIdx, String userIdx) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+
+		map.put("msgIdx", msgIdx);
 		map.put("userIdx", userIdx);
-		
-		
-		
+
 		int res = sqlMap.update("readMsgSql", map);
-		return res; 
-		
+		return res;
+
 	}
 
-
-	public String getUserId(int userIdx) {
-		// TODO Auto-generated method stub
-
-		String userId = sqlMap.selectOne("getUserIdSql", userIdx);
-		return userId; 
-		
-	}
+	/*
+	 * public String getUserId(int userIdx) { // TODO Auto-generated method stub
+	 * 
+	 * String userId = sqlMap.selectOne("getUserIdSql", userIdx); return userId;
+	 * 
+	 * }
+	 */
 	
 	public int getUserIdx(String userId) {
 		// TODO Auto-generated method stub

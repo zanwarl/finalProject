@@ -45,10 +45,10 @@
       
        
          <td>${dto.idx}</td>
-         <c:if test="${dto.sender == 1 }">
+         <c:if test="${dto.sender == sIdx }">
          	<td>${dto.receiver } </td>
          </c:if>
-         <c:if test="${dto.sender != 1 }">
+         <c:if test="${dto.sender != sIdx }">
          	<td>${dto.sender } </td>
          </c:if>
          
@@ -62,7 +62,7 @@
          <td>${dto.writedate}</td>
          <td>
 	<td>
-	<c:if test="${dto.isRead == 0}">
+	<c:if test="${dto.isRead == 0 && dto.sender != sIdx}">
 		new ! 		
 	</c:if>
 

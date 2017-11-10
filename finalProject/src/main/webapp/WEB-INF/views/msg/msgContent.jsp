@@ -15,10 +15,13 @@
 
 
 
+${partner}님과의 대화입니다.
+
 
 
 <table>
 	<thead>
+	
 	
 		<tr>
 			<th>idx</th>
@@ -57,44 +60,6 @@
    </c:forEach>
 	
 	</tbody>
-	
-	<tfoot>
-		<c:if test="${not empty list}">
-		
-		
-		<tr>
-			<td colspan="5" align="center">
-				${pageStr }
-			
-			</td>
-		</tr>
-		
-		
-		
-		</c:if>
-		
-		<!-- <tr>
-			<td colspan="7" align="center">
-				<form action="complainSearch.do" method="get">
-					<select name="key">
-						<option value="1">idx</option>
-						<option value="2">신고자</option>
-						<option value="3">피신고자</option>
-						<option value="4">담당자</option>
-
-					</select>
-					
-					
-					<input type="text" name="val">
-					<input type="submit" value="검색">
-				
-				</form>
-				<a href="noAnsComplainList.do">미처리신고</a>
-			</td>
-			
-		</tr> -->
-	
-	</tfoot>
 
 </table>
 

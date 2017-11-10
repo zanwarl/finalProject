@@ -21,7 +21,7 @@
 
 
 
-	<select id="msgTotalCnt" resultType="int" parameterType="int">
+	<select id="msgTotalCnt" resultType="int" parameterType="String">
 		<!-- select count (*) from ( select distinct msgIdx from msg where sender 
 			= #{userIdx} or receiver= #{userIdx} ) -->
 
@@ -42,16 +42,18 @@
 	<!-- msg content sql -->
 
 
-	<select id="msgContentSql" parameterType="map"
+	<select id="msgContentSql" parameterType="int"
 		resultType="korea.msg.model.MsgDTO">
 		
-		 <![CDATA[ 
+		select * from msg where msgIdx =#{msgIdx}  order by idx desc
+		
+<!-- 		 <![CDATA[ 
   select * from 
   (select rownum rnum,a.* 
   from (select * from msg where msgIdx =#{msgIdx}  order by idx desc ) a)b 
   where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]>
-
+ -->
 	</select>
 
 
@@ -90,11 +92,12 @@
 	</select>
 
 
-	<select id="getMaxMsgIdxSql" parameterType="int" resultType="int">
+	<select id="getMaxMsgIdxSql" parameterType="String" resultType="int">
 
-		select max(msgIdx) from msg where sender =#{sender}
-		or receiver
-		=#{sender}
+		select max(msgIdx) 
+		from msg 
+		where sender =#{sender}
+		or receiver	=#{sender}
 	</select>
 
 	<insert id="sendMsgSql" parameterType="korea.msg.model.MsgDTO">
@@ -118,7 +121,7 @@
 	<update id="readMsgSql" parameterType="map">
 		update msg
 		set isRead = 1
-		where msgIdx = #{msgIdx} and isread !=1 and receiver = ${userIdx}
+		where msgIdx = #{msgIdx} and isread !=1 and receiver = #{userIdx}
 
 	</update>
 

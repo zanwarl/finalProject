@@ -22,33 +22,33 @@ public class MsgController {
 	private MsgDAO mdao;
 
 	@RequestMapping(value = "/sendMsg.do", method = RequestMethod.GET)
-	public ModelAndView sendMsgFm(@RequestParam(value = "receiver" ) int receiver, HttpServletRequest req,
+	public ModelAndView sendMsgFm(@RequestParam(value = "receiver") String receiver, HttpServletRequest req,
 			HttpServletResponse resp) {
 		//
 
-	//	receiver = 2;
+		// receiver = 2;
 
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("sId");
 		int sender = mdao.getUserIdx(userId);
 
-		ModelAndView mav = new ModelAndView(); 
-		
+		ModelAndView mav = new ModelAndView();
+
 		mav.setViewName("msg/sendMsg");
 		mav.addObject("sender", sender);
-		
-		return mav; 
+
+		return mav;
 
 	}
 
 	@RequestMapping(value = "/sendMsg.do", method = RequestMethod.POST)
-	public ModelAndView sendMsg(@RequestParam(value = "receiver") int receiver, MsgDTO dto, HttpServletRequest req,
+	public ModelAndView sendMsg(@RequestParam(value = "receiver") String receiver, MsgDTO dto, HttpServletRequest req,
 			HttpServletResponse resp) {
 
 		// int sender = 1 ;
 		HttpSession session = req.getSession();
-		String userId = (String) session.getAttribute("sId");
-		int sender = mdao.getUserIdx(userId);
+		String sender = (String) session.getAttribute("sId");
+		// int sender = mdao.getUserIdx(userId);
 
 		// 기존에 대화가 있는지 찾기
 
@@ -57,7 +57,7 @@ public class MsgController {
 		if (isFirst) {
 			// 기존 대화가 있으면
 			msgIdx = mdao.getMsgIdx(sender, receiver);
-
+			// 없으면
 		} else {
 			msgIdx = mdao.getMaxMsgIdx(sender);
 
@@ -89,8 +89,8 @@ public class MsgController {
 			HttpServletResponse resp) {
 
 		HttpSession session = req.getSession();
-		String userId = (String) session.getAttribute("sId");
-		int userIdx = mdao.getUserIdx(userId);
+		String userIdx = (String) session.getAttribute("sId");
+		// int userIdx = mdao.getUserIdx(userId);
 
 		// int userIdx = 1;
 
@@ -108,6 +108,7 @@ public class MsgController {
 
 		mav.addObject("list", list);
 		mav.addObject("pageStr", pageStr);
+		// mav.addObject("sIdx", userIdx);
 
 		mav.setViewName("msg/msgList");
 
@@ -115,30 +116,26 @@ public class MsgController {
 	}
 
 	@RequestMapping("/msgContent.do")
-	public ModelAndView msgContent(@RequestParam(value = "cp", defaultValue = "1") int cp,
-			@RequestParam(value = "msgIdx") int msgIdx,
-
-			HttpServletRequest req, HttpServletResponse resp) {
+	public ModelAndView msgContent(@RequestParam(value = "msgIdx") int msgIdx, HttpServletRequest req,
+			HttpServletResponse resp) {
 
 		HttpSession session = req.getSession();
-		String userId = (String) session.getAttribute("sId");
-		int userIdx = mdao.getUserIdx(userId);
-		
+		String userIdx = (String) session.getAttribute("sId");
+
 		int read = mdao.readMsg(msgIdx, userIdx);
 
-		int totalCnt = mdao.getMsgContentTotalCnt(msgIdx);
+		List<MsgDTO> list = mdao.msgContent(msgIdx);
 
-		int listSize = 5;
-		int pageSize = 5;
+		String partner = list.get(0).getSender().equals(userIdx) ? list.get(0).getReceiver() : list.get(0).getSender();
 
-		List<MsgDTO> list = mdao.msgContent(cp, listSize, msgIdx);
-
-		String pageStr = korea.page.PageModule.makePage("msgContent.do", totalCnt, listSize, pageSize, cp);
+		
 
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("list", list);
-		mav.addObject("pageStr", pageStr);
+		// mav.addObject("pageStr", pageStr);
+		mav.addObject("partner", partner);
+		
 
 		mav.setViewName("msg/msgContent");
 
