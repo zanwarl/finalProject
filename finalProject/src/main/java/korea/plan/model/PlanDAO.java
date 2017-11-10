@@ -16,6 +16,7 @@ public interface PlanDAO {
 	public List<PlanDTO> myPlanList(int cp, int pageRow);
 	
 	//일정 내용 보여주기
+	public PlanDTO planMainContent(int pidx);
 	public List<PlanDetailDTO> planDetail(int pidx);
 	
 	//일정 메인 테이블 작성

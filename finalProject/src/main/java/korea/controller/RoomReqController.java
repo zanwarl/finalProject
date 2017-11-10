@@ -11,6 +11,10 @@ import korea.roomreq.model.RoomreqDTO;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 @Controller
 public class RoomReqController {
 
@@ -66,9 +70,18 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqList.do")
-	public ModelAndView roomReqList(@RequestParam(value = "cp", defaultValue = "1") int cp) {
-
-		String userId = "yera";
+	public ModelAndView roomReqList(
+			@RequestParam(value = "cp", defaultValue = "1") int cp,
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			) {
+		HttpSession session = req.getSession();
+		
+		String userId = (String)session.getAttribute("sId");
+		
+		
+		
+//		String userId = "yera";
 
 		int listSize = 5;
 		int pageSize = 5;

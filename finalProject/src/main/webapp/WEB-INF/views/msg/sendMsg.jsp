@@ -12,9 +12,9 @@
 </head>
 <body>
 
-${param.receiver}
+${param.receiver}에게 보내기 
 <form action="sendMsg.do" method="post">
-sender	<input type="text" name="sender" value="1">
+sender	<input type="text" name="sender" value="${sId}" readonly="readonly">
 
 <br>
 receiver

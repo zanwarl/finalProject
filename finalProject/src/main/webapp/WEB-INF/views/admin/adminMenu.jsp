@@ -10,16 +10,26 @@
 <title>Insert title here</title>
 </head>
 <body>
+
+<c:if test="${empty adminIdx }">
+
+	<script type="text/javascript">
+		window.alert ('로그인하세요');
+		location.href ='adminLogin.do';
+		
+	
+	</script>
+</c:if>
   <h3 class="w3-bar-item">
 
 
-<c:if test="${empty sId }">
+<c:if test="${empty adminIdx }">
 	
 	<a href="#" onclick="loginPopup(); return false; ">로그인</a>
 
 </c:if>
-<c:if test="${!empty sId }">
-	${sId }님 로그인중 ...<h5><a href="adminLogout.do">로그아웃</a></h5>
+<c:if test="${!empty adminIdx }">
+	${adminIdx}님 로그인중 ...<h5><a href="adminLogout.do">로그아웃</a></h5>
 </c:if>
 
 
@@ -31,6 +41,6 @@
   <a href="complainList.do" class="w3-bar-item w3-button">신고관리</a>
   <a href="blackList.do" class="w3-bar-item w3-button">블랙리스트</a>
   <a href="superHostList.do" class="w3-bar-item w3-button">슈퍼호스트</a>
-  <a href="noticeList.do" class="w3-bar-item w3-button">공지사항관리</a> 
+  <a href="noticeListAdmin.do" class="w3-bar-item w3-button">공지사항관리</a> 
 </body>
 </html>

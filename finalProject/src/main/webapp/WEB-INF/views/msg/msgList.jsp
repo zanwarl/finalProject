@@ -8,6 +8,8 @@
 <head>
 
 
+
+
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -25,6 +27,7 @@
 			<th>대화상대</th>
 			<th>내용</th>
 			<th>날짜</th>
+			<th></th>
 			
 		</tr>
 	</thead>
@@ -44,10 +47,10 @@
       
        
          <td>${dto.idx}</td>
-         <c:if test="${dto.sender == 1 }">
+         <c:if test="${dto.sender == sIdx }">
          	<td>${dto.receiver } </td>
          </c:if>
-         <c:if test="${dto.sender != 1 }">
+         <c:if test="${dto.sender != sIdx }">
          	<td>${dto.sender } </td>
          </c:if>
          
@@ -59,6 +62,13 @@
 
          <td><a href="${msgContentURL}">${dto.content}</a></td>
          <td>${dto.writedate}</td>
+         <td>
+	<td>
+	<c:if test="${dto.isRead == 0 && dto.sender != sId}">
+		new ! 		
+	</c:if>
+
+</td>
        
       </tr>
    </c:forEach>

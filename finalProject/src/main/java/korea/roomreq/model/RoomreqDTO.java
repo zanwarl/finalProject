@@ -8,11 +8,37 @@ public class RoomreqDTO {
 	private String userid;
 	private int roomidx;
 	private int count;
+	private int paid;
 		
 	private String reqDate;
 	private String checkindate;
 	private String checkoutdate;			
 	
+	
+	public RoomreqDTO(int reqidx, String userid, int roomidx, int count, int paid, String reqDate, String checkindate,
+			String checkoutdate) {
+		super();
+		this.reqidx = reqidx;
+		this.userid = userid;
+		this.roomidx = roomidx;
+		this.count = count;
+		this.paid = paid;
+		this.reqDate = reqDate;
+		this.checkindate = checkindate;
+		this.checkoutdate = checkoutdate;
+	}
+
+
+	public int getPaid() {
+		return paid;
+	}
+
+
+	public void setPaid(int paid) {
+		this.paid = paid;
+	}
+
+
 	public RoomreqDTO() {
 		// TODO Auto-generated constructor stub
 	}

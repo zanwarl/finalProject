@@ -14,6 +14,7 @@
 		<li><a href="#">이용약관</a></li>
 		<li><a href="#">개인정보보호정책</a></li>
 		<li><a href="#">찾아오시는길</a></li>
+		<li><a href="adminLogin.do">관리자로그인</a></li>
 	</ul>
 	<p class="copyright">
 	© 2017 http://www.iei.or.kr (주)대한민국길잡이 | 사업자등록번호 123-45-67890 | 통신판매업 신고번호 2017-서울강남-0123호 | 대표이사: ㅇㅇㅇ<br>
