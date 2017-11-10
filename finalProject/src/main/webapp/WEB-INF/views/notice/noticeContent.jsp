@@ -12,30 +12,18 @@
 <title>Insert title here</title>
 </head>
 <body>
-<!-- Sidebar -->
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-<jsp:include page="/adminMenu.do"></jsp:include>
+<jsp:include page="/header.do"></jsp:include>
 
 
-</div>
 
+	<div id="contents">
 
 
 
 
-<!-- Page Content -->
-<div style="margin-left:25%">
 
-<div class="w3-container w3-teal">
   <h1>공지사항내용</h1>
-</div>
-
-
-
-<div class="w3-container">
-
-
 
 
 <table>
@@ -66,34 +54,12 @@
 	</tbody>
 	
 	<tfoot>
-	
-		<tr>
-			<td>
-			<c:url var ="noticeUpdateURL" value="noticeUpdate.do">
-				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
-			</c:url>
-			
-			<c:url var ="noticeDeleteURL" value="noticeDeleteConfirm.do">
-				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
-			</c:url>
-			
-			
-			<a href="${noticeUpdateURL }">수정</a>|
-			<a href="${noticeDeleteURL }">삭제</a>|
-			</td>
-		</tr>
+
 	</tfoot>	
 
 
 </table>
 
-
-
-
-</div>
-
-</div>
-      
 
 
 
@@ -104,7 +70,9 @@
   
 
 
+</div>
 
+<jsp:include page="/footer.do"></jsp:include>
 
 
  

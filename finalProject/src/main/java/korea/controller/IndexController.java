@@ -17,4 +17,18 @@ public class IndexController {
 		
 		return "main";
 	}
+	
+	@RequestMapping("/header.do")
+	public String header() {
+		
+		return "header";
+	}
+	
+	@RequestMapping("/footer.do")
+	public String footer() {
+		
+		return "footer";
+	}
+	
+	
 }

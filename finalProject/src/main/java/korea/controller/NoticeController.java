@@ -118,6 +118,23 @@ public class NoticeController {
 		return mav; 
 		
 	}
+	@RequestMapping ("/noticeContentAdmin.do")
+	public ModelAndView noticeContentAdmin (@RequestParam("idx")int idx){
+		
+		NoticeDTO dto = ndao.noticeContent(idx);
+		
+		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
+		
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("con", dto);
+		mav.setViewName("notice/noticeContentAdmin");
+		
+		
+		return mav; 
+		
+	}
 	
 	@RequestMapping (value="/noticeUpdate.do" , method=RequestMethod.GET)
 	public ModelAndView noticeUpdateFm (@RequestParam ("idx" )int idx){
