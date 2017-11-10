@@ -19,9 +19,14 @@
 		</select>
 		
 		<select id="planDetail" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">
-			select * from plan_detail 
+			select * from plan_detail
 			where pland_pidx = #{pidx}
 			order by pland_day asc, pland_order asc
+		</select>
+		
+		<select id="planMainContent" parameterType="int" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main
+			where plan_idx = #{pidx}
 		</select>
 		
 	<!-- select end -->

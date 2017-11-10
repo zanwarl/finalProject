@@ -10,6 +10,10 @@
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
+${pdto.plan_writer }님의 일정 <hr>
+
+
+
 <c:forEach var="list" items="${list }">
 ${list.pland_day }
 ${list.pland_order } &nbsp;

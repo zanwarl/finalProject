@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
 import korea.plan.model.PlanDetailDTO;
+import korea.plan.model.PlanMainDetailDTO;
 
 @Controller
 public class PlanController {
@@ -154,9 +155,11 @@ public class PlanController {
 		//pidx = 75;
 		System.out.println(pidx);
 		ModelAndView mav = new ModelAndView();
+		PlanDTO pdto = pdao.planMainContent(pidx);
 		List<PlanDetailDTO> list = pdao.planDetail(pidx);	
-		
+		System.out.println("사이즈 : " + list.size());
 		mav.addObject("list", list);
+		mav.addObject("pdto", pdto);
 		mav.setViewName("plan/planContent");
 		return mav;
 		
