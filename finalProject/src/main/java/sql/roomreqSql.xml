@@ -17,7 +17,7 @@
 
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
-		select count(*) from roomReq where userId = #{userId}
+		select count(*) from roomreq where userId = #{userId}
 		<!-- roomReqTotalCnt -->
 	</select>
 

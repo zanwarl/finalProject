@@ -18,41 +18,41 @@ public class RoomReqController {
 	private RoomreqDAO rdao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReqForm() {
+	public ModelAndView roomReq() {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("roomreq/roomReqMain");
+		mav.setViewName("roomReq/roomReqMain");
 
 		return mav;
 	}
 
-	@RequestMapping("/roomReqMain.do")
-	public ModelAndView roomreq1(RoomreqDTO rdto) {
+	@RequestMapping("/roomReqFm.do")
+	public ModelAndView roomReqFm(RoomreqDTO rdto) {
 
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomreqCon2.do?idx=" + rdto.getReqidx();
+		String goURL = "roomReqOK.do?idx=" + rdto.getReqidx();
 		System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("reqmsge", msg);
-		mav.setViewName("roomreq/reqmsg");
+		mav.setViewName("roomReq/reqmsg");
 
 		mav.addObject("goURL", goURL);
-		mav.setViewName("roomreq/roomreqCon2");
+		mav.setViewName("roomReq/roomReqOK");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/roomreq2.do")
-	public ModelAndView roomreq2(@RequestParam(value = "idx") int idx) {
+	@RequestMapping(value = "/roomReqOK.do")
+	public ModelAndView roomreqOK(@RequestParam(value = "idx") int idx) {
 
-		RoomreqDTO rdto = rdao.RoomreqCon2(idx);
+		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomreq/roomreqCon2");
+		mav.setViewName("roomReq/roomReqOK");
 
 		return mav;
 	}

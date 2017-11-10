@@ -21,16 +21,16 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return list;
 	}
 */
-	public int RoomreqAdd(RoomreqDTO crdto) {
+	public int RoomreqAdd(RoomreqDTO rdto) {
 
-		int count = sqlMap.insert("roomreqInsert", crdto);
+		int count = sqlMap.insert("roomreqInsert", rdto);
 		return count;
 	}
 
-	public RoomreqDTO RoomreqCon2(int idx) {
+	public RoomreqDTO RoomreqOK(int idx) {
 
-		RoomreqDTO crdto = sqlMap.selectOne("roomreqCon2", idx);
-		return crdto;
+		RoomreqDTO rdto = sqlMap.selectOne("roomreqOK", idx);
+		return rdto;
 	}
 	
 	
