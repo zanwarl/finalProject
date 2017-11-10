@@ -79,7 +79,7 @@
 	         <li class='last'><a href='#'><span>게스트하우스</span></a></li>
      	 </ul>
    </li>
-   <li class='has-sub'><a href='#'><span>음식점</span></a>
+   <!-- <li class='has-sub'><a href='#'><span>음식점</span></a>
    		<ul>
 	         <li><a href='#'><span>한식</span></a></li>
 	         <li><a href='#'><span>일식</span></a></li>
@@ -94,7 +94,7 @@
 	         <li><a href='#'><span>스포츠</span></a></li>
 	         <li class='last'><a href='#'><span>그외</span></a></li>
 	  	</ul>
-   </li> 
+   </li>  -->
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
 	     	<li><a href='#'><span>공유일정보기</span></a></li>

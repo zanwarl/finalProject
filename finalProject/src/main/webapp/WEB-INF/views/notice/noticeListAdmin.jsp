@@ -63,7 +63,7 @@
 				<tr>
 				
 					<td>${dto.noticeIdx }</td>
-					<c:url  value = "noticeContent.do" var ="contentURL">
+					<c:url  value = "noticeContentAdmin.do" var ="contentURL">
 						<c:param name="idx" value = "${dto.noticeIdx }"></c:param>
 						
 					</c:url>
