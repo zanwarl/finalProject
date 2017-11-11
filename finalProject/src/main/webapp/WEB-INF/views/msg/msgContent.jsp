@@ -9,6 +9,30 @@
 <html>
 <head>
 
+<script type="text/javascript">
+
+
+$(window).on('load', function () {
+    load('#js-load', '4');
+    $("#js-btn-wrap .button").on("click", function () {
+        load('#js-load', '4', '#js-btn-wrap');
+    })
+});
+ 
+function load(id, cnt, btn) {
+    var girls_list = id + " .js-load:not(.active)";
+    var girls_length = $(girls_list).length;
+    var girls_total_cnt;
+    if (cnt < girls_length) {
+        girls_total_cnt = cnt;
+    } else {
+        girls_total_cnt = girls_length;
+        $(button).hide();
+    }
+    $(girls_list + ":lt(" + girls_total_cnt + ")").addClass("active");
+}
+</script>
+
 <meta charset=UTF-8">
 <title>Insert title here</title>
 
@@ -144,6 +168,116 @@ a{
 </head>
 <body>
 
+
+
+<jsp:include page="/header.do"></jsp:include>
+
+
+
+	<div id="contents">
+
+<!-- ---------본문내용---------------  -->
+
+<div class="container">
+  <div class="header">
+    <h2>${partner }님과의 대화</h2>
+    
+  </div>
+		<div class="chat-box">
+		<!--  chat box == content  -->
+		
+		
+     <div class="enter-message">
+    <form action="sendMsg.do" method="post" name="sendMsgFm">
+    	<input type="hidden" name="sender" value="${sId}" readonly="readonly">
+
+	<input type="hidden" name="receiver" value="${partner}">
+	<!-- 
+	<textarea rows="" cols=""></textarea>
+      <input type="text" placeholder="메세지를 입력하세요" name="content"/> -->
+      	<textarea rows="2" cols="35" name="content"></textarea>
+      
+      <a href="javascript:document.sendMsgFm.submit()"  class="send">Send</a>
+      </form>
+    </div>
+		
+
+			<c:forEach var="dto" items="${list}">
+			<c:set var="writedate" value="${dto.writedate }"></c:set>
+				<c:if test="${sId==dto.sender }">
+					
+					
+					
+					
+						<div class="message-box right-img">
+				<div class="picture">
+					<span>${dto.sender } </span> 
+				<%-- 	
+					<span class="time">${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일</span> --%>
+				</div>
+				<div class="message">
+					<span> ${dto.content}</span>
+					<p>${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
+					</div>
+			</div>
+					
+					
+				</c:if>
+				<c:if test="${partner == dto.sender}">
+					
+
+
+			<div class="message-box left-img">
+				<div class="picture">
+					<span>${dto.sender }</span> 
+							</div>
+				<div class="message">
+					<span>${dto.content }</span>
+					<p>${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
+				
+				</div>
+			</div>
+				</c:if>
+
+
+
+			</c:forEach>
+
+
+
+	
+	
+
+		
+			<!-- <div class="enter-message">
+		
+		
+				<input type="text" placeholder="Enter your message.." /> <a href="#"
+					class="send">Send</a>
+			</div> -->
+		</div>
+		<div id = "js-btn-wrap" > </div>
+	
+	</div>
+
+</div>
+
+<jsp:include page="/footer.do"></jsp:include>
+
+
+
+
+</body>
+</html>
+
+
+
 <%-- 
 
 ${partner}님과의 대화입니다.
@@ -234,115 +368,6 @@ receiver
 
 
  --%>
-
-
-
-
-
-<jsp:include page="/header.do"></jsp:include>
-
-
-
-	<div id="contents">
-
-<!-- ---------본문내용---------------  -->
-
-<div class="container">
-  <div class="header">
-    <h2>${partner }님과의 대화</h2>
-    
-  </div>
-		<div class="chat-box">
-		
-		
-     <div class="enter-message">
-    <form action="sendMsg.do" method="post" name="sendMsgFm">
-    	<input type="hidden" name="sender" value="${sId}" readonly="readonly">
-
-	<input type="hidden" name="receiver" value="${partner}">
-	<!-- 
-	<textarea rows="" cols=""></textarea>
-      <input type="text" placeholder="메세지를 입력하세요" name="content"/> -->
-      	<textarea rows="2" cols="35" name="content"></textarea>
-      
-      <a href="javascript:document.sendMsgFm.submit()"  class="send">Send</a>
-      </form>
-    </div>
-		
-
-			<c:forEach var="dto" items="${list}">
-			<c:set var="writedate" value="${dto.writedate }"></c:set>
-				<c:if test="${sId==dto.sender }">
-					
-					
-					
-					
-						<div class="message-box right-img">
-				<div class="picture">
-					<span>${dto.sender } </span> 
-				<%-- 	
-					<span class="time">${fn:substring (writedate,0,4 )}년
-					${fn:substring (writedate,5,7 )}월
-					${fn:substring (writedate,8,10 )}일</span> --%>
-				</div>
-				<div class="message">
-					<span> ${dto.content}</span>
-					<p>${fn:substring (writedate,0,4 )}년
-					${fn:substring (writedate,5,7 )}월
-					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
-					</div>
-			</div>
-					
-					
-				</c:if>
-				<c:if test="${partner == dto.sender}">
-					
-
-
-			<div class="message-box left-img">
-				<div class="picture">
-					<span>${dto.sender }</span> 
-					<%-- 	<span class="time">${fn:substring (writedate,0,4 )}년
-					${fn:substring (writedate,5,7 )}월
-					${fn:substring (writedate,8,10 )}일</span> --%>
-				</div>
-				<div class="message">
-					<span>${dto.content }</span>
-					<p>${fn:substring (writedate,0,4 )}년
-					${fn:substring (writedate,5,7 )}월
-					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
-				
-				</div>
-			</div>
-				</c:if>
-
-
-
-			</c:forEach>
-
-
-
-
-
-		
-			<!-- <div class="enter-message">
-		
-		
-				<input type="text" placeholder="Enter your message.." /> <a href="#"
-					class="send">Send</a>
-			</div> -->
-		</div>
-	</div>
-
-</div>
-
-<jsp:include page="/footer.do"></jsp:include>
-
-
-
-
-</body>
-</html>
 
 
 
