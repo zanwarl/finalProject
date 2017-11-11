@@ -104,7 +104,7 @@
    <li class='has-sub'><a href='#'><span>고객센터</span></a>
    	  <ul>
          <li><a href='noticeList.do'><span>공지사항</span></a></li>
-         <li class='last'><a href='#'><span>질문답변</span></a></li>
+         <li class='last'><a href='vocWrite.do'><span>질문답변</span></a></li>
       </ul>
    </li>
 </ul>

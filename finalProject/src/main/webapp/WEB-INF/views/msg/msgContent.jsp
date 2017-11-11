@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 
 <!DOCTYPE html >
 <html>
@@ -10,163 +12,139 @@
 <meta charset=UTF-8">
 <title>Insert title here</title>
 
+
 <style type="text/css">
 
-$white: #eee;
-
-$bg1: #555;
-$bg2: #333;
-$chat-left-color: lighten(royalblue,35);
-$chat-right-color: lighten(royalblue,10);
-$font-dark: #333;
-$font-light: #f5f5f5;
-$tail-size: 20px;
-
-
-body {
-	background-color: $bg2;
-	background: radial-gradient(circle, $bg1, $bg2);
-	min-height: 100vh;
+*{
+  font-family:'Helvetica Neue',Helvetica, sans-serif;
+  font-size:14px;
+  margin:0;
 }
-
-
-p { margin: 0; }
-
-fieldset {
-	font-size: 1em;
-	padding: 0.5em;
-	border: none;
+a{
+  font-weight:bold;
+  color:#fff;
+  text-decoration:none;
 }
-
-label, input, button {
-	font-size: inherit;
-	padding: 0.2em;
-	margin: 0.1em 0.2em;
-	box-sizing: border-box;
-	background-color: transparent;
-	border: inherit;
-	color: $font-dark;
+.container{
+  width:400px;
+  display:block;
+  margin:0 auto;
+  box-shadow:0 2px 5px rgba(0,0,0,0.4);
 }
-
-/*// Screen*/
-
-.container {
-	height: 100vh;
-	max-width: 768px;
-	min-width: 350px;
-	margin: 0 auto;	
+.header{
+  padding:20px 20px 18px 20px;
+  background:#5FB471;
+  color:#fff;
 }
-
-.phone {
-	padding-top: 10px;
-	background-color: $white;
-	position: relative;
-	box-sizing: border-box;
-	height: 100vh;
-	padding-bottom: 70px;
+.header h2{
+  font-size:16px;
+  line-height:15px;
+  display:inline-block;
 }
-
-/*msg*/
-.message {
-	padding: 0 10px;
+.header a{
+  display:inline-block;
+  float:right;
+  background:#3d8b4e;
+  font-size:25px;
+  line-height:20px;
+  padding:3px 6px;
+  margin-top:-5px;
+  border-radius:2px;
 }
-.message .chat {
-	text-align: left;
-	position: relative;
-	max-width: 75%;
-	display: inline-block;
-	padding: 20px;
-	padding-bottom: 10px;
-	line-height: 1.5;
-	margin: 10px 20px;
-	border-radius: 10px;
-	&:before,
-	&:after { 
-		content: "";
-		position: absolute; 
-		bottom: 0; 
-		width: $tail-size;
-		height: $tail-size;
-		background-color: $white;
-	}
+.chat-box, .enter-message{
+  background:#ECECEC;
+  padding:0 20px;
+  color:#a1a1a1;
 }
-
-.message.left {
-	text-align: left;
-	.chat {
-		background-color: $chat-left-color;
-		color: $font-dark;
-		border-bottom-left-radius: 0px;
-		&:before {
-			left: -$tail-size;
-			z-index: 2;
-			border-bottom-right-radius: 60% 50%;
-		}
-		&:after {
-			background-color: inherit;
-			left: -$tail-size;
-			z-index: 1;
-		}
-	}
+.chat-box .message-box{
+  padding:18px 0 10px;
+  clear:both;
 }
-
-.message.right {
-	text-align: right;
-	.chat {
-		background-color: $chat-right-color;
-		color: $font-light;
-		border-bottom-right-radius: 0px;
-		&:before {
-			right: -$tail-size;
-			z-index: 2;
-			border-bottom-left-radius: 60% 50%;
-		}
-		&:after {
-			background-color: inherit;
-			right: -$tail-size;
-			z-index: 1;
-		}
-	}
+.message-box .picture{
+  float:left;
+  width:50px;
+  display:block;
+  padding-right:10px;
 }
-
-.message .chat figcaption { font-size: 7.5pt; margin-top: 2px;}
-
-/* Chat Input*/
-.chat-input {
-	position: absolute;
-	bottom: 0;
-	width: 100%;
-	border-top: 2px solid #ccc;
-	background-color: #f5f5f5;
-	z-index: 3;
-	button {
-		width: 50px;
-		height: 50px;
-		background-color: #ccc;
-		border-radius: 4px;
-		transition: all 100ms ease-in-out;
-		&:hover {
-			background-color: #333;
-			color: #ccc;
-		}
-	}
-	input {
-		height: 50px;
-		width: calc(100% - 100px - 1.8em);
-		border-bottom: 2px solid #888;
-		transition: all 300ms ease-in-out;
-		&:focus {
-			outline: none;
-			border-bottom-color: $chat-right-color;
-		}
-	}
+.picture img{
+  width:43px;
+  height:48px;
+  border-radius:5px;
+}
+.picture span{
+  font-weight:bold;
+  font-size:12px;
+  clear:both;
+  display:block;
+  text-align:center;
+  margin-top:3px;
+}
+.message{
+  background:#fff;
+  display:inline-block;
+  padding:13px;
+  width:274px;
+  border-radius:2px;
+  box-shadow: 0 1px 1px rgba(0,0,0,.04);
+  position:relative;
+}
+.message:before{
+  content:"";
+  position:absolute;
+  display:block;
+  left:0;
+  border-right:6px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom:6px solid transparent;
+  top:10px;
+  margin-left:-6px;
+}
+.message span{
+  color:#555;
+  font-weight:bold;
+}
+.message p{
+  padding-top:5px;
+}
+.message-box.right-img .picture{
+  float:right;
+  padding:0;
+  padding-left:10px;
+}
+.message-box.right-img .picture img{
+  float:right;
+}
+.message-box.right-img .message:before{
+  left:100%;
+  margin-right:6px;
+  margin-left:0;
+  border-right:6px solid transparent;
+  border-left:6px solid #fff;
+  border-top: 6px solid transparent;
+  border-bottom:6px solid transparent;
+}
+.enter-message{
+  padding:13px 0px;
+}
+.enter-message textarea{
+  border:none;
+  padding:10px 12px;
+  background:#d3d3d3;
+  width:260px;
+  border-radius:2px;
+}
+.enter-message a.send{
+  padding:10px 15px;
+  background:#6294c2;
+  border-radius:2px;
+  float:right;
 }
 </style>
 
 </head>
 <body>
 
-
+<%-- 
 
 ${partner}님과의 대화입니다.
 
@@ -250,7 +228,127 @@ receiver
 
 </table>
 <hr>
+<hr>
 
+
+
+
+ --%>
+
+
+
+
+
+<jsp:include page="/header.do"></jsp:include>
+
+
+
+	<div id="contents">
+
+<!-- ---------본문내용---------------  -->
+
+<div class="container">
+  <div class="header">
+    <h2>${partner }님과의 대화</h2>
+    
+  </div>
+		<div class="chat-box">
+		
+		
+     <div class="enter-message">
+    <form action="sendMsg.do" method="post" name="sendMsgFm">
+    	<input type="hidden" name="sender" value="${sId}" readonly="readonly">
+
+	<input type="hidden" name="receiver" value="${partner}">
+	<!-- 
+	<textarea rows="" cols=""></textarea>
+      <input type="text" placeholder="메세지를 입력하세요" name="content"/> -->
+      	<textarea rows="2" cols="35" name="content"></textarea>
+      
+      <a href="javascript:document.sendMsgFm.submit()"  class="send">Send</a>
+      </form>
+    </div>
+		
+
+			<c:forEach var="dto" items="${list}">
+			<c:set var="writedate" value="${dto.writedate }"></c:set>
+				<c:if test="${sId==dto.sender }">
+					
+					
+					
+					
+						<div class="message-box right-img">
+				<div class="picture">
+					<span>${dto.sender } </span> 
+				<%-- 	
+					<span class="time">${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일</span> --%>
+				</div>
+				<div class="message">
+					<span> ${dto.content}</span>
+					<p>${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
+					</div>
+			</div>
+					
+					
+				</c:if>
+				<c:if test="${partner == dto.sender}">
+					
+
+
+			<div class="message-box left-img">
+				<div class="picture">
+					<span>${dto.sender }</span> 
+					<%-- 	<span class="time">${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일</span> --%>
+				</div>
+				<div class="message">
+					<span>${dto.content }</span>
+					<p>${fn:substring (writedate,0,4 )}년
+					${fn:substring (writedate,5,7 )}월
+					${fn:substring (writedate,8,10 )}일 ${ fn:substring (writedate,11,13 )}시${ fn:substring (writedate,14,16 )}분</p>
+				
+				</div>
+			</div>
+				</c:if>
+
+
+
+			</c:forEach>
+
+
+
+
+
+		
+			<!-- <div class="enter-message">
+		
+		
+				<input type="text" placeholder="Enter your message.." /> <a href="#"
+					class="send">Send</a>
+			</div> -->
+		</div>
+	</div>
+
+</div>
+
+<jsp:include page="/footer.do"></jsp:include>
+
+
+
+
+</body>
+</html>
+
+
+
+
+
+<%-- 
 
     <h2>[${partner }]님과의 대화</h2>
 <div class="container">
@@ -335,7 +433,7 @@ receiver
 	</div>
 	
 </div>
-
+ --%>
 <!-- ------------------------- -->
 
 <%-- 
@@ -389,6 +487,3 @@ receiver
 
 		</div>
 </div> --%>
-
-</body>
-</html>

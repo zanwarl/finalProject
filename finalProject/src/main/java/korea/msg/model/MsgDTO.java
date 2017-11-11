@@ -1,6 +1,5 @@
 package korea.msg.model;
 
-import java.sql.Date;
 
 public class MsgDTO {
 
@@ -10,7 +9,7 @@ public class MsgDTO {
 
 	private String receiver;
 	private String content;
-	private Date writedate;
+	private String writedate;
 
 	private int isRead;
 
@@ -58,7 +57,7 @@ public class MsgDTO {
 		this.content = content;
 	}
 
-	public MsgDTO(int idx, int msgIdx, String sender, String receiver, String content, Date writedate, int isRead) {
+	public MsgDTO(int idx, int msgIdx, String sender, String receiver, String content, String writedate, int isRead) {
 		super();
 		this.idx = idx;
 		this.msgIdx = msgIdx;
@@ -69,11 +68,11 @@ public class MsgDTO {
 		this.isRead = isRead;
 	}
 
-	public Date getWritedate() {
+	public String getWritedate() {
 		return writedate;
 	}
 
-	public void setWritedate(Date writedate) {
+	public void setWritedate(String writedate) {
 		this.writedate = writedate;
 	}
 

@@ -21,7 +21,14 @@
 	<div id="contents">
 
 <!-- ---------본문내용---------------  -->
+<form action="vocWrite.do" method="post" name="vocWriteFm">
 
+title <input type="text" name="title"><br>
+content <input type="text" name="content">
+<input type="submit" value="문의하기">
+
+
+</form>
 
 </div>
 

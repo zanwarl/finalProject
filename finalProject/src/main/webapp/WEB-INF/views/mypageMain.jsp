@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -9,8 +9,8 @@
 <body>
 
 <ul>
-	<li><a href="roomReqList.do" >¿¹¾à³»¿ª</a></li>
-	<li><a href="#" >È¸¿øÁ¤º¸¼öÁ¤</a></li>
+	<li><a href="roomReqList.do" >ì˜ˆì•½ë‚´ì—­</a></li>
+	<li><a href="#" >íšŒì›ì •ë³´ìˆ˜ì •</a></li>
 	
 </ul>
 
