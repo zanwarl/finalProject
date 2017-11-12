@@ -13,7 +13,9 @@ public interface PlanDAO {
 	//내 일정 리스트
 	public List<PlanDTO> myPlanList();
 	//내 일정 리스트 + 페이징
-	public List<PlanDTO> myPlanList(int cp, int pageRow);
+	public List<PlanDTO> myPlanList(int idx, int cp, int pageRow);
+	//내 일정 숫자
+	public int myTotalCnt(int idx);
 	
 	//일정 내용 보여주기
 	public PlanDTO planMainContent(int pidx);

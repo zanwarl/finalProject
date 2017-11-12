@@ -10,7 +10,7 @@
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents"><!-- contents -->
-내가만든~~리스트
+${sId }님의 일정
 <br>
 완성된 일정 / 작성중인 일정 /
 <table width="600" height="auto" border="1" cellspacing="0">
@@ -44,7 +44,7 @@
 	<!-- 페이징, 글쓰기 영역 -->
 	<tfoot>
 		<tr>
-			<td colspan="3">1 2 3 </td>
+			<td colspan="3">${page } </td>
 			<td><a href="planMake.do">일정 만들기</a></td>
 		</tr>
 	</tfoot>

@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -12,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
@@ -168,13 +171,23 @@ public class PlanController {
 	
 	/**내가 작성한 일정 목록 (+페이징)*/
 	@RequestMapping("/myPlan.do")
-	public ModelAndView myPlanList() {
+	public ModelAndView myPlanList(HttpSession session, @RequestParam(value="cp",required=false,defaultValue="1")int cp) {
+		int idx = (Integer) session.getAttribute("sIdx");
 		
 		ModelAndView mav = new ModelAndView();
-		List<PlanDTO> list = pdao.myPlanList();
+		
+		int totalCnt = pdao.myTotalCnt(idx);
+		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
+		
+		String url = "myPlan.do";
+		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
+		System.out.println(page);
+		List<PlanDTO> list = pdao.myPlanList(idx, cp, pageSize);
 		
 		mav.setViewName("plan/myPlanList");
 		mav.addObject("list", list);
+		mav.addObject("page", page);
 		return mav;
 	}
 	

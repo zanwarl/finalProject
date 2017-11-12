@@ -11,6 +11,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +19,7 @@ import korea.member.model.MemberDAO;
 import korea.member.model.MemberDTO;
 
 @Controller
+@SessionAttributes({"sId","sName","sIdx"})
 public class MemberController {
 
 	@Autowired
@@ -33,7 +35,7 @@ public class MemberController {
 	@RequestMapping("/memberJoin.do")
 	public ModelAndView memberJoin(MemberDTO dto) {
 		int result=memberDao.memberJoin(dto);		
-		String msg=result>0?"È¸¿ø°¡ÀÔ¼º°ø!":"µî·Ï½ÇÆĞ";
+		String msg=result>0?"È¸ï¿½ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½ï¿½!":"ï¿½ï¿½Ï½ï¿½ï¿½ï¿½";
 		ModelAndView mav=new ModelAndView();		
 		mav.addObject("msg",msg);
 		mav.setViewName("member/memberMsg");
@@ -51,11 +53,11 @@ public class MemberController {
 		boolean result=memberDao.memberSelect(userid);
 		ModelAndView mav=new ModelAndView();
 		if(result) {
-			String msg="ÀÌ¹Ì °¡ÀÔµÈ ¾ÆÀÌµğÀÔ´Ï´Ù.";
+			String msg="ï¿½Ì¹ï¿½ ï¿½ï¿½ï¿½Ôµï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.";
 			mav.addObject("msg", msg);
 			mav.setViewName("member/idCheckMsg");			
 		}else {
-			String msg=userid+"´Â »ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.";
+			String msg=userid+"ï¿½ï¿½ ï¿½ï¿½ë°¡ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½ï¿½Ô´Ï´ï¿½.";
 			mav.addObject("msg", msg);
 			mav.addObject("userid", userid);
 			mav.setViewName("member/idCheck_ok");
@@ -76,15 +78,17 @@ public class MemberController {
 			HttpServletResponse resp, 
 			@RequestParam (value="saveId", required=false)String saveId
 			) {
-		
+		ModelAndView mav= new ModelAndView(); 
 		boolean res = memberDao.login(member_id, member_pwd);
-		
-		if (res ){
+		if (res){
 			HttpSession session = req.getSession();
 			session.setAttribute("sId", member_id);
 			
+			//2017.11.13 í™ì£¼ì˜ memberdto ì„¸ì…˜ ì¶”ê°€
+			MemberDTO mdto = memberDao.memberInfo(member_id);
 			
-			
+			mav.addObject("sIdx",mdto.getMember_idx());
+			mav.addObject("sName",mdto.getMember_name());
 		}
 		
 		Cookie ck = new Cookie( "saveId", member_id);
@@ -97,10 +101,10 @@ public class MemberController {
 		}
 		resp.addCookie(ck);
 		
-		String msg = res? "È¯¿µÇÕ´Ï´Ù^^": "fail";
+		String msg = res? "È¯ï¿½ï¿½ï¿½Õ´Ï´ï¿½^^": "fail";
 		String goURL = res? "main.do": "memberLogin.do";
 		
-		ModelAndView mav= new ModelAndView(); 
+		
 		mav.setViewName("member/loginMsg");
 		mav.addObject("msg", msg);
 		mav.addObject("goURL", goURL);

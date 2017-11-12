@@ -132,9 +132,52 @@ public class PageModule {
 		return sb.toString();
 	}
 	
+	public static String page(String pageName, int totalCnt, int listSize, int pageSize, int cp) {
+		StringBuffer sb = new StringBuffer();
+		int totalPage = (totalCnt-1)/listSize+1; //총 페이지 수
+		int startNum = cp - (cp-1) % pageSize;; //처음 페이지
+		int endNum = startNum + (pageSize - 1); //마지막 페이지
+		
+		System.out.println("0");
+		
+		if(endNum > totalPage) {
+			endNum = totalPage;
+		}
+		
+		if(startNum!=1) {
+			System.out.println("1");
+			sb.append("<a href='");
+			sb.append(pageName);
+			sb.append("?cp=");
+			int tmp = startNum-1;
+			sb.append(tmp);
+			sb.append("'>&lt;&lt;</a>");
+			//str += "<a href='"+pageName+"="+(startNum-1)+"'>"+"<<이전"+"</a> ";
+		}
+		for(int i=startNum;i<=endNum;i++) {
+			System.out.println("2222");
+			sb.append("<a href='");
+			sb.append(pageName);
+			sb.append("?cp=");
+			sb.append(i);
+			sb.append("'>&nbsp;"+i+"&nbsp;</a>");
+			//str += "<a href='"+pageName+"="+i+"'>"+i+"</a> ";
+		}
+		if(endNum!=totalPage) {
+			System.out.println("3");
+			sb.append("<a href='");
+			sb.append(pageName);
+			sb.append("?cp=");
+			int tmp = endNum+1;
+			sb.append(tmp);
+			sb.append("'>&gt;&gt;</a>");
+			//str += "<a href='"+pageName+"="+(endNum+1)+"'>"+"다음>>"+"</a> ";
+		}
+		
+		return sb.toString();
+	}
 	
 	public static String page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
-			
 		StringBuffer sb = new StringBuffer();
 		int totalPage = (totalCnt-1)/listSize+1; //총 페이지 수
 		int startNum = cp - (cp-1) % pageSize;; //처음 페이지
@@ -145,6 +188,7 @@ public class PageModule {
 		}
 		
 		if(startNum!=1) {
+			System.out.println("1");
 			sb.append("<a href='");
 			sb.append(pageName);
 			sb.append("?cp=");
@@ -154,23 +198,14 @@ public class PageModule {
 			//str += "<a href='"+pageName+"="+(startNum-1)+"'>"+"<<이전"+"</a> ";
 		}
 		for(int i=startNum;i<=endNum;i++) {
-			if(i==cp) {
-				sb.append("<b><a href='");
-				sb.append(pageName);
-				sb.append("?cp=");
-				sb.append(i);
-				sb.append("'>&nbsp;"+i+"&nbsp;</a></b>");
-				//str += "<b><a href='"+pageName+"="+i+"'>"+i+"</a></b> ";
-			} else {
-				sb.append("<a href='");
-				sb.append(pageName);
-				sb.append("?cp=");
-				sb.append(i);
-				sb.append("'>&nbsp;"+i+"&nbsp;</a>");
-				//str += "<a href='"+pageName+"="+i+"'>"+i+"</a> ";
-			}
+			sb.append("<a href='");
+			sb.append(pageName);
+			sb.append("?cp=");
+			sb.append(i);
+			sb.append("'>&nbsp;"+i+"&nbsp;</a>");
 		}
 		if(endNum!=totalPage) {
+			System.out.println("3");
 			sb.append("<a href='");
 			sb.append(pageName);
 			sb.append("?cp=");
