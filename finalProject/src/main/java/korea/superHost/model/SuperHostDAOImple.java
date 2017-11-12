@@ -19,16 +19,18 @@ public class SuperHostDAOImple implements SuperHostDAO{
 		
 	}
 	
+
 	
-	public List<SuperHostDTO> superHostList(int cp, int listSize, int type) {
+	
+	public List<SuperHostDTO> superHostList(int cp, int listSize) {
 	
 		Map<String, Object>map = new HashMap<String, Object>();
 		int startNum = (cp -1)* listSize+1;
 		int endNum = cp*listSize;	
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		map.put("type", type);
-		
+		/*map.put("max", max);
+		*/
 		List<SuperHostDTO> list = sqlMap.selectList("superHostSql", map);
 		return list;
 		
@@ -37,6 +39,24 @@ public class SuperHostDAOImple implements SuperHostDAO{
 	public int getSuperHostTotalCnt() {
 		int res = sqlMap.selectOne("superHostTotalCntSql");
 		return res; 
+	}
+
+
+
+
+	public int updateSuper(int point) {
+		// TODO A\
+		return sqlMap.insert("updateSuperSql", point);
+		
+	}
+
+
+
+
+	public int deleteSuper() {
+		return sqlMap.delete("deleteSuperSql");
+		
+		
 	}
 
 }

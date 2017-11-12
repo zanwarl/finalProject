@@ -4,20 +4,48 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.superHost">
 	<!-- select -->
-	<select id="superHostSql" resultType="korea.superHost.model.SuperHostDTO" parameterType="map">
-  <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from superHost where type = #{type} ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
-   ]]>
-   </select>
-   
-   
-     <select id="superHostTotalCntSql" resultType="int" >
-       select count(*) from superHost
-       
-   </select>
-   
 
-   
-   
-   
+	<delete id="deleteSuperSql">
+		delete from superhost
+	</delete>
+
+	<insert id="updateSuperSql" parameterType="int">
+
+		INSERT INTO SUPERHOST (
+
+		select rownum as rank ,member_id, member_host_grade
+		from (
+		select member_id, member_host_grade
+		from member
+		order by member_host_grade desc
+		)
+		where MEMBER_HOST_GRADE >=#{point}
+
+
+		)
+
+
+	</insert>
+
+
+	<!-- select -->
+	<select id="superHostSql" resultType="korea.superHost.model.SuperHostDTO"
+		parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (
+  select * from superHost order by rank    ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+	</select>
+
+
+
+	<select id="superHostTotalCntSql" resultType="int">
+		select count(*) from superHost
+
+	</select>
+
+
+
+
+
 </mapper>
