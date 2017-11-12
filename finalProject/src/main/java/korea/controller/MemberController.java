@@ -35,7 +35,7 @@ public class MemberController {
 	@RequestMapping("/memberJoin.do")
 	public ModelAndView memberJoin(MemberDTO dto) {
 		int result=memberDao.memberJoin(dto);		
-		String msg=result>0?"ȸ�����Լ���!":"��Ͻ���";
+		String msg=result>0?"회원가입성공!":"등록실패";
 		ModelAndView mav=new ModelAndView();		
 		mav.addObject("msg",msg);
 		mav.setViewName("member/memberMsg");
@@ -53,11 +53,11 @@ public class MemberController {
 		boolean result=memberDao.memberSelect(userid);
 		ModelAndView mav=new ModelAndView();
 		if(result) {
-			String msg="�̹� ���Ե� ���̵��Դϴ�.";
+			String msg="이미 가입된 아이디입니다.";
 			mav.addObject("msg", msg);
 			mav.setViewName("member/idCheckMsg");			
 		}else {
-			String msg=userid+"�� ��밡���� ���̵��Դϴ�.";
+			String msg=userid+"는 사용가능한 아이디입니다.";
 			mav.addObject("msg", msg);
 			mav.addObject("userid", userid);
 			mav.setViewName("member/idCheck_ok");
@@ -101,7 +101,7 @@ public class MemberController {
 		}
 		resp.addCookie(ck);
 		
-		String msg = res? "ȯ���մϴ�^^": "fail";
+		String msg = res? "환영합니다^^": "fail";
 		String goURL = res? "main.do": "memberLogin.do";
 		
 		
