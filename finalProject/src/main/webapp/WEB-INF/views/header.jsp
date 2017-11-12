@@ -37,7 +37,7 @@
 				<c:if test="${empty sId }">
 	
 	<a href="memberLogin.do" onclick="loginPopup(); return false; ">로그인</a>
-
+	<li><a href="memberJoin.do">회원가입</a></li>
 </c:if>
 
 <c:if test="${!empty sId }">
@@ -45,7 +45,7 @@
 </c:if>
 
 </li>
-				<li><a href="memberJoin.do">회원가입</a></li>
+				
 				<li><a href="#">언어설정</a></li>
 				<li><a href="#">환율</a></li>
 				<li><a href="msgList.do">메세지</a></li>
