@@ -84,7 +84,7 @@ public class MemberController {
 			HttpSession session = req.getSession();
 			session.setAttribute("sId", member_id);
 			
-			//2017.11.13 �솉二쇱쁺 memberdto �꽭�뀡 異붽�
+			//2017.11.13 홍주영 memberdto 세션 추가!
 			MemberDTO mdto = memberDao.memberInfo(member_id);
 			
 			mav.addObject("sIdx",mdto.getMember_idx());
