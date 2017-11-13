@@ -59,7 +59,6 @@ public class RoomReqController {
 		mav.setViewName("roomReq/reqmsg");
 
 		mav.addObject("goURL", goURL);
-		mav.setViewName("roomReq/roomReqOK");
 
 		return mav;
 	}

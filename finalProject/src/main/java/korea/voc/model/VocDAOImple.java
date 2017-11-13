@@ -133,6 +133,31 @@ public class VocDAOImple implements VocDAO {
 		
 	}
 
+	public List<VocDTO> vocNoAnsList(int cp, int listSize) {
+		// TODO Auto-generated method s
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int startNum = (cp - 1) * listSize + 1;
+		int endNum = cp * listSize;
+
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+
+		// map.put("cp", cp);
+		// map.put("ls", listSize);
+
+		List<VocDTO> list = sqlMap.selectList("noAnsVocList", map);
+
+		return list;
+	}
+
+	public int getNoAnsTotalCnt() {
+		// TODO Auto-generated 
+		return sqlMap.selectOne("noAnsVocTotalCnt");
+		
+	}
+
 
 
 }

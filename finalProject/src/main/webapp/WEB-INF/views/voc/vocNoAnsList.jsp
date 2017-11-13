@@ -27,7 +27,7 @@
 <div style="margin-left:25%">
 
 <div class="w3-container w3-teal">
-  <h1>voc관리</h1>
+  <h1>미답변글</h1>
 </div>
 
 
@@ -98,20 +98,6 @@
 				
 			
 		</td>
-		</tr>
-		
-		<tr>
-			<td><a href="vocNoAnsList.do">미답변글보기</a></td>
-		</tr>
-		
-		<tr>
-			<td colspan="8">
-				<form action="vocSearchList.do" method="get">
-					ID
-					<input type="text" name="writer">
-					<input type="submit" value="검색">
-				</form>
-			</td>
 		</tr>
 		</tfoot>  
 	</table>
