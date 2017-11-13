@@ -7,7 +7,8 @@
 <meta charset=UTF-8>
 </head>
 <body>
-<section>
+${ param.reqidx }
+<%-- <section>
 	<table>
 	<c:set var="arr" value="${rdto}"/>
 		<tr>
@@ -27,7 +28,7 @@
 			<th>${arr.checkoutdate}</th>
 		</tr>
 	</table>
-</section>
+</section> --%>
 
 </body>
 </html>

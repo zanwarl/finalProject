@@ -3,6 +3,6 @@
 <script>
 
 	window.alert('${msg}');
-	location.href = '{goURL}';
+	location.href = '${goURL}';
 
 </script>
