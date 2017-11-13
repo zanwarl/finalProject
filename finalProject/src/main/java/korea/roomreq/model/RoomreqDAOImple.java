@@ -29,7 +29,7 @@ public class RoomreqDAOImple implements RoomreqDAO {
 
 	public RoomreqDTO RoomreqOK(int idx) {
 
-		RoomreqDTO rdto = sqlMap.selectOne("roomreqOK", idx);
+		RoomreqDTO rdto = sqlMap.selectOne("roomReqOK", idx);
 		return rdto;
 	}
 	
