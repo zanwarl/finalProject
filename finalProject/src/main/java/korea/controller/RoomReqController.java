@@ -50,7 +50,7 @@ public class RoomReqController {
 		int result = rdao.RoomreqAdd(rdto);
 
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
-		System.out.println(rdto.getReqidx());
+		//System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
@@ -70,7 +70,7 @@ public class RoomReqController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomReq/roomReqOK");
+		mav.setViewName("roomReq/roomOk");
 
 		return mav;
 	}
