@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="roomreq">
+	<select id="culreqList" resultType="culreq.model.CulreqDTO" parameterType="String">
+		select * from culreq where user_id = #{user_id}
+	</select>
+	<insert id="culreqInsert" parameterType="culreq.model.CulreqDTO">
+		insert into culreq values (creq_idx.nextval,1,2,#{c_count},TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'),#{c_date},#{c_reqTime})
+	</insert>+
+	<select id="culreqCon2" parameterType="int" resultType="culreq.model.CulreqDTO">
+		select * from culreq where creq_idx = #{idx}
+	</select>
+</mapper>
