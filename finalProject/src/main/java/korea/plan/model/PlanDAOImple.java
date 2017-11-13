@@ -18,12 +18,22 @@ public class PlanDAOImple implements PlanDAO {
 	}
 
 	public List<PlanDTO> planList() {
+		
 		List<PlanDTO> list = sqlMap.selectList("planList");
 		return list;
 	}
 
 	public List<PlanDTO> planList(int cp, int pageRow) {
-		return null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cp", cp);
+		map.put("pageRow", pageRow);
+		List<PlanDTO> list = sqlMap.selectList("planList", map);
+		return list;
+	}
+	
+	public int totalCnt() {
+		int result = sqlMap.selectOne("planTotalCnt");
+		return result;
 	}
 	
 	public int planMainWrite(PlanDTO pdto) {
@@ -56,7 +66,6 @@ public class PlanDAOImple implements PlanDAO {
 		List<PlanDTO> list = sqlMap.selectList("myPlanList", map);
 		return list;
 	}
-	
 	
 	public PlanDTO planMainContent(int pidx) {
 		PlanDTO pdto = sqlMap.selectOne("planMainContent", pidx);

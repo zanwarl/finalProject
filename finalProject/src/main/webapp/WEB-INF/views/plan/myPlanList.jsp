@@ -10,9 +10,9 @@
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents"><!-- contents -->
-${sId }님의 일정
+${sName }님의 일정
 <br>
-완성된 일정 / 작성중인 일정 /
+완성된 일정 / 작성중인 일정
 <table width="600" height="auto" border="1" cellspacing="0">
 	<thead>
 	<!-- 분류 영역 -->

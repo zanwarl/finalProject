@@ -97,7 +97,7 @@
    </li>  -->
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
-	     	<li><a href='#'><span>공유일정보기</span></a></li>
+	     	<li><a href='plan.do'><span>공유일정보기</span></a></li>
 	     	<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
 	   </ul>
    </li>

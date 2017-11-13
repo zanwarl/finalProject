@@ -7,9 +7,8 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="css/remodal.css">
 <link rel="stylesheet" href="css/remodal-default-theme.css">
-<link rel="stylesheet" href="css/pikaday.css">
-<link rel="stylesheet" href="css/site.css">
-
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <style>
 #cityList {
   background: #FFFFC6;
@@ -25,13 +24,13 @@
 #select_detail_view_city{
 	position:absolute;
 	width:310px;
-	height:auto;
-	left:310px;
-	top:380px;
+	height:200px;
+	left:350px;
+	top:400px;
 	padding-bottom:20px;
 	background:#fff;
 	border-radius:5px;
-	display:none;
+	/* display:none; */
 }
 .plan_full_box{
 	z-index:130000000;  //0 7개
@@ -46,74 +45,69 @@
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery-ui.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {	
+$(document).ready(function() {
+	
+	/* ----ajax start--- */
 	$.ajax({
 		url:"areaCode.do",
 		type:"POST",
 		dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 		
 		success : function(msg) {
-			// console.log(msg.response.body.items.item);
 			var myItem = msg.response.body.items.item;
 			        	   
 			var output = '';
-			
+				
 			//도시 리스트 뿌려주는 div 배열
-			for(var i=0; i<myItem.length; i++){
-				//output += '<h4 class="cityItem">'+myItem[i].name+'</h4>';
-				output += '<div class="wrap_cityList">'+ myItem[i].name +
-						  '<div class="remodal-bg"><a href="#modal"><img src="img/plan/add_button.png" width="17"></a></div></div><br>';
-			}
+			$.each(myItem, function(key, val) {
+				output += '<div class="wrap_cityList" data-no="'+key+'" data-val="'+val.name+'" data="'+val.code+'">'
+				output += '<div class="info">'+val.name+'</div>';
+				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+				output += '</div>';
+			});
 			
 			$("#cityList").html(output);
 			},
+			
 		error : function(xhr, status, error) {
 			alert("에러발생");
 		}
 	});
+	/* ---ajax end-- */
+	
+
+	$('#cityList').on('click','.add',function(){
+		//부모? div의 attribute 읽어와서 저장
+		name = $(this).parent().attr('data-val');
+		code = $(this).parent().attr('data');
+		$('#select_detail_view_city').show();
+		
+		$('#plan_city_list').each(function() {
+			var html = '<div class="city_info">'+name+'</div>';
+			$('#plan_city_list').append(html);
+		});
+	});
+	
+	/* var picker = new Pikaday(
+	{
+	    field: document.getElementById('datepicker'),
+	    firstDay: 1,
+	    minDate: new Date(),
+	    maxDate: new Date(2020, 12, 31),
+	    yearRange: [2000,2020]
+	});  */
+	
+	$("#datepicker").datepicker({
+		   dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
+  });
+
 	
 });
 </script>
 <script src="js/remodal.js"></script>
-<!-- Modal Events -->
-<script>
-  $(document).on('opening', '.remodal', function () {
-    console.log('opening');
-  });
-
-  $(document).on('opened', '.remodal', function () {
-    console.log('opened');
-  });
-
-  $(document).on('closing', '.remodal', function (e) {
-    console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
-  });
-
-  $(document).on('closed', '.remodal', function (e) {
-    console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
-  });
-
-  $(document).on('confirmation', '.remodal', function () {
-    console.log('confirmation');
-  });
-
-  $(document).on('cancellation', '.remodal', function () {
-    console.log('cancellation');
-  });
-
-//  Usage:
-//  $(function() {
-//
-//    // In this case the initialization function returns the already created instance
-//    var inst = $('[data-remodal-id=modal]').remodal();
-//
-//    inst.open();
-//    inst.close();
-//    inst.getState();
-//    inst.destroy();
-//  });
-</script>
 <script>
 function initMap() {
 	//마커 위치 초기화
@@ -164,42 +158,6 @@ function plan_display() {
 	}
 }
 </script>
-<script src="js/pikaday.js"></script>
-<script>
-$('#test').on('click',function(){
-	alert("z");
-});
-
-$('#test2').on('click',function(){
-	alert("z");
-});
-
-$('datepicker2').on('click',function(){
-	alert("z");
-});
-
-var picker = new Pikaday(
-	    {
-	        field: document.getElementById('datepicker2'),
-	        firstDay: 1,
-	        minDate: new Date(),
-	        maxDate: new Date(2020, 12, 31),
-	        yearRange: [2000,2020]
-	    })
-	    ;
- 
-</script>
-<script type="text/javascript">
-if (window.history && window.history.pushState) {
-    $('remodal').on('show.bs.modal', function (e) {
-        window.history.pushState('forward', null, '');
-    });
-
-    $(window).on('popstate', function () {
-        $('remodal').modal('hide');
-    });
-}
-</script>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
@@ -209,12 +167,24 @@ if (window.history && window.history.pushState) {
 	</div>
 		<div id="cityList" style="overflow:auto;"><!-- cityList -->
 		</div><!-- cityList -->
+		
 		<div id="map" style="overflow:auto;">
 		</div><!-- map -->
+		
+		<!-- 도시 선택 시 띄워주는 화면 -->
 		<div id="select_detail_view_city">
-			<div class="plan_full_box">
+			<div id="plan_date">
+				여행도시 출발일
+				<input type="text" name="plan_start" id="datepicker">
+			</div>
+			
+			<!-- 클릭 시 도시 리스트 추가 -->
+			<div id="plan_city_list">
+			</div>
+			
+			<div class="plan_make">
 				<div class="plan_main_name"></div>
-				<div class="plan_main_make" onclick="plan()"></div>
+				<div class="remodal-bg"><a href="#modal">상세 일정만들기</a></div>
 			</div>
 		</div>
 
@@ -256,10 +226,11 @@ if (window.history && window.history.pushState) {
 				</div>
 		</div>
 		<!-- modal div end -->
+		<!-- Datepicker -->
 </div><!-- contents -->
 
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
-	</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
+</script>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>
