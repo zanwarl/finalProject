@@ -69,25 +69,29 @@ function subNum(){
 <body>
 
 <form name="roomReqFm" action="roomReqFm.do" method="post">
+<input type="hidden" value="${roomIdx }" name="roomidx">
+   
+
+   
    <table>
      <tr>          
        	<td>
        		<label>예약인원</label> 
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="number" name="count" value="1" style="width:17px;">
+ 			<input type="text" name="count" value="1" style="width:17px;">
   			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
   		</td>
   	</tr> 
    	<tr>
    		<td>
             <label>check in</label>
-            <input type="date" name="checkinDate" id="datepicker"> 
+            <input type="text" name="checkindate" id="datepicker"> 
   		</td>
      </tr>   
      <tr>
      	<td>
             <label>check out </label>
-            <input type="date" name="checkoutDate" id="datepicker1">          	
+            <input type="text" name="checkoutdate" id="datepicker1">          	
 		</td>
 	</tr>
 			<td colspan="2" align="center">

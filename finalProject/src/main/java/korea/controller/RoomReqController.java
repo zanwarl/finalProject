@@ -22,16 +22,31 @@ public class RoomReqController {
 	private RoomreqDAO rdao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReq() {
+	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
+		mav.addObject("roomIdx", roomIdx);
+		
 
 		return mav;
 	}
 
 	@RequestMapping("/roomReqFm.do")
-	public ModelAndView roomReqFm(RoomreqDTO rdto) {
+	public ModelAndView roomReqFm(RoomreqDTO rdto, 
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			) {
 
+		
+		HttpSession session = req.getSession();
+		
+		String userId ="yera"; 
+		
+				//(String)session.getAttribute("sId");
+		
+		rdto.setUserid(userId);
+		
 		int result = rdao.RoomreqAdd(rdto);
 
 		String goURL = "roomReqOK.do?idx=" + rdto.getReqidx();
@@ -40,11 +55,10 @@ public class RoomReqController {
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("reqmsge", msg);
+		mav.addObject("reqmsg", msg);
 		mav.setViewName("roomReq/reqmsg");
 
 		mav.addObject("goURL", goURL);
-		mav.setViewName("roomReq/roomReqOK");
 
 		return mav;
 	}

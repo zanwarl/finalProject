@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.member.model.MemberDAO;
@@ -34,7 +35,7 @@ public class MemberController {
 	@RequestMapping("/memberJoin.do")
 	public ModelAndView memberJoin(MemberDTO dto) {
 		int result=memberDao.memberJoin(dto);		
-		String msg=result>0?"�쉶�썝媛��엯�꽦怨�!":"�벑濡앹떎�뙣";
+		String msg=result>0?"회원가입성공!":"등록실패";
 		ModelAndView mav=new ModelAndView();		
 		mav.addObject("msg",msg);
 		mav.setViewName("member/memberMsg");
@@ -52,11 +53,11 @@ public class MemberController {
 		boolean result=memberDao.memberSelect(userid);
 		ModelAndView mav=new ModelAndView();
 		if(result) {
-			String msg="�씠誘� 媛��엯�맂 �븘�씠�뵒�엯�땲�떎.";
+			String msg="이미 가입된 아이디입니다.";
 			mav.addObject("msg", msg);
 			mav.setViewName("member/idCheckMsg");			
 		}else {
-			String msg=userid+"�뒗 �궗�슜媛��뒫�븳 �븘�씠�뵒�엯�땲�떎.";
+			String msg=userid+"는 사용가능한 아이디입니다.";
 			mav.addObject("msg", msg);
 			mav.addObject("userid", userid);
 			mav.setViewName("member/idCheck_ok");
@@ -83,7 +84,7 @@ public class MemberController {
 			HttpSession session = req.getSession();
 			session.setAttribute("sId", member_id);
 			
-			//2017.11.13 �솉二쇱쁺 memberdto �꽭�뀡 異붽�!
+			//2017.11.13 홍주영 memberdto 세션 추가!
 			MemberDTO mdto = memberDao.memberInfo(member_id);
 			
 			mav.addObject("sIdx",mdto.getMember_idx());
@@ -100,7 +101,7 @@ public class MemberController {
 		} 	
 		resp.addCookie(ck);
 		
-		String msg = res? "�솚�쁺�빀�땲�떎^^": "fail";
+		String msg = res? "환영합니다^^": "fail";
 		String goURL = res? "main.do": "memberLogin.do";
 		
 		
@@ -125,9 +126,5 @@ public class MemberController {
 		return "main";
 		
 	}
-	@RequestMapping ("/loginCk.do")
-	public String loginCkFm (){
-		return "member/loginCheck"; 
-		
-	}
+	
 }

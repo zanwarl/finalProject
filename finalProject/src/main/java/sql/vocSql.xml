@@ -69,21 +69,40 @@
 
 	</delete>
 
-	<select id="noAnsVocTotalCnt" resultType="int ">
-		select count ( *) from
-		voc where ref not in (select ref from voc_tb where
-		lev != 0 )
+	<select id="noAnsVocTotalCnt" resultType="int">
+		select count ( *) 
+		from voc 
+		where ref not in (
+			select ref 
+			from voc 
+			where	lev != 0 )
 	</select>
 	<select id="noAnsVocList" resultType="korea.voc.model.VocDTO"
 		parameterType="map">
   <![CDATA[ 
   select * from (select rownum rnum,a.* from 
   (select * from voc where ref not in 
-  (select ref from voc where lev != 0 ) order by ref desc ,turn asc) a) b
+  (select ref from voc where lev != 0 ) order by ref desc ,sunbun asc) a) b
 where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]>
 
+	</select> 
+	
+<!-- 	<select id="vocSearchTotalCnt" resultType="int" parameterType="String">
+		select count ( *) 
+		from voc 
+		where writer = #{writer } 
 	</select>
+	<select id="noAnsVocList" resultType="korea.voc.model.VocDTO"
+		parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from 
+  (select * from voc where ref not in 
+  (select ref from voc where lev != 0 ) order by ref desc ,sunbun asc) a) b
+where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+
+	</select>  -->
 
 
 </mapper>
