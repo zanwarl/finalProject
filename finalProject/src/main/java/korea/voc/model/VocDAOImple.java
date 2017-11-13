@@ -4,116 +4,135 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.mybatis.spring.SqlSessionTemplate;
 
-public class VocDAOImple implements VocDAO{
+public class VocDAOImple implements VocDAO {
 
-	
 	private SqlSessionTemplate sqlMap;
-	
+
 	public VocDAOImple(SqlSessionTemplate sqlMap) {
 		super();
 		this.sqlMap = sqlMap;
-	
+
 	}
 
-	public int vocWrite(VocDTO dto) {
-		return  sqlMap.insert("vocWriteSql", dto);
-			
+	/**
+	 * voc 글쓰기
+	 */
+	public int vocAdd(VocDTO dto) {
+		int ref = getRefMax();
+
+		dto.setRef(ref + 1);
+
+		int count = sqlMap.insert("vocInsert", dto);
+		return count;
 	}
 
-	public int vocReWrite(VocDTO dto) {
+	/**
+	 * 글 리스트
+	 */
+	public List<VocDTO> vocAllList(int cp, int listSize) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		int startNum = (cp - 1) * listSize + 1;
+		int endNum = cp * listSize;
+
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+
+		// map.put("cp", cp);
+		// map.put("ls", listSize);
+
+		List<VocDTO> list = sqlMap.selectList("vocAllList", map);
+
+		return list;
+
+	}
+	public List<VocDTO> vocMyList(int cp, int listSize, String writer ) {
 		
-		vocTurnUpdate(dto.getRef(), dto.getTurn()+1);
+		Map<String, Object> map = new HashMap<String, Object>();
 		
+		int startNum = (cp - 1) * listSize + 1;
+		int endNum = cp * listSize;
 		
-		return sqlMap.insert("vocReWriteSql", dto);
-	}
-
-	public int getMyVocTotalCnt(String writer) {
-		return sqlMap.selectOne("getMyVocTotalCntSql");
-		
-	}
-
-	public int getVocTotalCnt() {
-
-		return sqlMap.selectOne("getVocTotalCntSql");
-	}
-
-	public int getNoAnsVocTotalCnt() {
-		return sqlMap.selectOne("getNoAnsVocTotalCntSql");
-	}
-
-	public List<VocDTO> myVocList(String writer, int cp, int listSize) {
-		Map<String, Object>map = new HashMap<String, Object>();
-		int startNum = (cp -1)* listSize+1;
-		int endNum = cp*listSize;	
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("writer", writer);
 		
-		return sqlMap.selectList("myVocListSql", map);
+		// map.put("cp", cp);
+		// map.put("ls", listSize);
 		
-			
-	}
-
-	public int vocUpdate(String title, String content, int idx) {
-		Map<String, Object>map = new HashMap<String, Object>();
-		map.put("title", title);
-		map.put("content", content);
-		map.put("idx", idx);
+		List<VocDTO> list = sqlMap.selectList("vocMyList", map);
 		
-		return sqlMap.insert("vocUpdateSql", map);
-	}
-
-	public int vodDel(int idx) {
-		return sqlMap.delete("vodDelSql", idx);
+		return list;
 		
 	}
 
 	public VocDTO vocCon(int idx) {
-		
-		return sqlMap.selectOne("vocConSql", idx);
-		
+
+		VocDTO dto = sqlMap.selectOne("vocCon", idx);
+		return dto;
+
 	}
 
-	public int getVocMaxRef() {
-		
-		return sqlMap.selectOne("getVocMaxRefSql");
-		
+	public int getTotalCnt() {
+		int res = sqlMap.selectOne("vocTotalCnt");
+		return res;
 	}
 
-	public List<VocDTO> vocList(int cp, int listSize) {
-		
-		
-		Map<String, Object>map = new HashMap<String, Object>();
-		int startNum = (cp -1)* listSize+1;
-		int endNum = cp*listSize;	
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
-		
-		
-		return sqlMap.selectList("vocListSql", map);
+	public int getRefMax() {
+		int res = sqlMap.selectOne("maxRef");
+		return res;
+
 	}
 
-	public List<VocDTO> vocNoAnsList(int cp, int listSize) {
-		Map<String, Object>map = new HashMap<String, Object>();
-		int startNum = (cp -1)* listSize+1;
-		int endNum = cp*listSize;	
-		map.put("startNum", startNum);
-		map.put("endNum", endNum);
-		
-		
-		return sqlMap.selectList("vocNoAnsListSql", map);
+	public int vocReWrite(VocDTO dto
+			) {
+
+		sunbunUpdate(dto.getRef(), dto.getSunbun() + 1);
+		dto.setLev(dto.getLev() + 1);
+		dto.setSunbun(dto.getSunbun() + 1);
+		int res = sqlMap.insert("vocInsert2", dto);
+		return res;
+
 	}
 
-	public int vocTurnUpdate(int ref, int turn ) {
-		Map<String, Object>map = new HashMap<String, Object>();
+	public void sunbunUpdate(int ref, int sun) {
+		// TODO Auto-generated method stub
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("ref", ref);
-		map.put("turn", turn);
-		return sqlMap.update("vocTurnUpdateSql", map);
+		map.put("sunbun", sun);
+
+		sqlMap.update("newSunbun", map);
+
+	}
+
+	public String getMyPwd(int idx) {
+		// TODO Auto-generated method stub
+
+		String myPwd = sqlMap.selectOne("myPwd", idx);
+		return myPwd;
+
+	}
+
+	public int vocDel(int idx) {
+		int res = sqlMap.delete("vocDel", idx);
+
+		// TODO Auto-generated method stub
+		return res;
+
+	}
+
+	public int getTotaMylCnt(String writer) {
+
+		return sqlMap.selectOne("vocTotalMyCnt", writer);
 		
 	}
 
-	
+
+
 }
