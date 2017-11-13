@@ -68,7 +68,7 @@
 		#{idx}
 
 	</delete>
-
+<!-- 
 	<select id="noAnsVocTotalCnt" resultType="int ">
 		select count ( *) from
 		voc where ref not in (select ref from voc_tb where
@@ -83,7 +83,7 @@
 where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]>
 
-	</select>
+	</select> -->
 
 
 </mapper>

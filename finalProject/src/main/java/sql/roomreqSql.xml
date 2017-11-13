@@ -7,7 +7,9 @@
 		parameterType="String"> select * from roomreq where userid = #{userid} </select> -->
 	<insert id="roomreqInsert" parameterType="korea.roomreq.model.RoomreqDTO">
 		insert into roomreq
-		values(reqidx.nextval,#{userid},#{roomidx},#{count},TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
+		values
+		(reqidx.nextval,#{userid},#{roomidx},#{count},
+		to_char (sysdate , 'yyyy/mm/dd hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
 	</insert>
 	<select id="roomreqCon2" parameterType="int"
 		resultType="korea.roomreq.model.RoomreqDTO">
