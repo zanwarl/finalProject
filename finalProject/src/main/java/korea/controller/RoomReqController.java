@@ -78,8 +78,7 @@ public class RoomReqController {
 		HttpSession session = req.getSession();
 		
 		String userId = (String)session.getAttribute("sId");
-		
-		
+				
 		
 //		String userId = "yera";
 
@@ -104,7 +103,7 @@ public class RoomReqController {
 	@RequestMapping(value = "/roomCancel.do")
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
-
+		
 		String msg = res > 0 ? "예약이 취소되었습니다" : "실패";
 		String goURL = "roomReqList.do";
 

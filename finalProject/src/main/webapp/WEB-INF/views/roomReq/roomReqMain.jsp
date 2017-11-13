@@ -18,6 +18,13 @@
 		$( "#datepicker1" ).datepicker();
 		});
 
+	window.onload = function TimeBtn(){
+		var timediv = document.getElementById("button");
+		for(var i=0;i<10;i++){
+			timediv.innerHTML += '<input type="button" name="t_btn'+i+'" value="'+i+'"> ';
+		}
+	}
+
 	 /* function change(num){
 	  var max=10;
 	  var p_num= document.getElementById("p_num");
@@ -70,7 +77,7 @@ function subNum(){
  			<input type="number" name="count" value="1" style="width:17px;">
   			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
   		</td>
-  	</tr>  	
+  	</tr> 
    	<tr>
    		<td>
             <label>check in</label>
