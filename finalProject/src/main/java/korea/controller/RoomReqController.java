@@ -55,7 +55,7 @@ public class RoomReqController {
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("reqmsge", msg);
+		mav.addObject("reqmsg", msg);
 		mav.setViewName("roomReq/reqmsg");
 
 		mav.addObject("goURL", goURL);
