@@ -33,6 +33,7 @@
 
 
 <div class="w3-container">
+${value}님의 문의글입니다.
 <table border="1" cellspacing = "0" width = "450" >
 		<thead>
 			<tr>

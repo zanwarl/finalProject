@@ -133,6 +133,36 @@ public class VocController {
 		mav.setViewName("voc/vocList");
 		return mav;
 	}
+	@RequestMapping("/vocSearchList.do")
+	public ModelAndView vocSearchList(
+			@RequestParam(value = "cp", defaultValue = "1") int cp, 
+			@RequestParam(value="writer")String writer 
+			) {
+		//
+		
+		
+		// paging
+		ModelAndView mav = new ModelAndView();
+		
+
+		
+		int totalCnt = vdao.getTotaMylCnt(writer);
+		
+		
+		int listSize = 5;
+		int pageSize = 5;
+		
+		List<VocDTO> list = vdao.vocMyList(cp, listSize, writer);
+		
+		String pageStr = korea.page.PageModule.makePage("vocSearchList.do", totalCnt, listSize, pageSize, cp);
+		
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("list", list);
+		mav.addObject("value", writer);
+		mav.setViewName("voc/vocSearchList");
+		return mav;
+	}
+
 	@RequestMapping("/vocListAdmin.do")
 	public ModelAndView vocListAdmin(@RequestParam(value = "cp", defaultValue = "1") int cp) {
 		//
@@ -152,6 +182,27 @@ public class VocController {
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("list", list);
 		mav.setViewName("voc/vocListAdmin");
+		return mav;
+	}
+	@RequestMapping("/vocNoAnsList.do")
+	public ModelAndView vocNoAnsList(@RequestParam(value = "cp", defaultValue = "1") int cp) {
+		//
+		
+		// paging
+		
+		int totalCnt = vdao.getNoAnsTotalCnt();
+		
+		int listSize = 5;
+		int pageSize = 5;
+		
+		List<VocDTO> list = vdao.vocNoAnsList(cp, listSize);
+		
+		String pageStr = korea.page.PageModule.makePage("vocNoAnsList.do", totalCnt, listSize, pageSize, cp);
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("list", list);
+		mav.setViewName("voc/vocNoAnsList");
 		return mav;
 	}
 
