@@ -36,6 +36,7 @@ function ok(reqIdx, amt ){
         	
         	
         	
+ 	       
     } else {
         var msg = '결제에 실패하였습니다.';
         msg += '에러내용 : ' + rsp.error_msg;
@@ -54,6 +55,7 @@ function ok(reqIdx, amt ){
 
 	
 	<input type="button" value="결제" onclick="ok('26', 100)">
+	
 </form>
 </body>
 </html>
