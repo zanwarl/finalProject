@@ -70,7 +70,7 @@ public class RoomReqController {
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomReq/roomOK");
+		mav.setViewName("roomReq/rOK");
 
 		return mav;
 	}
