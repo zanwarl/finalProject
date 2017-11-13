@@ -8,12 +8,33 @@
 <head>
 
 
+
+
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
 
 
+<c:if test="${empty sId }">
+
+	<script type="text/javascript">
+		window.alert ('로그인하세요');
+		location.href ='main.do';
+		
+	
+	</script>
+</c:if>
+
+
+
+<jsp:include page="/header.do"></jsp:include>
+
+
+
+	<div id="contents">
+
+<!-- ---------본문내용---------------  -->
 
 
 
@@ -25,6 +46,7 @@
 			<th>대화상대</th>
 			<th>내용</th>
 			<th>날짜</th>
+			<th></th>
 			
 		</tr>
 	</thead>
@@ -44,10 +66,10 @@
       
        
          <td>${dto.idx}</td>
-         <c:if test="${dto.sender == 1 }">
+         <c:if test="${dto.sender == sId }">
          	<td>${dto.receiver } </td>
          </c:if>
-         <c:if test="${dto.sender != 1 }">
+         <c:if test="${dto.sender != sId }">
          	<td>${dto.sender } </td>
          </c:if>
          
@@ -59,6 +81,13 @@
 
          <td><a href="${msgContentURL}">${dto.content}</a></td>
          <td>${dto.writedate}</td>
+         <td>
+	<td>
+	<c:if test="${dto.isRead == 0 && dto.sender != sId}">
+		new ! 		
+	</c:if>
+
+</td>
        
       </tr>
    </c:forEach>
@@ -104,6 +133,15 @@
 	</tfoot>
 
 </table>
+
+
+
+</div>
+
+<jsp:include page="/footer.do"></jsp:include>
+
+
+
 
 
 

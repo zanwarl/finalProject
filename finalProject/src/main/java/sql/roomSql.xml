@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<<<<<<< HEAD
 <mapper namespace="roomreq">
 	<select id="culreqList" resultType="culreq.model.CulreqDTO" parameterType="String">
 		select * from culreq where user_id = #{user_id}
@@ -13,3 +14,18 @@
 		select * from culreq where creq_idx = #{idx}
 	</select>
 </mapper>
+=======
+ <mapper namespace="room">
+ 	<insert id="roomAddrInsert" parameterType="korea.room.model.RoomAddrDTO">
+ 		insert into room_addr values (roomidx.nextval,#{addr1},#{addr2},#{postnum})
+ 	</insert>
+ 	<select id="selectIdx" resultType="int">
+ 		select roomidx.currval from dual
+ 	</select>
+ 	<select id="roomAddrContent" parameterType="int" resultType="korea.room.model.RoomAddrDTO">
+	select * from room_addr where room_idx = #{idx}
+ 	</select>
+ </mapper>
+  
+  
+>>>>>>> branch 'master' of https://github.com/zanwarl/finalProject.git

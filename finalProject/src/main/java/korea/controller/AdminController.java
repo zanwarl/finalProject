@@ -31,6 +31,12 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping (value="/mypageMain.do")
+	public String mypageMain(){
+		return "mypageMain";
+		
+	}
+	
 	
 	@RequestMapping(value="/adminLogin.do", method= RequestMethod.GET)
 	public String adminLoginFm (){
@@ -50,7 +56,7 @@ public class AdminController {
 		
 		if (res ){
 			HttpSession session = req.getSession();
-			session.setAttribute("sId", idx);
+			session.setAttribute("adminIdx", idx);
 			
 			
 			

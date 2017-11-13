@@ -4,6 +4,8 @@ import java.io.BufferedInputStream;
 import java.net.URL;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
@@ -12,10 +14,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
+import korea.plan.model.PlanDetailDTO;
+import korea.plan.model.PlanMainDetailDTO;
 
 @Controller
 public class PlanController {
@@ -146,13 +151,43 @@ public class PlanController {
 		return "plan/test";
 	}
 	
+	/**일정 내용 보여주기*/
+	@RequestMapping("/planContent.do")
+	public ModelAndView planDetail(int pidx) {
+		
+		//pidx = 75;
+		System.out.println(pidx);
+		ModelAndView mav = new ModelAndView();
+		PlanDTO pdto = pdao.planMainContent(pidx);
+		List<PlanDetailDTO> list = pdao.planDetail(pidx);	
+		System.out.println("사이즈 : " + list.size());
+		mav.addObject("list", list);
+		mav.addObject("pdto", pdto);
+		mav.setViewName("plan/planContent");
+		return mav;
+		
+	}
+	
+	
 	/**내가 작성한 일정 목록 (+페이징)*/
 	@RequestMapping("/myPlan.do")
-	public ModelAndView myPlanList() {
+	public ModelAndView myPlanList(HttpSession session, @RequestParam(value="cp",required=false,defaultValue="1")int cp) {
+		int idx = (Integer) session.getAttribute("sIdx");
 		
 		ModelAndView mav = new ModelAndView();
 		
+		int totalCnt = pdao.myTotalCnt(idx);
+		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
+		
+		String url = "myPlan.do";
+		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
+		System.out.println(page);
+		List<PlanDTO> list = pdao.myPlanList(idx, cp, pageSize);
+		
 		mav.setViewName("plan/myPlanList");
+		mav.addObject("list", list);
+		mav.addObject("page", page);
 		return mav;
 	}
 	

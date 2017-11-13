@@ -16,5 +16,8 @@
  		<mapper resource="sql/msgSql.xml"/>
  		<mapper resource="sql/memberSql.xml"/>
  		<mapper resource="sql/noticeSql.xml"/>
+ 		<mapper resource="sql/roomSql.xml"/>
+ 		<mapper resource="sql/roomreqSql.xml"/>
+ 		<mapper resource="sql/vocSql.xml"/> 
  	</mappers>
  </configuration>

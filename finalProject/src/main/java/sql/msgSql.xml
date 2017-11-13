@@ -21,17 +21,18 @@
 
 
 
-	<select id="msgTotalCnt" resultType="int" parameterType="int">
+	<select id="msgTotalCnt" resultType="int" parameterType="String">
 		<!-- select count (*) from ( select distinct msgIdx from msg where sender 
 			= #{userIdx} or receiver= #{userIdx} ) -->
 
 
-		select count(*) 
+		select count(*)
 		from (
-		select * from msg 
+		select * from msg
 		where idx in (
 		select max (idx)
-		from msg where sender = #{userIdx} or receiver = #{userIdx} group by
+		from msg where sender = #{userIdx} or
+		receiver = #{userIdx} group by
 		msgIdx ) order by idx desc)
 
 	</select>
@@ -41,16 +42,18 @@
 	<!-- msg content sql -->
 
 
-	<select id="msgContentSql" parameterType="map"
+	<select id="msgContentSql" parameterType="int"
 		resultType="korea.msg.model.MsgDTO">
 		
-		 <![CDATA[ 
+		select * from msg where msgIdx =#{msgIdx}  order by idx desc 
+		
+<!-- 		 <![CDATA[ 
   select * from 
   (select rownum rnum,a.* 
   from (select * from msg where msgIdx =#{msgIdx}  order by idx desc ) a)b 
   where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]>
-
+ -->
 	</select>
 
 
@@ -65,30 +68,36 @@
 	<!-- send msg sql -->
 	<select id="isFirstSql" parameterType="map" resultType="int">
 
-select count (*) from (
+		select count (*) from (
 		select
 		distinct msgIdx from (
-		select * from msg where sender = #{receiver} or
+		select * from msg where
+		sender = #{receiver} or
 		receiver = #{receiver} )
-		where sender = #{sender} or receiver =
+		where sender =
+		#{sender} or receiver =
 		#{sender}
-)
+		)
 
 	</select>
 
 	<select id="getMsgIdxSql" parameterType="map" resultType="int">
-	
-			select
+
+		select
 		distinct msgIdx from (
-		select * from msg where sender = #{receiver} or	receiver = #{receiver} )
-		where sender = #{sender} or receiver =#{sender}
+		select * from msg where sender = #{receiver} or
+		receiver = #{receiver} )
+		where sender = #{sender} or receiver
+		=#{sender}
 	</select>
 
 
-	<select id="getMaxMsgIdxSql" parameterType="int" resultType="int">
+	<select id="getMaxMsgIdxSql" parameterType="String" resultType="int">
 
-		select max(msgIdx) from msg where sender =#{sender}
-		or receiver =#{sender}
+		select max(msgIdx) 
+		from msg 
+		where sender =#{sender}
+		or receiver	=#{sender}
 	</select>
 
 	<insert id="sendMsgSql" parameterType="korea.msg.model.MsgDTO">
@@ -100,19 +109,32 @@ select count (*) from (
 		#{sender},
 		#{receiver},
 		#{content},
-		sysdate, 
+		to_char (sysdate , 'yyyy/mm/dd/hh24:mi:ss'),
 		0
+
 
 		)
 
 	</insert>
 
 
-<update id="readMsgSql" parameterType="int" >
-	update msg 
-	set isRead = 1  
-	where msgIdx = #{msgIdx}
+	<update id="readMsgSql" parameterType="map">
+		update msg
+		set isRead = 1
+		where msgIdx = #{msgIdx} and isread !=1 and receiver = #{userIdx}
 
-</update>
+	</update>
+
+	<select id="getUserIdSql" parameterType="int" resultType="String">
+		select member_id from member where member_idx = #{userIdx}
+	</select>
+
+
+	<select id="getUserIdxSql" parameterType="String" resultType="int">
+		select member_idx from member where member_id = #{userId}
+	</select>
+	
+
+
 
 </mapper>

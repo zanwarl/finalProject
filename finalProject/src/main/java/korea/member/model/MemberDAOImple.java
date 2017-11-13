@@ -40,6 +40,7 @@ public class MemberDAOImple implements MemberDAO {
 		
 		List<Object> pwd = sqlMap.selectList("memberloginSql", member_id);
 		if (pwd.get(0).equals(member_pwd)){
+			System.out.println("true");
 			return true;
 		}
 		else return false; 
@@ -50,6 +51,12 @@ public class MemberDAOImple implements MemberDAO {
 		//   <select id="getUserInfoSql" parameterType="int" resultMap="korea.member.model.MemberDTO">
 		MemberDTO dto =sqlMap.selectOne("getUserInfoSql", idx);
 		return dto ; 
+	}
+	
+	//2017.11.13 홍주영
+	public MemberDTO memberInfo(String member_id) {
+		MemberDTO mdto = sqlMap.selectOne("memberInfo", member_id);
+		return mdto;
 	}
 
 

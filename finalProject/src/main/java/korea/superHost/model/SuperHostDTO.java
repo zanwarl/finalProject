@@ -1,35 +1,44 @@
 package korea.superHost.model;
 
 public class SuperHostDTO {
-	
-	private int userIdx; 
-	private int type;
-	public SuperHostDTO(int userIdx, int type) {
+
+	private int rank;
+	private String member_id;
+	private int member_host_grade;
+
+	public SuperHostDTO(int rank, String member_id, int member_host_grade) {
 		super();
-		this.userIdx = userIdx;
-		this.type = type;
+		this.rank = rank;
+		this.member_id = member_id;
+		this.member_host_grade = member_host_grade;
 	}
-	
+
 	public SuperHostDTO() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public int getUserIdx() {
-		return userIdx;
+	public int getRank() {
+		return rank;
 	}
 
-	public void setUserIdx(int userIdx) {
-		this.userIdx = userIdx;
+	public void setRank(int rank) {
+		this.rank = rank;
 	}
 
-	public int getType() {
-		return type;
+	public String getMember_id() {
+		return member_id;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setMember_id(String member_id) {
+		this.member_id = member_id;
 	}
-	
-	
+
+	public int getMember_host_grade() {
+		return member_host_grade;
+	}
+
+	public void setMember_host_grade(int member_host_grade) {
+		this.member_host_grade = member_host_grade;
+	}
 
 }

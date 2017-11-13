@@ -122,12 +122,12 @@
 	<hr>
 	<div id="cmtform">
 	<form action="tourCmtWrite.do">
-		아이디 : 
+		${sId } : 
 		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
 		<input type="hidden" name="tour_cmt_pidx" value="${contentId }">
 		<input type="hidden" name="queryStr" value="${pageContext.request.queryString}">
-		
+		<input type="hidden" name="tour_cmt_writer" value="${sId } ">		
 	</form>
 	<c:if test="${empty list }">
 	아직 작성된 댓글이 없습니다.

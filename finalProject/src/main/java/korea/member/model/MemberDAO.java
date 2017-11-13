@@ -11,4 +11,7 @@ public interface MemberDAO {
 
 	public MemberDTO getUserInfo (int idx);
 	
+	
+	//2017.11.13.홍주영
+	public MemberDTO memberInfo(String member_id);
 }
