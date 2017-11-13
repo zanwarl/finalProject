@@ -30,7 +30,7 @@
 	padding-bottom:20px;
 	background:#fff;
 	border-radius:5px;
-	/* display:none; */
+	display:none;
 }
 .plan_full_box{
 	z-index:130000000;  //0 7개
@@ -45,8 +45,6 @@
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script src="js/jquery-3.2.1.js"></script>
-<script src="js/jquery-ui.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
 	
@@ -99,12 +97,6 @@ $(document).ready(function() {
 	    maxDate: new Date(2020, 12, 31),
 	    yearRange: [2000,2020]
 	});  */
-	
-	$("#datepicker").datepicker({
-		   dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
-  });
-
-	
 });
 </script>
 <script src="js/remodal.js"></script>
@@ -171,6 +163,25 @@ function plan_display() {
 		<div id="map" style="overflow:auto;">
 		</div><!-- map -->
 		
+	
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script>
+//header에 있는 js와 충돌나서 설정
+var jq = $.noConflict();
+
+jq(document).ready(function() {
+	
+	jq("#datepicker").datepicker({
+		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
+  	});
+	
+	jq(".modal_content #datepicker").datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+});
+	</script>
+
 		<!-- 도시 선택 시 띄워주는 화면 -->
 		<div id="select_detail_view_city">
 			<div id="plan_date">
@@ -188,7 +199,7 @@ function plan_display() {
 			</div>
 		</div>
 
-		<!-- modal div start -->
+		<!-- modal div start -->	
 		<div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
 			<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
 				<div>
