@@ -15,14 +15,8 @@
 
 		} else {
 			return;
-
 		}
-
-
 		window.self.close();
-
-
-
 	}
 </script>
 

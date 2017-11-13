@@ -145,12 +145,17 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
-<!--  	<bean class="korea.voc.model.VocDAOImple" id="vocDAO">
+ 	<bean class="korea.voc.model.VocDAOImple" id="vocDAO">
 		<constructor-arg>
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
- -->
+	<bean id="roomAddDAO" class="korea.roomAdd.model.RoomAddDAOImple" >
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+ 
 
 
 	<!-- views -->

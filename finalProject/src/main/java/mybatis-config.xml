@@ -18,6 +18,7 @@
  		<mapper resource="sql/noticeSql.xml"/>
  		<mapper resource="sql/roomSql.xml"/>
  		<mapper resource="sql/roomreqSql.xml"/>
-<!--  		<mapper resource="sql/vocSql.xml"/> -->
+ 		<mapper resource="sql/vocSql.xml"/> 
+ 		<mapper resource="sql/roomAdd.xml"/>
  	</mappers>
  </configuration>

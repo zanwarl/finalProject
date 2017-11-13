@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="korea.roomAdd">
+  <insert id="roomAddInsert" parameterType="korea.roomAdd.model.RoomAddDTO">
+  insert into roomAdd values(
+  room_idx.nextval, #{useridx},#{btype}, #{rtype}, #{maxcount},
+  #{addr1}, #{addr2}, #{postnum}, #{conv}, #{safe},
+  #{space}, #{image}, #{content}, #{room_name}, #{room_price},
+  #{nodate}, #{userId}, #{roomIdx}, #{count}, #{reqDate},
+  #{checkinDate}, #{checkoutDate}
+  )
+  </insert>
+  </mapper>

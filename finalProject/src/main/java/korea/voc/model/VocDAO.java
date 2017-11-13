@@ -3,28 +3,23 @@ package korea.voc.model;
 import java.util.List;
 
 public interface VocDAO {
-
-	
-	public int vocWrite ( VocDTO dto);
-	public int vocReWrite ( VocDTO dto);
-	public int getMyVocTotalCnt (String writer);
-	public int getVocTotalCnt ();
-	
-	public int getNoAnsVocTotalCnt();
-	
-	public List<VocDTO> myVocList(String writer, int cp, int listSize);
-	
-	public int vocUpdate( String title, String content, int idx);
-	public int vodDel( int idx);
-	
-	public VocDTO vocCon( int idx);
-	public int getVocMaxRef ();
-	
-	public List<VocDTO>vocList (int cp, int listSize);
-	public List<VocDTO>vocNoAnsList (int cp, int listSize);
-	
-	public int vocTurnUpdate (int ref, int turn );
-
-	
+	   public int vocAdd(VocDTO dto);	
+	   public List<VocDTO> vocAllList(int cp, int listSize);
+	   public List<VocDTO> vocMyList(int cp, int listSize, String writer );
+	   public List<VocDTO> vocNoAnsList(int cp, int listSize );
+	   public VocDTO vocCon (int idx); 
+	   public int getTotalCnt ();
+	   public int getNoAnsTotalCnt ();
+	   public int getTotaMylCnt (String writer );
+	   public int getRefMax ();
+	   public int vocReWrite (VocDTO dto);
+	   public void sunbunUpdate (int ref , int sun);
+	   public String getMyPwd (int idx);
+	   public int vocDel (int idx);
+	   
+	   
+	   
+	   
+	   
 	
 }

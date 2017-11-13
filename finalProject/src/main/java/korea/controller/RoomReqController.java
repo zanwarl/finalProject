@@ -22,41 +22,55 @@ public class RoomReqController {
 	private RoomreqDAO rdao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReqForm() {
+	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("roomreq/roomReqMain");
+		mav.setViewName("roomReq/roomReqMain");
+		mav.addObject("roomIdx", roomIdx);
+		
 
 		return mav;
 	}
 
-	@RequestMapping("/roomReqMain.do")
-	public ModelAndView roomreq1(RoomreqDTO rdto) {
+	@RequestMapping("/roomReqFm.do")
+	public ModelAndView roomReqFm(RoomreqDTO rdto, 
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			) {
 
+		
+		HttpSession session = req.getSession();
+		
+		String userId ="yera"; 
+		
+				//(String)session.getAttribute("sId");
+		
+		rdto.setUserid(userId);
+		
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomreqCon2.do?idx=" + rdto.getReqidx();
-		System.out.println(rdto.getReqidx());
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
+		//System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("reqmsge", msg);
-		mav.setViewName("roomreq/reqmsg");
-
+		mav.addObject("msg", msg);
+	
 		mav.addObject("goURL", goURL);
-		mav.setViewName("roomreq/roomreqCon2");
+		mav.setViewName("roomReq/reqmsg");
 
 		return mav;
 	}
 
-	@RequestMapping(value = "/roomreq2.do")
-	public ModelAndView roomreq2(@RequestParam(value = "idx") int idx) {
+	@RequestMapping(value = "/roomReqOK.do")
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx) {
 
-		RoomreqDTO rdto = rdao.RoomreqCon2(idx);
+		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomreq/roomreqCon2");
+		mav.setViewName("roomReq/rok");
 
 		return mav;
 	}
@@ -78,8 +92,7 @@ public class RoomReqController {
 		HttpSession session = req.getSession();
 		
 		String userId = (String)session.getAttribute("sId");
-		
-		
+				
 		
 //		String userId = "yera";
 
@@ -104,7 +117,7 @@ public class RoomReqController {
 	@RequestMapping(value = "/roomCancel.do")
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
-
+		
 		String msg = res > 0 ? "예약이 취소되었습니다" : "실패";
 		String goURL = "roomReqList.do";
 
