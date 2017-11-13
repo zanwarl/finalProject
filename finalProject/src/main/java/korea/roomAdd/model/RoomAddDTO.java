@@ -14,8 +14,8 @@ public class RoomAddDTO {
 	 private String safe; //체크
 	 private String space;  //체크
 	 private String content; //설명
-	 private String room_name; //방이름
-	 private int room_price; //방가격
+	 private String roomname; //방이름
+	 private int roomprice; //방가격
 	 private String nodate;/*안되는날*/ 
 	 private String checkin; //체크인
 	 private String checkout; //체크아웃
@@ -23,9 +23,9 @@ public class RoomAddDTO {
 	public RoomAddDTO() {
 		super();
 	}
-
+	
 	public RoomAddDTO(int roomidx, int useridx, String btype, String rtype, int maxcount, String addr1, String addr2,
-			String postnum, String conv, String safe, String space, String content, String room_name, int room_price,
+			String postnum, String conv, String safe, String space, String content, String roomname, int roomprice,
 			String nodate, String checkin, String checkout) {
 		super();
 		this.roomidx = roomidx;
@@ -40,8 +40,8 @@ public class RoomAddDTO {
 		this.safe = safe;
 		this.space = space;
 		this.content = content;
-		this.room_name = room_name;
-		this.room_price = room_price;
+		this.roomname = roomname;
+		this.roomprice = roomprice;
 		this.nodate = nodate;
 		this.checkin = checkin;
 		this.checkout = checkout;
@@ -143,20 +143,20 @@ public class RoomAddDTO {
 		this.content = content;
 	}
 
-	public String getRoom_name() {
-		return room_name;
+	public String getRoomname() {
+		return roomname;
 	}
 
-	public void setRoom_name(String room_name) {
-		this.room_name = room_name;
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
 	}
 
-	public int getRoom_price() {
-		return room_price;
+	public int getRoomprice() {
+		return roomprice;
 	}
 
-	public void setRoom_price(int room_price) {
-		this.room_price = room_price;
+	public void setRoomprice(int roomprice) {
+		this.roomprice = roomprice;
 	}
 
 	public String getNodate() {
