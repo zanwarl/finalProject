@@ -109,7 +109,7 @@
 		#{sender},
 		#{receiver},
 		#{content},
-		sysdate,
+		to_char (sysdate , 'yyyy/mm/dd/hh24:mi:ss'),
 		0
 
 

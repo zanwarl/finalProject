@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.voc">
+    
+    
+  <insert id="vocInsert" parameterType="korea.voc.model.VocDTO">
+   insert into voc values(vocidx.nextval,#{writer},#{subject},#{content},sysdate,#{ref},0,0)
+   </insert>
+   
+
+  
+  <select id="vocAllList" resultType="korea.voc.model.VocDTO" parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (select * from voc order by ref desc,sunbun asc) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]></select>
+  
+  <select id="vocMyList" resultType="korea.voc.model.VocDTO" parameterType="map">
+  <![CDATA[ 
+  select * from (
+  select rownum rnum,a.* from 
+  (select * from voc where writer = #{writer} order by ref desc,sunbun asc) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]></select>
+   
+  
+  <select id="vocCon" resultType="korea.voc.model.VocDTO" parameterType="int">
+    	select * from voc where idx = #{idx}
+   </select>
+   
+  
+  <select id="vocTotalCnt" resultType="int" >
+       select count(*) from voc
+       
+   </select>
+  <select id="vocTotalMyCnt" resultType="int" parameterType="String" >
+       select count(*) from voc where writer = #{writer}
+       
+   </select>
+   
+  
+  <select id="maxRef" resultType="int">
+       select max (ref) from voc
+   </select>
+
+  <insert id="vocInsert2" parameterType="korea.voc.model.VocDTO">
+      insert into voc values(vocidx.nextval,#{writer},#{subject},#{content},sysdate,#{ref},#{lev},#{sunbun})
+   
+  </insert>
+  
+  <update id="newSunbun" parameterType="map" >
+      update voc set sunbun=sunbun+1 where ref=#{ref} and sunbun>=#{sunbun}
+      
+  </update>
+  
+<!--   <select id="myPwd" parameterType="int" resultType="String">
+      
+	select pwd from voc where idx =#{idx} 
+  </select> -->
+
+  <delete id="vocDel" parameterType="int" >
+      delete from voc where idx = #{idx}
+      
+  </delete>
+  
+</mapper>
+
+
+  <!-- 
+#{} : 주어진 파라미터를 PreparedStatement 프로퍼티인 ?에 값을 셋팅하도록 SQL을 생성
+      자료형에 따라 적절히 처리되므로 가장 안정한 방법 
+
+${}: String Substitution
+     주어진 파라미터 부분을 주어진 값으로 변경 없이 대체함 
+     이 구문은 동적으로 테이블 명이나 ORDER BY 절에서 컬럼을 지정할 때에 사용 할 수 있음
+
+ -->
+   

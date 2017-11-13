@@ -7,10 +7,10 @@
 		<select id="tourCmtList" parameterType="map" resultType="korea.tour.model.tourCmtDTO">
 			select * from
 			(select rownum as rnum, a.* from
-			(select * from tour_comment order by tour_cmt_idx desc) a) b 
+			(select * from tour_comment order by tour_cmt_writedate desc) a) b 
 			<![CDATA[
-			where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} *+ #{pageRow}
-			]]>
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
+   			]]>
 			and tour_cmt_pidx = #{tour_cmt_pidx}
 		</select>
 		
@@ -22,7 +22,7 @@
 		
 	<!-- insert -->
 		<select id="tourCmtWrite" parameterType="korea.tour.model.tourCmtDTO" resultType="korea.tour.model.tourCmtDTO">
-			insert into tour_comment values(tour_cmt_idx.nextval,#{tour_cmt_pidx},'1','둘리',#{tour_cmt_content},sysdate)
+			insert into tour_comment values(tour_cmt_idx.nextval,#{tour_cmt_pidx},'1',#{tour_cmt_writer},#{tour_cmt_content},sysdate)
 		</select>
 	<!-- insert end -->
 	

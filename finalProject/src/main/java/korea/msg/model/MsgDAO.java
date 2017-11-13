@@ -1,6 +1,7 @@
 package korea.msg.model;
 
-import java.util.List;
+import java.util.*; 
+
 
 
 

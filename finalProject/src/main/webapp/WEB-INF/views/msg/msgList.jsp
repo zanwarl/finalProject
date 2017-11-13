@@ -16,6 +16,25 @@
 <body>
 
 
+<c:if test="${empty sId }">
+
+	<script type="text/javascript">
+		window.alert ('로그인하세요');
+		location.href ='main.do';
+		
+	
+	</script>
+</c:if>
+
+
+
+<jsp:include page="/header.do"></jsp:include>
+
+
+
+	<div id="contents">
+
+<!-- ---------본문내용---------------  -->
 
 
 
@@ -47,10 +66,10 @@
       
        
          <td>${dto.idx}</td>
-         <c:if test="${dto.sender == sIdx }">
+         <c:if test="${dto.sender == sId }">
          	<td>${dto.receiver } </td>
          </c:if>
-         <c:if test="${dto.sender != sIdx }">
+         <c:if test="${dto.sender != sId }">
          	<td>${dto.sender } </td>
          </c:if>
          
@@ -114,6 +133,15 @@
 	</tfoot>
 
 </table>
+
+
+
+</div>
+
+<jsp:include page="/footer.do"></jsp:include>
+
+
+
 
 
 

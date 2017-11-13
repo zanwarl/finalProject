@@ -28,21 +28,29 @@ public class MsgController {
 
 		// receiver = 2;
 
+		ModelAndView mav = new ModelAndView();
+		
+
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("sId");
-		int sender = mdao.getUserIdx(userId);
+		
+	
+			int sender = mdao.getUserIdx(userId);
 
-		ModelAndView mav = new ModelAndView();
 
-		mav.setViewName("msg/sendMsg");
-		mav.addObject("sender", sender);
+			mav.setViewName("msg/sendMsg");
+			mav.addObject("sender", sender);
 
+		
 		return mav;
+		
 
 	}
 
 	@RequestMapping(value = "/sendMsg.do", method = RequestMethod.POST)
-	public ModelAndView sendMsg(@RequestParam(value = "receiver") String receiver, MsgDTO dto, HttpServletRequest req,
+	public ModelAndView sendMsg(@RequestParam(value = "receiver") String receiver,
+			MsgDTO dto, 
+			HttpServletRequest req,
 			HttpServletResponse resp) {
 
 		// int sender = 1 ;
@@ -87,31 +95,44 @@ public class MsgController {
 	@RequestMapping("/msgList.do")
 	public ModelAndView msgList(@RequestParam(value = "cp", defaultValue = "1") int cp, HttpServletRequest req,
 			HttpServletResponse resp) {
+		
+		
+		
+		
 		HttpSession session = req.getSession();
 		String userIdx = (String) session.getAttribute("sId");
-		// int userIdx = mdao.getUserIdx(userId);
-
-		// int userIdx = 1;
-
-		int totalCnt = mdao.getTotalCnt(userIdx);
-		// System.out.println("totalCnt "+totalCnt);
-
-		int listSize = 5;
-		int pageSize = 5;
-
-		List<MsgDTO> list = mdao.msgList(cp, listSize, userIdx);
-
-		String pageStr = korea.page.PageModule.makePage("msgList.do", totalCnt, listSize, pageSize, cp);
-
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("list", list);
-		mav.addObject("pageStr", pageStr);
-		// mav.addObject("sIdx", userIdx);
+		
+		if ( userIdx==null || userIdx.equals("")){
+		mav.setViewName("admin/adminMsg");
+		mav.addObject("goURL", "main.do");
+		mav.addObject("msg", "로그인하세요");
+		return mav; 
+		
+		}else {
+			int totalCnt = mdao.getTotalCnt(userIdx);
+			// System.out.println("totalCnt "+totalCnt);
 
-		mav.setViewName("msg/msgList");
+			int listSize = 5;
+			int pageSize = 5;
 
-		return mav;
+			List<MsgDTO> list = mdao.msgList(cp, listSize, userIdx);
+
+			String pageStr = korea.page.PageModule.makePage("msgList.do", totalCnt, listSize, pageSize, cp);
+
+		
+			mav.addObject("list", list);
+			mav.addObject("pageStr", pageStr);
+			// mav.addObject("sIdx", userIdx);
+
+			mav.setViewName("msg/msgList");
+
+			return mav;
+		}
+		
+	
+		
 	}
 
 	@RequestMapping("/msgContent.do")
@@ -124,7 +145,16 @@ public class MsgController {
 		int read = mdao.readMsg(msgIdx, userIdx);
 
 		List<MsgDTO> list = mdao.msgContent(msgIdx);
+		
+		for ( int i =0; i< list.size(); i ++){
+			list.get(i).setContent(list.get(i).getContent().replaceAll("\r", "<br>"));
 
+			
+		}
+
+
+
+		
 		String partner = list.get(0).getSender().equals(userIdx) ? list.get(0).getReceiver() : list.get(0).getSender();
 
 		

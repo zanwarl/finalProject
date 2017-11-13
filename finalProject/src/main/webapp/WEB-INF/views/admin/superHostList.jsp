@@ -27,6 +27,7 @@
 
 <div class="w3-container w3-teal">
   <h1>슈퍼호스트</h1>
+  <a href="superHostUpdate.do">수정</a>
 </div>
 
 
@@ -34,38 +35,13 @@
 <div class="w3-container">
 
 
-<form action="superHostList.do">
-	
-
-	<input type="radio" name="type" value="1">숙박
-	<input type="radio" name="type" value="2">레스토랑
-	<input type="radio" name="type" value="3">문화체험
-	<input type="submit" value="ok">
-</form>
-
-<hr>
-
-<c:choose>
-	<c:when test="${param.type==1 }">
-	숙박 부문 슈퍼호스트
-	</c:when>
-	<c:when test="${param.type==2 }">
-	레스토랑 부문 슈퍼호스트
-	</c:when>
-	<c:when test="${param.type==3 }">
-	문화체험 부문 슈퍼호스트
-	</c:when>
-	<c:otherwise>
-	숙박 부문 슈퍼호스트 
-	</c:otherwise>
-
-
-</c:choose>
 <table>
 
 		<thead>
 		<tr>
-			<th>회원번호</th>
+			<th>순위</th>
+			<th>id</th>
+			<th>점수</th>
 		</tr>
 	</thead>
 		
@@ -81,7 +57,9 @@
 			<c:forEach var ="dto" items ="${list }">
 				<tr>
 				
-					<td>${dto.userIdx }</td>
+					<td>${dto.rank }</td>
+					<td>${dto.member_id }</td>
+					<td>${dto.member_host_grade }</td>
 				</tr>
 			</c:forEach>
 		
@@ -89,7 +67,7 @@
 
 	<tfoot>
 		<tr>
-			<td>${pateStr }</td>
+			<td>${pageStr }</td>
 		</tr>
 	
 	</tfoot>

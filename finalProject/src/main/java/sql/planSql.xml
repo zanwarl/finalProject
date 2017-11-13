@@ -15,7 +15,17 @@
 		</select>
 		
 		<select id="myPlanList" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main where plan_writer = 2
+			select * from
+			(select rownum as rnum, a.* from
+			(select * from plan_main order by plan_idx desc) a) b 
+			<![CDATA[
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
+   			]]>
+			and plan_writer = #{idx}
+		</select>
+		
+		<select id="myTotalCnt" parameterType="int" resultType="int">
+			select count(*) from plan_main where plan_idx = #{idx}
 		</select>
 		
 		<select id="planDetail" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">

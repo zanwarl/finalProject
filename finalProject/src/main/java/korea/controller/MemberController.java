@@ -7,17 +7,18 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.method.support.ModelAndViewContainer;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.member.model.MemberDAO;
 import korea.member.model.MemberDTO;
 
 @Controller
+@SessionAttributes({"sId","sName","sIdx"})
 public class MemberController {
 
 	@Autowired
@@ -33,7 +34,7 @@ public class MemberController {
 	@RequestMapping("/memberJoin.do")
 	public ModelAndView memberJoin(MemberDTO dto) {
 		int result=memberDao.memberJoin(dto);		
-		String msg=result>0?"È¸¿ø°¡ÀÔ¼º°ø!":"µî·Ï½ÇÆĞ";
+		String msg=result>0?"ï¿½ì‰¶ï¿½ìåª›ï¿½ï¿½ì—¯ï¿½ê½¦æ€¨ï¿½!":"ï¿½ë²‘æ¿¡ì•¹ë–ï¿½ë™£";
 		ModelAndView mav=new ModelAndView();		
 		mav.addObject("msg",msg);
 		mav.setViewName("member/memberMsg");
@@ -51,11 +52,11 @@ public class MemberController {
 		boolean result=memberDao.memberSelect(userid);
 		ModelAndView mav=new ModelAndView();
 		if(result) {
-			String msg="ÀÌ¹Ì °¡ÀÔµÈ ¾ÆÀÌµğÀÔ´Ï´Ù.";
+			String msg="ï¿½ì” èª˜ï¿½ åª›ï¿½ï¿½ì—¯ï¿½ë§‚ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ï¿½ì—¯ï¿½ë•²ï¿½ë–.";
 			mav.addObject("msg", msg);
 			mav.setViewName("member/idCheckMsg");			
 		}else {
-			String msg=userid+"´Â »ç¿ë°¡´ÉÇÑ ¾ÆÀÌµğÀÔ´Ï´Ù.";
+			String msg=userid+"ï¿½ë’— ï¿½ê¶—ï¿½ìŠœåª›ï¿½ï¿½ë’«ï¿½ë¸³ ï¿½ë¸˜ï¿½ì” ï¿½ëµ’ï¿½ì—¯ï¿½ë•²ï¿½ë–.";
 			mav.addObject("msg", msg);
 			mav.addObject("userid", userid);
 			mav.setViewName("member/idCheck_ok");
@@ -76,15 +77,17 @@ public class MemberController {
 			HttpServletResponse resp, 
 			@RequestParam (value="saveId", required=false)String saveId
 			) {
-		
+		ModelAndView mav= new ModelAndView(); 
 		boolean res = memberDao.login(member_id, member_pwd);
-		
-		if (res ){
+		if (res){
 			HttpSession session = req.getSession();
 			session.setAttribute("sId", member_id);
 			
+			//2017.11.13 ï¿½ì†‰äºŒì‡±ìº memberdto ï¿½ê½­ï¿½ë€¡ ç•°ë¶½ï¿½!
+			MemberDTO mdto = memberDao.memberInfo(member_id);
 			
-			
+			mav.addObject("sIdx",mdto.getMember_idx());
+			mav.addObject("sName",mdto.getMember_name());
 		}
 		
 		Cookie ck = new Cookie( "saveId", member_id);
@@ -94,13 +97,13 @@ public class MemberController {
 		}
 		else {
 			ck.setMaxAge(60*5);
-		}
+		} 	
 		resp.addCookie(ck);
 		
-		String msg = res? "È¯¿µÇÕ´Ï´Ù^^": "fail";
+		String msg = res? "ï¿½ì†šï¿½ìºï¿½ë¹€ï¿½ë•²ï¿½ë–^^": "fail";
 		String goURL = res? "main.do": "memberLogin.do";
 		
-		ModelAndView mav= new ModelAndView(); 
+		
 		mav.setViewName("member/loginMsg");
 		mav.addObject("msg", msg);
 		mav.addObject("goURL", goURL);
@@ -122,5 +125,9 @@ public class MemberController {
 		return "main";
 		
 	}
-	
+	@RequestMapping ("/loginCk.do")
+	public String loginCkFm (){
+		return "member/loginCheck"; 
+		
+	}
 }

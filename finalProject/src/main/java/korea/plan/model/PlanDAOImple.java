@@ -1,5 +1,6 @@
 package korea.plan.model;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -35,13 +36,25 @@ public class PlanDAOImple implements PlanDAO {
 		return pdto;
 	}
 	
+	public int myTotalCnt(int idx) {
+		int result = sqlMap.selectOne("myTotalCnt", idx);
+		return result;
+	}
+	
 	public List<PlanDTO> myPlanList() {
 		List<PlanDTO> list = sqlMap.selectList("myPlanList");
 		return list;
 	}
 	
-	public List<PlanDTO> myPlanList(int cp, int pageRow) {
-		return null;
+	public List<PlanDTO> myPlanList(int idx, int cp, int pageRow) {
+		
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("idx", idx);
+		map.put("cp", cp);
+		map.put("pageRow", pageRow);
+		
+		List<PlanDTO> list = sqlMap.selectList("myPlanList", map);
+		return list;
 	}
 	
 	
