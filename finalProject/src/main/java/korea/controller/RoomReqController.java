@@ -124,10 +124,23 @@ public class RoomReqController {
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
 		mav.addObject("goURL", goURL);
+		
 
 		mav.setViewName("admin/adminMsg");
 		return mav;
 
 	}
+	@RequestMapping(value = "/paidOk.do")
+	public ModelAndView paid (@RequestParam  (value="reqIdx")int reqIdx)
+	{
+		int res = rdao.paid(reqIdx);
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("admin/adminMsg");
+		mav.addObject("msg", "∞·¡¶");
+		mav.addObject("goURL", "main.do");
+	
+		return mav ; 
+	}
+	
 
 }

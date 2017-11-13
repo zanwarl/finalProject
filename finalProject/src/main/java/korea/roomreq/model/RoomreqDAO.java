@@ -15,4 +15,6 @@ public interface RoomreqDAO {
 
 	public int roomCancel(int reqIdx);
 
+	public int paid (int reqIdx );
+	
 }

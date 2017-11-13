@@ -49,6 +49,11 @@
 
 	</select>
 	
+	<update id="paidSql" parameterType="int" >
+	
+	update roomreq set paid = 1 where reqidx = #{reqIdx}
+	</update>
+	
 
 
 
