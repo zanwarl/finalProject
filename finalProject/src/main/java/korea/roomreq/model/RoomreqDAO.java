@@ -5,9 +5,9 @@ import java.util.List;
 public interface RoomreqDAO {
 
 	// public List<RoomreqDTO> roomreqList();
-	public int RoomreqAdd(RoomreqDTO crdto);
+	public int RoomreqAdd(RoomreqDTO rdto);
 
-	public RoomreqDTO RoomreqCon2(int idx);
+	public RoomreqDTO RoomreqOK(int idx);
 
 	public List<RoomreqDTO> roomreqList(String userId, int cp, int listSize);
 

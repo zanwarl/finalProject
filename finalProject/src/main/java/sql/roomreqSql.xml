@@ -7,7 +7,7 @@
 		parameterType="String"> select * from roomreq where userid = #{userid} </select> -->
 	<insert id="roomreqInsert" parameterType="korea.roomreq.model.RoomreqDTO">
 		insert into roomreq
-		values(reqidx.nextval,#{userid},#{roomix},#{count},#{reqdate},#{checkindate},#{checkoutdate},0)
+		values(reqidx.nextval,#{userid},#{roomidx},#{count},TO_DATE(SYSDATE,'yyyy/mm/dd hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
 	</insert>
 	<select id="roomreqCon2" parameterType="int"
 		resultType="korea.roomreq.model.RoomreqDTO">
@@ -15,9 +15,8 @@
 	</select>
 
 
-
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
-		select count(*) from roomReq where userId = #{userId}
+		select count(*) from roomreq where userId = #{userId}
 		<!-- roomReqTotalCnt -->
 	</select>
 
