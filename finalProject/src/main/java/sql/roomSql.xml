@@ -2,6 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
  <mapper namespace="room">
  	<insert id="roomAddrInsert" parameterType="korea.room.model.RoomAddrDTO">
  		insert into room_addr values (roomidx.nextval,#{addr1},#{addr2},#{postnum})
@@ -13,5 +14,3 @@
 	select * from room_addr where room_idx = #{idx}
  	</select>
  </mapper>
-  
-  

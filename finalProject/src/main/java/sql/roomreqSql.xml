@@ -20,11 +20,14 @@
 		(#{reqidx},#{userid},#{roomidx},#{count},
 		to_char (sysdate , 'yyyy/mm/dd hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
 	</insert>
-	<select id="roomreqCon2" parameterType="int"
+	<!-- <select id="roomreqCon2" parameterType="int"
 		resultType="korea.roomreq.model.RoomreqDTO">
 		select * from roomreq where reqidx = #{idx}
-	</select>
+	</select> -->
 
+ 	<select id="roomReqOK" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO">
+ 		select * from roomreq where reqidx = #{reqidx}
+ 	</select>
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
 		select count(*) from roomreq where userId = #{userId}
@@ -49,9 +52,11 @@
 
 	</select>
 	
-	<select id="">
+	<update id="paidSql" parameterType="int" >
 	
-	</select>
+	update roomreq set paid = 1 where reqidx = #{reqIdx}
+	</update>
+	
 
 
 

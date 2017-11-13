@@ -49,28 +49,28 @@ public class RoomReqController {
 		
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomReqOK.do?idx=" + rdto.getReqidx();
-		System.out.println(rdto.getReqidx());
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
+		//System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
-		mav.addObject("reqmsg", msg);
-		mav.setViewName("roomReq/reqmsg");
-
+		mav.addObject("msg", msg);
+	
 		mav.addObject("goURL", goURL);
+		mav.setViewName("roomReq/reqmsg");
 
 		return mav;
 	}
 
 	@RequestMapping(value = "/roomReqOK.do")
-	public ModelAndView roomreqOK(@RequestParam(value = "idx") int idx) {
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx) {
 
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomReq/roomReqOK");
+		mav.setViewName("roomReq/roomOK");
 
 		return mav;
 	}
