@@ -15,13 +15,13 @@ public class HomeController {
 	@Autowired
 	private RoomDAO roomDao;
 	
-	@RequestMapping("/home.do")
+	/*@RequestMapping("/home.do")
 	public ModelAndView home(){
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("home/home");
 		
 		return mav;
-	}
+	}*/
 	
 	@RequestMapping(value="/roomaddr.do",method=RequestMethod.GET)
 	public ModelAndView roomAddrForm(){
