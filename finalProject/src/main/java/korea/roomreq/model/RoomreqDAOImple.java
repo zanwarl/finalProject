@@ -62,4 +62,13 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return res; 
 		
 	}
+	public int paid(int reqIdx) {
+		// TODO Auto-gen
+
+		return sqlMap.update("paidSql", reqIdx);
+		
+	}
+	
+	
+	
 }
