@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -44,10 +45,10 @@
   
 
 function addNum(){
-	var frm = document.roomReqMain;
+	var frm = document.roomReqFm;
 	var count = frm.count.value;
 	
-	if(Number(count) > 10){
+	if(Number(count) > 9){
 		alert("최대 10명까지 예약할 수 있습니다.");
 	}else{
 		frm.count.value = Number(count) + 1;
@@ -55,7 +56,7 @@ function addNum(){
 }
   
 function subNum(){
-	var frm = document.roomReqMain;
+	var frm = document.roomReqFm;
 	var count = frm.count.value;
 	
 	if(Number(count) < 2){
@@ -70,16 +71,15 @@ function subNum(){
 
 <form name="roomReqFm" action="roomReqFm.do" method="post">
 <input type="hidden" value="${roomIdx }" name="roomidx">
-   
-
+<c:set var="arr" value="${rdto}"/>   
    
    <table>
      <tr>          
        	<td>
        		<label>예약인원</label> 
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="count" value="1" style="width:17px;">
-  			<input type="button" id="ADD_NUM" value="＋" onclick="addNum()">
+ 			<input type="number" name="count" value="1" style="width:17px;">
+  			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
   		</td>
   	</tr> 
    	<tr>
@@ -94,8 +94,15 @@ function subNum(){
             <input type="text" name="checkoutdate" id="datepicker1">          	
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<label>가격</label>
+			<input type="text" name="roomprice" value="${arr.roomprice}" readonly>
+		</td>
+	</tr>
 			<td colspan="2" align="center">
-            <input type="submit" value="예약하기">           
+            <input type="submit" value="예약하기">  
+           
     </td>   
  </table>
 </form>

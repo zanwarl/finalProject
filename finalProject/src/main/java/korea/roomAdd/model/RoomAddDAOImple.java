@@ -5,6 +5,7 @@ import java.util.List;
 import org.mybatis.spring.SqlSessionTemplate;
 
 import food.model.FoodDTO;
+import korea.room.model.RoomAddrDTO;
 
 public class RoomAddDAOImple implements RoomAddDAO {
 
@@ -23,5 +24,10 @@ public class RoomAddDAOImple implements RoomAddDAO {
 	public List<RoomAddDTO> roomList() {
 		List<RoomAddDTO> list = sqlMap.selectList("roomList");
 		return list;
+	}
+
+	public RoomAddDTO roomContent(int idx) {
+		RoomAddDTO rdto = sqlMap.selectOne("roomContent",idx);
+		return rdto;
 	}
 }

@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import korea.roomAdd.model.RoomAddDAO;
+import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
@@ -20,12 +22,16 @@ public class RoomReqController {
 
 	@Autowired
 	private RoomreqDAO rdao;
+	@Autowired
+	private RoomAddDAO radao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
+	public ModelAndView roomReq(@RequestParam (value="roomIdx") int idx  ) {
+		RoomAddDTO rdto = radao.roomContent(idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
-		mav.addObject("roomIdx", roomIdx);
+		mav.addObject("rdto",rdto);
+		mav.addObject("roomIdx", idx);
 		
 
 		return mav;
@@ -35,7 +41,7 @@ public class RoomReqController {
 	public ModelAndView roomReqFm(RoomreqDTO rdto, 
 			
 			HttpServletRequest req, 
-			HttpServletResponse resp
+			HttpServletResponse resp,@RequestParam(value="roomprice") int rprice
 			) {
 
 		
@@ -49,10 +55,10 @@ public class RoomReqController {
 		
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
 		//System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
+		String msg = result > 0 ? "확인" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -64,12 +70,13 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqOK.do")
-	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx) {
-
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,@RequestParam(value="roomprice") int rprice) {
+				
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println(rprice);
 		mav.addObject("rdto", rdto);
+		mav.addObject("rprice", rprice);
 		mav.setViewName("roomReq/rok");
 
 		return mav;
@@ -93,6 +100,7 @@ public class RoomReqController {
 		
 		String userId = (String)session.getAttribute("sId");
 				
+		System.out.println(userId);
 		
 //		String userId = "yera";
 

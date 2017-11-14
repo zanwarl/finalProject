@@ -61,7 +61,7 @@
         });
       }
     </script>
-      <script async defer
+    <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCbusV4tEDJhoqgUPVImHs8undZrTOaDEU&callback=initMap">
     </script>
 <title>Insert title here</title>
