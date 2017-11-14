@@ -25,14 +25,14 @@ function roomadd() {
 			</td>
 		</tr>
 	</c:if>
-	<c:forEach var="rdto" items="${list}">
+	<c:forEach var="rdto" items="${list}" varStatus="status">
+		<c:if test="${status.index%4==0}">
+			<tr></tr>
+		</c:if>
 		<c:url var="Url" value="roomContent.do">
 			<c:param name="roomidx" value="${rdto.roomidx}"></c:param>
 		</c:url>
 			<td><a href="${Url}">${rdto.roomname}</a></td>
-		<c:if test="${fn:length(list)+1%4==0}">
-			<tr></tr>
-		</c:if>
 	</c:forEach>
 </table>
 <input type="button" value="숙소등록" onclick="roomadd()">

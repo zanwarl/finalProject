@@ -14,4 +14,7 @@
   <select id="roomList" resultType="korea.roomAdd.model.RoomAddDTO">
 	select * from roomadd order by roomidx
   </select>
+  <select id="roomContent" parameterType="int" resultType="korea.roomAdd.model.RoomAddDTO">
+	select * from roomadd where roomidx = #{idx}
+ 	</select>
   </mapper>
