@@ -104,8 +104,12 @@ html, body {
 	<br> ${arr.space}
 	<br>
 
-	<div id="map" style="width: 100%; height: 350px;"></div>
-	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=480ecaa22ccfdaea85bcf1452c80b3eb&libraries=services"></script>
+	<div id="map" style="width: 100%; height: 350px;">지도</div>
+	
+	<!-- https://developers.kakao.com/apps 에서 localhost 뒤에 오는 포트 번호는 사람마다 다르니 추가 해줘야 함 -->
+	
+	<!-- <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=480ecaa22ccfdaea85bcf1452c80b3eb&libraries=services"></script> -->
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea5cb03a486060e94b82b64937721b6d&libraries=services"></script>
 	<script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	    mapOption = {
@@ -122,12 +126,12 @@ html, body {
 	var addr2 = document.getElementById('addr2').value;
 	var postnum = document.getElementById('postnum').value;
 	var address = addr1 +addr2 + postnum;
+	
 	// 주소로 좌표를 검색합니다
 		geocoder.addressSearch(address, function(result, status) {
 	
 	    // 정상적으로 검색이 완료됐으면 
 	     if (status === daum.maps.services.Status.OK) {
-	
 	        var coords = new daum.maps.LatLng(result[0].y, result[0].x);
 	
 	        // 결과값으로 받은 위치를 마커로 표시합니다
