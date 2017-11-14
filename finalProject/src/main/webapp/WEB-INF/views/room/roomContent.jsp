@@ -77,8 +77,11 @@ html, body {
       function golist() {
   		location.href="home.do";
   	  }
-      function roomReq(){
-    	  location.href="roomReq.do?roomIdx="+document.getElementById('roomidx').value+"";
+      function goUpdate(idx) {
+    	location.href='roomUpdate.do?idx='+idx;
+      }
+      function roomReq(idx){
+    	location.href='roomReq.do?roomIdx='+idx;
       }
     </script>
 <!-- <script async defer
@@ -88,7 +91,6 @@ html, body {
 </head>
 <body>
 	<c:set var="arr" value="${rdto}" />
-	<input type="hidden" id="roomidx" value="${arr.roomidx}">
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
@@ -158,6 +160,8 @@ html, body {
 	</script>
 	
 	<input type="button" value="목록으로" onclick="golist()">
-	<input type="button" value="예약하기" onclick="roomReq()">
+	<input type="button" value="수정하기" onclick="goUpdate('${arr.roomidx}')">
+	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
+	
 </body>
 </html>

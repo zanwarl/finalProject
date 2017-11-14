@@ -9,4 +9,5 @@ public interface RoomAddDAO {
 	public int roomAdd(RoomAddDTO dto);
 	public List<RoomAddDTO> roomList(); 
 	public RoomAddDTO roomContent(int idx);
+	public RoomAddDTO roomUpdateData(int idx);
 }

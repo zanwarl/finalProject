@@ -53,4 +53,15 @@ public class RoomAddController {
 		
 		return mav;
 	}
+	
+	@RequestMapping(value="/roomUpdate.do",method=RequestMethod.GET)
+	public ModelAndView roomUpdateForm(@RequestParam("idx")int idx){
+		
+		ModelAndView mav = new ModelAndView();
+		RoomAddDTO rdto = radao.roomUpdateData(idx);
+		
+		mav.addObject("rdto",rdto);
+		mav.setViewName("room/roomUpdateForm");
+		return mav;
+	}
 }
