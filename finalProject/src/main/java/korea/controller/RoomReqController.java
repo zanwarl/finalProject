@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.roomAdd.model.RoomAddDAO;
+import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
@@ -21,14 +22,16 @@ public class RoomReqController {
 
 	@Autowired
 	private RoomreqDAO rdao;
+	@Autowired
 	private RoomAddDAO radao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
+	public ModelAndView roomReq(@RequestParam (value="roomIdx") int idx  ) {
+		RoomAddDTO rdto = radao.roomContent(idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
-	
-		mav.addObject("roomIdx", roomIdx);
+		mav.addObject("rdto",rdto);
+		mav.addObject("roomIdx", idx);
 		
 
 		return mav;
