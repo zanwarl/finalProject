@@ -6,8 +6,7 @@
 	<!-- <select id="roomreqList" resultType="korea.roomreq.model.RoomreqDTO" 
 		parameterType="String"> select * from roomreq where userid = #{userid} </select> -->
 	
-	
-	
+		
 	<insert id="roomreqInsert" parameterType="korea.roomreq.model.RoomreqDTO">
 	
 		<selectKey keyProperty="reqidx" resultType="int" order="BEFORE" >
@@ -25,6 +24,7 @@
 		select * from roomreq where reqidx = #{idx}
 	</select> -->
 
+	
  	<select id="roomReqOK" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO">
  		select * from roomreq where reqidx = #{reqidx}
  	</select>

@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import korea.roomAdd.model.RoomAddDAO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
@@ -20,11 +21,13 @@ public class RoomReqController {
 
 	@Autowired
 	private RoomreqDAO rdao;
+	private RoomAddDAO radao;
 
 	@RequestMapping("/roomReq.do")
 	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
+	
 		mav.addObject("roomIdx", roomIdx);
 		
 
@@ -52,7 +55,7 @@ public class RoomReqController {
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
 		//System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
+		String msg = result > 0 ? "확인" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -93,6 +96,7 @@ public class RoomReqController {
 		
 		String userId = (String)session.getAttribute("sId");
 				
+		System.out.println(userId);
 		
 //		String userId = "yera";
 
