@@ -7,9 +7,11 @@
   insert into roomAdd values(
   room_idx.nextval, #{useridx},#{btype}, #{rtype}, #{maxcount},
   #{addr1}, #{addr2}, #{postnum}, #{conv}, #{safe},
-  #{space}, #{image}, #{content}, #{room_name}, #{room_price},
-  #{nodate}, #{userId}, #{roomIdx}, #{count}, #{reqDate},
-  #{checkinDate}, #{checkoutDate}
+  #{space}, #{content}, #{roomname}, #{roomprice},
+  #{nodate}, #{checkin}, #{checkout}
   )
   </insert>
+  <select id="roomList" resultType="korea.roomAdd.model.RoomAddDTO">
+	select * from roomadd order by roomidx
+  </select>
   </mapper>

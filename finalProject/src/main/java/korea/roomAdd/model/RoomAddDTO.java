@@ -1,40 +1,34 @@
 package korea.roomAdd.model;
 
 public class RoomAddDTO {
-
-	 private int room_idx;
-	 private int useridx; 
+		
+	 private int roomidx;  //방번호 
+	 private int useridx; 	//유저번호
 	 private String btype;  /* 집 호텔 기타*/
 	 private String rtype; /*집전체 다인실 개인실*/
-	 private int maxcount; 
-	 private String addr1; 
-	 private String addr2;
-	 private String postnum;
-	 private String conv;
-	 private String safe;
-	 private String space; 
-	 private String image; 
-	 private String content;
-	 private String room_name;
-	 private int room_price;
-	 private String nodate;/*안되는날*/
-	 private String userId ;
-	 private int roomIdx;
-	 private int count; 
-	 private String reqDate;
-	 private String checkinDate;
-	 private String checkoutDate;
+	 private int maxcount; //최대수용인원 
+	 private String addr1; //기본주소
+	 private String addr2; //상세주소
+	 private String postnum; //우편번호
+	 private String conv; //체크
+	 private String safe; //체크
+	 private String space;  //체크
+	 private String content; //설명
+	 private String roomname; //방이름
+	 private int roomprice; //방가격
+	 private String nodate;/*안되는날*/ 
+	 private String checkin; //체크인
+	 private String checkout; //체크아웃
 	 
 	public RoomAddDTO() {
 		super();
 	}
-
-	public RoomAddDTO(int room_idx, int useridx, String btype, String rtype, int maxcount, String addr1, String addr2,
-			String postnum, String conv, String safe, String space, String image, String content, String room_name,
-			int room_price, String nodate, String userId, int roomIdx, int count, String reqDate, String checkinDate,
-			String checkoutDate) {
+	
+	public RoomAddDTO(int roomidx, int useridx, String btype, String rtype, int maxcount, String addr1, String addr2,
+			String postnum, String conv, String safe, String space, String content, String roomname, int roomprice,
+			String nodate, String checkin, String checkout) {
 		super();
-		this.room_idx = room_idx;
+		this.roomidx = roomidx;
 		this.useridx = useridx;
 		this.btype = btype;
 		this.rtype = rtype;
@@ -45,25 +39,20 @@ public class RoomAddDTO {
 		this.conv = conv;
 		this.safe = safe;
 		this.space = space;
-		this.image = image;
 		this.content = content;
-		this.room_name = room_name;
-		this.room_price = room_price;
+		this.roomname = roomname;
+		this.roomprice = roomprice;
 		this.nodate = nodate;
-		this.userId = userId;
-		this.roomIdx = roomIdx;
-		this.count = count;
-		this.reqDate = reqDate;
-		this.checkinDate = checkinDate;
-		this.checkoutDate = checkoutDate;
+		this.checkin = checkin;
+		this.checkout = checkout;
 	}
 
-	public int getRoom_idx() {
-		return room_idx;
+	public int getRoomidx() {
+		return roomidx;
 	}
 
-	public void setRoom_idx(int room_idx) {
-		this.room_idx = room_idx;
+	public void setRoomidx(int roomidx) {
+		this.roomidx = roomidx;
 	}
 
 	public int getUseridx() {
@@ -146,14 +135,6 @@ public class RoomAddDTO {
 		this.space = space;
 	}
 
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
 	public String getContent() {
 		return content;
 	}
@@ -162,20 +143,20 @@ public class RoomAddDTO {
 		this.content = content;
 	}
 
-	public String getRoom_name() {
-		return room_name;
+	public String getRoomname() {
+		return roomname;
 	}
 
-	public void setRoom_name(String room_name) {
-		this.room_name = room_name;
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
 	}
 
-	public int getRoom_price() {
-		return room_price;
+	public int getRoomprice() {
+		return roomprice;
 	}
 
-	public void setRoom_price(int room_price) {
-		this.room_price = room_price;
+	public void setRoomprice(int roomprice) {
+		this.roomprice = roomprice;
 	}
 
 	public String getNodate() {
@@ -186,54 +167,20 @@ public class RoomAddDTO {
 		this.nodate = nodate;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getCheckin() {
+		return checkin;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setCheckin(String checkin) {
+		this.checkin = checkin;
 	}
 
-	public int getRoomIdx() {
-		return roomIdx;
+	public String getCheckout() {
+		return checkout;
 	}
 
-	public void setRoomIdx(int roomIdx) {
-		this.roomIdx = roomIdx;
+	public void setCheckout(String checkout) {
+		this.checkout = checkout;
 	}
 
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public String getReqDate() {
-		return reqDate;
-	}
-
-	public void setReqDate(String reqDate) {
-		this.reqDate = reqDate;
-	}
-
-	public String getCheckinDate() {
-		return checkinDate;
-	}
-
-	public void setCheckinDate(String checkinDate) {
-		this.checkinDate = checkinDate;
-	}
-
-	public String getCheckoutDate() {
-		return checkoutDate;
-	}
-
-	public void setCheckoutDate(String checkoutDate) {
-		this.checkoutDate = checkoutDate;
-	}
-	 
-	
-	 
 }

@@ -41,12 +41,23 @@ public class PlanController {
 	
 	/**일정 메인페이지(List)*/
 	@RequestMapping("/plan.do")
-	public ModelAndView planMain() {
+	public ModelAndView planMain(@RequestParam(value="cp",required=false,defaultValue="1")int cp) {
 
-		List<PlanDTO> list = pdao.planList();
 		ModelAndView mav = new ModelAndView();
 		
+		int totalCnt = pdao.totalCnt();
+		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
+		
+		List<PlanDTO> list = pdao.planList(cp,pageSize);
+		
+		String url = "plan.do";
+		
+		System.out.println(totalCnt);
+		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
+		
 		mav.addObject("list", list);
+		mav.addObject("page", page);
 		mav.setViewName("plan/plan");
 		return mav;
 	}

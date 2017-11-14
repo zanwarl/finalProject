@@ -5,7 +5,12 @@
 <mapper namespace="korea.plan">
 	<!-- select start -->
 		<select id="planList" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main
+			select * from
+			(select rownum as rnum, a.* from
+			(select * from plan_main order by plan_idx desc) a) b 
+			<![CDATA[
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
+   			]]>
 		</select>
 		
 		<select id="lastSaveIdx" resultType="korea.plan.model.PlanDTO">
@@ -37,6 +42,10 @@
 		<select id="planMainContent" parameterType="int" resultType="korea.plan.model.PlanDTO">
 			select * from plan_main
 			where plan_idx = #{pidx}
+		</select>
+		
+		<select id="planTotalCnt" resultType="int">
+			select count(*) from plan_main
 		</select>
 		
 	<!-- select end -->

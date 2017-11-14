@@ -191,7 +191,11 @@ public class PageModule {
 			System.out.println("1");
 			sb.append("<a href='");
 			sb.append(pageName);
-			sb.append("?cp=");
+			if (queryStr != null) {
+				sb.append("&cp=");
+			} else {
+				sb.append("?cp=");
+			}
 			int tmp = startNum-1;
 			sb.append(tmp);
 			sb.append("'>&lt;&lt;</a>");
@@ -200,7 +204,11 @@ public class PageModule {
 		for(int i=startNum;i<=endNum;i++) {
 			sb.append("<a href='");
 			sb.append(pageName);
-			sb.append("?cp=");
+			if (queryStr != null) {
+				sb.append("&cp=");
+			} else {
+				sb.append("?cp=");
+			}
 			sb.append(i);
 			sb.append("'>&nbsp;"+i+"&nbsp;</a>");
 		}
@@ -208,7 +216,11 @@ public class PageModule {
 			System.out.println("3");
 			sb.append("<a href='");
 			sb.append(pageName);
-			sb.append("?cp=");
+			if (queryStr != null) {
+				sb.append("&cp=");
+			} else {
+				sb.append("?cp=");
+			}
 			int tmp = endNum+1;
 			sb.append(tmp);
 			sb.append("'>&gt;&gt;</a>");

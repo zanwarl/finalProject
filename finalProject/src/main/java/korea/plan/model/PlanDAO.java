@@ -8,6 +8,8 @@ public interface PlanDAO {
 	public List<PlanDTO> planList();		
 	//일정 리스트 + 페이징
 	public List<PlanDTO> planList(int cp, int pageRow);
+	//모든 일정 숫자
+	public int totalCnt();
 	
 	
 	//내 일정 리스트

@@ -125,9 +125,9 @@
 		${sId } : 
 		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
-		<input type="hidden" name="tour_cmt_pidx" value="${contentId }">
+		<input type="hidden" name="tour_cmt_pidx" value="${contentId}">
 		<input type="hidden" name="queryStr" value="${pageContext.request.queryString}">
-		<input type="hidden" name="tour_cmt_writer" value="${sId } ">		
+		<input type="hidden" name="tour_cmt_writer" value="${sId}">		
 	</form>
 	<c:if test="${empty list }">
 	아직 작성된 댓글이 없습니다.
@@ -135,8 +135,11 @@
 	<c:forEach var="list" items="${list }">
 	작성자 : ${list.tour_cmt_writer } <br>
 	내용 : ${list.tour_cmt_content }
-	작성일 : ${list.tour_cmt_writeDate }
-	<input type="button" name="cmtDel" value="삭제" onclick="cmtDel('${list.tour_cmt_idx}','${contentId}','${contentTypeId}')"> <br>
+	작성일 : ${list.tour_cmt_writeDate } 
+	
+	<c:if test="${list.tour_cmt_writer == sId }">
+		<input type="button" name="cmtDel" value="삭제" onclick="cmtDel('${list.tour_cmt_idx}','${contentId}','${contentTypeId}')"> <br>
+	</c:if>
 	 </c:forEach>
 	 <br>
 	 ${page }

@@ -194,7 +194,7 @@ public class TourController {
 		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
 		
 		String url = "tourDetail.do?contentTypeId=" + contentTypeId + "&contentId=" + contentId;
-		String page = korea.page.PageModule.makePage(url, totalCnt, listSize, pageSize, cp, queryStr);
+		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp, queryStr);
 		
 		List<tourCmtDTO> list = tDAO.tourcmtList(contentId,cp,listSize);
 		System.out.println("-------" + contentTypeId);
