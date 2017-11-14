@@ -53,6 +53,7 @@ function ok(reqIdx, amt ){
 <section>
 	<table>
 	<c:set var="arr" value="${rdto}"/>
+
 		<tr>
 			<th>예약인원수</th>
 			<th>${arr.count}</th>
@@ -68,6 +69,10 @@ function ok(reqIdx, amt ){
 		<tr>
 			<th>체크아웃</th>
 			<th>${arr.checkoutdate}</th>
+		</tr>
+		<tr>
+			<th>총 합계</th>
+			<th>${rprice}</th>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">	 
