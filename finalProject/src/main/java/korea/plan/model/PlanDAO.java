@@ -25,6 +25,8 @@ public interface PlanDAO {
 	
 	//일정 메인 테이블 작성
 	public int planMainWrite(PlanDTO pdto);					
+	public int planMainUpdate(PlanDTO pdto);
+	public int planDetailWrite(PlanDetailDTO pddto);
 	
 	//최근 저장 한 마지막 idx 불러오기 + 로그인 한회원번호
 	public PlanDTO lastSaveIdx(PlanDTO pdto);

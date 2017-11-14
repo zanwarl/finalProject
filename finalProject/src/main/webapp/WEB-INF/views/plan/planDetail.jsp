@@ -135,7 +135,7 @@ $(document).ready(function() {
 		}
 	});
 	/* ---ajax end--- */
-	var order = 0;
+	var order = 1;
 	/* 여행지 선택 시 div 복사해서 추가 */
 	$('#cityList').on('click','.add',function() {
 		add_title = $(this).parent().attr('data-val');
@@ -148,11 +148,11 @@ $(document).ready(function() {
 		
 		var output = '';
 		
-		output += '<div class="list_item" data="'+order+'">';
+		output += '<div class="list_item" data="'+order+'" data-type="'+add_type+'" data-code="'+add_code+'">';
 		output += '<div class="item_img"><img src="'+add_img+'" width="100" height="90"></div>';
 		output += '<div class="item_title">'+add_title+'</div>';
-		output += '<input type="hidden" name="add_code" value="'+add_code+'">';
-		output += '<input type="hidden" value="add_type" '+add_type+'">';
+		output += '<input type="hidden" id="add_code" name="add_code" value="'+add_code+'">';
+		output += '<input type="hidden" id="add_type" name="add_type" value="'+add_type+'">';
 		output += '</div>';
 		order++;
 		$('#planList').append(output);
@@ -218,6 +218,7 @@ function plan_display() {
 <%@ include file="../header.jsp" %>
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/jquery-ui.js"></script>
+<script src="js/json2.js"></script>
 <script>
 //header에 있는 js와 충돌나서 noConflict설정
 var jq = $.noConflict();
@@ -264,15 +265,61 @@ jq(document).ready(function() {
 		<div>
 			<h2 id="modal1Title">일정만들기 완료</h2>
 			<div class="modal_content">
-				<form name="plan_make">
+				<form name="plan_make" action="planDetailWrite.do">
 				<!-- <form name="plan_make" action="planDetailWrite.do"> -->
 				<script>
 				function submit() {
-					window.alert("zz");
-					var div = document.getElementById('.planList');
-					var nodeList = div.getElementsByTagName(div);
+
+					var nlist = '';
+					var count = '0';
 					
-					window.alert(nodeList);
+					var p_writer = '';
+					var txt = '';
+					
+					$('.list_item').each(function(key,val){
+						count++;
+					});
+					
+					var array = new Array();
+					
+					$('.list_item').each(function(key,val){
+						/* txt += 'order?' + $(this).attr('data');
+						txt += 'type?' + $(this).attr('data-type');
+						txt += 'code?' + $(this).attr('data-code');
+						txt += 'title?' +$(".item_title").eq(key).html();
+						txt += 'img?' + $(".item_img img").eq(key).attr('src');*/
+						
+						order = $(this).attr('data');
+						type = $(this).attr('data-type');
+						code = $(this).attr('data-code');
+						title = $(".item_title").eq(key).html();
+						img = $(".item_img img").eq(key).attr('src');
+						/* alert($("#add_code").val());
+						alert($("#add_type").val()); */
+						//array[key] = txt;
+						
+						var planInfo = new Object();
+						
+						writer = $("#plan_writer").val();
+						
+						
+						planInfo.order = order;
+						planInfo.type = type;
+						planInfo.code = code;
+						planInfo.title = title;
+						planInfo.img = img;
+						
+						array.push(planInfo);
+						
+					});
+					
+					var jsonInfo = JSON.stringify(array);
+					$('#str').val(jsonInfo);
+					//var jsonInfo = {"datalist":JSON.stringify(array)};
+					console.log(jsonInfo); //브라우저 f12개발자 모드에서 confole로 확인 가능
+					
+					
+				document.plan_make.submit();
 				}
 				
 				</script>
@@ -284,7 +331,7 @@ jq(document).ready(function() {
 							</tr>
 							<tr>
 								<th>출발일</th>
-								<td><input type="text" name="plan_start" id="datepicker"></td>
+								<td><input type="text" id="plan_start" name="plan_start" id="datepicker"></td>
 							</tr>
 							<tr>
 								<th>설명</th>
@@ -299,18 +346,20 @@ jq(document).ready(function() {
 								<td>
 									<!-- form에서 넘겨줘야 할 데이터 -->
 									<!-- 작성자,areacode -->
-									<input type="text" name="plan_writer" value="${sIdx }">
-									<input type="text" name="plan_name" value="${sName }">
+									<input type="hidden" id="plan_writer" name="plan_writer" value="${sIdx }">
+									<input type="hidden" name="plan_name" value="${sName }">
+									<input type="hidden" id="str" name="str">
+									<input type="text" id="plan_idx" name="plan_idx" value=${plan_idx }>
 								</td>
 							</tr>
 						</tfoot>
 					</table>
 				<button data-remodal-action="cancel" class="remodal-cancel">취소</button>
 				<button class="remodal-confirm" onclick="submit();">완료</button>
-				<button class="remodal-confirm" onclick="submit();">완료</button>
+				<a href="javascript:submit()">[완료]</a> 
 				<!-- <a class="remodal-confirm" href="planDetail.do">완료</a> -->
 				</form>
-			</div>
+			</div>	
 		</div>
 </div>
 <!-- modal div end -->

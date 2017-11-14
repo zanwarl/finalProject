@@ -2,19 +2,29 @@ package korea.controller;
 
 import java.io.BufferedInputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
@@ -199,4 +209,51 @@ public class PlanController {
 		return mav;
 	}
 	
+	/*@RequestMapping("/planDetailWrite.do")
+	public ModelAndView planDetailWrite(PlanDetailDTO pddto, PlanDTO pdto, @RequestParam(value="str") String[] str) {
+		
+		System.out.println(str.length);
+
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/planOk");
+		return mav;
+	}*/
+	
+	@RequestMapping(value="/planDetailWrite.do")
+	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
+		
+		/*Object object=null;
+		JSONArray arrayObj=null;
+		JSONParser jsonParser=new JSONParser();
+		object=jsonParser.parse(str);
+		arrayObj=(JSONArray) object;
+		System.out.println("Json object :: "+arrayObj);*/
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(str);
+		JSONArray jsonArray = (JSONArray)obj;
+		
+		PlanDetailDTO pddto = new PlanDetailDTO();
+		for(int i=0;i<jsonArray.size();i++){
+			JSONObject jsonObj = (JSONObject)jsonArray.get(i);
+			pddto.setPland_order(Integer.parseInt((String) jsonObj.get("order")));
+			pddto.setPland_img((String)jsonObj.get("img"));
+			pddto.setPland_typeid((String)jsonObj.get("type"));
+			pddto.setPland_code((String)jsonObj.get("code"));
+			pddto.setPland_subject((String)jsonObj.get("title"));
+			pddto.setPland_pidx(pdto.getPlan_idx());
+			
+			int result = pdao.planDetailWrite(pddto);
+		}
+		System.out.println("---: " + pdto.getPlan_subject());
+		System.out.println("---: " + pdto.getPlan_idx());
+		int update = pdao.planMainUpdate(pdto);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/plan");
+		return mav;
+	}    
+
 }	
