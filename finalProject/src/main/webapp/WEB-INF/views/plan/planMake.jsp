@@ -167,7 +167,7 @@ function plan_display() {
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script>
-//header에 있는 js와 충돌나서 설정
+//header에 있는 js와 충돌나서 noConflict설정
 var jq = $.noConflict();
 
 jq(document).ready(function() {
@@ -180,7 +180,7 @@ jq(document).ready(function() {
 		dateFormat: 'yy-mm-dd'
 	});
 });
-	</script>
+</script>
 
 		<!-- 도시 선택 시 띄워주는 화면 -->
 		<div id="select_detail_view_city">

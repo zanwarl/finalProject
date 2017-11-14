@@ -146,10 +146,7 @@ public class PlanController {
 	public ModelAndView planDetail(PlanDTO pdto) {
 		
 		pdto = pdao.lastSaveIdx(pdto);
-		
-		System.out.println("마지막 idx : " + pdto.getPlan_idx());
-		System.out.println(pdto.getPlan_subject());
-		
+
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("plan/planDetail");
