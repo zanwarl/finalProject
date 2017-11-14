@@ -72,7 +72,6 @@ function subNum(){
 <form name="roomReqFm" action="roomReqFm.do" method="post">
 <input type="hidden" value="${roomIdx }" name="roomidx">
 <c:set var="arr" value="${rdto}"/>   
-	${arr.roomprice}
    
    <table>
      <tr>          
@@ -93,6 +92,12 @@ function subNum(){
      	<td>
             <label>check out </label>
             <input type="text" name="checkoutdate" id="datepicker1">          	
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<label>가격</label>
+			<input type="text" id="roomprice" value="${arr.roomprice}" readonly>
 		</td>
 	</tr>
 			<td colspan="2" align="center">
