@@ -97,7 +97,7 @@ function subNum(){
 	<tr>
 		<td>
 			<label>가격</label>
-			<input type="text" id="roomprice" value="${arr.roomprice}" readonly>
+			<input type="text" name="roomprice" value="${arr.roomprice}" readonly>
 		</td>
 	</tr>
 			<td colspan="2" align="center">

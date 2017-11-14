@@ -41,7 +41,7 @@ public class RoomReqController {
 	public ModelAndView roomReqFm(RoomreqDTO rdto, 
 			
 			HttpServletRequest req, 
-			HttpServletResponse resp
+			HttpServletResponse resp,@RequestParam(value="roomprice") int rprice
 			) {
 
 		
@@ -55,7 +55,7 @@ public class RoomReqController {
 		
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
 		//System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "확인" : "다시 예약해주세요";
@@ -70,12 +70,13 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqOK.do")
-	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx) {
-
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,@RequestParam(value="roomprice") int rprice) {
+				
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println(rprice);
 		mav.addObject("rdto", rdto);
+		mav.addObject("rprice", rprice);
 		mav.setViewName("roomReq/rok");
 
 		return mav;
