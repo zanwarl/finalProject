@@ -73,8 +73,9 @@ function subNum(){
 
 function call(rp)
 {
+
  if(document.getElementById("num").value && document.getElementById("roomp").value){
-  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt(rp);
+  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt('rp');
  }
 }
 
