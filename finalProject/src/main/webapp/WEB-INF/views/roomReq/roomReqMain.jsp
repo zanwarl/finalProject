@@ -12,7 +12,7 @@
 
 <script language='javascript'>
 	$( function() {
-	$( "#datepicker" ).datepicker();
+	$( "#datepicker" ).datepicker({});
 	});
 	
 	$( function() {
@@ -44,40 +44,69 @@
   } */
   
 
-function addNum(){
-	var frm = document.roomReqFm;
-	var count = frm.count.value;
-	
-	if(Number(count) > 9){
-		alert("최대 10명까지 예약할 수 있습니다.");
-	}else{
-		frm.count.value = Number(count) + 1;
-		call();
-	}
-	
-	
-}
+
+
   
-function subNum(){
-	var frm = document.roomReqFm;
-	var count = frm.count.value;
-	
-	if(Number(count) < 2){
-		alert("최소 1명 이상 선택해야 합니다.");
-	}else{
-		frm.count.value = Number(count) - 1;  
-		call();
-	}
-}
 
 
-function call(rp)
+/* function call(rp)
 {
  if(document.getElementById("num").value && document.getElementById("roomp").value){
   document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt(rp);
  }
-}
+} */
 
+	var date = 1;
+	function call() {
+		
+		var day1 = $('#datepicker').val();
+		day1 = day1.substring(3,5);
+		
+		(day1.charAt(0));
+		
+		if(day1.charAt(0)==0) {
+			day1 = day1.charAt(1);
+		} 
+		
+		var day2 = $('#datepicker1').val();
+		day2 = day2.substring(3,5);
+		
+		(day2.charAt(0));
+		
+		if(day2.charAt(0)==0) {
+			day2 = day2.charAt(1);
+		} 
+		
+		date = day2 - day1;
+		
+		var num = $('#num').val();
+		var sum = price*num*date;
+		$('#roomp').val(sum);
+	}
+	
+	function addNum(){
+		var frm = document.roomReqFm;
+		var count = frm.count.value;
+		
+		if(Number(count) > 9){
+			alert("최대 10명까지 예약할 수 있습니다.");
+		}else{
+			frm.count.value = Number(count) + 1;
+			call();
+		}
+	}		
+	  
+	function subNum(){
+		var frm = document.roomReqFm;
+		var count = frm.count.value;
+		
+		if(Number(count) < 2){
+			alert("최소 1명 이상 선택해야 합니다.");
+		}else{
+			frm.count.value = Number(count) - 1;  
+			call();
+		}
+	}
 
 
 </script>
@@ -93,7 +122,7 @@ function call(rp)
        	<td>
        		<label>예약인원</label> 
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="count" id='num' value="1" onchange="call()" style="width:30px;">
+ 			<input type="text" name="count" id="num" value="1" onchange="call()" style="width:30px;">
   			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
   		</td>
   	</tr> 
@@ -112,7 +141,7 @@ function call(rp)
 	<tr>
 		<td>
 			<label>가격</label>
-			<input type="text" name="roomprice" id='roomp' value="${arr.roomprice}" onkeyup="call(${arr.roomprice})" readonly>
+			<input type="text" name="roomprice" id="roomp" value="${arr.roomprice}" onkeyup="call()" readonly>
 		</td>
 	</tr>
 			<td colspan="2" align="center">
@@ -120,6 +149,9 @@ function call(rp)
            
     </td>   
  </table>
+<script>
+var price = document.getElementById('roomp').value;
+</script>
 </form>
 
 
