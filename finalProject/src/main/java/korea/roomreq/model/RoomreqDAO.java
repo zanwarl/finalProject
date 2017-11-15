@@ -17,4 +17,7 @@ public interface RoomreqDAO {
 
 	public int paid (int reqIdx );
 	
+	public List<String> myRoomList(String userId);
+	
+	
 }

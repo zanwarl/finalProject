@@ -22,4 +22,7 @@
 		resultType="korea.roomAdd.model.RoomAddDTO">
 		select * from roomadd where roomidx = #{idx}
 	</select>
+	
+	
+	
 </mapper>

@@ -137,5 +137,34 @@ public class RoomReqController {
 		return mav;
 
 	}
+	
+	
+	@RequestMapping("myRoomReqList.do")
+	public ModelAndView myRoomList (
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			)
+	{
+		ModelAndView mav = new ModelAndView(); 
+		
+		
+		HttpSession session = req.getSession();
+		
+		String userId ="znzl"; 
+		
+				//(String)session.getAttribute("sId");
+		
+		
+		List<String> list = rdao.myRoomList(userId);
+		mav.addObject("list", list);
+		mav.setViewName("room/myRoomReqList");
+		return mav; 
+		
+		
+		
+	}
+	
+	
 
 }
