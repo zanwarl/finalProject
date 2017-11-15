@@ -53,10 +53,15 @@ public class MemberDAOImple implements MemberDAO {
 		return dto ; 
 	}
 	
-	//2017.11.13 홍주영
+	//2017.11.13 �솉二쇱쁺
 	public MemberDTO memberInfo(String member_id) {
 		MemberDTO mdto = sqlMap.selectOne("memberInfo", member_id);
 		return mdto;
+	}
+	
+	public int memberUpdate(MemberDTO dto) {
+		int count=sqlMap.update("memberUpdate", dto);
+		return count;
 	}
 
 
