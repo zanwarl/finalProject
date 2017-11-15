@@ -12,6 +12,7 @@ import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -137,5 +138,52 @@ public class RoomReqController {
 		return mav;
 
 	}
+	
+	
+
+	@RequestMapping("/myRoomReqList.do")
+	public ModelAndView myRoomList (
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			)
+	{
+		ModelAndView mav = new ModelAndView(); 
+		
+		
+		HttpSession session = req.getSession();
+		
+		String userId ="yera"; 
+		
+				//(String)session.getAttribute("sId");
+		
+		List<Map<String, Object>> list = rdao.myRoomList(userId);
+		//System.out.println(list);
+		mav.addObject("list", list);
+		mav.setViewName("room/myRoomReqList");
+		return mav; 
+		
+		
+		
+	}
+	
+
+	@RequestMapping ("/roomReqInfo.do")
+	public ModelAndView roomReqInfo (
+			@RequestParam (value="roomIdx")int roomIdx 
+			
+			){
+		roomIdx = 1 ; 
+		
+		ModelAndView mav = new ModelAndView(); 
+		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx);
+		mav.addObject("list", list);
+		mav.setViewName("room/roomReqInfo");
+		return mav; 
+		
+		
+	}
+	
+	
 
 }

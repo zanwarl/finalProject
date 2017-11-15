@@ -25,7 +25,7 @@
 	backgroud: skyblue; 
 	width: 40%;
 	float: left;
-	height: 950px;
+	height: 850px;
 }
 
 #cityList {
@@ -135,6 +135,7 @@ $(document).ready(function() {
 		}
 	});
 	/* ---ajax end--- */
+	
 	var order = 1;
 	/* 여행지 선택 시 div 복사해서 추가 */
 	$('#cityList').on('click','.add',function() {
@@ -239,7 +240,15 @@ jq(document).ready(function() {
 		<div class="remodal-bg"><a href="#modal">저장하기</a></div>
 	</div>
 	<div id="left_box">
-		<div id="planList" style="overflow:auto;">일정 리스트</div>
+		<div id="planList" style="overflow:auto;">일정 리스트
+			<c:forEach var="list" items="${list }">
+				<div class="list_item" data="${list.pland_order }" data-type="${list.pland_typeid }" data-code="${list.pland_code }">
+				<div class="item_img"><img src="${list.pland_img }" width="100" height="90"></div>
+				<div class="item_title">${list.pland_subject }</div>
+				<input type="hidden" value=${list.pland_order }>
+				</div>
+			</c:forEach>
+		</div>
 		<div id="cityList" style="overflow:auto;">
 			<div id="search">
 				${areaCode }

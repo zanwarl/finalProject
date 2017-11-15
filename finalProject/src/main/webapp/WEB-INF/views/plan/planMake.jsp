@@ -81,6 +81,15 @@ $(document).ready(function() {
 		//부모? div의 attribute 읽어와서 저장
 		name = $(this).parent().attr('data-val');
 		code = $(this).parent().attr('data');
+		
+		var tmp = '';
+		
+		tmp = code;
+		
+		if(tmp!=null) {
+			window.alert("실행x");
+		}
+		$('#area_code').val(code);
 		$('#select_detail_view_city').show();
 		
 		$('#plan_city_list').each(function() {
@@ -222,8 +231,8 @@ jq(document).ready(function() {
 										<td>
 											<!-- form에서 넘겨줘야 할 데이터 -->
 											<!-- 작성자,areacode -->
-											<input type="hidden" name="plan_writer" value="1">
-											<input type="hidden" name="area_code" value="1">
+											<input type="text" name="plan_writer" value="${sIdx }">
+											<input type="text" id="area_code" name="area_code">
 											
 										</td>
 									</tr>

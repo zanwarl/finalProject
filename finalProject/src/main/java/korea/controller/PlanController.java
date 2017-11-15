@@ -139,11 +139,13 @@ public class PlanController {
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
 	@RequestMapping("/planMainSaveDb.do")
 	public ModelAndView planMainSaveDb(PlanDTO pdto) {
+		int idx = pdao.lastSaveIdx(pdto);
+		System.out.println(idx);
+		pdto.setPlan_idx(idx);
 		
 		int result = pdao.planMainWrite(pdto);
-		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("2");
 		String str = "planDetail.do";
 		str = str +  "?plan_idx="+pdto.getPlan_idx();
 		
@@ -157,11 +159,12 @@ public class PlanController {
 	@RequestMapping("/planDetail.do")
 	public ModelAndView planDetail(PlanDTO pdto) {
 		
-		pdto = pdao.lastSaveIdx(pdto);
+		//int idx = pdao.lastSaveIdx(pdto);
 
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("plan/planDetail");
+		mav.addObject("plan_idx", pdto.getPlan_idx());
 		return mav;
 	}
 	
@@ -222,8 +225,10 @@ public class PlanController {
 		return mav;
 	}*/
 	
-	@RequestMapping(value="/planDetailWrite.do")
+	@RequestMapping("/planDetailWrite.do")
 	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
+		
+		System.out.println("???????????????????");
 		
 		/*Object object=null;
 		JSONArray arrayObj=null;
@@ -235,6 +240,8 @@ public class PlanController {
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(str);
 		JSONArray jsonArray = (JSONArray)obj;
+		
+		pdao.planDetailDelete(pdto.getPlan_idx());
 		
 		PlanDetailDTO pddto = new PlanDetailDTO();
 		for(int i=0;i<jsonArray.size();i++){
@@ -250,6 +257,8 @@ public class PlanController {
 		}
 		System.out.println("---: " + pdto.getPlan_subject());
 		System.out.println("---: " + pdto.getPlan_idx());
+		
+		
 		int update = pdao.planMainUpdate(pdto);
 		
 		
@@ -257,5 +266,17 @@ public class PlanController {
 		mav.setViewName("plan/plan");
 		return mav;
 	}    
+	
+	@RequestMapping("/planEdit.do")
+	public ModelAndView planEdit(int plan_idx) {
+		
+		System.out.println("수정 할 번호 : " + plan_idx);
+		List<PlanDetailDTO> list = pdao.planEditList(plan_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/planDetail");
+		mav.addObject("plan_idx", plan_idx);
+		mav.addObject("list", list);
+		return mav;
+	}
 
 }	
