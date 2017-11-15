@@ -1,6 +1,8 @@
 package korea.roomAdd.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
@@ -44,6 +46,11 @@ public class RoomAddDAOImple implements RoomAddDAO {
 	public int roomDelete(int idx) {
 		int count = sqlMap.delete("roomDelete",idx);
 		return count;
+	}
+
+	public void fileupload(Map<String, Object> map) {
+	    sqlMap.insert("rImageFile",map);
+
 	}
 	
 	
