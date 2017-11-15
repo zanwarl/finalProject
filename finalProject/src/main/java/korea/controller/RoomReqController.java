@@ -171,6 +171,7 @@ public class RoomReqController {
 	@RequestMapping ("/roomReqInfo.do")
 	public ModelAndView roomReqInfo (
 			@RequestParam (value="roomIdx")int roomIdx 
+
 			
 			){
 		roomIdx = 1 ; 

@@ -38,7 +38,6 @@
 
 body {
   padding: 3em;
-  background-image: url(https://subtlepatterns.com/patterns/retina_wood.png);
   color: grey;
   font-family: 'Quicksand', sans-serif;
 }
