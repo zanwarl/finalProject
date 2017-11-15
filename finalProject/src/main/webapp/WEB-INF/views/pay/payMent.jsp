@@ -12,6 +12,9 @@ function paid (reqIdx){
 	location.href ="paidOk.do?reqIdx="+reqIdx; 
 }
 function ok(reqIdx, amt ){
+	
+	
+	
 	var IMP = window.IMP; // 생략가능	
 	IMP.init('imp23082100');  // 가맹점 식별 코드
 

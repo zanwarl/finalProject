@@ -26,6 +26,7 @@
 	<li><a href="sendMsg.do?receiver=5">메세지보내기</a></li>
 	<li><a href="roomReq.do?roomIdx=1">예약하기</a></li>
 	<li><a href="roomReqList.do">예약리스트</a></li>
+	<li><a href="myRoomReqList.do"">호스트 예약관리</a></li>
 	
 </ul>
 </body>

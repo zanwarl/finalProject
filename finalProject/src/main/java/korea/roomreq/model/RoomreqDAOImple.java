@@ -68,6 +68,13 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return sqlMap.update("paidSql", reqIdx);
 		
 	}
+	public List<String> myRoomList(String userId) {
+		
+		
+		List<String> list = sqlMap.selectList("myRoomListSql", userId);
+		return list ; 
+		
+	}
 	
 	
 	

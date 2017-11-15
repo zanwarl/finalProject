@@ -56,9 +56,27 @@
 	
 	update roomreq set paid = 1 where reqidx = #{reqIdx}
 	</update>
-	
+
+<!-- 
+
+<resultMap id="roomInfo" type="java.util.HashMap">
+        <result javaType="java.lang.String" column="bookName" property="bookName"/>
+        <result javaType="데이터타입" column="db컬럼명" property="맵에서 키값"/>
+</resultMap>
+ -->
+
+	<select id="myRoomListSql" resultType="String"  parameterType="String">
+
+		select roomname
+		from roomadd
+		where useridx in (
+
+		select member_idx
+		from member
+		where member_id = #{userId}
+		)
 
 
-
+	</select>
 
 </mapper>
