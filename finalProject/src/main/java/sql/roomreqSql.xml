@@ -55,7 +55,8 @@
 
 	<update id="paidSql" parameterType="int">
 
-		update roomreq set paid = 1 where reqidx = #{reqIdx}
+		update roomreq set paid = 1
+		where reqidx = #{reqIdx}
 	</update>
 
 	<select id="myRoomListSql" resultType="java.util.Map"
@@ -73,10 +74,16 @@
 
 	</select>
 
-	<select id="roomReqInfoSql" parameterType="int" resultType="java.util.Map">
-		select *
+	<select id="roomReqInfoSql" parameterType="map" resultType="java.util.Map">
+		select substr(checkindate,4, 2) as checkindate, (to_number (
+		substr(checkoutdate,4, 2) )-to_number (substr(checkindate,4, 2) )+1)as
+		span, userid
 		from roomreq
 		where roomidx = #{roomIdx}
+		and checkindate like #{mm}||'/'||'%/'||#{yy}
+
+
+
 
 
 	</select>

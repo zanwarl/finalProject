@@ -11,6 +11,7 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
@@ -199,16 +200,38 @@ public class RoomReqController {
 		int lastDay =cal.getActualMaximum(Calendar.DATE);
 		
 		
-		System.out.println(lastDay);
+	//	System.out.println(lastDay);
 		
 		roomIdx = 1 ; 
 		
 		ModelAndView mav = new ModelAndView(); 
-		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx);
+		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx, mm, yy);
+
+/*	
+		int schedule []= new int [lastDay+1	];
+		for ( int i =0; i< list.size(); i ++){
+			schedule[  (Integer) list.get(i).get("CHECKINDATE")]=1; 
+			
+		}*/
+		
+		
+		
+	/*	Integer schedule [] = new Integer [lastDay];
+	
+		for ( int i =0; i< date.size(); i ++){
+			schedule[date.get(i)]= 1; 
+			
+		}
+		
+		for ( int i =0; i <schedule.length; i ++){
+			System.out.print(schedule[i]+" ");
+		}*/
+		
 		mav.addObject("list", list);
 		mav.addObject("startDay",startDay);
 		mav.addObject("lastDay",lastDay);
 		mav.setViewName("room/roomReqInfo");
+		//System.out.println(list);
 		return mav; 
 		
 		

@@ -7,14 +7,19 @@
 <meta charset="UTF-8">
 
 <style>
-#content_wrap {width:1200px; height:auto; background:#ddd; margin:0 auto; padding:5px;}
-.content {background:#fff;}
-.info{background:#666;}
-.map{background:skyblue;}
+#content_wrap {width:1200px; height:300px; background:#ddd; margin:0 auto; padding:5px;background:white;}
+.content {
+float: left;
+}
+.content_block{
+float: left;
+width: 200px;
+}
 #map {
-        height: 400px;
-        width: 400px;;
-       }
+height: 400px;
+width: 400px;;
+float: left;
+ }
 </style>
 <title>Insert title here</title>
 <script type="text/JavaScript"
@@ -91,7 +96,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<form>
+<div id="contents"><!-- contents -->
 	<table>
 		<thead>
 			<tr>
@@ -104,21 +109,13 @@
 		</thead>
 	</table>
 	<div id="content_wrap">
-
-
-		<div class="content">
-		</div>
-		
-		<div id="map">
-		지도
-		</div>
-	
+		<div class="content"></div>
+		<div class="content_block">벌어져</div>
+		<div id="map"></div>
 	</div>
 
 	<div class="info">
-	jsp 현재 주소 값
 	</div>
-</form>
 	<hr>
 	<div id="cmtform">
 	<form action="tourCmtWrite.do">
@@ -146,7 +143,9 @@
 	</div>
 	<!-- <div id="map">지도영역</div> -->
 
+</div>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
 </script>	
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

@@ -165,9 +165,11 @@ public class PlanController {
 		ModelAndView mav = new ModelAndView();
 		
 		pdto = pdao.pdtoInfo(pdto.getPlan_idx());
+		int plan_idx = pdto.getPlan_idx();
 		
 		mav.setViewName("plan/planDetail");
 		mav.addObject("pdto", pdto);
+		mav.addObject("plan_idx", plan_idx);
 		return mav;
 	}
 	
@@ -231,7 +233,6 @@ public class PlanController {
 	@RequestMapping("/planDetailWrite.do")
 	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
 		
-		System.out.println("???????????????????");
 		
 		/*Object object=null;
 		JSONArray arrayObj=null;
@@ -264,9 +265,12 @@ public class PlanController {
 		
 		int update = pdao.planMainUpdate(pdto);
 		
+
+		String goPage = "plan.do";
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("plan/plan");
+		mav.addObject("url", goPage);
+		mav.setViewName("plan/planDetailOk");
 		return mav;
 	}    
 	
