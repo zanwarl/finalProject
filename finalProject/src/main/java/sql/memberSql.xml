@@ -26,4 +26,8 @@
    		select * from member where member_idx = #{memberIdx}
    
    </select> -->
+   <update id="memberUpdate" parameterType="korea.member.model.MemberDTO">
+	update member set member_pwd=#{member_pwd}, member_tel=#{member_tel}, member_email=#{member_email}, member_addr=#{member_addr} where member_id=#{member_id}
+	</update>
+   
 </mapper>

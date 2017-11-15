@@ -127,4 +127,21 @@ public class MemberController {
 		
 	}
 	
+	
+	@RequestMapping(value="/memberUpdate.do",
+			method=RequestMethod.GET)
+	public String updateForm() {
+		return "member/memberUpdate";
+	}
+	
+	@RequestMapping("/memberUpdate.do")
+	public ModelAndView memberUpdate(MemberDTO dto) {
+		int result=memberDao.memberUpdate(dto);		
+		String msg=result>0?"회원수정성공!":"등록실패";
+		ModelAndView mav=new ModelAndView();		
+		mav.addObject("msg",msg);
+		mav.setViewName("member/memberMsg");
+		return mav;
+	}
+	
 }

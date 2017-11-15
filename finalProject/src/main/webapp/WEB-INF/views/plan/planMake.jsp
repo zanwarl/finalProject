@@ -167,7 +167,7 @@ function plan_display() {
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/jquery-ui.js"></script>
 <script>
-//header에 있는 js와 충돌나서 설정
+//header에 있는 js와 충돌나서 noConflict설정
 var jq = $.noConflict();
 
 jq(document).ready(function() {
@@ -180,7 +180,7 @@ jq(document).ready(function() {
 		dateFormat: 'yy-mm-dd'
 	});
 });
-	</script>
+</script>
 
 		<!-- 도시 선택 시 띄워주는 화면 -->
 		<div id="select_detail_view_city">
@@ -205,7 +205,7 @@ jq(document).ready(function() {
 				<div>
 					<h2 id="modal1Title">출발일 선택</h2>
 					<div class="modal_content">
-						<form name="plan_make" action="planMainSaveDb.do" method="post">
+						<form name="plan_make" action="planMainSaveDb.do">
 							<table>
 								<tbody>
 									<tr>
@@ -222,7 +222,7 @@ jq(document).ready(function() {
 										<td>
 											<!-- form에서 넘겨줘야 할 데이터 -->
 											<!-- 작성자,areacode -->
-											<input type="hidden" name="plan_writer" value="1">
+											<input type="hidden" name="plan_writer" value="${sIdx }">
 											<input type="hidden" name="area_code" value="1">
 											
 										</td>

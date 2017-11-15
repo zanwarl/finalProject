@@ -17,6 +17,9 @@ ${list.pland_order } &nbsp;
 <a href="tourDetail.do?contentTypeId=${list.pland_typeid }&contentId=${list.pland_code }">
 <img src="${list.pland_img}" width="100"></a>${list.pland_subject } <br>
 </c:forEach>
+<c:if test="${pdto.plan_writer eq sIdx }">
+<a href="planEdit.do?plan_idx=${pdto.plan_idx }">[수정하기] || [삭제하기]</a>
+</c:if>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

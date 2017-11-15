@@ -72,6 +72,7 @@ public class TourController {
 
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		JSONObject json = (JSONObject) jsonObject.get("response");
+		System.out.println(json);
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
 

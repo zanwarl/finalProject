@@ -2,19 +2,29 @@ package korea.controller;
 
 import java.io.BufferedInputStream;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONValue;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.ServletRequestUtils;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
@@ -127,15 +137,18 @@ public class PlanController {
 	}
 	
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
-	@RequestMapping(value="/planMainSaveDb.do", method=RequestMethod.POST)
+	@RequestMapping("/planMainSaveDb.do")
 	public ModelAndView planMainSaveDb(PlanDTO pdto) {
+		int idx = pdao.lastSaveIdx(pdto)+1;
+		pdto.setPlan_idx(idx);
 		
 		int result = pdao.planMainWrite(pdto);
-		System.out.println(result);
 		ModelAndView mav = new ModelAndView();
-		
+		System.out.println("2");
 		String str = "planDetail.do";
+		str = str +  "?plan_idx="+pdto.getPlan_idx();
 		
+		System.out.println(str);
 		mav.setViewName("plan/planDetailOk");
 		mav.addObject("url", str);
 		return mav;
@@ -145,14 +158,12 @@ public class PlanController {
 	@RequestMapping("/planDetail.do")
 	public ModelAndView planDetail(PlanDTO pdto) {
 		
-		pdto = pdao.lastSaveIdx(pdto);
-		
-		System.out.println("마지막 idx : " + pdto.getPlan_idx());
-		System.out.println(pdto.getPlan_subject());
-		
+		//int idx = pdao.lastSaveIdx(pdto);
+
 		ModelAndView mav = new ModelAndView();
 		
 		mav.setViewName("plan/planDetail");
+		mav.addObject("plan_idx", pdto.getPlan_idx());
 		return mav;
 	}
 	
@@ -202,4 +213,69 @@ public class PlanController {
 		return mav;
 	}
 	
+	/*@RequestMapping("/planDetailWrite.do")
+	public ModelAndView planDetailWrite(PlanDetailDTO pddto, PlanDTO pdto, @RequestParam(value="str") String[] str) {
+		
+		System.out.println(str.length);
+
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/planOk");
+		return mav;
+	}*/
+	
+	@RequestMapping("/planDetailWrite.do")
+	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
+		
+		System.out.println("???????????????????");
+		
+		/*Object object=null;
+		JSONArray arrayObj=null;
+		JSONParser jsonParser=new JSONParser();
+		object=jsonParser.parse(str);
+		arrayObj=(JSONArray) object;
+		System.out.println("Json object :: "+arrayObj);*/
+		
+		JSONParser parser = new JSONParser();
+		Object obj = parser.parse(str);
+		JSONArray jsonArray = (JSONArray)obj;
+		
+		pdao.planDetailDelete(pdto.getPlan_idx());
+		
+		PlanDetailDTO pddto = new PlanDetailDTO();
+		for(int i=0;i<jsonArray.size();i++){
+			JSONObject jsonObj = (JSONObject)jsonArray.get(i);
+			pddto.setPland_order(Integer.parseInt((String) jsonObj.get("order")));
+			pddto.setPland_img((String)jsonObj.get("img"));
+			pddto.setPland_typeid((String)jsonObj.get("type"));
+			pddto.setPland_code((String)jsonObj.get("code"));
+			pddto.setPland_subject((String)jsonObj.get("title"));
+			pddto.setPland_pidx(pdto.getPlan_idx());
+			
+			int result = pdao.planDetailWrite(pddto);
+		}
+		System.out.println("---: " + pdto.getPlan_subject());
+		System.out.println("---: " + pdto.getPlan_idx());
+		
+		
+		int update = pdao.planMainUpdate(pdto);
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/plan");
+		return mav;
+	}    
+	
+	@RequestMapping("/planEdit.do")
+	public ModelAndView planEdit(int plan_idx) {
+		
+		System.out.println("수정 할 번호 : " + plan_idx);
+		List<PlanDetailDTO> list = pdao.planEditList(plan_idx);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("plan/planDetail");
+		mav.addObject("plan_idx", plan_idx);
+		mav.addObject("list", list);
+		return mav;
+	}
+
 }	
