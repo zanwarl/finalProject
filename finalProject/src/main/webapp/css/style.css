@@ -34,7 +34,7 @@ width:900px;
 z-index:130000000;
 position:relative;
 margin:0 auto;
-  font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
 }
 #main_menu > ul {
   font-size: 20px; /*폰트사이즈설정*/
