@@ -14,13 +14,12 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		super();
 		this.sqlMap = sqlMap;
 	}
-/*
-	public List<RoomreqDTO> roomreqList() {
 
-		List<RoomreqDTO> list = sqlMap.selectList("roomreqList");
-		return list;
-	}
-*/
+	/*
+	 * public List<RoomreqDTO> roomreqList() {
+	 * 
+	 * List<RoomreqDTO> list = sqlMap.selectList("roomreqList"); return list; }
+	 */
 	public int RoomreqAdd(RoomreqDTO rdto) {
 
 		int count = sqlMap.insert("roomreqInsert", rdto);
@@ -32,50 +31,56 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		RoomreqDTO rdto = sqlMap.selectOne("roomReqOK", idx);
 		return rdto;
 	}
-	
-	
-	
+
 	///////////////////////////
 	public List<RoomreqDTO> roomreqList(String userId, int cp, int listSize) {
 		// TODO Auto
-		Map<String, Object>map = new HashMap<String, Object>();
-		int startNum = (cp -1)* listSize+1;
-		int endNum = cp*listSize;	
+		Map<String, Object> map = new HashMap<String, Object>();
+		int startNum = (cp - 1) * listSize + 1;
+		int endNum = cp * listSize;
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("userId", userId);
-		
+
 		List<RoomreqDTO> list = sqlMap.selectList("roomreqList", map);
 		return list;
 	}
+
 	public int roomReqTotalCnt(String userId) {
-	
-		
+
 		int res = sqlMap.selectOne("roomReqTotalCntSql", userId);
-		return res ; 
-		
+		return res;
+
 	}
+
 	public int roomCancel(int reqIdx) {
 		// TODO A
 
 		int res = sqlMap.update("roomCancelSql", reqIdx);
-		return res; 
-		
+		return res;
+
 	}
+
 	public int paid(int reqIdx) {
 		// TODO Auto-gen
 
 		return sqlMap.update("paidSql", reqIdx);
-		
+
 	}
-	public List<String> myRoomList(String userId) {
-		
-		
-		List<String> list = sqlMap.selectList("myRoomListSql", userId);
-		return list ; 
-		
+
+	public List<Map<String, Object>> myRoomList(String userId) {
+
+		List<Map<String, Object>> map = sqlMap.selectList("myRoomListSql", userId);
+
+		return map;
+
 	}
-	
-	
-	
+
+	public List<Map<String, Object>> roomReqInfo(int roomidx) {
+
+		List<Map<String, Object>> map = sqlMap.selectList("roomReqInfoSql", roomidx);
+		return map;
+
+	}
+
 }

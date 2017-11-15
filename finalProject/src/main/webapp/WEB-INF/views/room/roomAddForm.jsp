@@ -54,7 +54,7 @@
 <h1>숙소등록페이지</h1>
 	<form name="roomadd.do" action="home.do" method="post">
  	<div>
- 	유저번호:<input type="text" name="useridx"><br>
+ 	<input type="hidden" name="useridx" value="${useridx}"><br>
  	방타입:<select name="btype">
  		<option value="집">집</option>
  		<option value="호텔">호텔</option>
