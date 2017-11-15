@@ -22,5 +22,5 @@ ${list.pland_order } &nbsp;
 </c:if>
 </div>
 <%@ include file="../footer.jsp" %>
-</body>
+</body>	
 </html>

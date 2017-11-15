@@ -139,7 +139,8 @@ public class PlanController {
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
 	@RequestMapping("/planMainSaveDb.do")
 	public ModelAndView planMainSaveDb(PlanDTO pdto) {
-		int idx = pdao.lastSaveIdx(pdto)+1;
+		int idx = pdao.lastSaveIdx(pdto);
+		System.out.println(idx);
 		pdto.setPlan_idx(idx);
 		
 		int result = pdao.planMainWrite(pdto);

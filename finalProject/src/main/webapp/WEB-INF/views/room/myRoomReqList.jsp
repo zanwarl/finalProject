@@ -27,12 +27,14 @@
 
 <table>
 
-<!-- 	<thead>
+	<thead>
 		<tr>
+		
+			<th>방번호 </th>
 			<th>방이름 </th>
 		
 		</tr>
-	</thead> -->
+	</thead> 
 		
 	
 	<tbody>
@@ -45,43 +47,26 @@
 		</c:if>
 			<c:forEach var ="dto" items ="${list }">
 				<tr>
+				<%-- 
+					<td><c:out value="${dto.roomidx }"></c:out></td>
+					<td><c:out value="${dto.roomname }"></c:out></td> --%>
 				
-					<td>${dto}</td>
+				
+					<td>${dto.ROOMIDX}</td>
+					<c:url value="roomReqInfo.do" var="roomReqInfoURL" >
+						<c:param name="roomIdx" value="${dto.ROOMIDX }"></c:param>
+					</c:url>
+					
+					<td><a href="${roomReqInfoURL }">${dto.ROOMNAME}</a></td> 
 				
 				
 
 				</tr>
-				<%-- <tr>
-					
-					<!--	@RequestMapping (value = "/roomCancel.do")
-	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {  -->
-					<c:url value="roomCancel.do" var="roomCancelURL" >
-						<c:param name="reqIdx" value="${dto.reqidx}"></c:param>
-					
-					</c:url>
-					<c:if test="${dto.paid !=-1 }">
-					<td colspan="6">
-					<a href="${roomCancelURL }">취소하기</a>
-					</td>
 				
-					</c:if>
-					
-					</tr> --%>
 			</c:forEach>
 		
 	</tbody>	
 
-<%-- 	<tfoot>
-		<tr>
-			<td>${pageStr}</td>
-		</tr>
-<!-- 	
-		<tr>
-			<td><a href="">글쓰기</a></td>
-		</tr> -->
-	
-	</tfoot>
- --%>
 </table>
 
 

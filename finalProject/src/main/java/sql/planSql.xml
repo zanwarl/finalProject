@@ -14,9 +14,11 @@
 		</select>
 		
 		<select id="lastSaveIdx" parameterType="korea.plan.model.PlanDTO" resultType="int">
-			select plan_idx from plan_main  
+			<!-- select plan_idx from plan_main  
 			where rownum = 1 and plan_writer = #{plan_writer}
-			order by plan_idx desc
+			order by plan_idx desc -->
+			select last_number from user_sequences
+			where sequence_name=upper('plan_idx')
 		</select>
 		
 		<select id="myPlanList" resultType="korea.plan.model.PlanDTO">
