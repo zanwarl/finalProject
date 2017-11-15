@@ -13,9 +13,9 @@
    			]]>
 		</select>
 		
-		<select id="lastSaveIdx" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main  
-			where rownum = 1 and plan_writer = 1
+		<select id="lastSaveIdx" parameterType="korea.plan.model.PlanDTO" resultType="int">
+			select plan_idx from plan_main  
+			where rownum = 1 and plan_writer = #{plan_writer}
 			order by plan_idx desc
 		</select>
 		
@@ -48,6 +48,10 @@
 			select count(*) from plan_main
 		</select>
 		
+		<select id="planEditList" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">
+			select * from plan_detail where pland_pidx = #{pland_pidx}
+		</select>
+		
 	<!-- select end -->
 		
 	<!-- insert start -->
@@ -71,6 +75,9 @@
 
 
 	<!-- delete start -->
+		<select id="planDetailDelete" parameterType="int" resultType="int">
+			delete plan_detail where pland_pidx = #{pidx}
+		</select>
 	<!-- delete end -->
 	
 	
