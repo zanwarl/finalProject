@@ -11,6 +11,7 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -167,18 +168,46 @@ public class RoomReqController {
 		
 	}
 	
+/*	public static int [] getDate (){
+
+		Calendar now = Calendar.getInstance(); 
+		int y = now.get(Calendar.YEAR);
+		int m = now.get(Calendar.MONTH)+1; 
+		int res []= {y, m};
+		return res ; 
+		
+		
+	}*/
+	
 
 	@RequestMapping ("/roomReqInfo.do")
 	public ModelAndView roomReqInfo (
-			@RequestParam (value="roomIdx")int roomIdx 
-
-			
+			@RequestParam (value="roomIdx")int roomIdx ,
+			@RequestParam (value="yy", defaultValue="2017")int yy ,
+			@RequestParam (value="mm",  defaultValue="12" )int mm
 			){
+	
+		
+		
+		Calendar cal= Calendar.getInstance(); 
+		cal.set(Calendar.YEAR, yy);
+		cal.set(Calendar.MONTH, mm-1);
+		cal.set(Calendar.DATE, 1);
+		
+		int startDay = cal.get(Calendar.DAY_OF_WEEK);//시작요일
+	//	System.out.println(startDay);
+		int lastDay =cal.getActualMaximum(Calendar.DATE);
+		
+		
+		System.out.println(lastDay);
+		
 		roomIdx = 1 ; 
 		
 		ModelAndView mav = new ModelAndView(); 
 		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx);
 		mav.addObject("list", list);
+		mav.addObject("startDay",startDay);
+		mav.addObject("lastDay",lastDay);
 		mav.setViewName("room/roomReqInfo");
 		return mav; 
 		
