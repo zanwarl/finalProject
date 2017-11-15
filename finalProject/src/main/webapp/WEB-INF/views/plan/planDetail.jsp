@@ -91,58 +91,77 @@
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
 var add_img = '';
+var initLoc = new Array();
+
+var contentArray = [];
+var iConArray = [];
+var markers = [];
+var iterator = 0;
+var markerArray = [];
+
+var initx = '';
+var inity = '';
 
 
-$(document).ready(function() {	
 	var cp = 1;
+	function initxy() {
+		/* ---ajax start--- */
+		$.ajax({
+			url:"areaBasedList.do?areaCode=${pdto.plan_place}&cp="+cp,
+			type:"GET",
+			dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+		 	async:false, // 이 한줄만 추가해주시면 됩니다.
+			success : function(msg) {
+			// console.log(msg.response.body.items.item);
+			var myItem = msg.response.body.items.item;
+			
+			
+			var totalCnt = msg.response.body.totalCount;
+			var pageName = 'city.do?areaCode='+ 1;
+			var listSize = 10;
+			var pageSize = 5;
+			
+			var queryStr = '123123';
+			
+			var output = '';
+			
+			$.each(myItem, function(key, val) {
+				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+				if(val.firstimage == null) {
+					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+				} else {
+					output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+				}
+				output += '<div class="info">'+val.title+'</div>';
+				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+				output += '</div>';
 	
-	/* ---ajax start--- */
-	$.ajax({
-		url:"areaBasedList.do?areaCode="+${pdto.plan_idx}+"&cp="+cp,
-		type:"GET",
-		dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-		success : function(msg) {
-		// console.log(msg.response.body.items.item);
-		var myItem = msg.response.body.items.item;
-		
-		
-		var totalCnt = msg.response.body.totalCount;
-		var pageName = 'city.do?areaCode='+ 1;
-		var listSize = 10;
-		var pageSize = 5;
-		
-		var queryStr = '123123';
-		
-		var output = '';
-		
-		$.each(myItem, function(key, val) {
-			output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
-			if(val.firstimage == null) {
-				output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
-			} else {
-				output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+				contentArray[key] = val.title;
+				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+				inity = val.mapy;
+				initx = val.mapx;
+			});
+			
+			$('#cityList').append(output);
+			/* $("#cityList").html(output); */
+			},
+			error : function(xhr, status, error) {
+				alert("에러발생");
 			}
-			output += '<div class="info">'+val.title+'</div>';
-			output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
-			output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
-			output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
-			output += '</div>';
 		});
-		
-		$('#cityList').append(output);
-		/* $("#cityList").html(output); */
-		},
-		error : function(xhr, status, error) {
-			alert("에러발생");
-		}
-	});
+	}
 	/* ---ajax end--- */
 	
+$(document).ready(function() {	
 	/* order 번호 1로 초기화. 수정시엔 마지막 order 번호 받아서 추가 */
-	var compareOrder = ${lastOrder};
+	var compareOrder = '${lastOrder}';
 	var order = 1;	
-	if(compareOrder > 1) {
-		var order = compareOrder + 1;
+	if(compareOrder == null) {
+		order = 1;
+	} else if(compareOrder>1) {
+		order = parseInt(compareOrder)+1; 
 	}
 	alert(order);
 	/* 여행지 선택 시 요소 구해서 새로 div append */
@@ -174,37 +193,46 @@ $(document).ready(function() {
 <script>
 function initMap() {
 	//마커 위치 초기화
-	var initLoc = [
-					['서울',37.567874, 126.987895],
-				    ['인천',37.491034, 126.707597],
-				    ['경기',37.411543, 127.514934],
-				    ['대전',36.373976, 127.388284],
-				    ['대구',35.869106, 128.561676],
-				    ['광주',35.153961, 126.834019],
-				    ['부산',35.168423, 129.039288],
-				    ['울산',35.548319, 129.245663],
-				    ['세종',36.566003, 127.257765],
-				    ['강원',37.823038, 128.156857],
-				    ['충북',37.000694, 127.709422],
-				    ['충남',36.703444, 126.798422],
-				    ['경북',36.264092, 128.931699],
-				    ['경남',35.458897, 128.221178],
-				    ['전북',35.701074, 127.124440],
-				    ['전남',34.882915, 126.982925],
-				    ['제주',33.392589, 126.549532]
-				  ];
+	initxy();
+	/* alert("t");
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 8,
 		center: new google.maps.LatLng(36.733956, 127.806931),
 	});
-	var marker, i;
+				  
+  	for (var i=0;i<markerArray.length;i++) {
+  		addMarker();
+  	} */
+  	 var mapOptions = {
+  	        zoom: 10,
+  	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+  	        //각 지역의 중심 좌표로
+  	        center: new google.maps.LatLng(inity, initx)
+  	    };
+  	 
+  	    map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  	 
+  	    for (var i = 0; i < markerArray.length; i++) {
+  	        addMarker();
+  	    }
+}
+
+function addMarker() {
 	//지도에 마커 띄우기
-    for (i = 0; i < initLoc.length; i++) {
-    	marker = new google.maps.Marker({
-    		position: new google.maps.LatLng(initLoc[i][1],initLoc[i][2]),
-    		map: map
-    	});
-    }
+   	var marker = new google.maps.Marker({
+   		position: markerArray[iterator],
+   		map: map
+   	});
+	markers.push(marker);
+	
+	var infowindow = new google.maps.InfoWindow({
+	      content: contentArray[iterator]
+	    });
+	
+	google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+    });
+	iterator++;
 }
 
 function plan() {

@@ -119,15 +119,12 @@ public class TourController {
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
-		System.out.println("zz");
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
+		System.out.println("jsonobject : " + jsonObject);
 		JSONObject json = (JSONObject) jsonObject.get("response");
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
-
-		 System.out.println("총 지역 수 : " +totalCount);
-		 
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
 				+ tour_code
