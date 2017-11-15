@@ -10,7 +10,7 @@
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-<script>
+<script language='javascript'>
 	$( function() {
 	$( "#datepicker" ).datepicker();
 	});
@@ -23,7 +23,7 @@
 		var timediv = document.getElementById("button");
 		for(var i=0;i<10;i++){
 			timediv.innerHTML += '<input type="button" name="t_btn'+i+'" value="'+i+'"> ';
-		}
+		}	
 	}
 
 	 /* function change(num){
@@ -52,7 +52,10 @@ function addNum(){
 		alert("최대 10명까지 예약할 수 있습니다.");
 	}else{
 		frm.count.value = Number(count) + 1;
+		call();
 	}
+	
+	
 }
   
 function subNum(){
@@ -63,8 +66,20 @@ function subNum(){
 		alert("최소 1명 이상 선택해야 합니다.");
 	}else{
 		frm.count.value = Number(count) - 1;  
+		call();
 	}
 }
+
+
+function call(rp)
+{
+ if(document.getElementById("num").value && document.getElementById("roomp").value){
+  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt(rp);
+ }
+}
+
+
+
 </script>
 </head>
 <body>
@@ -78,7 +93,7 @@ function subNum(){
        	<td>
        		<label>예약인원</label> 
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="number" name="count" value="1" style="width:17px;">
+ 			<input type="text" name="count" id='num' value="1" onchange="call()" style="width:30px;">
   			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
   		</td>
   	</tr> 
@@ -97,7 +112,7 @@ function subNum(){
 	<tr>
 		<td>
 			<label>가격</label>
-			<input type="text" name="roomprice" value="${arr.roomprice}" readonly>
+			<input type="text" name="roomprice" id='roomp' value="${arr.roomprice}" onkeyup="call(${arr.roomprice})" readonly>
 		</td>
 	</tr>
 			<td colspan="2" align="center">
