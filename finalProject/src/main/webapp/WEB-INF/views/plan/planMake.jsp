@@ -77,19 +77,19 @@ $(document).ready(function() {
 	/* ---ajax end-- */
 	
 
+	var _areacode = 0;
+	
 	$('#cityList').on('click','.add',function(){
 		//부모? div의 attribute 읽어와서 저장
 		name = $(this).parent().attr('data-val');
 		code = $(this).parent().attr('data');
 		
-		var tmp = '';
-		
-		tmp = code;
-		
-		if(tmp!=null) {
-			window.alert("실행x");
+		_areacode = $('#acode').val();
+		if(_areacode == 0) {
+			_areacode = code;
+			$('#plan_place').val(code);
+			$('#acode').val(code);
 		}
-		$('#area_code').val(code);
 		$('#select_detail_view_city').show();
 		
 		$('#plan_city_list').each(function() {
@@ -206,6 +206,8 @@ jq(document).ready(function() {
 				<div class="plan_main_name"></div>
 				<div class="remodal-bg"><a href="#modal">상세 일정만들기</a></div>
 			</div>
+			
+			<input type="text" name="acode" id="acode">
 		</div>
 
 		<!-- modal div start -->	
@@ -231,8 +233,8 @@ jq(document).ready(function() {
 										<td>
 											<!-- form에서 넘겨줘야 할 데이터 -->
 											<!-- 작성자,areacode -->
-											<input type="text" name="plan_writer" value="${sIdx }">
-											<input type="text" id="area_code" name="area_code">
+											<input type="hidden" name="plan_writer" value="${sIdx }">
+											<input type="hidden" id="plan_place" name="plan_place">
 											
 										</td>
 									</tr>

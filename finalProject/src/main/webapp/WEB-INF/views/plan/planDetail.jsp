@@ -95,8 +95,10 @@ var add_img = '';
 
 $(document).ready(function() {	
 	var cp = 1;
+	
+	/* ---ajax start--- */
 	$.ajax({
-		url:"areaBasedList.do?areaCode=1&cp="+cp,
+		url:"areaBasedList.do?areaCode="+${pdto.plan_idx}+"&cp="+cp,
 		type:"GET",
 		dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 		success : function(msg) {
@@ -136,8 +138,14 @@ $(document).ready(function() {
 	});
 	/* ---ajax end--- */
 	
-	var order = 1;
-	/* 여행지 선택 시 div 복사해서 추가 */
+	/* order 번호 1로 초기화. 수정시엔 마지막 order 번호 받아서 추가 */
+	var compareOrder = ${lastOrder};
+	var order = 1;	
+	if(compareOrder > 1) {
+		var order = compareOrder + 1;
+	}
+	alert(order);
+	/* 여행지 선택 시 요소 구해서 새로 div append */
 	$('#cityList').on('click','.add',function() {
 		add_title = $(this).parent().attr('data-val');
 		add_code = $(this).parent().attr('data');

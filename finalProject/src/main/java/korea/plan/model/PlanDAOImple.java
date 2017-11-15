@@ -37,11 +37,21 @@ public class PlanDAOImple implements PlanDAO {
 	}
 	
 	public int planMainWrite(PlanDTO pdto) {
-		System.out.println("!!" + pdto.getPlan_subject());
 		int result = sqlMap.insert("planMainWrite", pdto);
 		return result;
 	}
 	
+	public PlanDTO pdtoInfo(int idx) {
+		PlanDTO pdto = sqlMap.selectOne("pdtoInfo", idx);
+		return pdto;
+		
+	}
+	
+	public int lastOrder(int idx) {
+		int result = sqlMap.selectOne("lastOrder", idx);
+		return result;
+		
+	}
 	public int planMainUpdate(PlanDTO pdto) {
 		System.out.println("idx : " + pdto.getPlan_idx());
 		int result = sqlMap.update("planMainUpdate", pdto);

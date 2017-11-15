@@ -27,9 +27,9 @@
 	<tr>
 	</c:if>
 		<td>
-		${list.plan_idx }
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_idx }</a>
 		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_explain }</a> <br>
-		${list.plan_subject }
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_subject }</a>
 		조회수 : ${list.plan_readnum } <br>
 		${list.plan_name }
 		</td>
