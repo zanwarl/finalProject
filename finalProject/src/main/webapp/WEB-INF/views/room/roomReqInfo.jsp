@@ -7,14 +7,46 @@
 <!DOCTYPE html >
 <html>
 <head>
+<link rel='stylesheet' href='calendar/fullcalendar.css' />
+<script src='calendar/jquery.min.js'></script>
+<script src='calendar/moment.min.js'></script>
+<script src='calendar/fullcalendar.js'></script>
 
 
+<script>
+//header에 있는 js와 충돌나서 noConflict설정
+var jq = $.noConflict();
+
+jq(document).ready(function() {
+	jq("#calendar").fullCalendar({})
+	
+	
+/* 	
+	jq("#datepicker").datepicker({
+		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
+  	});
+	
+	jq(".modal_content #datepicker").datepicker({
+		dateFormat: 'yy-mm-dd'
+	}); */
+});
+</script>
+<!-- 
+<script type="text/javascript">
+
+
+$(document).ready(function() {
+
+    // page is now ready, initialize the calendar...
+
+    $('#calendar').fullCalendar({
+        // put your options and callbacks here
+    })
+
+});
+</script> -->
 <meta charset=UTF-8">
 <title>Insert title here</title>
-
-<script type="text/javascript">
-	
-</script>
 
 <style type="text/css">
 /* =========
@@ -87,7 +119,7 @@ body {
 }
 
 .calendar .days li .event {
-	background: #6EB590;
+	background: black;
 	font-size: .75em;
 	padding: 0 .75em;
 	line-height: 2em;
@@ -95,11 +127,10 @@ body {
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	border-radius: 1em;
 	margin-bottom: 1px;
 }
 
-.calendar .days li .event.span-2 {
+/* .calendar .days li .event.span-2 {
 	width: 200%;
 }
 
@@ -113,8 +144,7 @@ body {
 
 .calendar .days li .event.all-day {
 	background: #9987B5;
-}
-
+} */
 .calendar .days li .event.clear {
 	background: none;
 }
@@ -132,11 +162,10 @@ body {
 <body>
 
 
-
-
+ 
 	<jsp:include page="/header.do"></jsp:include>
 
-
+<div id="calendar" ></div>
 
 	<div id="contents">
 
@@ -224,17 +253,17 @@ body {
 		</c:url>
 		<c:url var="nextURL" value="roomReqInfo.do">
 
-			<c:if test="${param.mm==1 }">
+			<c:if test="${param.mm==12 }">
 
 				<c:param name="roomIdx" value="${param.roomIdx }"></c:param>
-				<c:param name="mm" value="12"></c:param>
-				<c:param name="yy" value="${param.yy-1}"></c:param>
+				<c:param name="mm" value="1"></c:param>
+				<c:param name="yy" value="${param.yy+1 }"></c:param>
 			</c:if>
 
-			<c:if test="${param.mm!=1 }">
+			<c:if test="${param.mm!=12 }">
 
 				<c:param name="roomIdx" value="${param.roomIdx }"></c:param>
-				<c:param name="mm" value="${param.mm-1 }"></c:param>
+				<c:param name="mm" value="${param.mm+1 }"></c:param>
 				<c:param name="yy" value="${param.yy}"></c:param>
 
 			</c:if>
@@ -250,7 +279,8 @@ body {
 
 
 
-				<a href="${preURL }">&lt;</a> ${param.yy }/${param.mm } &gt;
+				<a href="${preURL }">&lt;</a> ${param.yy }/${param.mm } <a
+					href="${nextURL }">&gt;</a>
 			</h1>
 			<ol class="day-names">
 				<li>Sunday</li>
@@ -272,6 +302,24 @@ body {
 
 					<li>
 						<div class="date">${i }</div>
+
+						<div class="event">Event with Long Name</div>
+						
+						
+						 <%-- 	 <c:forEach var="dto"items="${list }">
+							<c:if test="${dto.CHECKINDATE==i }">
+								<c:forEach var="j" begin="1" end="${dto.SPAN }">
+									<div class="event">Event with Long Name</div>
+
+								</c:forEach>
+
+
+							</c:if>
+
+						</c:forEach>
+ --%>
+
+
 					</li>
 				</c:forEach>
 				<!-- <li>
@@ -476,15 +524,13 @@ body {
 			</ol>
 		</div>
 
+</div>
 
 
-
-
-
-	</div>
+<%-- 
 
 	<jsp:include page="/footer.do"></jsp:include>
-
+ --%>
 
 
 </body>
