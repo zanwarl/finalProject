@@ -205,7 +205,7 @@ jq(document).ready(function() {
 				<div>
 					<h2 id="modal1Title">출발일 선택</h2>
 					<div class="modal_content">
-						<form name="plan_make" action="planMainSaveDb.do" method="post">
+						<form name="plan_make" action="planMainSaveDb.do">
 							<table>
 								<tbody>
 									<tr>

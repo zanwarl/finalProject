@@ -137,7 +137,7 @@ public class PlanController {
 	}
 	
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
-	@RequestMapping(value="/planMainSaveDb.do", method=RequestMethod.POST)
+	@RequestMapping("/planMainSaveDb.do")
 	public ModelAndView planMainSaveDb(PlanDTO pdto) {
 		
 		int result = pdao.planMainWrite(pdto);
@@ -145,7 +145,9 @@ public class PlanController {
 		ModelAndView mav = new ModelAndView();
 		
 		String str = "planDetail.do";
+		str = str +  "?plan_idx="+pdto.getPlan_idx();
 		
+		System.out.println(str);
 		mav.setViewName("plan/planDetailOk");
 		mav.addObject("url", str);
 		return mav;
