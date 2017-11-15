@@ -42,7 +42,7 @@
 		<c:url var="contentUrl" value="reBbsContent.do">
 			<c:param name="idx">${dto.rebbs_idx }</c:param>
 		</c:url>
-		<td><a href="${contentUrll }">${dto.subject }</a></td>	
+		<td><a href="${contentUrl }">${dto.subject }</a></td>	
 		<td>${dto.writer }</td>
 		<td>${dto.readnum }</td>
 	</tr>

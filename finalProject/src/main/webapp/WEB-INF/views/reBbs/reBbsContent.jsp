@@ -11,7 +11,7 @@
 <table border="1" cellspacing="0" width="450">
 	<tr>
 		<th>번호</th>
-		<td>${dto.idx }</td>
+		<td>${dto.rebbs_idx }</td>
 		<th>작성날짜</th>
 		<td>${dto.writedate }</td>
 	</tr>
