@@ -11,6 +11,6 @@
  		select roomidx.currval from dual
  	</select>
  	<select id="roomAddrContent" parameterType="int" resultType="korea.room.model.RoomAddrDTO">
-	select * from room_addr where room_idx = #{idx}
+		select * from room_addr where room_idx = #{idx}
  	</select>
  </mapper>
