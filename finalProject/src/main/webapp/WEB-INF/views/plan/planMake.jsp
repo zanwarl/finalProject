@@ -222,7 +222,7 @@ jq(document).ready(function() {
 										<td>
 											<!-- form에서 넘겨줘야 할 데이터 -->
 											<!-- 작성자,areacode -->
-											<input type="hidden" name="plan_writer" value="1">
+											<input type="hidden" name="plan_writer" value="${sIdx }">
 											<input type="hidden" name="area_code" value="1">
 											
 										</td>
