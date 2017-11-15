@@ -22,6 +22,15 @@
 		resultType="korea.roomAdd.model.RoomAddDTO">
 		select * from roomadd where roomidx = #{idx}
 	</select>
+	<update id="roomUpdate" parameterType="korea.roomAdd.model.RoomAddDTO">
+		update roomadd set btype=#{btype}, rtype=#{rtype},maxcount=#{maxcount},
+		addr1=#{addr1},addr2=#{addr2},postnum=#{postnum},conv=#{conv},safe=#{safe},
+		space=#{space},content=#{content},roomname=#{roomname},roomprice=#{roomprice},
+		nodate=#{nodate},checkin=#{checkin},checkout=#{checkout} where roomidx=#{roomidx}
+	</update>
+	<delete id="roomDelete" parameterType="int">
+		delete from roomadd where roomidx=#{idx}
+	</delete>
 	
 	
 	

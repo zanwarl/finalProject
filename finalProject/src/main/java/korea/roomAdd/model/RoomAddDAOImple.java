@@ -35,4 +35,16 @@ public class RoomAddDAOImple implements RoomAddDAO {
 		RoomAddDTO rdto = sqlMap.selectOne("roomUpdateData",idx);
 		return rdto;
 	}
+
+	public int roomUpdate(RoomAddDTO dto) {
+		int count = sqlMap.update("roomUpdate",dto);
+		return count;
+	}
+
+	public int roomDelete(int idx) {
+		int count = sqlMap.delete("roomDelete",idx);
+		return count;
+	}
+	
+	
 }

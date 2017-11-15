@@ -10,4 +10,6 @@ public interface RoomAddDAO {
 	public List<RoomAddDTO> roomList(); 
 	public RoomAddDTO roomContent(int idx);
 	public RoomAddDTO roomUpdateData(int idx);
+	public int roomUpdate(RoomAddDTO dto);
+	public int roomDelete(int idx);
 }
