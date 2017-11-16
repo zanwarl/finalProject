@@ -183,14 +183,12 @@ public class RoomReqController {
 
 	@RequestMapping ("/roomReqInfo.do")
 	public ModelAndView roomReqInfo (
-			@RequestParam (value="roomIdx")int roomIdx ,
-			@RequestParam (value="yy", defaultValue="2017")int yy ,
-			@RequestParam (value="mm",  defaultValue="12" )int mm
+			@RequestParam (value="roomIdx")int roomIdx 
 			){
 	
 		
 		
-		Calendar cal= Calendar.getInstance(); 
+/*		Calendar cal= Calendar.getInstance(); 
 		cal.set(Calendar.YEAR, yy);
 		cal.set(Calendar.MONTH, mm-1);
 		cal.set(Calendar.DATE, 1);
@@ -198,39 +196,47 @@ public class RoomReqController {
 		int startDay = cal.get(Calendar.DAY_OF_WEEK);//시작요일
 	//	System.out.println(startDay);
 		int lastDay =cal.getActualMaximum(Calendar.DATE);
-		
+		*/
 		
 	//	System.out.println(lastDay);
 		
 		roomIdx = 1 ; 
 		
 		ModelAndView mav = new ModelAndView(); 
-		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx, mm, yy);
-
-/*	
-		int schedule []= new int [lastDay+1	];
-		for ( int i =0; i< list.size(); i ++){
-			schedule[  (Integer) list.get(i).get("CHECKINDATE")]=1; 
-			
-		}*/
+		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx);
 		
-		
-		
-	/*	Integer schedule [] = new Integer [lastDay];
 	
-		for ( int i =0; i< date.size(); i ++){
-			schedule[date.get(i)]= 1; 
+		String event = "";
+		
+		for ( int i =0; i< list.size()-1; i ++){
+			String start = (String) list.get(i).get("STARTDATE");
+			String end = (String)list.get(i).get("ENDDATE");
+			String userId = (String)list.get(i).get("USERID");
+			event =event + "{start:'"+start+"',end:'"+end+"',title:'"+userId+"'},";
+			
 			
 		}
+		String start = (String) list.get(list.size()-1).get("STARTDATE");
+		String end = (String)list.get(list.size()-1).get("ENDDATE");
+		String userId = (String)list.get(list.size()-1).get("USERID");
+		event =event + "{start:'"+start+"',end:'"+end+"',title:'"+userId+"'},";
 		
-		for ( int i =0; i <schedule.length; i ++){
-			System.out.print(schedule[i]+" ");
-		}*/
+		
+		
+		
+
 		
 		mav.addObject("list", list);
+		
+		System.out.println(list);
+		/*
+	
+		
 		mav.addObject("startDay",startDay);
-		mav.addObject("lastDay",lastDay);
+		mav.addObject("lastDay",lastDay);*/
 		mav.setViewName("room/roomReqInfo");
+		mav.addObject("event",event);
+		System.out.println(event);
 		//System.out.println(list);
 		return mav; 
 		

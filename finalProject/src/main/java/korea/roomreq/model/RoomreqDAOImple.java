@@ -76,13 +76,11 @@ public class RoomreqDAOImple implements RoomreqDAO {
 
 	}
 
-	public List<Map<String, Object>> roomReqInfo(int roomidx, int mm, int yy) {
+	public List<Map<String, Object>> roomReqInfo(int roomidx) {
 		Map<String, Object> map = new HashMap<String, Object>();
 	
 		map.put("roomIdx", roomidx);
-		map.put("mm", mm);
-		map.put("yy", yy);
-		
+
 		List<Map<String, Object>> list = sqlMap.selectList("roomReqInfoSql", map);
 		return list;
 

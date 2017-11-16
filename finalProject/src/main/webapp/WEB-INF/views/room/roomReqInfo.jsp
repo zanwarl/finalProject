@@ -7,28 +7,64 @@
 <!DOCTYPE html >
 <html>
 <head>
+
+<link rel='stylesheet' href='calendar/fullcalendar.print.css'
+	media="print" />
 <link rel='stylesheet' href='calendar/fullcalendar.css' />
-<script src='calendar/jquery.min.js'></script>
 <script src='calendar/moment.min.js'></script>
+<script src='calendar/jquery.min.js'></script>
+
+
 <script src='calendar/fullcalendar.js'></script>
 
 
 <script>
+
+
+
 //header에 있는 js와 충돌나서 noConflict설정
 var jq = $.noConflict();
 
 jq(document).ready(function() {
-	jq("#calendar").fullCalendar({})
+	
+	jq("#calendar").fullCalendar({
+		
+/* 	 	header: { 	left: 'prev,next today',
+					center: 'title', 
+				
+				}, */
+		defaultDate: new Date(),
+		navLinks: false, // can click day/week names to navigate views 
+		editable: false, 
+		eventLimit: true, // allow "more" link when too many events
+	
+		
+		events:
+			
+			[
+				
+				${event}
+
+				
+		
+			/* 
+			
+			{ title: 'All Day Event', start: '2017-11-01' },
+			{ title: 'Long Event', start: '2017-11-07', end: '2017-11-10' }, 
+			{ title: ' Event', start: '2017-11-10', end: '2017-11-11' }, 
+			{ id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00' }
+ */
+		
+			
+		]  
+		
+		
+		
+		
+	});
 	
 	
-/* 	
-	jq("#datepicker").datepicker({
-		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
-  	});
-	
-	jq(".modal_content #datepicker").datepicker({
-		dateFormat: 'yy-mm-dd'
-	}); */
+
 });
 </script>
 <!-- 
@@ -162,13 +198,14 @@ body {
 <body>
 
 
- 
+
 	<jsp:include page="/header.do"></jsp:include>
 
-<div id="calendar" ></div>
+
 
 	<div id="contents">
 
+		<div id="calendar"></div>
 		<!-- ---------본문내용---------------  -->
 
 		<!--  -->
@@ -177,15 +214,12 @@ body {
 			<thead>
 				<tr>
 
-					<th>REQIDX</th>
-					<th>USERID</th>
-					<th>ROOMIDX</th>
-					<th>COUNT</th>
-					<th>REQDATE</th>
+					
 					<th>CHECKINDATE</th>
 					<th>CHECKOUTDATE</th>
-					<th>PAID</th>
-
+					<th>USERID</th>
+				
+				
 				</tr>
 			</thead>
 
@@ -203,7 +237,12 @@ body {
 						<%-- 
 					<td><c:out value="${dto.roomidx }"></c:out></td>
 					<td><c:out value="${dto.roomname }"></c:out></td> --%>
+						<td>${DTO.STARTDATE}</td>
 
+						<td>${DTO.ENDDATE}</td>
+						<td>${DTO.USERID}</td>
+
+						<%-- 
 
 						<td>${DTO.REQIDX}</td>
 
@@ -213,7 +252,7 @@ body {
 						<td>${DTO.REQDATE}</td>
 						<td>${DTO.CHECKINDATE}</td>
 						<td>${DTO.CHECKOUTDATE}</td>
-						<td>${DTO.PAID}</td>
+						<td>${DTO.PAID}</td> --%>
 
 
 
@@ -229,7 +268,7 @@ body {
 		<hr>
 		<hr>
 		<!-- ---------- -->
-
+		<%-- 
 
 		<c:url var="preURL" value="roomReqInfo.do">
 
@@ -303,10 +342,7 @@ body {
 					<li>
 						<div class="date">${i }</div>
 
-						<div class="event">Event with Long Name</div>
-						
-						
-						 <%-- 	 <c:forEach var="dto"items="${list }">
+						<div class="event">Event with Long Name</div> 	 <c:forEach var="dto"items="${list }">
 							<c:if test="${dto.CHECKINDATE==i }">
 								<c:forEach var="j" begin="1" end="${dto.SPAN }">
 									<div class="event">Event with Long Name</div>
@@ -317,7 +353,7 @@ body {
 							</c:if>
 
 						</c:forEach>
- --%>
+
 
 
 					</li>
@@ -524,13 +560,11 @@ body {
 			</ol>
 		</div>
 
-</div>
+	</div> --%>
+	</div>
 
-
-<%-- 
 
 	<jsp:include page="/footer.do"></jsp:include>
- --%>
 
 
 </body>
