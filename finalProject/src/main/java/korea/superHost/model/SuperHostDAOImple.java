@@ -35,12 +35,34 @@ public class SuperHostDAOImple implements SuperHostDAO{
 		return list;
 		
 	}
+	
+	
+	public List<SuperHostDTO> superHostSearchList(int cp, int listSize, String id) {
+		
+		Map<String, Object>map = new HashMap<String, Object>();
+		int startNum = (cp -1)* listSize+1;
+		int endNum = cp*listSize;	
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		map.put("id",id);
+		/*map.put("max", max);
+		 */
+		List<SuperHostDTO> list = sqlMap.selectList("superHostSearchSql", map);
+		return list;
+		
+	}
 
 	public int getSuperHostTotalCnt() {
 		int res = sqlMap.selectOne("superHostTotalCntSql");
 		return res; 
 	}
 
+	
+	public int superHostSearchTotalCnt(String id) {
+		int res = sqlMap.selectOne("superHostTotalCntSql" , id);
+		return res; 
+	}
+	
 
 
 

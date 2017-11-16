@@ -8,7 +8,33 @@
 <head>
 <meta  charset=UTF-8">
 <title>Insert title here</title>
+
+<style>
+table, td, th {
+	margin-top: 50px; border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+</style>
+
 </head>
+
 <body>
 
 
