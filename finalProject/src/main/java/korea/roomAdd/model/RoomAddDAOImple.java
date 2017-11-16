@@ -52,6 +52,11 @@ public class RoomAddDAOImple implements RoomAddDAO {
 	    sqlMap.insert("rImageFile",map);
 
 	}
+
+	public List<ImageDTO> fileList(int idx) {
+		List<ImageDTO> imageList = sqlMap.selectList("imageList",idx);
+		return imageList;
+	}
 	
 	
 }
