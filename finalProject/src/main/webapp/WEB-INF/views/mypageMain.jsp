@@ -10,7 +10,7 @@
 
 <ul>
 	<li><a href="roomReqList.do" >예약내역</a></li>
-	<li><a href="#" >회원정보수정</a></li>
+	<li><a href="memberUpdate.do" >회원정보수정</a></li>
 	
 </ul>
 

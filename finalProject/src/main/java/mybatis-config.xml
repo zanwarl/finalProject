@@ -19,5 +19,7 @@
  		<mapper resource="sql/roomSql.xml"/>
  		<mapper resource="sql/roomreqSql.xml"/>
  		<mapper resource="sql/vocSql.xml"/> 
+ 		<mapper resource="sql/roomAdd.xml"/>
+ 		<mapper resource="sql/reBbsSql.xml"/>
  	</mappers>
  </configuration>

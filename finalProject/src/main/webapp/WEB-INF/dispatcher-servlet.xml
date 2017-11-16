@@ -150,7 +150,16 @@
 			<ref bean="sqlSessionTemplate" />
 		</constructor-arg>
 	</bean>
- 
+	<bean id="roomAddDAO" class="korea.roomAdd.model.RoomAddDAOImple" >
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate" />
+		</constructor-arg>
+	</bean>
+ 	<bean id="reBbsDAO" class="korea.rebbs.model.ReBbsDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
 
 
 	<!-- views -->

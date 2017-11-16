@@ -7,14 +7,19 @@
 <meta charset="UTF-8">
 
 <style>
-#content_wrap {width:1200px; height:auto; background:#ddd; margin:0 auto; padding:5px;}
-.content {background:#fff;}
-.info{background:#666;}
-.map{background:skyblue;}
+#content_wrap {width:1200px; height:300px; background:#ddd; margin:0 auto; padding:5px;background:white;}
+.content {
+float: left;
+}
+.content_block{
+float: left;
+width: 200px;
+}
 #map {
-        height: 400px;
-        width: 400px;;
-       }
+height: 400px;
+width: 400px;;
+float: left;
+ }
 </style>
 <title>Insert title here</title>
 <script type="text/JavaScript"
@@ -91,7 +96,7 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<form>
+<div id="contents"><!-- contents -->
 	<table>
 		<thead>
 			<tr>
@@ -104,30 +109,22 @@
 		</thead>
 	</table>
 	<div id="content_wrap">
-
-
-		<div class="content">
-		</div>
-		
-		<div id="map">
-		지도
-		</div>
-	
+		<div class="content"></div>
+		<div class="content_block">벌어져</div>
+		<div id="map"></div>
 	</div>
 
 	<div class="info">
-	jsp 현재 주소 값
 	</div>
-</form>
 	<hr>
 	<div id="cmtform">
 	<form action="tourCmtWrite.do">
 		${sId } : 
 		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
-		<input type="hidden" name="tour_cmt_pidx" value="${contentId }">
+		<input type="hidden" name="tour_cmt_pidx" value="${contentId}">
 		<input type="hidden" name="queryStr" value="${pageContext.request.queryString}">
-		<input type="hidden" name="tour_cmt_writer" value="${sId } ">		
+		<input type="hidden" name="tour_cmt_writer" value="${sId}">		
 	</form>
 	<c:if test="${empty list }">
 	아직 작성된 댓글이 없습니다.
@@ -135,15 +132,20 @@
 	<c:forEach var="list" items="${list }">
 	작성자 : ${list.tour_cmt_writer } <br>
 	내용 : ${list.tour_cmt_content }
-	작성일 : ${list.tour_cmt_writeDate }
-	<input type="button" name="cmtDel" value="삭제" onclick="cmtDel('${list.tour_cmt_idx}','${contentId}','${contentTypeId}')"> <br>
+	작성일 : ${list.tour_cmt_writeDate } 
+	
+	<c:if test="${list.tour_cmt_writer == sId }">
+		<input type="button" name="cmtDel" value="삭제" onclick="cmtDel('${list.tour_cmt_idx}','${contentId}','${contentTypeId}')"> <br>
+	</c:if>
 	 </c:forEach>
 	 <br>
 	 ${page }
 	</div>
 	<!-- <div id="map">지도영역</div> -->
 
+</div>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRvbbQ3ZU5pL6Q-JngNfSgfoO61PatCUw&callback=initMap">
 </script>	
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

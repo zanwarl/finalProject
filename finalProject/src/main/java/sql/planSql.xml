@@ -5,13 +5,20 @@
 <mapper namespace="korea.plan">
 	<!-- select start -->
 		<select id="planList" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main
+			select * from
+			(select rownum as rnum, a.* from
+			(select * from plan_main order by plan_idx desc) a) b 
+			<![CDATA[
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
+   			]]>
 		</select>
 		
-		<select id="lastSaveIdx" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main  
-			where rownum = 1 and plan_writer = 1
-			order by plan_idx desc
+		<select id="lastSaveIdx" parameterType="korea.plan.model.PlanDTO" resultType="int">
+			<!-- select plan_idx from plan_main  
+			where rownum = 1 and plan_writer = #{plan_writer}
+			order by plan_idx desc -->
+			select last_number from user_sequences
+			where sequence_name=upper('plan_idx')
 		</select>
 		
 		<select id="myPlanList" resultType="korea.plan.model.PlanDTO">
@@ -39,20 +46,48 @@
 			where plan_idx = #{pidx}
 		</select>
 		
+		<select id="planTotalCnt" resultType="int">
+			select count(*) from plan_main
+		</select>
+		
+		<select id="planEditList" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">
+			select * from plan_detail where pland_pidx = #{pland_pidx}
+		</select>
+		
+		<select id="pdtoInfo" parameterType="int" resultType="korea.plan.model.PlanDTO">
+			select * from plan_main where plan_idx = #{idx}
+		</select>
+		
+		<select id="lastOrder" parameterType="int" resultType="int">
+			select nvl(max(pland_order),1) from plan_detail 
+			where pland_pidx = #{idx}
+		</select>
 	<!-- select end -->
 		
 	<!-- insert start -->
 		<select id="planMainWrite" parameterType="korea.plan.model.PlanDTO" resultType="int">
-			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum) values
-			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0)	
+			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum,plan_place) values
+			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0,#{plan_place})	
+		</select>
+		
+		<select id="planDetailWrite" parameterType="korea.plan.model.PlanDetailDTO" resultType="int">
+			insert into plan_detail values(pland_idx.nextval,#{pland_pidx},'1','1',#{pland_order},#{pland_subject},#{pland_typeid},#{pland_code},#{pland_img})
 		</select>
 	<!-- insert end -->
 	
 	<!-- update start -->
+		<select id="planMainUpdate" parameterType="korea.plan.model.PlanDTO" resultType="int">
+			update plan_main
+			set plan_explain = #{plan_explain}, plan_name = #{plan_name}
+			where plan_idx = #{plan_idx}
+		</select>
 	<!-- update end -->
 
 
 	<!-- delete start -->
+		<select id="planDetailDelete" parameterType="int" resultType="int">
+			delete plan_detail where pland_pidx = #{pidx}
+		</select>
 	<!-- delete end -->
 	
 	

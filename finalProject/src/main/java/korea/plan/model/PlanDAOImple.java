@@ -18,12 +18,22 @@ public class PlanDAOImple implements PlanDAO {
 	}
 
 	public List<PlanDTO> planList() {
+		
 		List<PlanDTO> list = sqlMap.selectList("planList");
 		return list;
 	}
 
 	public List<PlanDTO> planList(int cp, int pageRow) {
-		return null;
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cp", cp);
+		map.put("pageRow", pageRow);
+		List<PlanDTO> list = sqlMap.selectList("planList", map);
+		return list;
+	}
+	
+	public int totalCnt() {
+		int result = sqlMap.selectOne("planTotalCnt");
+		return result;
 	}
 	
 	public int planMainWrite(PlanDTO pdto) {
@@ -31,9 +41,46 @@ public class PlanDAOImple implements PlanDAO {
 		return result;
 	}
 	
-	public PlanDTO lastSaveIdx(PlanDTO pdto) {
-		pdto = sqlMap.selectOne("lastSaveIdx", pdto);
+	public PlanDTO pdtoInfo(int idx) {
+		PlanDTO pdto = sqlMap.selectOne("pdtoInfo", idx);
 		return pdto;
+		
+	}
+	
+	public int lastOrder(int idx) {
+		int result = sqlMap.selectOne("lastOrder", idx);
+		return result;
+		
+	}
+	public int planMainUpdate(PlanDTO pdto) {
+		System.out.println("idx : " + pdto.getPlan_idx());
+		int result = sqlMap.update("planMainUpdate", pdto);
+		return result;
+	}
+	
+	public int planDetailWrite(PlanDetailDTO pddto) {
+		System.out.println(pddto.getPland_img());
+		System.out.println(pddto.getPland_order());
+		int result = sqlMap.insert("planDetailWrite", pddto);
+		return result;
+	}
+	
+	public List<PlanDetailDTO> planEditList(int pidx) {
+		List<PlanDetailDTO> list = sqlMap.selectList("planEditList", pidx);
+		return list;
+	}
+	
+	public int planDetailDelete(int pidx) {
+		int result = sqlMap.delete("planDetailDelete", pidx);
+		return result;
+	}
+	
+	
+	public int lastSaveIdx(PlanDTO pdto) {
+		System.out.println("idx : " + pdto.getPlan_writer());
+		int result = sqlMap.selectOne("lastSaveIdx", pdto);
+		System.out.println("result :" + result);
+		return result;
 	}
 	
 	public int myTotalCnt(int idx) {
@@ -56,7 +103,6 @@ public class PlanDAOImple implements PlanDAO {
 		List<PlanDTO> list = sqlMap.selectList("myPlanList", map);
 		return list;
 	}
-	
 	
 	public PlanDTO planMainContent(int pidx) {
 		PlanDTO pdto = sqlMap.selectOne("planMainContent", pidx);

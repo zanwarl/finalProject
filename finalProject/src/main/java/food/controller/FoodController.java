@@ -55,13 +55,23 @@ public class FoodController {
    
    @RequestMapping("/addFood.do")
    public ModelAndView addFood(FoodDTO fdto) {
-
+	  System.out.println(fdto.getAddr1());
       ModelAndView mav = new ModelAndView();
-      fdao.foodAdd(fdto);
-       
-          
-      return new ModelAndView("food/addFoodOk");
+      //fdao.foodAdd(fdto);
+      mav.addObject("fdto",fdto);
+      mav.setViewName("food/addFoodOk");
+      
+      return mav;
    }
+   
+   @RequestMapping("/addImage.do")
+	   public ModelAndView addImageForm(){
+		   ModelAndView mav = new ModelAndView();
+		   mav.setViewName("food/foodimage");
+		   
+		   return mav;
+	  }
+   
    
    @RequestMapping("/foodContent.do")
    public ModelAndView foodContent(@RequestParam("foodidx")int idx){

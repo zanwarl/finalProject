@@ -57,19 +57,19 @@
 			</ul>
 	</div>
 	<div id="logo">
-	<a href="index.do"><img src="img/logo.png"></a>
+	<a href="index.do"><img src="img/logo.png" height="100"></a>
 	</div>
 	<div id="main_menu">
 	<ul>
   	 	<li class='has-sub'><a href='tour.do'><span>여행지</span></a>
-   			<ul>
+   			<!-- <ul>
 		         <li><a href='#'><span>서울경기</span></a></li>
 		         <li><a href='#'><span>강원도</span></a></li>
 		         <li><a href='#'><span>충청도</span></a></li>
 		         <li><a href='#'><span>전라도</span></a></li>
 		         <li><a href='#'><span>경상도</span></a></li>
 		         <li class='last'><a href='#'><span>제주도</span></a></li>
-      		</ul>
+      		</ul> -->
   		</li>
  	<li class='has-sub'><a href='#'><span>숙소</span></a>
    		<ul>
@@ -97,8 +97,11 @@
    </li>  -->
    <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
 	   <ul>
-	     	<li><a href='#'><span>공유일정보기</span></a></li>
-	     	<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
+	     	<li><a href='plan.do'><span>공유일정보기</span></a></li>
+	     	<c:if test="${sId ne null }">
+	     		<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
+	     	</c:if>
+	     	
 	   </ul>
    </li>
    <li class='has-sub'><a href='#'><span>고객센터</span></a>

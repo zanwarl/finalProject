@@ -17,7 +17,7 @@
 	<thead>
 	<!-- 분류 영역 -->
 		<tr>
-			<td>인기 | 신규</td>
+			<td colspan="4">인기 | 신규</td>
 		</tr>
 	</thead>
 	<!-- 본문 영역 -->
@@ -27,9 +27,9 @@
 	<tr>
 	</c:if>
 		<td>
-		${list.plan_idx }
-		<a href="planContent.do?idx=${list.plan_idx}">${list.plan_explain }</a> <br>
-		${list.plan_subject }
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_idx }</a>
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_explain }</a> <br>
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_subject }</a>
 		조회수 : ${list.plan_readnum } <br>
 		${list.plan_name }
 		</td>
@@ -42,7 +42,7 @@
 	<!-- 페이징, 글쓰기 영역 -->
 	<tfoot>
 		<tr>
-			<td colspan="3">1 2 3 </td>
+			<td colspan="3">${page }</td>
 			<td><a href="planMake.do">일정 만들기</a></td>
 		</tr>
 	</tfoot>

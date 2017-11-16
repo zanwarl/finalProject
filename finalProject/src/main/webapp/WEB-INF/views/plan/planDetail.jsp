@@ -11,15 +11,32 @@
 <link rel="stylesheet" href="css/site.css">
 
 <style>
+#left_box {
+	width: 550px;
+	float: left;
+}
+
+#right_box {
+	width: 800px;
+	float: left;
+}
+
+#planList {
+	backgroud: skyblue; 
+	width: 40%;
+	float: left;
+	height: 850px;
+}
+
 #cityList {
   background: #FFBB00;
   float: left;
-  width: 300px;
-  height: 950px;
+  width: 60%;
+  height: 850px;
 }
 #map {
   width: auto;
-  height: 950px;
+  height: 850px;
   position:relative;
  }
 #select_detail_view_city{
@@ -44,117 +61,178 @@
 .remodal-bg.with-red-theme.remodal-is-opened{
 	filter: none;
 }
+
+.add {
+	float: left;
+}
+
+.img {
+	float: left;
+}
+.info {
+	float: left;
+	font-size: 13px;
+	
+}
+.wrap_cityList {
+	height: 120px;
+}
+
+#search {
+	height: 200px;
+	background: white;
+}
+
+#top_bar {
+	height: 100px;
+	background: #FFE08C;
+}
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() {	
+var add_img = '';
+var initLoc = new Array();
+
+var contentArray = [];
+var iConArray = [];
+var markers = [];
+var iterator = 0;
+var markerArray = [];
+
+var initx = '';
+var inity = '';
+
+
 	var cp = 1;
-	$.ajax({
-		 url:"areaBasedList.do?areaCode=1&cp="+cp,
-		 type:"GET",
-         dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-         success : function(msg) {
-        	 // console.log(msg.response.body.items.item);
-      	   var myItem = msg.response.body.items.item;
-      	   
-      	   
-      	   var totalCnt = msg.response.body.totalCount;
-      	   var pageName = 'city.do?areaCode='+ 1;
-      	   var listSize = 10;
-      	   var pageSize = 5;
-      	   
-      	   var queryStr = '123123';
-      	   //alert(queryStr);
-      	   //var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
-      	   //총 게시물 수 myItem.length + 페이징처리 
-             var output = '';
-      	   for(var i=1; i<=listSize; i++){
-                  output += '<h4>'+myItem[i].title+'</h4>';
-                  output += '<img src="'+myItem[i].firstimage+'" width="150">';
-                  output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
-              }
-			$("#cityList").html(output);
+	function initxy() {
+		/* ---ajax start--- */
+		$.ajax({
+			url:"areaBasedList.do?areaCode=${pdto.plan_place}&cp="+cp,
+			type:"GET",
+			dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+		 	async:false, // 이 한줄만 추가해주시면 됩니다.
+			success : function(msg) {
+			// console.log(msg.response.body.items.item);
+			var myItem = msg.response.body.items.item;
+			
+			
+			var totalCnt = msg.response.body.totalCount;
+			var pageName = 'city.do?areaCode='+ 1;
+			var listSize = 10;
+			var pageSize = 5;
+			
+			var queryStr = '123123';
+			
+			var output = '';
+			
+			$.each(myItem, function(key, val) {
+				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+				if(val.firstimage == null) {
+					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+				} else {
+					output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+				}
+				output += '<div class="info">'+val.title+'</div>';
+				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+				output += '</div>';
+	
+				contentArray[key] = val.title;
+				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+				inity = val.mapy;
+				initx = val.mapx;
+			});
+			
+			$('#cityList').append(output);
+			/* $("#cityList").html(output); */
 			},
-		error : function(xhr, status, error) {
-			alert("에러발생");
-		}
+			error : function(xhr, status, error) {
+				alert("에러발생");
+			}
+		});
+	}
+	/* ---ajax end--- */
+	
+$(document).ready(function() {	
+	/* order 번호 1로 초기화. 수정시엔 마지막 order 번호 받아서 추가 */
+	var compareOrder = '${lastOrder}';
+	var order = 1;	
+	if(compareOrder == null) {
+		order = 1;
+	} else if(compareOrder>1) {
+		order = parseInt(compareOrder)+1; 
+	}
+	alert(order);
+	/* 여행지 선택 시 요소 구해서 새로 div append */
+	$('#cityList').on('click','.add',function() {
+		add_title = $(this).parent().attr('data-val');
+		add_code = $(this).parent().attr('data');
+		add_type = $(this).parent().attr('data-type');
+		
+		
+		//add_img = $(this).parent().children('.img').attr('fl');
+		add_img = $(this).parent().children('.img').attr('fl');
+		
+		var output = '';
+		
+		output += '<div class="list_item" data="'+order+'" data-type="'+add_type+'" data-code="'+add_code+'">';
+		output += '<div class="item_img"><img src="'+add_img+'" width="100" height="90"></div>';
+		output += '<div class="item_title">'+add_title+'</div>';
+		output += '<input type="hidden" id="add_code" name="add_code" value="'+add_code+'">';
+		output += '<input type="hidden" id="add_type" name="add_type" value="'+add_type+'">';
+		output += '</div>';
+		order++;
+		$('#planList').append(output);
+		
 	});
 	
 });
 </script>
 <script src="js/remodal.js"></script>
-<!-- Modal Events -->
-<script>
-  $(document).on('opening', '.remodal', function () {
-    console.log('opening');
-  });
-
-  $(document).on('opened', '.remodal', function () {
-    console.log('opened');
-  });
-
-  $(document).on('closing', '.remodal', function (e) {
-    console.log('closing' + (e.reason ? ', reason: ' + e.reason : ''));
-  });
-
-  $(document).on('closed', '.remodal', function (e) {
-    console.log('closed' + (e.reason ? ', reason: ' + e.reason : ''));
-  });
-
-  $(document).on('confirmation', '.remodal', function () {
-    console.log('confirmation');
-  });
-
-  $(document).on('cancellation', '.remodal', function () {
-    console.log('cancellation');
-  });
-
-//  Usage:
-//  $(function() {
-//
-//    // In this case the initialization function returns the already created instance
-//    var inst = $('[data-remodal-id=modal]').remodal();
-//
-//    inst.open();
-//    inst.close();
-//    inst.getState();
-//    inst.destroy();
-//  });
-</script>
 <script>
 function initMap() {
 	//마커 위치 초기화
-	var initLoc = [
-					['서울',37.567874, 126.987895],
-				    ['인천',37.491034, 126.707597],
-				    ['경기',37.411543, 127.514934],
-				    ['대전',36.373976, 127.388284],
-				    ['대구',35.869106, 128.561676],
-				    ['광주',35.153961, 126.834019],
-				    ['부산',35.168423, 129.039288],
-				    ['울산',35.548319, 129.245663],
-				    ['세종',36.566003, 127.257765],
-				    ['강원',37.823038, 128.156857],
-				    ['충북',37.000694, 127.709422],
-				    ['충남',36.703444, 126.798422],
-				    ['경북',36.264092, 128.931699],
-				    ['경남',35.458897, 128.221178],
-				    ['전북',35.701074, 127.124440],
-				    ['전남',34.882915, 126.982925],
-				    ['제주',33.392589, 126.549532]
-				  ];
+	initxy();
+	/* alert("t");
 	var map = new google.maps.Map(document.getElementById('map'), {
 		zoom: 8,
 		center: new google.maps.LatLng(36.733956, 127.806931),
 	});
-	var marker, i;
+				  
+  	for (var i=0;i<markerArray.length;i++) {
+  		addMarker();
+  	} */
+  	 var mapOptions = {
+  	        zoom: 10,
+  	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+  	        //각 지역의 중심 좌표로
+  	        center: new google.maps.LatLng(inity, initx)
+  	    };
+  	 
+  	    map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  	 
+  	    for (var i = 0; i < markerArray.length; i++) {
+  	        addMarker();
+  	    }
+}
+
+function addMarker() {
 	//지도에 마커 띄우기
-    for (i = 0; i < initLoc.length; i++) {
-    	marker = new google.maps.Marker({
-    		position: new google.maps.LatLng(initLoc[i][1],initLoc[i][2]),
-    		map: map
-    	});
-    }
+   	var marker = new google.maps.Marker({
+   		position: markerArray[iterator],
+   		map: map
+   	});
+	markers.push(marker);
+	
+	var infowindow = new google.maps.InfoWindow({
+	      content: contentArray[iterator]
+	    });
+	
+	google.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map,marker);
+    });
+	iterator++;
 }
 
 function plan() {
@@ -172,39 +250,53 @@ function plan_display() {
 }
 </script>
 <script src="js/pikaday.js"></script>
-<script>
-$('#test').on('click',function(){
-	alert("z");
-});
-
-$('#test2').on('click',function(){
-	alert("z");
-});
-
-$('#datepicker').on('click',function(){
-	alert("z");
-});
-/* 
-var picker = new Pikaday(
-{
-    field: document.getElementById('#datepicker'),
-    firstDay: 1,
-    minDate: new Date(),
-    maxDate: new Date(2020, 12, 31),
-    yearRange: [2000,2020]
-	})
-	;
- */
-</script>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div id="contents"><!-- contents -->
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script src="js/json2.js"></script>
+<script>
+//header에 있는 js와 충돌나서 noConflict설정
+var jq = $.noConflict();
 
-	<div id="cityList" style="overflow:auto;"><!-- cityList -->
-	</div><!-- cityList -->
-	<div id="map" style="overflow:auto;">
-	</div><!-- map -->
+jq(document).ready(function() {
+	
+	jq("#datepicker").datepicker({
+		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
+  	});
+	
+	jq(".modal_content #datepicker").datepicker({
+		dateFormat: 'yy-mm-dd'
+	});
+});
+</script>
+<div id="contents"><!-- contents -->
+	<div id="top_bar">
+		<div class="remodal-bg"><a href="#modal">저장하기</a></div>
+	</div>
+	<div id="left_box">
+		<div id="planList" style="overflow:auto;">일정 리스트
+			<c:forEach var="list" items="${list }">
+				<div class="list_item" data="${list.pland_order }" data-type="${list.pland_typeid }" data-code="${list.pland_code }">
+				<div class="item_img"><img src="${list.pland_img }" width="100" height="90"></div>
+				<div class="item_title">${list.pland_subject }</div>
+				<input type="hidden" value=${list.pland_order }>
+				</div>
+			</c:forEach>
+		</div>
+		<div id="cityList" style="overflow:auto;">
+			<div id="search">
+				${areaCode }
+			</div>
+		</div>
+	</div>
+	
+	<div id="right_box">
+		<!-- map -->
+		<div id="map" style="overflow:auto;"></div>
+	</div>
+	
 	<div id="select_detail_view_city">
 		<div class="plan_full_box">
 			<div class="plan_main_name"></div>
@@ -216,9 +308,66 @@ var picker = new Pikaday(
 <div class="remodal" data-remodal-id="modal" role="dialog" aria-labelledby="modal1Title" aria-describedby="modal1Desc">
 	<button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
 		<div>
-			<h2 id="modal1Title">출발일 선택</h2>
+			<h2 id="modal1Title">일정만들기 완료</h2>
 			<div class="modal_content">
-				<form name="plan_make" action="planDetail.do">
+				<form name="plan_make" action="planDetailWrite.do">
+				<!-- <form name="plan_make" action="planDetailWrite.do"> -->
+				<script>
+				function submit() {
+
+					var nlist = '';
+					var count = '0';
+					
+					var p_writer = '';
+					var txt = '';
+					
+					$('.list_item').each(function(key,val){
+						count++;
+					});
+					
+					var array = new Array();
+					
+					$('.list_item').each(function(key,val){
+						/* txt += 'order?' + $(this).attr('data');
+						txt += 'type?' + $(this).attr('data-type');
+						txt += 'code?' + $(this).attr('data-code');
+						txt += 'title?' +$(".item_title").eq(key).html();
+						txt += 'img?' + $(".item_img img").eq(key).attr('src');*/
+						
+						order = $(this).attr('data');
+						type = $(this).attr('data-type');
+						code = $(this).attr('data-code');
+						title = $(".item_title").eq(key).html();
+						img = $(".item_img img").eq(key).attr('src');
+						/* alert($("#add_code").val());
+						alert($("#add_type").val()); */
+						//array[key] = txt;
+						
+						var planInfo = new Object();
+						
+						writer = $("#plan_writer").val();
+						
+						
+						planInfo.order = order;
+						planInfo.type = type;
+						planInfo.code = code;
+						planInfo.title = title;
+						planInfo.img = img;
+						
+						array.push(planInfo);
+						
+					});
+					
+					var jsonInfo = JSON.stringify(array);
+					$('#str').val(jsonInfo);
+					//var jsonInfo = {"datalist":JSON.stringify(array)};
+					console.log(jsonInfo); //브라우저 f12개발자 모드에서 confole로 확인 가능
+					
+					
+				document.plan_make.submit();
+				}
+				
+				</script>
 					<table>
 						<tbody>
 							<tr>
@@ -227,7 +376,14 @@ var picker = new Pikaday(
 							</tr>
 							<tr>
 								<th>출발일</th>
-								<td><input type="text" name="plan_start" id="datepicker"></td>
+								<td><input type="text" id="plan_start" name="plan_start" id="datepicker"></td>
+							</tr>
+							<tr>
+								<th>설명</th>
+								<td><textarea name="plan_explain" cols="20" rows="5"></textarea></td>
+							</tr>
+							<tr>
+								<td colspan="2"><hr>비공개 <input type="checkbox" name="plan_public"></td>
 							</tr>
 						</tbody>
 						<tfoot>
@@ -235,17 +391,20 @@ var picker = new Pikaday(
 								<td>
 									<!-- form에서 넘겨줘야 할 데이터 -->
 									<!-- 작성자,areacode -->
-									<input type="hidden" name="plan_writer" value="1">
-									<input type="hidden" name="area_code" value="1">
+									<input type="hidden" id="plan_writer" name="plan_writer" value="${sIdx }">
+									<input type="hidden" name="plan_name" value="${sName }">
+									<input type="hidden" id="str" name="str">
+									<input type="text" id="plan_idx" name="plan_idx" value=${plan_idx }>
 								</td>
 							</tr>
 						</tfoot>
 					</table>
 				<button data-remodal-action="cancel" class="remodal-cancel">취소</button>
-				<button class="remodal-confirm">완료</button>
+				<button class="remodal-confirm" onclick="submit();">완료</button>
+				<a href="javascript:submit()">[완료]</a> 
 				<!-- <a class="remodal-confirm" href="planDetail.do">완료</a> -->
 				</form>
-			</div>
+			</div>	
 		</div>
 </div>
 <!-- modal div end -->

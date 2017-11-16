@@ -6,10 +6,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import korea.roomAdd.model.RoomAddDAO;
+import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,12 +25,16 @@ public class RoomReqController {
 
 	@Autowired
 	private RoomreqDAO rdao;
+	@Autowired
+	private RoomAddDAO radao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReq(@RequestParam (value="roomIdx")int roomIdx  ) {
+	public ModelAndView roomReq(@RequestParam (value="roomIdx") int idx  ) {
+		RoomAddDTO rdto = radao.roomContent(idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
-		mav.addObject("roomIdx", roomIdx);
+		mav.addObject("rdto",rdto);
+		mav.addObject("roomIdx", idx);
 		
 
 		return mav;
@@ -35,7 +44,7 @@ public class RoomReqController {
 	public ModelAndView roomReqFm(RoomreqDTO rdto, 
 			
 			HttpServletRequest req, 
-			HttpServletResponse resp
+			HttpServletResponse resp,@RequestParam(value="roomprice") int rprice
 			) {
 
 		
@@ -49,10 +58,10 @@ public class RoomReqController {
 		
 		int result = rdao.RoomreqAdd(rdto);
 
-		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx();
-		System.out.println(rdto.getReqidx());
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
+		//System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "예약완료" : "다시 예약해주세요";
+		String msg = result > 0 ? "확인" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -64,13 +73,14 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqOK.do")
-	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx) {
-
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,@RequestParam(value="roomprice") int rprice) {
+				
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
-
+		System.out.println(rprice);
 		mav.addObject("rdto", rdto);
-		mav.setViewName("roomReq/roomReqOK");
+		mav.addObject("rprice", rprice);
+		mav.setViewName("roomReq/rok");
 
 		return mav;
 	}
@@ -93,6 +103,7 @@ public class RoomReqController {
 		
 		String userId = (String)session.getAttribute("sId");
 				
+		System.out.println(userId);
 		
 //		String userId = "yera";
 
@@ -129,5 +140,103 @@ public class RoomReqController {
 		return mav;
 
 	}
+	
+	
+
+	@RequestMapping("/myRoomReqList.do")
+	public ModelAndView myRoomList (
+			
+			HttpServletRequest req, 
+			HttpServletResponse resp
+			)
+	{
+		ModelAndView mav = new ModelAndView(); 
+		
+		
+		HttpSession session = req.getSession();
+		
+		String userId ="yera"; 
+		
+				//(String)session.getAttribute("sId");
+		
+		List<Map<String, Object>> list = rdao.myRoomList(userId);
+		//System.out.println(list);
+		mav.addObject("list", list);
+		mav.setViewName("room/myRoomReqList");
+		return mav; 
+		
+		
+		
+	}
+	
+/*	public static int [] getDate (){
+
+		Calendar now = Calendar.getInstance(); 
+		int y = now.get(Calendar.YEAR);
+		int m = now.get(Calendar.MONTH)+1; 
+		int res []= {y, m};
+		return res ; 
+		
+		
+	}*/
+	
+
+	@RequestMapping ("/roomReqInfo.do")
+	public ModelAndView roomReqInfo (
+			@RequestParam (value="roomIdx")int roomIdx ,
+			@RequestParam (value="yy", defaultValue="2017")int yy ,
+			@RequestParam (value="mm",  defaultValue="12" )int mm
+			){
+	
+		
+		
+		Calendar cal= Calendar.getInstance(); 
+		cal.set(Calendar.YEAR, yy);
+		cal.set(Calendar.MONTH, mm-1);
+		cal.set(Calendar.DATE, 1);
+		
+		int startDay = cal.get(Calendar.DAY_OF_WEEK);//시작요일
+	//	System.out.println(startDay);
+		int lastDay =cal.getActualMaximum(Calendar.DATE);
+		
+		
+	//	System.out.println(lastDay);
+		
+		roomIdx = 1 ; 
+		
+		ModelAndView mav = new ModelAndView(); 
+		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx, mm, yy);
+
+/*	
+		int schedule []= new int [lastDay+1	];
+		for ( int i =0; i< list.size(); i ++){
+			schedule[  (Integer) list.get(i).get("CHECKINDATE")]=1; 
+			
+		}*/
+		
+		
+		
+	/*	Integer schedule [] = new Integer [lastDay];
+	
+		for ( int i =0; i< date.size(); i ++){
+			schedule[date.get(i)]= 1; 
+			
+		}
+		
+		for ( int i =0; i <schedule.length; i ++){
+			System.out.print(schedule[i]+" ");
+		}*/
+		
+		mav.addObject("list", list);
+		mav.addObject("startDay",startDay);
+		mav.addObject("lastDay",lastDay);
+		mav.setViewName("room/roomReqInfo");
+		//System.out.println(list);
+		return mav; 
+		
+		
+	}
+	
+	
 
 }
