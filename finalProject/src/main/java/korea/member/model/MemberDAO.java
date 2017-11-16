@@ -16,4 +16,6 @@ public interface MemberDAO {
 	public MemberDTO memberInfo(String member_id);
 	
 	public int memberUpdate(MemberDTO dto);
+	public String idSeach(String member_name, String member_email);
+	public String pwdSeach(String member_id, String member_email);
 }
