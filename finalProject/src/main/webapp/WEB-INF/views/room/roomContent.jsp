@@ -169,8 +169,12 @@ html, body {
 	</script>
 
 	<input type="button" value="목록으로" onclick="golist()">
+	<c:if test="${sIdx ==arr.useridx }">
+	
 	<input type="button" value="수정하기" onclick="goUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
+	</c:if>
+	
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
 </body>
 </html>

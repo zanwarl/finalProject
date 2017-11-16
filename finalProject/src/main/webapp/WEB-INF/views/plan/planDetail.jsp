@@ -89,6 +89,7 @@
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script type="text/javascript">
 var add_img = '';
 var initLoc = new Array();
@@ -163,7 +164,6 @@ $(document).ready(function() {
 	} else if(compareOrder>1) {
 		order = parseInt(compareOrder)+1; 
 	}
-	alert(order);
 	/* 여행지 선택 시 요소 구해서 새로 div append */
 	$('#cityList').on('click','.add',function() {
 		add_title = $(this).parent().attr('data-val');
@@ -187,6 +187,40 @@ $(document).ready(function() {
 		
 	});
 	
+});
+	
+//header에 있는 js와 충돌나서 noConflict설정
+var jq = $.noConflict();
+
+jq(document).ready(function() {
+	
+	jq(function () {
+	    jq("#planList").sortable({
+	    	 revert: false,
+	         items : '.list_item',
+	         start: function (e, ui) {
+				$(ui.placeholder).css('width', 0);
+			},
+			change: function (e, ui) {
+				$(ui.placeholder).css('width', 'auto');
+			},
+			placeholder: "ui-state-highlight",
+			
+			//div order 순서 재정렬
+			update: function(e,ui) {
+				 var cur_order = ui.item.attr('data');
+				 var set_order = Number($("#planList .list_item").index(ui.item))+1;
+				 var jj = 1;
+		          $('#planList .list_item').each(function(ii, val) {
+		              $(this).attr('data',jj);
+		              jj++;
+		          });
+		        ui.item.attr('data',set_order);
+			}
+	    });
+	});
+
+
 });
 </script>
 <script src="js/remodal.js"></script>

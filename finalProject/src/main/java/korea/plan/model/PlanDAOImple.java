@@ -22,6 +22,11 @@ public class PlanDAOImple implements PlanDAO {
 		List<PlanDTO> list = sqlMap.selectList("planList");
 		return list;
 	}
+	
+	public int readNumUpdate(int idx) {
+		int result = sqlMap.update("readNumUpdate", idx);
+		return result;
+	}
 
 	public List<PlanDTO> planList(int cp, int pageRow) {
 		HashMap<String, Object> map = new HashMap<String, Object>();

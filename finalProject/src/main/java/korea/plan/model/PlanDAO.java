@@ -14,6 +14,7 @@ public interface PlanDAO {
 	public PlanDTO pdtoInfo(int idx);
 	
 	public int lastOrder(int idx);
+	public int readNumUpdate(int idx);
 	
 	//내 일정 리스트
 	public List<PlanDTO> myPlanList();

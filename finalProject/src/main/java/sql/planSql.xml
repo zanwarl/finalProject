@@ -51,7 +51,9 @@
 		</select>
 		
 		<select id="planEditList" parameterType="int" resultType="korea.plan.model.PlanDetailDTO">
-			select * from plan_detail where pland_pidx = #{pland_pidx}
+			select * from plan_detail
+			where pland_pidx = #{pland_idx}
+			order by pland_day asc, pland_order asc
 		</select>
 		
 		<select id="pdtoInfo" parameterType="int" resultType="korea.plan.model.PlanDTO">
@@ -80,6 +82,12 @@
 			update plan_main
 			set plan_explain = #{plan_explain}, plan_name = #{plan_name}
 			where plan_idx = #{plan_idx}
+		</select>
+		
+		<select id="readNumUpdate" parameterType="int" resultType="int">
+			update plan_main
+			set plan_readnum = plan_readnum + 1
+			where plan_idx = #{idx }
 		</select>
 	<!-- update end -->
 

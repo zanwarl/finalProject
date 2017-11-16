@@ -1,7 +1,7 @@
 /**
- * 1:1 ¹®ÀÇ °Ô½ÃÆÇ 
+ * 1:1 ï¿½ï¿½ï¿½ï¿½ ï¿½Ô½ï¿½ï¿½ï¿½ 
  * 
- * ¿ù¿äÀÏ¿¡ ¼öÁ¤ÇÒ²¿ 
+ * ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ 
  * 
  */
 
@@ -112,7 +112,7 @@ public class VocController {
 		if ( writer==null || writer.equals("")){
 		mav.setViewName("admin/adminMsg");
 		mav.addObject("goURL", "main.do");
-		mav.addObject("msg", "·Î±×ÀÎÇÏ¼¼¿ä");
+		mav.addObject("msg", "ë¡œê·¸ì¸í•˜ì„¸ìš”");
 		return mav; 
 		}
 		

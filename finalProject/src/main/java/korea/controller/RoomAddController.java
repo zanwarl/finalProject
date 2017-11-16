@@ -39,8 +39,13 @@ public class RoomAddController {
 	@Autowired
 	private VocDAO vdao;
 
+	
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
 	public ModelAndView roomList(HttpServletRequest req) {
+		
+		
+		
+		
 
 		List<RoomAddDTO> list = radao.roomList();
 		ModelAndView mav = new ModelAndView();
@@ -56,14 +61,43 @@ public class RoomAddController {
 	@RequestMapping(value = "/roomadd.do")
 	public ModelAndView roomAdd(HttpServletRequest req, HttpServletResponse resp) {
 		
-		ModelAndView mav = new ModelAndView();
-		HttpSession session = req.getSession();
-		String userId = (String) session.getAttribute("sId");
-		int useridx = mdao.getUserIdx(userId);
+		/*
+		 * 
+		 * 		HttpSession session = req.getSession(); 
+		String writer = (String) session.getAttribute("sId");
 		
-		mav.addObject("useridx", useridx);
-		mav.setViewName("room/roomAddForm");
-		return mav;
+		
+		if ( writer==null || writer.equals("")){
+		mav.setViewName("admin/adminMsg");
+		mav.addObject("goURL", "main.do");
+		mav.addObject("msg", "로그인하세요");
+		return mav; 
+		}
+		
+		 * 
+		 */
+		
+		ModelAndView mav = new ModelAndView();
+		
+		HttpSession session = req.getSession(); 
+		String writer = (String) session.getAttribute("sId");
+		
+		
+		if ( writer==null || writer.equals("")){
+		mav.setViewName("admin/adminMsg");
+		mav.addObject("goURL", "main.do");
+		mav.addObject("msg", "로그인하세요");
+		return mav; 
+		}
+		else {
+			
+			mav.addObject("useridx", writer);
+			mav.setViewName("room/roomAddForm");
+			return mav;
+			
+		}
+		
+		
 	}
 
 	/*@RequestMapping(value = "/home.do", method = RequestMethod.POST)
