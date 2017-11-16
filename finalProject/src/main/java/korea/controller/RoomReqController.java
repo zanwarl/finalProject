@@ -50,9 +50,7 @@ public class RoomReqController {
 		
 		HttpSession session = req.getSession();
 		
-		String userId ="yera"; 
-		
-				//(String)session.getAttribute("sId");
+		String userId =(String)session.getAttribute("sId");
 		
 		rdto.setUserid(userId);
 		
