@@ -282,12 +282,12 @@ jq(document).ready(function() {
 	    jq('#tour_search').keyup(function() {
 	    	var txt = $(this).val();
             	
-            $.ajax({
+	    	jq.ajax({
             	url:"tourSearch.do?txt="+ txt +"&areaCode=${pdto.plan_place}&cp="+cp,
 				type:"GET",
 				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
                 success : function(msg) {
-                	$('.form_cityList').remove();
+                	jq('.form_cityList').remove();
                 	// console.log(msg.response.body.items.item);
         			var myItem = msg.response.body.items.item;
         			
@@ -301,7 +301,7 @@ jq(document).ready(function() {
         			
         			var output ='<div class="form_cityList">';
         			
-        			$.each(myItem, function(key, val) {
+        			jq.each(myItem, function(key, val) {
         				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
         				if(val.firstimage == null) {
         					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
@@ -322,7 +322,7 @@ jq(document).ready(function() {
         			});
         			output += '</div>';
         			
-        			$('#cityList').append(output);
+        			jq('#cityList').append(output);
         			},
         			error : function(xhr, status, error) {
         				alert("에러발생");

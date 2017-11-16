@@ -151,11 +151,22 @@ public class TourController {
 		System.out.println("areacode : " + areaCode);
 		System.out.println("검색 : " + txt);
 		
-		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=" +
+		if(txt==null || txt.equals("")) {
+			tour_code = "areaBasedList";
+			param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
+					+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
+					+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=50&pageNo=" + cp;
+
+			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
+					+ service_key + param_1 + data_type;
+		} else {
+			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=" +
 			           "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D" +
 			           "&keyword=" + txt + "&areaCode=" + areaCode + 
 			           "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=50&pageNo=1&_type=json";	
+		}
 		
+		System.out.println(tour_api_url);
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
 		System.out.println("jsonobject : " + jsonObject);
