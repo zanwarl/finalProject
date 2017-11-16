@@ -83,13 +83,26 @@ text-align:center;
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script language='javascript'>
-	$( function() {
-	$( "#datepicker" ).datepicker({});
-	});
 	
-	$( function() {
-		$( "#datepicker1" ).datepicker();
-		});
+	
+	var jq = $.noConflict();
+	
+	jq(document).ready( function() {
+	      		
+			jq( "#datepicker" ).datepicker({ minDate:0, numberOfMonths:2 , 
+				onSelect: function(selected) {
+				jq("#datepicker1").datepicker("option","minDate", selected)
+				}
+			});
+			
+			jq("#datepicker1").datepicker({ minDate:0, numberOfMonths:2 ,
+				onSelect: function(selected) {
+				jq("#datepicker").datepicker("option","maxDate", selected)
+				}
+			});
+			});
+
+
 
 	window.onload = function TimeBtn(){
 		var timediv = document.getElementById("button");
@@ -123,8 +136,9 @@ text-align:center;
 
 /* function call(rp)
 {
+
  if(document.getElementById("num").value && document.getElementById("roomp").value){
-  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt(rp);
+  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt('rp');
  }
 } */
 

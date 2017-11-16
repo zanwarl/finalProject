@@ -14,3 +14,4 @@
 		select * from room_addr where room_idx = #{idx}
  	</select>
  </mapper>
+

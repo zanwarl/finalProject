@@ -12,7 +12,7 @@
 function paid (reqIdx){
 	location.href ="paidOk.do?reqIdx="+reqIdx; 
 }
-function ok(reqIdx, amt ){
+function ok(reqIdx, amt){
 	var IMP = window.IMP; // 생략가능	
 	IMP.init('imp23082100');  // 가맹점 식별 코드
 
@@ -30,9 +30,7 @@ function ok(reqIdx, amt ){
 }, function(rsp) {
     if ( rsp.success ) {
  	       var msg = '결제가 완료되었습니다.';
- 	       paid(reqIdx);
- 	       
-        	
+ 	       paid(reqIdx);      	
         	
         	
  	       
@@ -76,7 +74,7 @@ function ok(reqIdx, amt ){
 		</tr>
 		<tr>
 			<td colspan="2" align="center">	 
-				<input type="button" value="결제" onclick="ok('26', 100)"> 
+				<input type="button" value="결제" onclick="ok('26', ${rprice})"> 
 			</td>
 			<td>	 </td>
 		</tr>	 	   
