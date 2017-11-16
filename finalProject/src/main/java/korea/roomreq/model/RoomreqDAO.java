@@ -20,6 +20,9 @@ public interface RoomreqDAO {
 
 	public List<Map<String, Object>> myRoomList(String userId);
 
-	public List<Map<String, Object>> roomReqInfo(int roomIdx, int mm, int yy);
+	public List<Map<String, Object>> roomReqInfo(int roomIdx);
+	
+	public Map<String, Object> roomReqInfo2Sql 	(int reqidx );
+	 
 
 }

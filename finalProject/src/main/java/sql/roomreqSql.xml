@@ -18,10 +18,10 @@
 		values
 		(#{reqidx},#{userid},#{roomidx},#{count},
 		to_char (sysdate , 'yyyy/mm/dd
-		hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
+		hh24:mi:ss'),#{checkindate},#{checkoutdate},0,#{total_pay})
 	</insert>
 	<!-- <select id="roomreqCon2" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO"> 
-		select * from roomreq where reqidx = #{idx} </select> -->
+		select * from roomreq where mwjreqidx = #{idx} </select> -->
 
 
 	<select id="roomReqOK" parameterType="int"
@@ -75,14 +75,32 @@
 	</select>
 
 	<select id="roomReqInfoSql" parameterType="map" resultType="java.util.Map">
-		select substr(checkindate,4, 2) as checkindate, (to_number (
-		substr(checkoutdate,4, 2) )-to_number (substr(checkindate,4, 2) )+1)as
-		span, userid
+
+		select
+		reqidx,count,
+		(substr (checkindate, 7,4))||'-'||(substr
+		(checkindate,
+		1,2))||'-'||(substr(checkindate, 4,2)) as STARTDATE,
+		(substr
+		(checkoutdate, 7,4))||'-'||(substr (checkoutdate,
+		1,2))||'-'||(substr(checkoutdate, 4,2)) as ENDDATE,
+		userid
 		from roomreq
-		where roomidx = #{roomIdx}
-		and checkindate like #{mm}||'/'||'%/'||#{yy}
+		where roomidx =#{roomIdx}
 
 
+
+	</select>
+
+
+	<select id="roomReqInfo2Sql" parameterType="map" resultType="map">
+		select member_name as name, member_tel as tel, member_sex as gender,
+		count, checkindate,
+		checkoutdate , reqidx
+		from roomreq, member
+		where
+		member.member_id = roomreq .userid
+		and reqidx =#{reqidx}
 
 
 

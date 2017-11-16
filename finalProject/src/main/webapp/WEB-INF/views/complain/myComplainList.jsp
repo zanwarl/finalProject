@@ -7,13 +7,6 @@
 <html>
 <head>
 
-<style type="text/css">
-<!--
-@import url("/data/201107/IJ13098534210144/style.css");
--->
-</style>
-
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 
 <meta charset=UTF-8">
@@ -23,36 +16,24 @@
 
 <!-- Sidebar -->
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-<jsp:include page="/adminMenu.do"></jsp:include>
-
-
-</div>
-
 
 
 
 <!-- Page Content -->
-<div style="margin-left:25%">
 
-<div class="w3-container w3-teal">
   <h1>신고관리</h1>
-</div>
 
 
 
-<div class="w3-container">
 <table id="hor-minimalist-b">
 	<thead>
 	
 		<tr>
 			<th>idx</th>
-			<th>신고자</th>
-			<th>피신고자</th>
+			<th>대상</th>
 			<th>타입</th>
 			<th>날짜</th>
 			<th>상태</th>
-			<th>담당자</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -65,19 +46,23 @@
    </c:if>
    <c:forEach var="dto" items="${list}">
       
-      <c:url value ="complainContent.do" var ="contentURL">
+      <c:url value ="myComplainContent.do" var ="contentURL">
       	<c:param name="idx" value="${dto.idx }"></c:param>
        </c:url>
       
       <tr>
       
          <td><a href="${contentURL}">${dto.idx}</a></td>
-         <td>${dto.sender}</td>
+       
          <td>${dto.receiver}</td>
          <td>${dto.type}</td>
          <td>${dto.writedate}</td>
-         <td>${dto.res}</td>
-         <td>${dto.incharge}</td>
+     		<td><c:if test="${dto.res==0 }">
+	처리중
+	</c:if> <c:if test="${dto.res!=0 }">
+	처리완료
+	</c:if></td>
+    
       </tr>
    </c:forEach>
 	
@@ -98,26 +83,6 @@
 		
 		</c:if>
 		
-		<tr>
-			<td colspan="7" align="center">
-				<form action="complainSearch.do" method="get">
-					<select name="key">
-						<option value="1">idx</option>
-						<option value="2">신고자</option>
-						<option value="3">피신고자</option>
-						<option value="4">담당자</option>
-
-					</select>
-					
-					
-					<input type="text" name="val">
-					<input type="submit" value="검색">
-				
-				</form>
-				<a href="noAnsComplainList.do">미처리신고</a>
-			</td>
-			
-		</tr>
 	
 	</tfoot>
 
@@ -125,11 +90,6 @@
 
 
 
-
-</div>
-
-</div>
-      
 
 
 

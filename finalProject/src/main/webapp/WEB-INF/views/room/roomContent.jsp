@@ -93,6 +93,10 @@ html, body {
 </head>
 <body>
 	<c:set var="arr" value="${rdto}" />
+	<c:forEach var="imageList" items="${imageList}">
+		<input type="text" value="${imageList.filename}">
+	</c:forEach>
+		<img src="E:/yongguk/bbb/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload5fee17293f1042cc8fb8802dcfb76e0b.jpg">
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
@@ -165,9 +169,12 @@ html, body {
 	</script>
 
 	<input type="button" value="목록으로" onclick="golist()">
+	<c:if test="${sIdx ==arr.useridx }">
+	
 	<input type="button" value="수정하기" onclick="goUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
+	</c:if>
+	
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
-
 </body>
 </html>
