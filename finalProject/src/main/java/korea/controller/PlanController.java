@@ -179,16 +179,15 @@ public class PlanController {
 		return "plan/test";
 	}
 	
-	/**일정 내용 보여주기*/
+	/**일정 내용 보여주기 + 조회수 추가*/
 	@RequestMapping("/planContent.do")
 	public ModelAndView planDetail(int pidx) {
 		
-		//pidx = 75;
-		System.out.println(pidx);
+		pdao.readNumUpdate(pidx);
+		
 		ModelAndView mav = new ModelAndView();
 		PlanDTO pdto = pdao.planMainContent(pidx);
 		List<PlanDetailDTO> list = pdao.planDetail(pidx);	
-		System.out.println("사이즈 : " + list.size());
 		mav.addObject("list", list);
 		mav.addObject("pdto", pdto);
 		mav.setViewName("plan/planContent");
@@ -259,9 +258,6 @@ public class PlanController {
 			
 			int result = pdao.planDetailWrite(pddto);
 		}
-		System.out.println("---: " + pdto.getPlan_subject());
-		System.out.println("---: " + pdto.getPlan_idx());
-		
 		
 		int update = pdao.planMainUpdate(pdto);
 		
