@@ -7,10 +7,10 @@
 <title>Insert title here</title>
 <script>
 function openIdSeach(){
-	window.open('memberIdSeach.do','memberIdSeach','width=450,height=200');
+	window.open('memberIdSeachForm.do','memberIdSeach','width=450,height=200');
 }
 function openPwdSeach(){
-	window.open('memberPwdSeach.do','memberPwdSeach','width=450,height=200');
+	window.open('memberPwdSeachForm.do','memberPwdSeach','width=450,height=200');
 }
 </script>
 </head>

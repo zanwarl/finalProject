@@ -17,18 +17,20 @@ public class BlackDAOImple implements BlackDAO{
 	}
 	
 
-	public List<BlackDTO> blackList(int cp, int listSize) {
+	public  List<Map<String, Object>> blackList(int cp, int listSize) {
 
 		Map<String, Object>map = new HashMap<String, Object>();
 		int startNum = (cp -1)* listSize+1;
 		int endNum = cp*listSize;	
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
-		List<BlackDTO> list = sqlMap.selectList("blackListSql", map);
+		List<Map<String, Object>> list = sqlMap.selectList("blackListSql", map);
 		return list;
 		
 	}
 
+	
+	
 	public int getTotalCnt() {
 		
 		int res = sqlMap.selectOne("totalCntSql");
@@ -36,6 +38,14 @@ public class BlackDAOImple implements BlackDAO{
 		
 	}
 
+	
+	public int getSearchTotalCnt(String id) {
+		
+		int res = sqlMap.selectOne("totalSearchCntSql", id);
+		return res; 
+		
+	}
+	
 
 //	public int addBlackList(int userIdx) {
 //		// TODO Auto-generated method stub
@@ -50,6 +60,20 @@ public class BlackDAOImple implements BlackDAO{
 		
 		
 		
+	}
+
+
+	public List<Map<String, Object>> blackSearchList(int cp, int listSize, String id) {
+
+		
+		Map<String, Object>map = new HashMap<String, Object>();
+		int startNum = (cp -1)* listSize+1;
+		int endNum = cp*listSize;	
+		map.put("startNum", startNum);
+		map.put("endNum", endNum);
+		map.put("id", id);
+		List<Map<String, Object>> list = sqlMap.selectList("blackListSql", map);
+		return list;
 	}
 
 

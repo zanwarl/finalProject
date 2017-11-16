@@ -19,11 +19,13 @@
       <input type="text" name="tomail" size="120" style="width:100%" placeholder="상대의 이메일" class="form-control" value ="${receiver}" >
     </div>     
     <div align="center"><!-- 제목 -->
-      <input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" >
+      <input type="text" name="title" size="120" style="width:100%" placeholder="제목을 입력해주세요" class="form-control" value="안녕하세요, 고객님~! 대한민국 구석구석입니다." >
     </div>
     <p>
     <div align="center"><!-- 내용 --> 
-      <textarea name="content" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" class="form-control"></textarea>
+      <textarea name="content" cols="120" rows="12" style="width:100%; resize:none" placeholder="내용#" class="form-control">안녕하세요, 고객님~! 대한민국 구석구석입니다. 
+      
+      </textarea>
     </div>
     <p>
     <div align="center">

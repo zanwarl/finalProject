@@ -144,4 +144,43 @@ public class MemberController {
 		return mav;
 	}
 	
+	@RequestMapping("/memberIdSeachForm.do")
+	public String memberIdSeachForm() {
+		return "member/idSeach";
+	}
+	
+	@RequestMapping("/memberPwdSeachForm.do")
+	public String memberPwdSeachForm() {
+		return "member/pwdSeach";
+	}
+	
+	@RequestMapping(value = "/memberIdSeach.do", method = RequestMethod.POST)
+	public ModelAndView idSeach (@RequestParam("member_name")String member_name, 
+			@RequestParam("member_email")String member_email			 
+			) {
+		
+		String list=memberDao.idSeach(member_name, member_email);
+						
+		ModelAndView mav= new ModelAndView(); 
+				
+		mav.addObject("list",list);
+		mav.setViewName("member/idSeach_ok");
+		
+		return mav; 
+	}
+	
+	@RequestMapping(value = "/memberPwdSeach.do", method = RequestMethod.POST)
+	public ModelAndView pwdSeach (@RequestParam("member_id")String member_id, 
+			@RequestParam("member_email")String member_email			 
+			) {
+		
+		String list2=memberDao.pwdSeach(member_id, member_email);
+						
+		ModelAndView mav= new ModelAndView(); 
+				
+		mav.addObject("list2",list2);
+		mav.setViewName("member/pwdSeach_ok");
+		
+		return mav; 
+	}
 }

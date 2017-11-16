@@ -80,7 +80,7 @@ public class ComplainDAOImple implements ComplainDAO {
 	}
 
 	public int comReqWrite(ComplainDTO dto){
-	//	System.out.println("³»¿ë: " + dto.getContent());
+	//	System.out.println("ï¿½ï¿½ï¿½ï¿½: " + dto.getContent());
 		int result = sqlMap.insert("comReqWrite",dto);
 		return result;
 	}
@@ -232,6 +232,15 @@ public class ComplainDAOImple implements ComplainDAO {
 		List <ComplainDTO> list = sqlMap.selectList("receiveComplainListSql", userIdx);
 
 		return list ; 
+		
+	}
+
+
+
+	public int getnoAnstotalCnt() {
+		// TODO Auto-generated method stub
+		
+		return sqlMap.selectOne("noAnsTotalCnt");
 		
 	}	
 

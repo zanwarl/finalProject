@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
+
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -15,12 +17,8 @@
 <form name="comReq" action="comReqWrite.do" method="post">
 <table>
 	<tr>
-		<th>신고자</th>
-		<td><input type="text" name="sender"></td>
-	</tr>
-	<tr>
 		<th>신고대상자</th>
-		<td><input type="text" name="receiver"></td>
+		<td><input type="text" name="receiver" value="${receiver }"></td>
 	</tr>
 	<tr>
 		<th>분류</th>
@@ -31,12 +29,12 @@
 		</select></td>
 	</tr>
 	<tr>
-		<th>내용</th>
+		<th>신고내용</th>
 		<td><textarea rows="10" cols="30" name="content"></textarea></td>
 	</tr>
 	<tr>
 		<td colspan="2">
-		<input type="submit" value="전송">
+		<input type="submit" value="신고하기">
 		<input type="reset" value="다시작성">
 		</td>
 	</tr>

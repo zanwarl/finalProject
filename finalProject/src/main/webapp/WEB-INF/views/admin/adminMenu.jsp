@@ -29,7 +29,11 @@
 
 </c:if>
 <c:if test="${!empty adminIdx }">
-	${adminIdx}님 로그인중 ...<h5><a href="adminLogout.do">로그아웃</a></h5>
+	사원번호: ${adminIdx}
+	
+	<h5>
+	<a href="main.do">메인페이지</a>|
+	<a href="adminLogout.do">로그아웃</a></h5>
 </c:if>
 
 
