@@ -52,7 +52,7 @@
 </head>
 <body>
 <h1>숙소등록페이지</h1>
-	<form name="roomadd.do" action="home.do" method="post">
+	<form name="roomadd.do" action="imageUploadForm.do" method="post">
  	<div>
  	<input type="hidden" name="useridx" value="${useridx}"><br>
  	방타입:<select name="btype">

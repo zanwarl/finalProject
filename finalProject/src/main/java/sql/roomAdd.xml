@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.roomAdd">
 	<insert id="roomAddInsert" parameterType="korea.roomAdd.model.RoomAddDTO">
-		<selectKey keyProperty="roomidx" resultType="int" order="BEFORE">
+		<selectKey keyProperty="roomidx" resultType="int" order="AFTER">
 			SELECT room_idx.currval from dual
 		</selectKey>
 		insert into roomAdd values(
@@ -37,5 +37,8 @@
 	<insert id="rImageFile" parameterType="HashMap">
   	    insert into rimage values (image_seq.nextval, #{oname}, #{filename}, #{filesize}, #{roomidx})
 	</insert>
+	<select id="imageList" parameterType="int" resultType="korea.roomAdd.model.ImageDTO">
+		select * from rimage where roomidx = #{idx}
+	</select>
 
 </mapper>
