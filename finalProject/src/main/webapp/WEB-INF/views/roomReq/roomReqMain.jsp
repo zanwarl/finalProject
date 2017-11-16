@@ -83,13 +83,22 @@ text-align:center;
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 <script language='javascript'>
-	$( function() {
-	$( "#datepicker" ).datepicker({ minDate:0});
-	});
-	
-	$( function() {
-		$( "#datepicker1" ).datepicker({ minDate:0});
+
+var jq = $.noConflict();
+
+	jq(document).ready( function() {
+	jq( "#datepicker" ).datepicker({
+		minDate:0
 		});
+	});
+
+var ds = $.noConflict();
+	
+	ds(document).ready( function() {
+		$( "#datepicker1" ).datepicker({
+			minDate:0
+		});
+	});
 
 	window.onload = function TimeBtn(){
 		var timediv = document.getElementById("button");
