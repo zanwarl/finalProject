@@ -30,9 +30,7 @@ function ok(reqIdx, amt){
 }, function(rsp) {
     if ( rsp.success ) {
  	       var msg = '결제가 완료되었습니다.';
- 	       paid(reqIdx);
- 	       
-        	
+ 	       paid(reqIdx);      	
         	
         	
  	       

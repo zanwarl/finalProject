@@ -11,8 +11,6 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -46,10 +44,9 @@ public class RoomReqController {
 
 		HttpSession session = req.getSession();
 
-		String userId = "yera";
 
-		// (String)session.getAttribute("sId");
-
+		String userId =(String)session.getAttribute("sId");
+		
 		rdto.setUserid(userId);
 
 		int result = rdao.RoomreqAdd(rdto);
