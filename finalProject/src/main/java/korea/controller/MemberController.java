@@ -158,14 +158,15 @@ public class MemberController {
 	public ModelAndView idSeach (@RequestParam("member_name")String member_name, 
 			@RequestParam("member_email")String member_email			 
 			) {
-		
-		String list=memberDao.idSeach(member_name, member_email);
+		System.out.println(member_name);
+		System.out.println(member_email);
+		String listt=memberDao.idSeach(member_name, member_email);
 						
 		ModelAndView mav= new ModelAndView(); 
 				
-		mav.addObject("list",list);
+		mav.addObject("listt",listt);
 		mav.setViewName("member/idSeach_ok");
-		
+		System.out.println(listt);
 		return mav; 
 	}
 	
