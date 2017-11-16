@@ -16,6 +16,7 @@ public interface ComplainDAO {
 	
 	
 	public int getTOtalCnt();
+	public int getnoAnstotalCnt();
 	public int getTOtalCnt( boolean isAns);
 	public int getTOtalCnt(int key, String val );
 	

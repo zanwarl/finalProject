@@ -28,33 +28,35 @@ public class RoomReqController {
 
 	@RequestMapping("/roomReq.do")
 	public ModelAndView roomReq(@RequestParam(value = "roomIdx") int idx) {
+		
 		RoomAddDTO rdto = radao.roomContent(idx);
+				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
-		mav.addObject("rdto", rdto);
+		mav.addObject("rdto", rdto);		
 		mav.addObject("roomIdx", idx);
 
-		return mav;
+		return mav; 
 	}
 
 	@RequestMapping("/roomReqFm.do")
 	public ModelAndView roomReqFm(RoomreqDTO rdto,
 
-			HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "roomprice") int rprice) {
+		HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "total_pay") int total_pay) {
 
 		HttpSession session = req.getSession();
-
-
+		
 		String userId =(String)session.getAttribute("sId");
 		
 		rdto.setUserid(userId);
+		rdto.setTotal_pay(total_pay);
 
 		int result = rdao.RoomreqAdd(rdto);
-
-		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
+	
+		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&total_pay=" + total_pay;
 		// System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "Ȯ��" : "�ٽ� �������ּ���";
+		String msg = result > 0 ? "확인" : "다시 예약해주세요.";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -67,13 +69,13 @@ public class RoomReqController {
 
 	@RequestMapping(value = "/roomReqOK.do")
 	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,
-			@RequestParam(value = "roomprice") int rprice) {
+			@RequestParam(value = "total_pay") int total_pay) {
 
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
+		
 		ModelAndView mav = new ModelAndView();
-		System.out.println(rprice);
 		mav.addObject("rdto", rdto);
-		mav.addObject("rprice", rprice);
+		mav.addObject("total_pay", total_pay);
 		mav.setViewName("roomReq/rok");
 
 		return mav;

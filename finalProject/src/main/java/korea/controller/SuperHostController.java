@@ -87,6 +87,36 @@ public class SuperHostController {
 	}
 	
 	
+	@RequestMapping ( value = "/superHostSearch.do" , method=RequestMethod.GET)
+	public ModelAndView superHostSearch (
+			@RequestParam(value="cp", defaultValue="1") int cp,  
+			@RequestParam(value="id") String id  
+			
+			){
+		
+		
+		
+		//	int max = 10 ; 
+		
+		int totalCnt =sdao.superHostSearchTotalCnt(id);
+		
+		int listSize = 5;
+		int pageSize = 5; 
+		
+		List<SuperHostDTO> list = sdao.superHostSearchList(cp, listSize, id);
+		
+		
+		String pageStr = korea.page.PageModule.makePage("superHostSearch.do?id="+id, totalCnt, listSize, pageSize, cp, "1");
+		
+		ModelAndView mav = new  ModelAndView();
+		mav.addObject("pageStr", pageStr);
+		mav.addObject("list", list);
+		mav.setViewName("admin/superHostSearchList");
+		return mav; 
+		
+	}
+	
+	
 		
 	
 }

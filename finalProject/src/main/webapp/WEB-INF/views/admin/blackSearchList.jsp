@@ -6,8 +6,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <style type="text/css">
+
 table {
 	border-collapse: collapse;
 	width: 100%;
@@ -28,7 +28,6 @@ tfoot td {
 	text-align: center;
 }
 </style>
-
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <meta  charset=UTF-8">
@@ -68,7 +67,7 @@ tfoot td {
 		<c:if test="${empty list }">
 		
 			<tr>
-				<td>블랙리스트인 회원이 없습니다. </td>
+				<td>검색 결과가 없습니다. </td>
 			</tr>
 		</c:if>
 			<c:forEach var ="dto" items ="${list }">
@@ -87,12 +86,18 @@ tfoot td {
 	</tbody>	
 
 	<tfoot>
-		<tr  >
-			<td colspan="2">${pageStr}</td>
-		</tr><tr>
+		<tr >
+		
+		<c:if test="${not empty list }">
+		
+			<tr>
+				<td colspan="2">${pageStr} </td>
+			</tr>
+		</c:if>
+		<tr>
 			<td colspan="2"><form action="blackSearchList.do">
-			ID	<input type="text" name="id">
-				<input type="submit" value="검색">
+			ID	<input type="text" name="id" placeholder="${param.id }">
+				<input type="submit" value="검색" >
 			</form> </td>
 		</tr>
 	

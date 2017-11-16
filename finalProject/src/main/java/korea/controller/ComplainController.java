@@ -23,17 +23,6 @@ public class ComplainController {
 	@Autowired
 	private ComplainDAO comdao;
 
-	/*
-	 * @Autowired private MemberDAO memdao;
-	 */
-
-	/*
-	 * @RequestMapping (value ="/sendMail.do", method=RequestMethod.GET) public
-	 * String sendMailFm(){ return "complain/mailForm";
-	 * 
-	 * }
-	 */
-
 	@RequestMapping(value = "/userInfo.do")
 	public ModelAndView userInfo(@RequestParam(value = "idx") int idx) {
 		// int res = comdao.givePenalty(idx);
@@ -91,7 +80,7 @@ public class ComplainController {
 	) {
 
 		int res = comdao.complainAns(incharge, resContent, idx);
-		String msg = res > 0 ? "º∫∞¯" : "Ω«∆–";
+		String msg = res > 0 ? "ÏôÑÎ£å" : "Ïã§Ìå®";
 		String goURL = res > 0 ? "complainList.do" : "complainContent.do?idx=" + idx;
 
 		ModelAndView mav = new ModelAndView();
@@ -128,8 +117,8 @@ public class ComplainController {
 	@RequestMapping("/noAnsComplainList.do")
 	public ModelAndView noAnsComplainList(@RequestParam(value = "cp", defaultValue = "1") int cp) {
 
-		int totalCnt = comdao.getTOtalCnt();
-
+		int totalCnt = comdao.getnoAnstotalCnt();
+		
 		int listSize = 5;
 		int pageSize = 5;
 
@@ -163,7 +152,7 @@ public class ComplainController {
 
 		// searchComplainList
 
-		String pageStr = korea.page.PageModule.makePage("complainSearch.do", totalCnt, listSize, pageSize, cp);
+		String pageStr = korea.page.PageModule.makePage("complainSearch.do?key="+key+"&val="+val, totalCnt, listSize, pageSize, cp, "key="+key+"&val="+val);
 
 		ModelAndView mav = new ModelAndView();
 
@@ -189,45 +178,36 @@ public class ComplainController {
 	 * 
 	 */
 	@RequestMapping("/myComplainList.do")
-	public ModelAndView myComplainList(@RequestParam(value = "cp", defaultValue = "1") int cp
-	,HttpServletRequest req, 
-	HttpServletResponse resp
-			
-			) {
-		
+	public ModelAndView myComplainList(@RequestParam(value = "cp", defaultValue = "1") int cp, HttpServletRequest req,
+			HttpServletResponse resp
+
+	) {
+
 		int key = 2;
-		HttpSession s = req.getSession(); 
-		String val =String. valueOf(s.getAttribute("sIdx"));
-		
-		
-		
+		HttpSession s = req.getSession();
+		String val = String.valueOf(s.getAttribute("sIdx"));
+
 		int listSize = 5;
 		int pageSize = 5;
-		
+
 		int totalCnt = comdao.getTOtalCnt(key, val);
-		
+
 		List<ComplainDTO> list = comdao.searchComplainList(cp, listSize, key, val);
-		
+
 		// searchComplainList
-		
+
 		String pageStr = korea.page.PageModule.makePage("myComplainList.do", totalCnt, listSize, pageSize, cp);
-		
+
 		ModelAndView mav = new ModelAndView();
-		
+
 		mav.addObject("list", list);
 		mav.addObject("pageStr", pageStr);
-		
+
 		mav.setViewName("complain/myComplainList");
-		
+
 		return mav;
 	}
 
-	
-	
-		
-		
-		
-	
 	@RequestMapping("/myComplainContent.do")
 	public ModelAndView myComplainContent(@RequestParam("idx") int idx) {
 
@@ -241,33 +221,57 @@ public class ComplainController {
 		return mav;
 
 	}
+
 	@RequestMapping("/complainContent.do")
 	public ModelAndView complainContent(@RequestParam("idx") int idx) {
-		
+
 		ComplainDTO dto = comdao.complainContetn(idx);
 		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("con", dto);
 		mav.setViewName("complain/complainContent");
-		
+
 		return mav;
-		
+
 	}
 
 	@RequestMapping("/comReq.do")
 
-	public String comReq() {
+	public ModelAndView comReq(HttpServletRequest req, HttpServletResponse resp, 
+			@RequestParam(value="receiver")int receiver 
+			) {
 
-		return "comreq/comReqWrite";
+		ModelAndView mav = new ModelAndView();
+
+		HttpSession session = req.getSession();
+
+		if (session.getAttribute("sIdx") == null) {
+			mav.setViewName("admin/adminMsg");
+			mav.addObject("msg", "Î°úÍ∑∏Ïù∏ ÌïòÏÑ∏Ïöî");
+			mav.addObject("goURL", "main.do");
+			return mav;
+		} else {
+			mav.addObject("receiver",receiver);
+			
+			mav.setViewName("comreq/comReqWrite");
+			return mav;
+		}
 	}
 
 	@RequestMapping("/comReqWrite.do")
 
-	public ModelAndView comReqWrite(ComplainDTO dto) {
+	public ModelAndView comReqWrite(ComplainDTO dto, HttpServletRequest req, HttpServletResponse resp
+
+	) {
+
+		HttpSession session = req.getSession();
+		int sender = (Integer) session.getAttribute("sIdx");
+		dto.setSender(sender);
+
 		ModelAndView mav = new ModelAndView();
 		int result = comdao.comReqWrite(dto);
-		String msg = result > 0 ? "µÓ∑œº∫∞¯" : "µÓ∑œΩ«∆–";
+		String msg = result > 0 ? "Ïã†Í≥†Í∞Ä Îì±Î°ùÎêòÏóàÏäµÎãàÎã§." : "Ïã§Ìå®";
 		mav.setViewName("comreq/comReqOk");
 		mav.addObject("msg", msg);
 		return mav;

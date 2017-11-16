@@ -78,7 +78,7 @@
 					<tr>
 						<td>
 							<form action="superHostSearch.do">
-								<input type="text" name="id" >
+							ID	<input type="text" name="id" >
 								<input type="submit" value="검색">
 							</form>
 						</td>

@@ -2,23 +2,23 @@ package korea.roomAdd.model;
 
 public class RoomAddDTO {
 		
-	 private int roomidx;  //¹æ¹øÈ£ 
-	 private int useridx; 	//À¯Àú¹øÈ£
-	 private String btype;  /* Áý È£ÅÚ ±âÅ¸*/
-	 private String rtype; /*ÁýÀüÃ¼ ´ÙÀÎ½Ç °³ÀÎ½Ç*/
-	 private int maxcount; //ÃÖ´ë¼ö¿ëÀÎ¿ø 
-	 private String addr1; //±âº»ÁÖ¼Ò
-	 private String addr2; //»ó¼¼ÁÖ¼Ò
-	 private String postnum; //¿ìÆí¹øÈ£
+	 private int roomidx;  //ï¿½ï¿½ï¿½È£ 
+	 private int useridx; 	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£
+	 private String btype;  /* ï¿½ï¿½ È£ï¿½ï¿½ ï¿½ï¿½Å¸*/
+	 private String rtype; /*ï¿½ï¿½ï¿½ï¿½Ã¼ ï¿½ï¿½ï¿½Î½ï¿½ ï¿½ï¿½ï¿½Î½ï¿½*/
+	 private int maxcount; //ï¿½Ö´ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ 
+	 private String addr1; //ï¿½âº»ï¿½Ö¼ï¿½
+	 private String addr2; //ï¿½ï¿½ï¿½Ö¼ï¿½
+	 private String postnum; //ï¿½ï¿½ï¿½ï¿½ï¿½È£
 	 private String conv; //Ã¼Å©
 	 private String safe; //Ã¼Å©
 	 private String space;  //Ã¼Å©
-	 private String content; //¼³¸í
-	 private String roomname; //¹æÀÌ¸§
-	 private int roomprice; //¹æ°¡°Ý
-	 private String nodate;/*¾ÈµÇ´Â³¯*/ 
-	 private String checkin; //Ã¼Å©ÀÎ
-	 private String checkout; //Ã¼Å©¾Æ¿ô
+	 private String content; //ï¿½ï¿½ï¿½ï¿½
+	 private String roomname; //ï¿½ï¿½ï¿½Ì¸ï¿½
+	 private int roomprice; //ï¿½æ°¡ï¿½ï¿½
+	 private String nodate;/*ï¿½ÈµÇ´Â³ï¿½*/ 
+	 private String checkin; //Ã¼Å©ï¿½ï¿½
+	 private String checkout; //Ã¼Å©ï¿½Æ¿ï¿½
 	 
 	public RoomAddDTO() {
 		super();

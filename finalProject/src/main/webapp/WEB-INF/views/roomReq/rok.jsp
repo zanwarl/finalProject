@@ -70,11 +70,11 @@ function ok(reqIdx, amt){
 		</tr>
 		<tr>
 			<th>총 합계</th>
-			<th>${rprice}</th>
+			<th>${total_pay}</th>
 		</tr>
 		<tr>
 			<td colspan="2" align="center">	 
-				<input type="button" value="결제" onclick="ok('26', ${rprice})"> 
+				<input type="button" value="결제" onclick="ok('26', ${total_pay})"> 
 			</td>
 			<td>	 </td>
 		</tr>	 	   

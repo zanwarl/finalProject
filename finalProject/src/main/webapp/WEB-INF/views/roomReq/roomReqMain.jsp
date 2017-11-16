@@ -84,12 +84,11 @@ text-align:center;
 
 <script language='javascript'>
 	
-	
 	var jq = $.noConflict();
 	
 	jq(document).ready( function() {
-	      		
-			jq( "#datepicker" ).datepicker({ minDate:0, numberOfMonths:2 , 
+		
+	      	jq( "#datepicker" ).datepicker({ minDate:0, numberOfMonths:2 , 
 				onSelect: function(selected) {
 				jq("#datepicker1").datepicker("option","minDate", selected)
 				}
@@ -109,41 +108,13 @@ text-align:center;
 		for(var i=0;i<10;i++){
 			timediv.innerHTML += '<input type="button" name="t_btn'+i+'" value="'+i+'"> ';
 		}	
+		
 	}
-
-	 /* function change(num){
-	  var max=10;
-	  var p_num= document.getElementById("p_num");
-	  var pas_num = Number(p_num.innerHTML);
-	  var result = pas_num+num;
-	  p_num.innerHTML = result;
-	  
-	  if(result<1){
-		  alert('최소 1명이상 예약해야합니다.');
-		  p_num.innerHTML=1;
-	  }else if(result>max){
-		  alert('최대 수용인원수를 벗어났습니다.');
-		  result--;
-		  p_num.innerHTML=result;
-	  }
-  } */
-  
-
-
-
-  
-
-
-/* function call(rp)
-{
-
- if(document.getElementById("num").value && document.getElementById("roomp").value){
-  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt('rp');
- }
-} */
 
 	var date = 1;
 	function call() {
+		
+		var frm = document.roomReqFm;
 		
 		var day1 = $('#datepicker').val();
 		day1 = day1.substring(3,5);
@@ -164,8 +135,8 @@ text-align:center;
 		} 
 		
 		date = day2 - day1;
-		
-		var num = $('#num').val();
+		date = date + 1;
+		var num = frm.count.value;
 		var sum = price*num*date;
 		$('#roomp').val(sum);
 	}
@@ -202,6 +173,7 @@ text-align:center;
 <div id="contents">
 <form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
 <input type="hidden" value="${roomIdx }" name="roomidx">
+
 <c:set var="arr" value="${rdto}"/>   
              
        	<p class="req">
@@ -220,12 +192,11 @@ text-align:center;
 		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="roomprice" id="roomp" value="${arr.roomprice}" onkeyup="call()" readonly>
+			<input type="text" name="total_pay" id="roomp" value="${arr.roomprice}" onkeyup="call()" readonly>
 		</p>
 		<p class="req">
             <input type="submit" class="reqBtn" value="예약하기">
         </p>   
-
 <script>
 var price = document.getElementById('roomp').value;
 </script>
