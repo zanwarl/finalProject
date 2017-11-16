@@ -11,8 +11,6 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -29,43 +27,38 @@ public class RoomReqController {
 	private RoomAddDAO radao;
 
 	@RequestMapping("/roomReq.do")
-	public ModelAndView roomReq(@RequestParam (value="roomIdx") int idx  ) {
+	public ModelAndView roomReq(@RequestParam(value = "roomIdx") int idx) {
 		RoomAddDTO rdto = radao.roomContent(idx);
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
-		mav.addObject("rdto",rdto);
+		mav.addObject("rdto", rdto);
 		mav.addObject("roomIdx", idx);
-		
 
 		return mav;
 	}
 
 	@RequestMapping("/roomReqFm.do")
-	public ModelAndView roomReqFm(RoomreqDTO rdto, 
-			
-			HttpServletRequest req, 
-			HttpServletResponse resp,@RequestParam(value="roomprice") int rprice
-			) {
+	public ModelAndView roomReqFm(RoomreqDTO rdto,
 
-		
+			HttpServletRequest req, HttpServletResponse resp, @RequestParam(value = "roomprice") int rprice) {
+
 		HttpSession session = req.getSession();
-		
-		String userId ="yera"; 
-		
-				//(String)session.getAttribute("sId");
+
+
+		String userId =(String)session.getAttribute("sId");
 		
 		rdto.setUserid(userId);
-		
+
 		int result = rdao.RoomreqAdd(rdto);
 
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
-		//System.out.println(rdto.getReqidx());
+		// System.out.println(rdto.getReqidx());
 
 		String msg = result > 0 ? "확인" : "다시 예약해주세요";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
-	
+
 		mav.addObject("goURL", goURL);
 		mav.setViewName("roomReq/reqmsg");
 
@@ -73,8 +66,9 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqOK.do")
-	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,@RequestParam(value="roomprice") int rprice) {
-				
+	public ModelAndView roomreqOK(@RequestParam(value = "reqidx") int idx,
+			@RequestParam(value = "roomprice") int rprice) {
+
 		RoomreqDTO rdto = rdao.RoomreqOK(idx);
 		ModelAndView mav = new ModelAndView();
 		System.out.println(rprice);
@@ -94,18 +88,15 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqList.do")
-	public ModelAndView roomReqList(
-			@RequestParam(value = "cp", defaultValue = "1") int cp,
-			HttpServletRequest req, 
-			HttpServletResponse resp
-			) {
+	public ModelAndView roomReqList(@RequestParam(value = "cp", defaultValue = "1") int cp, HttpServletRequest req,
+			HttpServletResponse resp) {
 		HttpSession session = req.getSession();
-		
-		String userId = (String)session.getAttribute("sId");
-				
-		System.out.println(userId);
-		
-//		String userId = "yera";
+
+		String userId = (String) session.getAttribute("sId");
+
+	//	System.out.println(userId);
+
+		// String userId = "yera";
 
 		int listSize = 5;
 		int pageSize = 5;
@@ -128,7 +119,7 @@ public class RoomReqController {
 	@RequestMapping(value = "/roomCancel.do")
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
-		
+
 		String msg = res > 0 ? "예약이 취소되었습니다" : "실패";
 		String goURL = "roomReqList.do";
 
@@ -140,103 +131,120 @@ public class RoomReqController {
 		return mav;
 
 	}
-	
-	
 
 	@RequestMapping("/myRoomReqList.do")
-	public ModelAndView myRoomList (
-			
-			HttpServletRequest req, 
-			HttpServletResponse resp
-			)
-	{
-		ModelAndView mav = new ModelAndView(); 
-		
-		
+	public ModelAndView myRoomList(
+
+			HttpServletRequest req, HttpServletResponse resp) {
+		ModelAndView mav = new ModelAndView();
+
 		HttpSession session = req.getSession();
-		
-		String userId ="yera"; 
-		
-				//(String)session.getAttribute("sId");
-		
+
+		String userId =  (String)session.getAttribute("sId");
+
 		List<Map<String, Object>> list = rdao.myRoomList(userId);
-		//System.out.println(list);
+		// System.out.println(list);
 		mav.addObject("list", list);
 		mav.setViewName("room/myRoomReqList");
-		return mav; 
-		
-		
-		
+		return mav;
+
 	}
-	
-/*	public static int [] getDate (){
 
-		Calendar now = Calendar.getInstance(); 
-		int y = now.get(Calendar.YEAR);
-		int m = now.get(Calendar.MONTH)+1; 
-		int res []= {y, m};
-		return res ; 
-		
-		
-	}*/
-	
+	/*
+	 * public static int [] getDate (){
+	 * 
+	 * Calendar now = Calendar.getInstance(); int y = now.get(Calendar.YEAR);
+	 * int m = now.get(Calendar.MONTH)+1; int res []= {y, m}; return res ;
+	 * 
+	 * 
+	 * }
+	 */
 
-	@RequestMapping ("/roomReqInfo.do")
-	public ModelAndView roomReqInfo (
-			@RequestParam (value="roomIdx")int roomIdx ,
-			@RequestParam (value="yy", defaultValue="2017")int yy ,
-			@RequestParam (value="mm",  defaultValue="12" )int mm
-			){
+	@RequestMapping("/roomReqInfo.do")
+	public ModelAndView roomReqInfo(@RequestParam(value = "roomIdx") int roomIdx) {
+
+		
+		ModelAndView mav = new ModelAndView();
+		List<Map<String, Object>> list = rdao.roomReqInfo(roomIdx);
+
+		
+		String event = "";
+		
+		
+		
+		if (list .size()!= 0 ){
+			for (int i = 0; i < list.size() - 1; i++) {
+				
+				String start = (String) list.get(i).get("STARTDATE");
+				String start1= start.substring(5);
+				
+				
+				String count =String.valueOf(list.get(i).get("COUNT"));
+				String reqidx =String.valueOf(list.get(i).get("REQIDX"));
+				
+				
+			//	String count = (String) list.get(i).get("COUNT");
+				String end = (String) list.get(i).get("ENDDATE");
+				String end1 =end.substring(5);
+				
+				String userId = (String) list.get(i).get("USERID");
+				event = event + "{start:'" + start + "',end:'" + end + "',title:'" + userId + "(" + count + ")" + start1
+						+ "~" + end1 + "', reqidx:'"+reqidx+"'},";
+
+			}
+
+			String start = (String) list.get(list.size() - 1).get("STARTDATE");
+			String start1= start.substring(5);
+			
+			String end = (String) list.get(list.size() - 1).get("ENDDATE");
+			String end1 =end.substring(5);
+
+			String reqidx =String.valueOf(list.get(list.size() - 1).get("REQIDX"));
+			
+			String userId = (String) list.get(list.size() - 1).get("USERID");		
+			String count =String.valueOf(list.get(list.size() - 1).get("COUNT"));
+			event = event + "{start:'" + start + "',end:'" + end + "',title:'" + userId + "(" + count + ")" + start1 + "~"
+					+ end1 + "' , reqidx :'"+reqidx+"'}";
+		}
+
+		
+//
+//		mav.addObject("list", list);
+
+		// System.out.println(list);
+		/*
+		 * 
+		 * 
+		 * mav.addObject("startDay",startDay); mav.addObject("lastDay",lastDay);
+		 */
+		mav.setViewName("room/roomReqInfo");
+		mav.addObject("event", event);
+		System.out.println(event);
+		// System.out.println(list);
+		return mav;
+
+	}
+
+
+	@RequestMapping("/roomReqInfo2.do")
 	
+	public ModelAndView roomReqInfo2(
+			@RequestParam(value = "reqidx") int reqidx
+			
+			)
+	{
+		Map<String,Object> list = rdao.roomReqInfo2Sql(reqidx);
 		
-		
-		Calendar cal= Calendar.getInstance(); 
-		cal.set(Calendar.YEAR, yy);
-		cal.set(Calendar.MONTH, mm-1);
-		cal.set(Calendar.DATE, 1);
-		
-		int startDay = cal.get(Calendar.DAY_OF_WEEK);//시작요일
-	//	System.out.println(startDay);
-		int lastDay =cal.getActualMaximum(Calendar.DATE);
-		
-		
-	//	System.out.println(lastDay);
-		
-		roomIdx = 1 ; 
 		
 		ModelAndView mav = new ModelAndView(); 
-		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx, mm, yy);
-
-/*	
-		int schedule []= new int [lastDay+1	];
-		for ( int i =0; i< list.size(); i ++){
-			schedule[  (Integer) list.get(i).get("CHECKINDATE")]=1; 
-			
-		}*/
-		
-		
-		
-	/*	Integer schedule [] = new Integer [lastDay];
-	
-		for ( int i =0; i< date.size(); i ++){
-			schedule[date.get(i)]= 1; 
-			
-		}
-		
-		for ( int i =0; i <schedule.length; i ++){
-			System.out.print(schedule[i]+" ");
-		}*/
-		
+		mav.setViewName("room/roomReqInfo2");
 		mav.addObject("list", list);
-		mav.addObject("startDay",startDay);
-		mav.addObject("lastDay",lastDay);
-		mav.setViewName("room/roomReqInfo");
-		//System.out.println(list);
+		
 		return mav; 
+		
 		
 		
 	}
 	
 	
-
 }
