@@ -11,7 +11,10 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -139,7 +142,8 @@ public class RoomReqController {
 	}
 	
 	
-	@RequestMapping("myRoomReqList.do")
+
+	@RequestMapping("/myRoomReqList.do")
 	public ModelAndView myRoomList (
 			
 			HttpServletRequest req, 
@@ -151,16 +155,84 @@ public class RoomReqController {
 		
 		HttpSession session = req.getSession();
 		
-		String userId ="znzl"; 
+		String userId ="yera"; 
 		
 				//(String)session.getAttribute("sId");
 		
-		
-		List<String> list = rdao.myRoomList(userId);
+		List<Map<String, Object>> list = rdao.myRoomList(userId);
+		//System.out.println(list);
 		mav.addObject("list", list);
 		mav.setViewName("room/myRoomReqList");
 		return mav; 
 		
+		
+		
+	}
+	
+/*	public static int [] getDate (){
+
+		Calendar now = Calendar.getInstance(); 
+		int y = now.get(Calendar.YEAR);
+		int m = now.get(Calendar.MONTH)+1; 
+		int res []= {y, m};
+		return res ; 
+		
+		
+	}*/
+	
+
+	@RequestMapping ("/roomReqInfo.do")
+	public ModelAndView roomReqInfo (
+			@RequestParam (value="roomIdx")int roomIdx ,
+			@RequestParam (value="yy", defaultValue="2017")int yy ,
+			@RequestParam (value="mm",  defaultValue="12" )int mm
+			){
+	
+		
+		
+		Calendar cal= Calendar.getInstance(); 
+		cal.set(Calendar.YEAR, yy);
+		cal.set(Calendar.MONTH, mm-1);
+		cal.set(Calendar.DATE, 1);
+		
+		int startDay = cal.get(Calendar.DAY_OF_WEEK);//시작요일
+	//	System.out.println(startDay);
+		int lastDay =cal.getActualMaximum(Calendar.DATE);
+		
+		
+	//	System.out.println(lastDay);
+		
+		roomIdx = 1 ; 
+		
+		ModelAndView mav = new ModelAndView(); 
+		List<Map<String, Object>> list= rdao.roomReqInfo(roomIdx, mm, yy);
+
+/*	
+		int schedule []= new int [lastDay+1	];
+		for ( int i =0; i< list.size(); i ++){
+			schedule[  (Integer) list.get(i).get("CHECKINDATE")]=1; 
+			
+		}*/
+		
+		
+		
+	/*	Integer schedule [] = new Integer [lastDay];
+	
+		for ( int i =0; i< date.size(); i ++){
+			schedule[date.get(i)]= 1; 
+			
+		}
+		
+		for ( int i =0; i <schedule.length; i ++){
+			System.out.print(schedule[i]+" ");
+		}*/
+		
+		mav.addObject("list", list);
+		mav.addObject("startDay",startDay);
+		mav.addObject("lastDay",lastDay);
+		mav.setViewName("room/roomReqInfo");
+		//System.out.println(list);
+		return mav; 
 		
 		
 	}

@@ -1,14 +1,29 @@
 package korea.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import korea.msg.model.MsgDAO;
 import korea.roomAdd.model.RoomAddDAO;
 import korea.roomAdd.model.RoomAddDTO;
 
@@ -17,51 +32,115 @@ public class RoomAddController {
 
 	@Autowired
 	private RoomAddDAO radao;
-	
-	@RequestMapping(value="/home.do",method=RequestMethod.GET)
-	public ModelAndView roomList(){
-		
+	@Autowired
+	private MsgDAO mdao;
+
+	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
+	public ModelAndView roomList() {
+
 		List<RoomAddDTO> list = radao.roomList();
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("list",list);
+
+		mav.addObject("list", list);
 		mav.setViewName("room/roomList");
 		return mav;
 	}
-	
-	@RequestMapping(value="/roomadd.do")
-	public ModelAndView roomAdd(){
+
+	@RequestMapping(value = "/roomadd.do")
+	public ModelAndView roomAdd(HttpServletRequest req, HttpServletResponse resp) {
 		ModelAndView mav = new ModelAndView();
+		HttpSession session = req.getSession();
+		String userId = (String) session.getAttribute("sId");
+		int useridx = mdao.getUserIdx(userId);
+
+		mav.addObject("useridx", useridx);
 		mav.setViewName("room/roomAddForm");
 		return mav;
 	}
-	@RequestMapping(value="/home.do", method=RequestMethod.POST )
-	public ModelAndView roomAdd(RoomAddDTO rdto){
+
+	@RequestMapping(value = "/home.do", method = RequestMethod.POST)
+	public ModelAndView roomAdd(HttpServletRequest req,RoomAddDTO rdto) {
+		req.getSession().setAttribute("rdto", rdto);
 		radao.roomAdd(rdto);
-		ModelAndView mav=new ModelAndView("redirect:home.do");
+		ModelAndView mav = new ModelAndView("redirect:home.do");
 		return mav;
 	}
-	
-	@RequestMapping(value="/roomContent.do")
-	public ModelAndView roomContent(@RequestParam("roomidx")int idx){
-		
-		RoomAddDTO rdto  = radao.roomContent(idx);
+
+	@RequestMapping(value = "/roomContent.do")
+	public ModelAndView roomContent(@RequestParam("roomidx") int idx) {
+
+		RoomAddDTO rdto = radao.roomContent(idx);
 		ModelAndView mav = new ModelAndView();
-		
-		mav.addObject("rdto",rdto);
+
+		mav.addObject("rdto", rdto);
 		mav.setViewName("room/roomContent");
-		
+
 		return mav;
 	}
-	
-	@RequestMapping(value="/roomUpdate.do",method=RequestMethod.GET)
-	public ModelAndView roomUpdateForm(@RequestParam("idx")int idx){
-		
+
+	@RequestMapping(value = "/roomUpdate.do", method = RequestMethod.GET)
+	public ModelAndView roomUpdateForm(@RequestParam("idx") int idx) {
+
 		ModelAndView mav = new ModelAndView();
 		RoomAddDTO rdto = radao.roomUpdateData(idx);
-		
-		mav.addObject("rdto",rdto);
+
+		mav.addObject("rdto", rdto);
 		mav.setViewName("room/roomUpdateForm");
 		return mav;
+	}
+
+	@RequestMapping(value = "/roomUpdate.do", method = RequestMethod.POST)
+	public ModelAndView roomUpdate(RoomAddDTO rdto) {
+		radao.roomUpdate(rdto);
+		ModelAndView mav = new ModelAndView("redirect:home.do");
+		return mav;
+	}
+
+	@RequestMapping(value = "/roomDelete.do")
+	public ModelAndView roomDelete(@RequestParam("idx") int idx) {
+		radao.roomDelete(idx);
+		ModelAndView mav = new ModelAndView("redirect:home.do");
+		return mav;
+	}
+	
+	@RequestMapping(value= "/imageUpload.do")
+	public ModelAndView rimage(HttpServletRequest req, MultipartHttpServletRequest mhsq) throws IllegalStateException, IOException {
+		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
+		Iterator<String> iterator = mhsq.getFileNames();
+		
+		MultipartFile multipartFile = null;
+    	String originalFileName = null;
+    	String originalFileExtension = null;
+    	String storedFileName = null;
+    	Map<String, Object> listMap = null; 
+		
+    	File file = new File("d:/upload2/");
+        if(file.exists() == false){
+        	file.mkdirs();
+        }
+        
+        while(iterator.hasNext()){
+        	multipartFile = mhsq.getFile(iterator.next());
+        	if(multipartFile.isEmpty() == false){
+        		originalFileName = multipartFile.getOriginalFilename();
+        		originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        		storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
+        		
+        		file = new File("d:/upload2/"+storedFileName);
+        		multipartFile.transferTo(file);
+        		
+        		listMap = new HashMap<String,Object>();
+        		listMap.put("roomidx", 1);
+        		listMap.put("oname", originalFileName);
+        		System.out.println(originalFileName);
+        		listMap.put("filename", storedFileName);
+        		System.out.println(storedFileName);
+        		listMap.put("filesize", multipartFile.getSize());
+        		System.out.println(multipartFile.getSize());
+        		radao.fileupload(listMap);
+        	}
+        }
+		return new ModelAndView("redirect:home.do");
+
 	}
 }

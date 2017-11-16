@@ -141,6 +141,7 @@ public class PlanController {
 	public ModelAndView planMainSaveDb(PlanDTO pdto) {
 		int idx = pdao.lastSaveIdx(pdto);
 		System.out.println(idx);
+		System.out.println("areacode : " + pdto.getPlan_place());
 		pdto.setPlan_idx(idx);
 		
 		int result = pdao.planMainWrite(pdto);
@@ -163,8 +164,12 @@ public class PlanController {
 
 		ModelAndView mav = new ModelAndView();
 		
+		pdto = pdao.pdtoInfo(pdto.getPlan_idx());
+		int plan_idx = pdto.getPlan_idx();
+		
 		mav.setViewName("plan/planDetail");
-		mav.addObject("plan_idx", pdto.getPlan_idx());
+		mav.addObject("pdto", pdto);
+		mav.addObject("plan_idx", plan_idx);
 		return mav;
 	}
 	
@@ -228,7 +233,6 @@ public class PlanController {
 	@RequestMapping("/planDetailWrite.do")
 	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
 		
-		System.out.println("???????????????????");
 		
 		/*Object object=null;
 		JSONArray arrayObj=null;
@@ -261,9 +265,12 @@ public class PlanController {
 		
 		int update = pdao.planMainUpdate(pdto);
 		
+
+		String goPage = "plan.do";
 		
 		ModelAndView mav = new ModelAndView();
-		mav.setViewName("plan/plan");
+		mav.addObject("url", goPage);
+		mav.setViewName("plan/planDetailOk");
 		return mav;
 	}    
 	
@@ -272,10 +279,19 @@ public class PlanController {
 		
 		System.out.println("수정 할 번호 : " + plan_idx);
 		List<PlanDetailDTO> list = pdao.planEditList(plan_idx);
+		
+		PlanDTO pdto = pdao.pdtoInfo(plan_idx);
+		//plan_detail 테이블의 마지막 order를 불러와서 넘김
+		int lastOrder = pdao.lastOrder(plan_idx);
+		
+		System.out.println("lastOrder : " + lastOrder);
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("plan/planDetail");
 		mav.addObject("plan_idx", plan_idx);
 		mav.addObject("list", list);
+		mav.addObject("pdto", pdto);
+		mav.addObject("lastOrder", lastOrder);
 		return mav;
 	}
 

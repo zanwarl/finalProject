@@ -5,29 +5,29 @@
 <mapper namespace="korea.roomreq">
 	<!-- <select id="roomreqList" resultType="korea.roomreq.model.RoomreqDTO" 
 		parameterType="String"> select * from roomreq where userid = #{userid} </select> -->
-	
-		
+
+
 	<insert id="roomreqInsert" parameterType="korea.roomreq.model.RoomreqDTO">
-	
-		<selectKey keyProperty="reqidx" resultType="int" order="BEFORE" >
-		
-		select reqidx.nextval from dual
+
+		<selectKey keyProperty="reqidx" resultType="int" order="BEFORE">
+
+			select reqidx.nextval from dual
 		</selectKey>
-	
+
 		insert into roomreq
 		values
 		(#{reqidx},#{userid},#{roomidx},#{count},
-		to_char (sysdate , 'yyyy/mm/dd hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
+		to_char (sysdate , 'yyyy/mm/dd
+		hh24:mi:ss'),#{checkindate},#{checkoutdate},0)
 	</insert>
-	<!-- <select id="roomreqCon2" parameterType="int"
-		resultType="korea.roomreq.model.RoomreqDTO">
-		select * from roomreq where reqidx = #{idx}
-	</select> -->
+	<!-- <select id="roomreqCon2" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO"> 
+		select * from roomreq where reqidx = #{idx} </select> -->
 
-	
- 	<select id="roomReqOK" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO">
- 		select * from roomreq where reqidx = #{reqidx}
- 	</select>
+
+	<select id="roomReqOK" parameterType="int"
+		resultType="korea.roomreq.model.RoomreqDTO">
+		select * from roomreq where reqidx = #{reqidx}
+	</select>
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
 		select count(*) from roomreq where userId = #{userId}
@@ -37,7 +37,8 @@
 
 	<update id="roomCancelSql" parameterType="int">
 
-		update roomreq set paid = -1 where reqIdx = #{reqIdx}
+		update roomreq set paid
+		= -1 where reqIdx = #{reqIdx}
 	</update>
 
 
@@ -51,30 +52,38 @@
 
 
 	</select>
-	
-	<update id="paidSql" parameterType="int" >
-	
-	update roomreq set paid = 1 where reqidx = #{reqIdx}
+
+	<update id="paidSql" parameterType="int">
+
+		update roomreq set paid = 1
+		where reqidx = #{reqIdx}
 	</update>
 
-<!-- 
+	<select id="myRoomListSql" resultType="java.util.Map"
+		parameterType="String">
 
-<resultMap id="roomInfo" type="java.util.HashMap">
-        <result javaType="java.lang.String" column="bookName" property="bookName"/>
-        <result javaType="데이터타입" column="db컬럼명" property="맵에서 키값"/>
-</resultMap>
- -->
-
-	<select id="myRoomListSql" resultType="String"  parameterType="String">
-
-		select roomname
+		select roomname, roomidx
 		from roomadd
 		where useridx in (
-
 		select member_idx
 		from member
-		where member_id = #{userId}
+		where member_id
+		= #{userId}
 		)
+
+
+	</select>
+
+	<select id="roomReqInfoSql" parameterType="map" resultType="java.util.Map">
+		select substr(checkindate,4, 2) as checkindate, (to_number (
+		substr(checkoutdate,4, 2) )-to_number (substr(checkindate,4, 2) )+1)as
+		span, userid
+		from roomreq
+		where roomidx = #{roomIdx}
+		and checkindate like #{mm}||'/'||'%/'||#{yy}
+
+
+
 
 
 	</select>

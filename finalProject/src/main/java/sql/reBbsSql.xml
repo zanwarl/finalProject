@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="korea.rebbs">
+	<insert id="reBbsWrite" parameterType="korea.rebbs.model.ReBbsDTO">
+		insert into
+			rebbs
+		values(rebbs_idx.nextval,
+				#{writer},
+				#{pwd},
+				#{subject},
+				#{content},
+				sysdate,0,0,0,0)
+	</insert>
+	
+	<select id="reBbsList"  parameterType="Map"  resultType="korea.rebbs.model.ReBbsDTO">
+		<![CDATA[ 
+    select * from (select rownum as rnum,a.* from (select * from rebbs order by rebbs_idx desc  ) a)b where rnum>=#{startnum} and rnum<=#{endnum} 
+     ]]>
+	</select>
+	<select id="reBbsContent" parameterType="int" resultType="korea.rebbs.model.ReBbsDTO">
+		  select * 
+		  from rebbs
+		  where rebbs_idx=#{rebbs_idx} 
+	</select>
+	
+	<select id="reBbsTotalCnt" resultType="int">
+		select count(*) from rebbs
+	</select>
+</mapper>

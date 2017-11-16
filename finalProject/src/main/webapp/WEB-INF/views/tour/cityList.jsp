@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,10 +33,15 @@
 
 	        	   //총 게시물 수 myItem.length + 페이징처리 
                    var output = '';
+                   var chkImg = '';
 	        	   for(var i=1; i<=listSize; i++){
 	                    output += '<h4>'+myItem[i].title+'</h4>';
-	                    output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+
-	                    		'&contentId='+myItem[i].contentid+'"><img src="'+myItem[i].firstimage+'" width="150"></a>';
+	                    output += '<a href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+'&contentId='+myItem[i].contentid+'">';
+	                    if(myItem[i].firstimage==undefined) {
+	                    	output += '<img src="img/notimage.png" width="150" height="120"></a>';             	
+	                    } else {
+	                    	output += '<img src="'+myItem[i].firstimage+'" width="150" height="120"></a>';
+	                    }
 	                    output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
 	                }
 	        	   $(".panel").html(output);
