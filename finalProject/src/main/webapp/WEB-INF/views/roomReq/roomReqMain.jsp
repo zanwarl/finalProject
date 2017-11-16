@@ -12,11 +12,11 @@
 
 <script language='javascript'>
 	$( function() {
-	$( "#datepicker" ).datepicker({});
+	$( "#datepicker" ).datepicker({ minDate:0});
 	});
 	
 	$( function() {
-		$( "#datepicker1" ).datepicker();
+		$( "#datepicker1" ).datepicker({ minDate:0});
 		});
 
 	window.onload = function TimeBtn(){
