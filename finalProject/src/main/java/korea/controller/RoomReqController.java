@@ -54,7 +54,7 @@ public class RoomReqController {
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&roomprice=" + rprice;
 		// System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "È®ÀÎ" : "´Ù½Ã ¿¹¾àÇØÁÖ¼¼¿ä";
+		String msg = result > 0 ? "È®ï¿½ï¿½" : "ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -120,7 +120,7 @@ public class RoomReqController {
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
 
-		String msg = res > 0 ? "¿¹¾àÀÌ Ãë¼ÒµÇ¾ú½À´Ï´Ù" : "½ÇÆÐ";
+		String msg = res > 0 ? "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ÒµÇ¾ï¿½ï¿½ï¿½ï¿½Ï´ï¿½" : "ï¿½ï¿½ï¿½ï¿½";
 		String goURL = "roomReqList.do";
 
 		ModelAndView mav = new ModelAndView();
@@ -207,16 +207,7 @@ public class RoomReqController {
 					+ end1 + "' , reqidx :'"+reqidx+"'}";
 		}
 
-		
-//
-//		mav.addObject("list", list);
 
-		// System.out.println(list);
-		/*
-		 * 
-		 * 
-		 * mav.addObject("startDay",startDay); mav.addObject("lastDay",lastDay);
-		 */
 		mav.setViewName("room/roomReqInfo");
 		mav.addObject("event", event);
 		System.out.println(event);

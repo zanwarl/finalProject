@@ -56,16 +56,13 @@ public class MsgController {
 		// int sender = 1 ;
 		HttpSession session = req.getSession();
 		String sender = (String) session.getAttribute("sId");
-		// int sender = mdao.getUserIdx(userId);
-
-		// ±âÁ¸¿¡ ´ëÈ­°¡ ÀÖ´ÂÁö Ã£±â
 
 		int msgIdx = 0;
 		boolean isFirst = mdao.isFirst(sender, receiver);
 		if (isFirst) {
-			// ±âÁ¸ ´ëÈ­°¡ ÀÖÀ¸¸é
+			// ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È­ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 			msgIdx = mdao.getMsgIdx(sender, receiver);
-			// ¾øÀ¸¸é
+			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		} else {
 			msgIdx = mdao.getMaxMsgIdx(sender);
 
@@ -79,7 +76,7 @@ public class MsgController {
 		ModelAndView mav = new ModelAndView();
 		int res = mdao.sendMsg(dto);
 		String goURL = res > 0 ? "msgContent.do?msgIdx="+dto.getMsgIdx() : "/sendMsg.do?receiver=" + receiver;
-		String msg = res > 0 ? "¼º°ø" : "½ÇÆÐ	";
+		String msg = res > 0 ? "ï¿½ï¿½ï¿½ï¿½" : "ï¿½ï¿½ï¿½ï¿½	";
 		mav.addObject("msg", msg);
 
 		mav.addObject("goURL", goURL);
@@ -107,7 +104,7 @@ public class MsgController {
 		if ( userIdx==null || userIdx.equals("")){
 		mav.setViewName("admin/adminMsg");
 		mav.addObject("goURL", "main.do");
-		mav.addObject("msg", "·Î±×ÀÎÇÏ¼¼¿ä");
+		mav.addObject("msg", "ï¿½Î±ï¿½ï¿½ï¿½ï¿½Ï¼ï¿½ï¿½ï¿½");
 		return mav; 
 		
 		}else {

@@ -34,6 +34,10 @@ function roomadd() {
 			<td><a href="${Url}">${rdto.roomname}</a></td>
 		</c:forEach>
 	</table>
+	<c:if test="${not empty sId }">
+	
 		<input type="button" value="숙소등록" onclick="roomadd()">
+	</c:if>
+	
 </body>
 </html>
