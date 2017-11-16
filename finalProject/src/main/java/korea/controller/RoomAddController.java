@@ -86,6 +86,7 @@ public class RoomAddController {
 		ModelAndView mav = new ModelAndView();
 		
 		/*mav.addObject("useridx", useridx);*/
+		
 		mav.addObject("imageList",imageList);
 		mav.addObject("rdto", rdto);
 		mav.setViewName("room/roomContent");
@@ -130,12 +131,11 @@ public class RoomAddController {
 	@RequestMapping(value = "/imageUpload.do")
 	public ModelAndView rimage(HttpServletRequest req, MultipartHttpServletRequest mhsq)
 			throws IllegalStateException, IOException {
+		
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
-		String filepath = req.getSession().getServletContext().getRealPath("/");  
-		System.out.println(filepath);
-	    String attach_path = "resources/upload/";
-	    System.out.println(attach_path);
-
+		
+		String filepath = req.getSession().getServletContext().getRealPath("/resources/upload/");  
+	    
 
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
@@ -147,7 +147,7 @@ public class RoomAddController {
 		String storedFileName = null;
 		Map<String, Object> listMap = null;
 
-		File file = new File(filepath+attach_path);
+		File file = new File(filepath);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
@@ -159,7 +159,8 @@ public class RoomAddController {
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 
-				file = new File(filepath + storedFileName);
+				file = new File(filepath+storedFileName);
+				req.getSession().setAttribute("file", file);
 				multipartFile.transferTo(file);
 
 				listMap = new HashMap<String, Object>();
