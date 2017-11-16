@@ -94,7 +94,7 @@ html, body {
 <body>
 	<c:set var="arr" value="${rdto}" />
 	<c:forEach var="imageList" items="${imageList}">
-		<img src="E:\yongguk\bbb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\roomimg349cd83266eb4ab99b6f7289f9a09463.jpg">
+		<img src="E:\yongguk\bbb\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\finalProject\+${imageList.filename}">
 		<input type="text" value="${imageList.filename}">
 	</c:forEach>
 	<input type="hidden" id="addr1" value="${arr.addr1}">

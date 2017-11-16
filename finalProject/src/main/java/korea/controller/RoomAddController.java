@@ -84,14 +84,7 @@ public class RoomAddController {
 		RoomAddDTO rdto = radao.roomContent(idx);
 		List<ImageDTO> imageList = radao.fileList(idx);
 		ModelAndView mav = new ModelAndView();
-		String str = "E:/yongguk/bbb/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/";
-					  
-		String img = null;
-		for (int i = 0; i < imageList.size(); i++) {
-			img = imageList.get(i).getFilename();
-		}
-		System.out.println(str+""+img);
-		System.out.println(imageList.size());
+		
 		/*mav.addObject("useridx", useridx);*/
 		mav.addObject("imageList",imageList);
 		mav.addObject("rdto", rdto);
@@ -138,7 +131,12 @@ public class RoomAddController {
 	public ModelAndView rimage(HttpServletRequest req, MultipartHttpServletRequest mhsq)
 			throws IllegalStateException, IOException {
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
-		String filepath = "E:/yongguk/bbb/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/roomimg/";
+		String filepath = req.getSession().getServletContext().getRealPath("/");  
+		System.out.println(filepath);
+	    String attach_path = "resources/upload/";
+	    System.out.println(attach_path);
+
+
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
 		Iterator<String> iterator = mhsq.getFileNames();
@@ -149,7 +147,7 @@ public class RoomAddController {
 		String storedFileName = null;
 		Map<String, Object> listMap = null;
 
-		File file = new File(filepath);
+		File file = new File(filepath+attach_path);
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
@@ -167,11 +165,9 @@ public class RoomAddController {
 				listMap = new HashMap<String, Object>();
 				listMap.put("roomidx", roomidx);
 				listMap.put("oname", originalFileName);
-				System.out.println(originalFileName);
 				listMap.put("filename", storedFileName);
-				System.out.println(storedFileName);
 				listMap.put("filesize", multipartFile.getSize());
-				System.out.println(multipartFile.getSize());
+			
 				radao.fileupload(listMap);
 			}
 		}
