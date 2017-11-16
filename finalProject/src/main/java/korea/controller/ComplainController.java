@@ -2,6 +2,10 @@ package korea.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -46,21 +50,22 @@ public class ComplainController {
 		return mav;
 
 	}
+
 	@RequestMapping(value = "/userInfo_noPenaltyBt.do")
 	public ModelAndView userInfo_noPenaltyBt(@RequestParam(value = "idx") int idx) {
 		// int res = comdao.givePenalty(idx);
 		// String msg = res>0? "success": "fail";
 		// String goURL ="complainList.do";
-		
+
 		MemberDTO dto = comdao.getUserInfo(idx);
-		
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("complain/userInfo_noPenaltyBt");
 		mav.addObject("idx", idx);
 		mav.addObject("userInfo", dto);
-		
+
 		return mav;
-		
+
 	}
 
 	@RequestMapping(value = "/givePenalty.do")
@@ -170,18 +175,84 @@ public class ComplainController {
 		return mav;
 	}
 
-	@RequestMapping("/complainContent.do")
-	public ModelAndView complainContent(@RequestParam("idx") int idx) {
+	/*
+	 * 
+	 * HttpServletRequest req, HttpServletResponse resp,
+	 * 
+	 * @RequestParam (value="saveId", required=false)String saveId ) {
+	 * 
+	 * boolean res = adao.login(idx, userPwd);
+	 * 
+	 * if (res ){ HttpSession session = req.getSession();
+	 * session.setAttribute("adminIdx", idx);
+	 * 
+	 * 
+	 */
+	@RequestMapping("/myComplainList.do")
+	public ModelAndView myComplainList(@RequestParam(value = "cp", defaultValue = "1") int cp
+	,HttpServletRequest req, 
+	HttpServletResponse resp
+			
+			) {
+		
+		int key = 2;
+		HttpSession s = req.getSession(); 
+		String val =String. valueOf(s.getAttribute("sIdx"));
+		
+		
+		
+		int listSize = 5;
+		int pageSize = 5;
+		
+		int totalCnt = comdao.getTOtalCnt(key, val);
+		
+		List<ComplainDTO> list = comdao.searchComplainList(cp, listSize, key, val);
+		
+		// searchComplainList
+		
+		String pageStr = korea.page.PageModule.makePage("myComplainList.do", totalCnt, listSize, pageSize, cp);
+		
+		ModelAndView mav = new ModelAndView();
+		
+		mav.addObject("list", list);
+		mav.addObject("pageStr", pageStr);
+		
+		mav.setViewName("complain/myComplainList");
+		
+		return mav;
+	}
+
+	
+	
+		
+		
+		
+	
+	@RequestMapping("/myComplainContent.do")
+	public ModelAndView myComplainContent(@RequestParam("idx") int idx) {
 
 		ComplainDTO dto = comdao.complainContetn(idx);
 		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("con", dto);
-		mav.setViewName("complain/complainContent");
+		mav.setViewName("complain/myComplainContent");
 
 		return mav;
 
+	}
+	@RequestMapping("/complainContent.do")
+	public ModelAndView complainContent(@RequestParam("idx") int idx) {
+		
+		ComplainDTO dto = comdao.complainContetn(idx);
+		dto.setContent(dto.getContent().replaceAll("\r", "<br>"));
+		
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("con", dto);
+		mav.setViewName("complain/complainContent");
+		
+		return mav;
+		
 	}
 
 	@RequestMapping("/comReq.do")
@@ -201,25 +272,19 @@ public class ComplainController {
 		mav.addObject("msg", msg);
 		return mav;
 	}
-	
-	
-	@RequestMapping (value ="/blackListInfo.do")
-	public ModelAndView blackListInfo (@RequestParam ("userIdx") int userIdx)
-	{
+
+	@RequestMapping(value = "/blackListInfo.do")
+	public ModelAndView blackListInfo(@RequestParam("userIdx") int userIdx) {
 		ModelAndView mav = new ModelAndView();
 		List<ComplainDTO> receiveList = comdao.receiveComplainList(userIdx);
 		List<ComplainDTO> writeList = comdao.writeComplainList(userIdx);
-		
+
 		mav.addObject("receiveList", receiveList);
 		mav.addObject("writeList", writeList);
-		
+
 		mav.setViewName("admin/blackListInfo");
-		return mav; 
-		
-		
-		
+		return mav;
+
 	}
-	
-	
-	
+
 }
