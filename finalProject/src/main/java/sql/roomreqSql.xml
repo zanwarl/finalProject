@@ -75,14 +75,24 @@
 	</select>
 
 	<select id="roomReqInfoSql" parameterType="map" resultType="java.util.Map">
-		select substr(checkindate,4, 2) as checkindate, (to_number (
-		substr(checkoutdate,4, 2) )-to_number (substr(checkindate,4, 2) )+1)as
-		span, userid
+
+		select
+		reqidx,
+		(substr (checkindate, 7,4))||'-'||(substr (checkindate, 1,2))||'-'||(substr
+		(checkindate, 4,2)) as STARTDATE,
+		(substr (checkoutdate, 7,4))||'-'||(substr (checkoutdate, 1,2))||'-'||(substr
+		(checkoutdate, 4,2)) as ENDDATE,
+		userid
+
+
 		from roomreq
-		where roomidx = #{roomIdx}
-		and checkindate like #{mm}||'/'||'%/'||#{yy}
+		where roomidx =#{roomIdx}
 
 
+		<!-- select * reqidx, (substr (checkindate, 7,4))||'-'||(substr (checkindate, 
+			1,2))||'-'||(substr(checkindate, 4,2)) as start, (substr (checkoutdate, 7,4))||'-'||(substr 
+			(checkoutdate, 1,2))||'-'||(substr(checkoutdate, 4,2)) as end, userid from 
+			roomreq where roomidx =#{roomIdx} -->
 
 
 

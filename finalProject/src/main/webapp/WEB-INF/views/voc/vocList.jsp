@@ -23,7 +23,6 @@
 	<div id="contents">
 
 <!-- ---------본문내용---------------  -->
-<jsp:include page="/loginCk.do"></jsp:include>
 	
 	<h2>1:1문의글</h2>
 	

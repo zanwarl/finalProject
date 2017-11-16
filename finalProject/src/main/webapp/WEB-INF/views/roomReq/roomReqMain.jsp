@@ -84,11 +84,11 @@ text-align:center;
 
 <script language='javascript'>
 	$( function() {
-	$( "#datepicker" ).datepicker({});
+	$( "#datepicker" ).datepicker({ minDate:0});
 	});
 	
 	$( function() {
-		$( "#datepicker1" ).datepicker();
+		$( "#datepicker1" ).datepicker({ minDate:0});
 		});
 
 	window.onload = function TimeBtn(){
@@ -123,8 +123,9 @@ text-align:center;
 
 /* function call(rp)
 {
+
  if(document.getElementById("num").value && document.getElementById("roomp").value){
-  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt(rp);
+  document.getElementById('roomp').value =parseInt(document.getElementById('num').value) * parseInt('rp');
  }
 } */
 
