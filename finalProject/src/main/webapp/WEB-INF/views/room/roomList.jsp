@@ -15,6 +15,7 @@ function roomadd() {
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<table>
 		<tr>
 			<th>숙소이름</th>
@@ -38,6 +39,6 @@ function roomadd() {
 	
 		<input type="button" value="숙소등록" onclick="roomadd()">
 	</c:if>
-	
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

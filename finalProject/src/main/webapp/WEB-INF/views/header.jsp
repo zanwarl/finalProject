@@ -71,7 +71,7 @@
 		         <li class='last'><a href='#'><span>제주도</span></a></li>
       		</ul> -->
   		</li>
- 	<li class='has-sub'><a href='#'><span>숙소</span></a>
+ 	<li class='has-sub'><a href='home.do'><span>숙소</span></a>
    		<ul>
 	         <li><a href='#'><span>홈쉐어</span></a></li>
 	         <li><a href='#'><span>한옥스테이</span></a></li>

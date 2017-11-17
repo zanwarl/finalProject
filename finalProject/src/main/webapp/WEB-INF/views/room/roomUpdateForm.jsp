@@ -5,9 +5,33 @@
 <html>
 <head>
 <meta content="text/html; charset=UTF-8">
+
+<link rel="stylesheet" href="css/remodal.css">
+<link rel="stylesheet" href="css/remodal-default-theme.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- loads jquery and jquery ui -->
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery-ui.js"></script>
+<script type="text/javascript" src="js/jquery-ui.multidatespicker.js"></script>
+
+<script>
+//header에 있는 js와 충돌나서 noConflict설정
+var today = new Date();
+var jq = $.noConflict();
+jq(document).ready(function() {
+	
+	jq("#datepicker").multiDatesPicker({
+		minDate: 0,
+		maxDate: 30,
+		dateFormat: 'yy/mm/dd' //데이터포멧(ex - 2012.12.13)
+  	});
+});
+</script>
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<h1>숙소수정페이지</h1>
 	<c:set var="r" value="${rdto}" />
 	<form name="roomUpdate.do" action="roomUpdate.do" method="post">
@@ -134,11 +158,12 @@
  	<textarea name="content" value="${r.content}" rows="10" cols="60"></textarea><br>
  	방이름<input type="text" name="roomname" value="${r.roomname}"><br>
  	방가격<input type="number" name="roomprice" value="${r.roomprice}"><br>
- 	안돼는날자<input type="text" name="nodate" value="${r.nodate}"><br>
+ 	안돼는날자<input type="text" name="nodate" value="${r.nodate}" id="datepicker"><br>
  	체크인<input type="text" name="checkin" value="${r.checkin}"><br>
  	체크아웃<input type="text" name="checkout" value="${r.checkout}"><br>
  	</div>
  	<input type="submit" value="등록">
  	</form>
+ <%@ include file="../footer.jsp" %>
 </body>
 </html>
