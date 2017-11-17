@@ -8,23 +8,27 @@
 <html>
 <head>
 
+
 <style type="text/css">
+
 table {
-	border-collapse: collapse;
-	width: 100%;
+    border-collapse: collapse;
+    width: 100%;
 }
 
 th, td {
-	padding: 8px;
-	text-align: left;
-	border-bottom: 1px solid #ddd;
+    padding: 8px;
+    text-align: center
+    ;
+    border-bottom: 1px solid #ddd;
 }
 
-tr:hover {
-	background-color: #f5f5f5
+tfoot td{
+text-align: center;
 }
+
+tr:hover{background-color:#f5f5f5}
 </style>
-
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -35,25 +39,22 @@ tr:hover {
 
 
 	<div id="contents">
+	
+	<h1>공지사항</h1>
 
 		<table>
 
-			<thead>
 				<tr>
-					<th>idx</th>
-					<th>제목</th>
-					<th>글쓴이</th>
+					<th>글번호</th>
+					<th style="text-align: letter-spacing: ;" width="70%">제목</th>
 					<th>날짜</th>
 				</tr>
-			</thead>
-
-
-			<tbody>
+		
 
 				<c:if test="${empty list }">
 
 					<tr>
-						<td>등록된 공지사항이 없습니다.</td>
+						<td colspan="3">등록된 공지사항이 없습니다.</td>
 					</tr>
 				</c:if>
 				<c:forEach var="dto" items="${list }">
@@ -67,18 +68,21 @@ tr:hover {
 
 
 
-						<td><a href="${contentURL}">${dto.title }</a></td>
-						<td>${dto.writer }</td>
+						<td width="70%" style="text-align: left;"><a href="${contentURL}">${dto.title }</a></td>
 						<td>${dto.writedate }</td>
 					</tr>
 				</c:forEach>
 
-			</tbody>
-
+		
 			<tfoot>
+				
+				<c:if test="${not empty list }">
 				<tr>
-					<td>${pageStr}</td>
+				
+					<td colspan="3" style="text-align: center;">${pageStr}</td>
 				</tr>
+				</c:if>
+				
 
 				<!-- 	<tr>
 			<td><a href="noticeWrite.do">글쓰기</a></td>

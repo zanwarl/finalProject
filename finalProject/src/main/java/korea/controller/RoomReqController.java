@@ -232,5 +232,25 @@ public class RoomReqController {
 		
 	}
 	
+	@RequestMapping ("/paidOk.do")
+	public ModelAndView paid (
+			@RequestParam(value="reqIdx")int reqIdx
+			)
+	
+	{
+		
+		ModelAndView mav = new  ModelAndView(); 
+		int res = rdao.paid(reqIdx);
+		
+		String msg = res > 0 ? "취소되었습니다." : "오류";
+		String goURL = "main.do";
+
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+
+		mav.setViewName("admin/adminMsg");
+		return mav;
+
+	}
 	
 }

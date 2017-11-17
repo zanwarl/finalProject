@@ -6,7 +6,39 @@
 <!DOCTYPE html >
 <html>
 <head>
+<style>
+table, td, th {
+	margin-top: 50px; border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+th{
+text-align: center;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+tfoot td{
+	
+	
+	text-align: center;
+	
+}
+
+</style>
 
 <meta charset=UTF-8">
 <title>Insert title here</title>
@@ -29,29 +61,26 @@
 <table>
 <c:set var ="dto" value=  "${con}"></c:set>
 
-	<thead>
-	
+
 		<tr>
-			<th>idx</th>
 			<th>제목</th>
-			<th>글쓴이</th>
-			<th>내용</th>
-			<th>날짜</th>
-		</tr>
-	</thead>
-	<tbody>
-
-      
-      <tr>
-      
-         <td>${dto.noticeIdx}</td>
-         <td>${dto.title}</td>
-         <td>${dto.writer}</td>
-         <td>${dto.content}</td>
+			
+         <td width="70%">${dto.title}</td>
+         <th>날짜</th>
+			
          <td>${dto.writedate}</td>
-      </tr>
+         
+        </tr>
+		
+		<tr>
+			<th>내용</th>
+			
+         <td colspan="3">${dto.title}</td>
+        </tr>
 
-	</tbody>
+      
+
+	
 	
 	<tfoot>
 

@@ -246,7 +246,7 @@ public class VocController {
 		mav.addObject("msg", msg);
 		mav.addObject("goURL", goURL);
 		mav.setViewName("admin/adminMsg");
-		return mav;
+		return mav; 
 
 	}
 
