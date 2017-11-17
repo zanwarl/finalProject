@@ -72,7 +72,7 @@ public class BlackDAOImple implements BlackDAO{
 		map.put("startNum", startNum);
 		map.put("endNum", endNum);
 		map.put("id", id);
-		List<Map<String, Object>> list = sqlMap.selectList("blackListSql", map);
+		List<Map<String, Object>> list = sqlMap.selectList("blackSearchListSql", map);
 		return list;
 	}
 

@@ -11,6 +11,26 @@
 
 <meta  charset=UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tfoot td{
+text-align:center;
+}
+
+tr:hover{background-color:#f5f5f5}
+</style>
+
 </head>
 <body>
 
@@ -27,24 +47,21 @@
 <div style="margin-left:25%">
 
 <div class="w3-container w3-teal">
-  <h1>미답변글</h1>
+  <h1>voc관리</h1>
 </div>
 
 
 
 <div class="w3-container">
-<table border="1" cellspacing = "0" width = "450" >
+<table  >
 		<thead>
 			<tr>
-				<th>idx</th>
-				<th>writer</th>
-				<th>subject</th>
-				<th>writeDate</th>
+				<th>문의번호</th>
+				<th>글쓴이</th>
+				<th>제목</th>
+				<th>날짜</th>
 			
-				<th>ref</th>
-				<th>lev</th>
-				<th>sunbun</th>
-
+	
 			
 			</tr>
 		</thead>
@@ -54,7 +71,7 @@
 		<tbody>
 			<c:if test="${empty list}">
 				<tr>
-					<td>no data</td>
+					<td colspan="4">등록된 문의글이 없습니다.</td>
 				</tr>
 			
 			</c:if>
@@ -80,10 +97,7 @@
 					<a href="${contentURL}">${dto.subject } </a></td>
 					<td>${dto.writeDate }</td>
 				
-					<td>${dto.ref }</td>
-					<td>${dto.lev }</td>
-					<td>${dto.sunbun }</td>
-			
+	
 				
 				</tr>
 			</c:forEach>
@@ -91,14 +105,31 @@
 	
 	
  		<tfoot>
-		
-		<tr>
-		<td colspan="8">
+				<c:if test="${empty list}">
+				<tr>
+		<td colspan="4">
 			${pageStr}
 				
 			
 		</td>
 		</tr>
+			</c:if>
+	
+		
+		<tr>
+			<td colspan="4">
+			<form action="vocSearchList.do" method="get">
+					ID
+					<input type="text" name="writer">
+					<input type="submit" value="검색" style="border: none;">
+						<a href="vocListAdmin.do">목록으로</a>
+						
+				</form>
+			
+		</td>
+		</tr>
+		
+		
 		</tfoot>  
 	</table>
 	

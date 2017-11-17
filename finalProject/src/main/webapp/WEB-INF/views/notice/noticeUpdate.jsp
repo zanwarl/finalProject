@@ -7,7 +7,36 @@
 <html>
 <head>
 
+<style type="text/css">
 
+table, td, th {
+	margin-top: 50px; border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input button {
+	border: none;
+}
+tfoot td{
+	
+	
+	text-align: center;
+	
+}
+</style>
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -47,35 +76,47 @@
 
 <c:set var ="dto" value=  "${con}"></c:set>
 
-	<thead>
+
 	
 		<tr>
-			<th>idx</th>
-			<th>제목</th>
-			<th>글쓴이</th>
-			<th>내용</th>
-			<th>날짜</th>
+			<th>글번호</th>
+			<td><input type="text" style="border: none;" name="noticeIdx" value="${dto.noticeIdx}" readonly="readonly"> </td>
+		
 		</tr>
-	</thead>
-	<tbody>
-
-      
-      <tr>
-      
-         <td><input type="text" name="noticeIdx" value="${dto.noticeIdx}" readonly="readonly"> </td>
-         <td><input type="text" name="title" value="${dto.title}"> </td>
+		<tr>
+				<th>제목</th>
+				
+         <td><input type="text" name="title" value="${dto.title}" style="width: 100%"> </td>
+		
+		
+		</tr>
+		<tr>
+			<th>글쓴이</th>
+		
+		
          <td>${dto.writer}</td>
-         <td><input type="text" name="content" value="${dto.content}"> </td>
-         <td>${dto.writedate}</td>
-      </tr>
+		</tr>
+		<tr>
+			<th>내용</th>
+			
+			
+			
+         <td>
+         <textarea rows="" cols="" name="content">
+         ${dto.content}
+         </textarea> </td>
+		
+		</tr>
 
-	</tbody>
-	
+
+      
+ 
+
 	<tfoot>
 	
 		<tr>
-			<td>
-			<input type="submit" value="수정하기">
+			<td colspan="2">
+			<input type="submit" value="수정하기" style="border: none;">
 			</td>
 		</tr>
 	</tfoot>	

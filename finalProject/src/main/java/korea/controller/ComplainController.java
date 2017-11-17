@@ -280,15 +280,29 @@ public class ComplainController {
 	@RequestMapping(value = "/blackListInfo.do")
 	public ModelAndView blackListInfo(@RequestParam("userIdx") int userIdx) {
 		ModelAndView mav = new ModelAndView();
-		List<ComplainDTO> receiveList = comdao.receiveComplainList(userIdx);
+	//	List<ComplainDTO> receiveList = comdao.receiveComplainList(userIdx);
 		List<ComplainDTO> writeList = comdao.writeComplainList(userIdx);
 
-		mav.addObject("receiveList", receiveList);
+	//	mav.addObject("receiveList", receiveList);
 		mav.addObject("writeList", writeList);
 
 		mav.setViewName("admin/blackListInfo");
 		return mav;
 
+	}
+	
+	@RequestMapping(value = "/blackListInfoRcv.do")
+	public ModelAndView blackListInfoRcv(@RequestParam("userIdx") int userIdx) {
+		ModelAndView mav = new ModelAndView();
+		List<ComplainDTO> receiveList = comdao.receiveComplainList(userIdx);
+		//List<ComplainDTO> writeList = comdao.writeComplainList(userIdx);
+		
+		mav.addObject("receiveList", receiveList);
+	//	mav.addObject("writeList", writeList);
+		
+		mav.setViewName("admin/blackListInfoRcv");
+		return mav;
+		
 	}
 
 }

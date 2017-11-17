@@ -75,20 +75,11 @@ input {
 	<c:param name="userIdx" value="${param.userIdx }"></c:param>
 </c:url>
 
-<a href="${sendURL }"><b>신고 한 내용</b></a>|
-<a href="${rcvURL }">신고 받은 내용</a>
+<a href="${sendURL }">신고 한 내용</a>|
+<a href="${rcvURL }"><b>신고 받은 내용</b></a>
 
 
- <br>
-<%-- 
-	<c:forEach var ="dto" items="${writeList}">
-		<table>
-			<tr></tr>
-		</table>
-	</c:forEach> --%>
-	
-	
-	<c:forEach var= "dto" items ="${writeList}">
+		<c:forEach var= "dto" items ="${receiveList}">
 	
 
 	<table border="1">
@@ -104,9 +95,9 @@ input {
 	</c:url>
 	
 	
-	<td><a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=600, height =400'); return false", target="_blank"> ${dto.sender } </a>
-	<%-- <input type="button" value="메일" onclick="mailPopup(${dto.sender})">  --%> </td>
-		<th>신고 대상</th> 
+	<td> <a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=600, height =400'); return false", target="_blank"> ${dto.sender } </a>
+	<%-- <input type="button" value="메일" onclick="mailPopup(${dto.sender})">   --%></td>
+		<th>신고대상</th> 
 		
 		
 	<td>
@@ -116,26 +107,20 @@ input {
 	</c:url>
 	
 	<a href="${userInfoURL }" onclick="window.open(this.href, 'userInfoPopup', 'width=600, height =400'); return false", target="_blank"> ${dto.receiver } </a>
-<%-- 	<input type="button" value="메일" onclick="mailPopup(${dto.receiver})">   --%></td>
+	<%-- <input type="button" value="메일" onclick="mailPopup(${dto.receiver})">  --%> </td>
 		<th>상태</th>
-	<td>
-
-<c:if test="${dto.res ==1}">
+						<td><c:if test="${dto.res ==1}">
 		처리완료
 	</c:if> <c:if test="${dto.res==0 }">
 	미처리
-	</c:if>
-</td>
+	</c:if></td>
 
 </tr>
 <tr>	
 		<th>담당자</th>
 	<td>
-		<c:if test="${empty dto.incharge }">
-		
-		<input type="text" name="incharge" value ="${sId}" readonly="readonly">
-		
-		</c:if>
+	
+	
 		<c:if test="${not empty dto.incharge }">
 			${dto.incharge }
 		
@@ -159,9 +144,9 @@ input {
 							</c:choose></td>
 
 
-					</tr>
+</tr>
 <tr>
-	<th colspan="6" style="text-align: center;">
+	<th colspan="6">
 	신고내용
 	</th>
 
@@ -177,7 +162,7 @@ ${dto.content }
 </tr>
 
 <tr>
-	<th colspan="6" style="text-align: center;">
+	<th colspan="6">
 	처리결과
 	</th>
 
@@ -195,12 +180,10 @@ ${dto.content }
 	</tr>
 	
 
-
 </table>
 		</c:forEach>
 	
 	
-	<br>
 
 </div>
 
