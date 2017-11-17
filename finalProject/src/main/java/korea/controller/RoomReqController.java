@@ -96,10 +96,6 @@ public class RoomReqController {
 
 		String userId = (String) session.getAttribute("sId");
 
-	//	System.out.println(userId);
-
-		// String userId = "yera";
-
 		int listSize = 5;
 		int pageSize = 5;
 
@@ -122,7 +118,7 @@ public class RoomReqController {
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
 
-		String msg = res > 0 ? "������ ��ҵǾ����ϴ�" : "����";
+		String msg = res > 0 ? "占쏙옙占쏙옙占쏙옙 占쏙옙撚퓸占쏙옙占쏙옙求占�" : "占쏙옙占쏙옙";
 		String goURL = "roomReqList.do";
 
 		ModelAndView mav = new ModelAndView();
