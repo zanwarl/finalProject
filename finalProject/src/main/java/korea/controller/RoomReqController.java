@@ -96,6 +96,8 @@ public class RoomReqController {
 			HttpServletResponse resp) {
 		HttpSession session = req.getSession();
 
+		
+		
 		String userId = (String) session.getAttribute("sId");
 
 		int listSize = 5;
@@ -103,18 +105,8 @@ public class RoomReqController {
 
 		int totalCnt = rdao.roomReqTotalCnt(userId);
 
-/*	
-		Calendar now = Calendar.getInstance(); 
-		int y= now.get(Calendar.YEAR);
-		int m = now.get(Calendar.MONTH)+1; 
-		int d = now .get(Calendar.DATE);*/
 		
-		
-		
-		
-		
-		
-		 List<Map<String, Object>> list = rdao.roomreqList(userId, cp, listSize);
+		List<Map<String, Object>> list = rdao.roomreqList(userId, cp, listSize);
 //System.out.println(list);
 		
 		String pageStr = korea.page.PageModule.makePage("roomReqList.do", totalCnt, listSize, pageSize, cp);

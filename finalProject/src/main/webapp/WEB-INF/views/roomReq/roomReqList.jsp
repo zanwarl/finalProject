@@ -11,7 +11,8 @@
 <head>
 <style>
 table, td, th {
-	margin-top: 50px; border : 1px solid #ddd;
+	margin-top: 50px;
+	border: 1px solid #ddd;
 	text-align: left;
 	border: 1px solid #ddd;
 }
@@ -24,30 +25,25 @@ table {
 th, td {
 	padding: 15px;
 }
-th{
-	width: 30%; 
+
+th {
+	width: 30%;
 }
 
 textarea {
-	width: 100% ; 
+	width: 100%;
 }
 
-tfoot td{
-	
-	
+tfoot td {
 	text-align: center;
-	
 }
-
 </style>
 
 
 <script type="text/javascript">
-
 	function cancelRoom(x) {
 		if (confirm("예약을 취소하시겠습니까?") == true) { //확인
 			window.open(x, 'givePenalty', 'width =300, height=100');
-
 
 		} else {
 			return;
@@ -72,73 +68,84 @@ tfoot td{
 
 
 		<c:forEach var="dto" items="${list }">
-		<br>
-		
+			<br>
+			
+			<c:url value="${contextPath }/img/room/" var="src"/>
+	
+
 			<c:url value="roomCancel.do" var="roomCancelURL">
 				<c:param name="reqIdx" value="${dto.REQIDX}"></c:param>
 
 			</c:url>
-		
-			<c:set value="black" var="cancelStyle"></c:set>
-			
-		<c:if test="${dto.PAID==-1 }">
-			<c:remove var="cancelStyle"/>
-			<c:set value="gray" var="cancelStyle"></c:set>
-		</c:if>
-			<table style="font:${cancelStyle}; " >
-			
-			
-				<tr>
-					<td colspan="4">[예약번호: ${dto.REQIDX }]</td>
-				</tr>
-				<tr>
-					<th>방 이름</th>
-					<c:url value="roomContent.do" var ="roomInfoURL">
-						<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
-					</c:url>
-					<td colspan="2"><a href="${roomInfoURL }" >${dto.ROOMNAME }</a></td>
-					<c:choose>
-					
 
-						<c:when test="${dto.PAID==-1 }">
-							<td>취소된 예약</td>
-						</c:when>
+			<c:if test="${dto.PAID==-1 }">
+				<table style="opacity: 0.2;">
+			</c:if>
 
-						<c:when test="${dto.CANCELDATE>=3 }">
-							<td>
-							<input type="button" value="취소하기" style="border: none; " onclick="cancelRoom('${roomCancelURL}')">
-							</td>
-						</c:when>
-						<c:otherwise>
-							<td>취소불가</td>
-						</c:otherwise>
-					</c:choose>
+			<c:if test="${dto.PAID!=-1 }">
+				<table>
+			</c:if>
 
-				</tr>
-				<tr>
-					<th>여행 기간</th>
-					<td colspan="3">${dto.CHECKINDATE }~${dto.CHECKOUTDATE }</td>
-				</tr>
-				<tr>
-					<th>인원수</th>
 
-					<td>${dto.COUNT }</td>
-					<th>가격</th>
-					<td>${dto.TOTAL_PAY }</td>
-				</tr>
-				<tr>
-					<th>주소</th>
-					<td colspan="3">${dto.ADDR }</td>
-				</tr>
+
+			<tr>
+				<th colspan="5">[예약번호: ${dto.REQIDX }]</th>
+			</tr>
+			<tr>
+				<td rowspan="5" >
+				<img src="${src }${dto.FILENAME}" width="40%">
+				</td>
+			</tr>
+			<tr>
+				<th>방 이름</th>
+				<c:url value="roomContent.do" var="roomInfoURL">
+					<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
+				</c:url>
+				<td colspan="2"><a href="${roomInfoURL }">${dto.ROOMNAME }</a></td>
+				<c:choose>
+
+
+					<c:when test="${dto.PAID==-1 }">
+						<td>취소된 예약</td>
+					</c:when>
+
+					<c:when test="${dto.CANCELDATE>=3 }">
+						<td><input type="button" value="취소하기" style="border: none;"
+							onclick="cancelRoom('${roomCancelURL}')"></td>
+					</c:when>
+					<c:otherwise>
+						<td>취소불가</td>
+					</c:otherwise>
+				</c:choose>
 				
+
+			</tr>
+			<tr>
+				<th>여행 기간</th>
+				<td colspan="3">${dto.CHECKINDATE }~${dto.CHECKOUTDATE }</td>
+			</tr>
+			<tr>
+				<th>인원수</th>
+
+				<td>${dto.COUNT }</td>
+				<th>가격</th>
+				<td>${dto.TOTAL_PAY }</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td colspan="4">${dto.ADDR }</td>
+			</tr>
+
 			</table>
-<br>
+			<br>
 		</c:forEach>
-		
+
 		<table>
-		<tr><td style="text-align: center;">${pageStr}</td></tr>
+			<tr>
+				<td style="text-align: center;">${pageStr}</td>
+			</tr>
 		</table>
-	<%-- 	<table>
+		<%-- 	<table>
 
 			<thead>
 				<tr>

@@ -28,9 +28,9 @@
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
 	
-				select count (*)from roomReq , roomadd
+				select count (*)from roomReq , roomadd, rimage
 				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
- 	
+ 	and roomadd.roomidx = rimage.roomidx
 	
 		<!-- roomReqTotalCnt -->
 	</select>
@@ -53,7 +53,7 @@
 					from (
 
 				select reqidx,PAID,  roomreq.roomidx,  count,substr ( reqdate, 1, 10) as reqdate, 
-				roomname,
+				roomname,filename,
 				(substr (checkindate, 7,4))||'/'||(substr(checkindate,1,2))||'/'||(substr(checkindate, 4,2)) as checkindate,
 				 
 TRUNC (
@@ -62,8 +62,9 @@ TO_DATE( CHECKINDATE , 'MM/DD/YYYY')-SYSDATE )AS CANCELDATE,
 		(substr(checkoutdate, 7,4))||'/'||(substr (checkoutdate,
 		1,2))||'/'||(substr(checkoutdate, 4,2)) as checkoutdate
 				, total_pay, concat (addr1, addr2)as addr
-					from roomReq , roomadd
+					from roomReq , roomadd, rimage
 				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
+ 				and roomadd.roomidx = rimage.roomidx
  				order by reqidx  desc
  
  
