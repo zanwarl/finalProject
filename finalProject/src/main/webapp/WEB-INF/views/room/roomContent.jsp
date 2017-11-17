@@ -96,7 +96,7 @@ html, body {
 	<c:forEach var="imageList" items="${imageList}">
 		<input type="text" value="${imageList.filename}">
 	</c:forEach>
-		<img src="E:/yongguk/bbb/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/finalProject/resources/upload5fee17293f1042cc8fb8802dcfb76e0b.jpg">
+		<img src="E:/finalProject/img/063584f38daf4874928eb03c6df7ec9c.jpg">
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
