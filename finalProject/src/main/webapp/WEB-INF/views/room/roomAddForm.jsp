@@ -7,15 +7,27 @@
 <meta charset="UTF-8">
 <c:set var="contextPath" value="<%=request.getContextPath()%>" />
 
+<link rel="stylesheet" href="css/remodal.css">
+<link rel="stylesheet" href="css/remodal-default-theme.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
 <!-- loads jquery and jquery ui -->
-<!-- -->
-<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
-<script type="text/javascript" src="js/jquery-ui-1.11.1.js"></script>
-<!-- loads mdp -->
+<script src="js/jquery-3.2.1.js"></script>
+<script src="js/jquery-ui.js"></script>
 <script type="text/javascript" src="js/jquery-ui.multidatespicker.js"></script>
 
-<script type="text/javascript">
-	$('#datepicker').multiDatesPicker();
+<script>
+//header에 있는 js와 충돌나서 noConflict설정
+var jq = $.noConflict();
+
+jq(document).ready(function() {
+	
+	jq("#datepicker").multiDatesPicker({
+		minDate: 0,
+		maxDate: 30,
+		dateFormat: 'yy/mm/dd' //데이터포멧(ex - 2012.12.13)
+  	});
+});
 
 
 	/* function sample6_execDaumPostcode() {
