@@ -6,7 +6,36 @@
 <!DOCTYPE html >
 <html>
 <head>
+<style>
+table, td, th {
+	margin-top: 50px; border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+tfoot td{
+	
+	
+	text-align: center;
+	
+}
+
+</style>
 
 <meta charset=UTF-8">
 <title>Insert title here</title>
@@ -34,33 +63,45 @@
 
 
 <div class="w3-container">
-
-
-
-
 <table>
 <c:set var ="dto" value=  "${con}"></c:set>
 
 	<thead>
 	
 		<tr>
-			<th>idx</th>
-			<th>제목</th>
+			<th>글번호</th>
+			
+         <td>${dto.noticeIdx}</td>
+			
+		
 			<th>글쓴이</th>
-			<th>내용</th>
+         <td>${dto.writer}</td>
+	
 			<th>날짜</th>
-		</tr>
+         <td>${dto.writedate}</td>
+
+		
+        		</tr>
 	</thead>
 	<tbody>
+	<tr>
+	      	<th>제목</th>
+         <td colspan="5">${dto.title}</td>
+	</tr>
 
       
       <tr>
+      		<th colspan="6">내용</th>
+      		
+
+
+      </tr>
       
-         <td>${dto.noticeIdx}</td>
-         <td>${dto.title}</td>
-         <td>${dto.writer}</td>
-         <td>${dto.content}</td>
-         <td>${dto.writedate}</td>
+      <tr>
+      		         <td colspan="6">${dto.content}</td>
+      		
+
+
       </tr>
 
 	</tbody>
@@ -68,7 +109,7 @@
 	<tfoot>
 	
 		<tr>
-			<td>
+			<td colspan="6">
 			<c:url var ="noticeUpdateURL" value="noticeUpdate.do">
 				<c:param name="idx" value="${dto.noticeIdx }"></c:param>
 			</c:url>
@@ -79,7 +120,7 @@
 			
 			
 			<a href="${noticeUpdateURL }">수정</a>|
-			<a href="${noticeDeleteURL }">삭제</a>|
+			<a href="${noticeDeleteURL }">삭제</a>
 			</td>
 		</tr>
 	</tfoot>	

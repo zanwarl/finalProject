@@ -33,7 +33,7 @@ public class RoomreqDAOImple implements RoomreqDAO {
 	}
 
 	///////////////////////////
-	public List<RoomreqDTO> roomreqList(String userId, int cp, int listSize) {
+	public  List<Map<String, Object>> roomreqList(String userId, int cp, int listSize) {
 		// TODO Auto
 		Map<String, Object> map = new HashMap<String, Object>();
 		int startNum = (cp - 1) * listSize + 1;
@@ -42,7 +42,7 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		map.put("endNum", endNum);
 		map.put("userId", userId);
 
-		List<RoomreqDTO> list = sqlMap.selectList("roomreqList", map);
+		 List<Map<String, Object>> list = sqlMap.selectList("roomreqList", map);
 		return list;
 	}
 

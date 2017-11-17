@@ -20,9 +20,6 @@
 		to_char (sysdate , 'yyyy/mm/dd
 		hh24:mi:ss'),#{checkindate},#{checkoutdate},0,#{total_pay})
 	</insert>
-	<!-- <select id="roomreqCon2" parameterType="int" resultType="korea.roomreq.model.RoomreqDTO"> 
-		select * from roomreq where mwjreqidx = #{idx} </select> -->
-
 
 	<select id="roomReqOK" parameterType="int"
 		resultType="korea.roomreq.model.RoomreqDTO">
@@ -43,12 +40,24 @@
 
 
 
-	<select id="roomreqList" resultType="korea.roomreq.model.RoomreqDTO"
-		parameterType="map">
+	<select id="roomreqList" resultType="map" parameterType="map">
 		<!-- select * from roomreq where userId = #{userId} -->
 		 <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from roomReq where userId = #{userId} order by reqidx   ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
-   ]]>
+
+				select * from 
+				(select rownum rnum,a.* 
+					from (
+
+				select reqidx,PAID,  roomreq.roomidx,  count,reqdate, checkindate , checkoutdate, total_pay, concat (addr1, addr2)as addr
+					from roomReq , roomadd
+				where userId =#{userId}and roomadd.roomidx= roomreq.roomidx
+ 				order by reqidx  
+ 
+ 
+ 				 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+
+
+ ]]>
 
 
 	</select>

@@ -86,20 +86,36 @@ text-align:center;
 	
 	var jq = $.noConflict();
 	
+		
 	jq(document).ready( function() {
 		
-	      	jq( "#datepicker" ).datepicker({ minDate:0, numberOfMonths:2 , 
+			
+	      	jq( "#datepicker" ).datepicker({ minDate:0, numberOfMonths:2 , beforeShowDay: disableAllTheseDays,
 				onSelect: function(selected) {
 				jq("#datepicker1").datepicker("option","minDate", selected)
 				}
 			});
 			
-			jq("#datepicker1").datepicker({ minDate:0, numberOfMonths:2 ,
+			jq("#datepicker1").datepicker({ minDate:0, numberOfMonths:2 , beforeShowDay: disableAllTheseDays,
 				onSelect: function(selected) {
 				jq("#datepicker").datepicker("option","maxDate", selected)
 				}
+			
 			});
-			});
+			});	
+	
+	var disabledDays = ["2017-11-22"];
+	
+	function disableAllTheseDays(date) { 
+	   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
+	   for (i = 0; i < disabledDays.length; i++) { 
+	       if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
+	           return [false]; 
+	       } 
+	   } 
+	   return [true]; 
+	}
+	
 
 
 

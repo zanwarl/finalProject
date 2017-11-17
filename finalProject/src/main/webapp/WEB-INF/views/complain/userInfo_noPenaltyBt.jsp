@@ -6,46 +6,34 @@
 <!DOCTYPE html >
 <html>
 <head>
-<!-- <script type="text/javascript">
 
-	function givePenalty(x) {
-		if (confirm("패널티 주기") == true) { //확인
-			window.open(x, 'givePenalty', 'width =300, height=100');
+<style>
+table, td, th {
+border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
 
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
 
-		} else {
-			return;
+th, td {
+	padding: 15px;
+}
 
-		}
-
-
-		window.self.close();
-
-
-
-	}
-</script>
- -->
-
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+</style>
 <meta charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-
-	${param.idx }
-
-
-
-	<%-- <c:url value="givePenalty.do" var="givePenaltyURL">
-		<c:param name="idx" value="${param.idx }"></c:param>
-
-
-	</c:url>
-
-	<input type="button" value="패널티주기"
-		onclick="givePenalty('${givePenaltyURL}')"> --%>
-	<%-- 
-<a href="${givePenaltyURL }">패널티주기</a> --%>
 
 	<c:set var="dto" value="${userInfo }"></c:set>
 
@@ -67,7 +55,7 @@
 			<td><c:if test="${dto.member_sex==1 }">
 					M
 		</c:if>
-			<td><c:if test="${dto.member_sex==2 }">
+			<c:if test="${dto.member_sex==2 }">
 					F
 		</c:if></td>
 		</tr>
