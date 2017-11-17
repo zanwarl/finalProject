@@ -10,6 +10,38 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <meta  charset=UTF-8">
+
+<style type="text/css">
+table, td, th {
+	margin-top: 50px;
+	border: 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	height: 100% ; 
+	width: 100%;
+}
+
+input button {
+	border: none;
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
+
 <title>Insert title here</title>
 </head>
 <body>
@@ -42,22 +74,22 @@
 	<table>
 		<tr>
 			<th>이름</th>
-			<td><input type="text" name="writer"> </td>
+			<td><input type="text" name="writer" value="${adminIdx }" style="border: none;"> </td>
 		
 		</tr>
 
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="subject" value="re:) ${param.subject }"> </td>
+			<td><input type="text" name="subject" style="width: 100%" value="re:) ${param.subject }"> </td>
 		
 		</tr>
 		<tr>
 			<th>내용</th>
-			<td><input type="text" name="content"> </td>
+			<td><textarea rows="10" cols="" name="content" required="required"></textarea> </td>
 		
 		</tr>
 		<tr>
-			<td colspan="2"> <input type="submit" value="submit"> </td>
+			<td colspan="2"style="text-align: center;"> <input style="border: none;" type="submit" value="딥글쓰기"> </td>
 		
 		</tr>
 	</table>

@@ -102,9 +102,7 @@ tfoot td{
 			
 			
          <td>
-         <textarea rows="" cols="" name="content">
-         ${dto.content}
-         </textarea> </td>
+         <textarea rows="10" cols="" name="content">${dto.content}</textarea> </td>
 		
 		</tr>
 

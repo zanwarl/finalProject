@@ -120,6 +120,8 @@ tfoot td{
 			
 			
 			<a href="${noticeUpdateURL }">수정</a>|
+			<a href="noticeListAdmin.do">목록으로</a>|
+			
 			<a href="${noticeDeleteURL }">삭제</a>
 			</td>
 		</tr>

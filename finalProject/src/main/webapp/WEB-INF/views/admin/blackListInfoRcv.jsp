@@ -8,14 +8,12 @@
 <head>
 <meta  charset=UTF-8">
 <title>Insert title here</title>
-
 <style>
 table, td, th {
 	margin-top: 50px; border : 1px solid #ddd;
 	text-align: left;
-	border: 1px solid gray;
+	border: 1px solid #ddd;
 }
-
 
 table {
 	border-collapse: collapse;
@@ -23,11 +21,8 @@ table {
 }
 
 th, td {
-	padding: 15px;.0.0
-	
+	padding: 15px;
 }
-
-
 
 textarea {
 	width: 100% ; 
@@ -36,7 +31,6 @@ input {
 	border: none;
 }
 </style>
-
 </head>
 
 <body>
@@ -121,10 +115,8 @@ input {
 	<td>
 	
 	
-		<c:if test="${not empty dto.incharge }">
 			${dto.incharge }
 		
-		</c:if>
 	
 </td>
 		<th>날짜</th>
@@ -146,7 +138,7 @@ input {
 
 </tr>
 <tr>
-	<th colspan="6">
+	<th colspan="6" style="text-align: center;">
 	신고내용
 	</th>
 
@@ -162,7 +154,7 @@ ${dto.content }
 </tr>
 
 <tr>
-	<th colspan="6">
+	<th colspan="6" style="text-align: center;">
 	처리결과
 	</th>
 

@@ -135,7 +135,7 @@ tfoot td {
 									<option value="4">담당자</option>
 
 								</select> <input type="text" name="val"> <input type="submit"
-									value="검색"> <a href="complainList.do">전체보기</a>
+								style="border: none;"	value="검색"> <a href="complainList.do">전체보기</a>
 							</form>
 						</td>
 

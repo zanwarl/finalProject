@@ -131,7 +131,7 @@ function mailPopup(receiver){
 
 					</tr>
 					<tr>
-						<th colspan="6">신고내용</th>
+						<th colspan="6"style="text-align: center;" >신고내용</th>
 
 					</tr>
 					<tr>
@@ -145,7 +145,7 @@ function mailPopup(receiver){
 
 					<c:if test="${dto.res eq 0  }">
 						<tr>
-							<th>처리내용</th>
+							<th style="text-align: center;">처리내용</th>
 						</tr>
 						<tr>
 							<td><textarea rows="6" cols="50" name="resContent"></textarea>
@@ -161,7 +161,7 @@ function mailPopup(receiver){
 
 					<c:if test="${dto.res != 0   }">
 						<tr>
-							<th>처리결과</th>
+							<th style="text-align: center;">처리결과</th>
 
 						</tr>
 						<tr>

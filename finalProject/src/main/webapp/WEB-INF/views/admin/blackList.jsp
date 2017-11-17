@@ -92,7 +92,7 @@ tfoot td {
 		</tr><tr>
 			<td colspan="2"><form action="blackSearchList.do">
 			ID	<input type="text" name="id">
-				<input type="submit" value="검색">
+				<input type="submit" value="검색" style="border: none;">
 			</form> </td>
 		</tr>
 	

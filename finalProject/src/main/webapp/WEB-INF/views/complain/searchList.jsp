@@ -6,6 +6,20 @@
 <!DOCTYPE html >
 <html>
 <head>
+
+<script type="text/javascript">
+function submitBt() {
+	if (document.searchFm.key.value==1 && !isFinite (document.searchFm.val.value)  ){
+		window.alert ('숫자만 입력하세요');
+		
+	}
+	else {
+		document.searchFm.submit (); 
+		
+	}
+}
+
+</script>
 <style type="text/css">
 table {
 	border-collapse: collapse;
@@ -73,7 +87,7 @@ tfoot td {
 				<tbody>
 					<c:if test="${empty list}">
 						<tr>
-							<td colspan="7" align="center">등록된 신고가 없습니다.</td>
+							<td colspan="7" align="center" style="text-align: center;">등록된 신고가 없습니다.</td>
 						</tr>
 					</c:if>
 					<c:forEach var="dto" items="${list}">
@@ -127,15 +141,16 @@ tfoot td {
 
 					<tr>
 						<td colspan="7" align="center">
-							<form action="complainSearch.do" method="get">
+							<form action="complainSearch.do" method="get" name="searchFm">
 								<select name="key">
 									<option value="1">idx</option>
 									<option value="2">신고자</option>
 									<option value="3">피신고자</option>
 									<option value="4">담당자</option>
 
-								</select> <input type="text" name="val"> <input type="submit"
-									value="검색"> <a href="complainList.do">전체보기</a>
+								</select> <input type="text" name="val" placeholder="${param.val }"> 
+								<input type="button"
+									value="검색" onclick="submitBt()"> <a href="complainList.do">전체보기</a>
 							</form>
 						</td>
 

@@ -105,7 +105,7 @@ tr:hover{background-color:#f5f5f5}
 	
 	
  		<tfoot>
-				<c:if test="${empty list}">
+				<c:if test="${not empty list}">
 				<tr>
 		<td colspan="4">
 			${pageStr}

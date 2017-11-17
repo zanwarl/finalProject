@@ -8,14 +8,12 @@
 <head>
 <meta  charset=UTF-8">
 <title>Insert title here</title>
-
 <style>
 table, td, th {
 	margin-top: 50px; border : 1px solid #ddd;
 	text-align: left;
-	border: 1px solid gray;
+	border: 1px solid #ddd;
 }
-
 
 table {
 	border-collapse: collapse;
@@ -23,11 +21,8 @@ table {
 }
 
 th, td {
-	padding: 15px;.0.0
-	
+	padding: 15px;
 }
-
-
 
 textarea {
 	width: 100% ; 
@@ -80,12 +75,7 @@ input {
 
 
  <br>
-<%-- 
-	<c:forEach var ="dto" items="${writeList}">
-		<table>
-			<tr></tr>
-		</table>
-	</c:forEach> --%>
+
 	
 	
 	<c:forEach var= "dto" items ="${writeList}">
@@ -131,15 +121,9 @@ input {
 <tr>	
 		<th>담당자</th>
 	<td>
-		<c:if test="${empty dto.incharge }">
 		
-		<input type="text" name="incharge" value ="${sId}" readonly="readonly">
-		
-		</c:if>
-		<c:if test="${not empty dto.incharge }">
 			${dto.incharge }
 		
-		</c:if>
 	
 </td>
 		<th>날짜</th>

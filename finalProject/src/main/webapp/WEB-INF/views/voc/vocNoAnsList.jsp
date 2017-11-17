@@ -71,7 +71,7 @@ tr:hover{background-color:#f5f5f5}
 		<tbody>
 			<c:if test="${empty list}">
 				<tr>
-					<td colspan="4">등록된 문의글이 없습니다.</td>
+					<td colspan="4" style="text-align: center;">등록된 문의글이 없습니다.</td>
 				</tr>
 			
 			</c:if>
@@ -105,7 +105,7 @@ tr:hover{background-color:#f5f5f5}
 	
 	
  		<tfoot>
-				<c:if test="${empty list}">
+				<c:if test="${ not empty list}">
 				<tr>
 		<td colspan="4">
 			${pageStr}

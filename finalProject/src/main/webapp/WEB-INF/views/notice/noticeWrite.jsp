@@ -1,70 +1,102 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html >
 <html>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<meta charset=UTF-8">
 <title>Insert title here</title>
+
+
+<style type="text/css">
+table, td, th {
+	margin-top: 50px;
+	border: 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	height: 100% ; 
+	width: 100%;
+}
+
+input button {
+	border: none;
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
+
 </head>
 <body>
-<!-- Sidebar -->
+	<!-- Sidebar -->
 
-<div class="w3-sidebar w3-light-grey w3-bar-block" style="width:25%">
-<jsp:include page="/adminMenu.do"></jsp:include>
-
-
-
-
-
-</div>
+	<div class="w3-sidebar w3-light-grey w3-bar-block" style="width: 25%">
+		<jsp:include page="/adminMenu.do"></jsp:include>
 
 
 
 
 
-<!-- Page Content -->
-<div style="margin-left:25%">
-
-<div class="w3-container w3-teal">
-  <h1>°øÁö»çÇ× ÀÛ¼º</h1>
-</div>
-
-
-
-<div class="w3-container">
+	</div>
 
 
 
 
 
-<form action="noticeWrite.do" method="post">
-±Û¾´ÀÌ	<input type="text" name="writer">
-<br>
-Á¦¸ñ	<input type="text" name="title">
-<br>
-³»¿ë	<input type="text" name="content">
-<br>
+	<!-- Page Content -->
+	<div style="margin-left: 25%">
 
-<input type="submit" value="±Û¾²±â">
-
-</form>
-
-
-</div>
-
-</div>
-      
+		<div class="w3-container w3-teal">
+			<h1>ê³µì§€ì‚¬í•­ ì‘ì„±</h1>
+		</div>
 
 
 
+		<div class="w3-container">
 
+			<form action="noticeWrite.do" method="post">
+				<table>
+					<thead>
+					</thead>
 
+					<tbody>
+						<tr>
+							<th>ê¸€ì“´ì´</th>
+							<td>
+							<input style="border: none;" type="text" value="${adminIdx }" readonly="readonly" name="writer">
+							</td>
+						</tr>
 
+						<tr>
+							<th>ì œëª©</th>
+							<td><input type="text" name="title" required="required" style="width: 100%; "></td>
+						</tr>
 
-
-
-
-
-
+						<tr>
+							<th>ë‚´ìš©</th>
+							<td><textarea rows="10" cols="" name="content" required="required"></textarea></td>
+						</tr>
+					</tbody>
+					<tfoot>
+						<tr>
+							<td colspan="2"><input type="submit" value="ê¸€ì“°ê¸°" style="border: none;"></td>
+						</tr>
+					</tfoot>
+				</table>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

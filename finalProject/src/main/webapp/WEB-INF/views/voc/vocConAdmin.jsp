@@ -95,7 +95,7 @@ tfoot td{
 		
 		</tr>
 		<tr>
-			<td colspan="2" style="text-align: center;">${dto.content } </td>
+			<td colspan="2">${dto.content } </td>
 		
 		
 		

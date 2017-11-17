@@ -29,7 +29,7 @@
 
 <!-- ---------본문내용---------------  -->
 
-<h2>vocWrite.jsp</h2>
+<h2>1:1 문의하기</h2>
 <form action="vocWrite.do" method="post">
 
 	<table>
@@ -42,7 +42,7 @@
 		<tr>
 			<th>내용</th>
 			<td>
-			<textarea rows="25" cols="35" name="content"></textarea>
+			<textarea  name="content"></textarea>
 			</td>
 		
 		</tr>
