@@ -92,11 +92,12 @@ html, body {
 <title>Insert title here</title>
 </head>
 <body>
+	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
+	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
 	<c:forEach var="imageList" items="${imageList}">
-		<input type="text" value="${imageList.filename}">
+		<img src="${src }${imageList.filename}" width="500">
 	</c:forEach>
-		<img src="E:/finalProject/img/063584f38daf4874928eb03c6df7ec9c.jpg">
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">

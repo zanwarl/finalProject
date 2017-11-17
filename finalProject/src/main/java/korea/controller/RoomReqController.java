@@ -56,7 +56,7 @@ public class RoomReqController {
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&total_pay=" + total_pay;
 		// System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "확인" : "다시 예약해주세요.";
+		String msg = result > 0 ? "결제 하시겠습니까?" : "예약오류 : 다시 예약해주세요.";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
