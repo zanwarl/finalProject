@@ -5,26 +5,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<c:set var="contextPath" value="<%= request.getContextPath()%>"/>
+<c:set var="contextPath" value="<%=request.getContextPath()%>" />
 
-<script src='js/jquery-ui.multidatespicker.js'></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<script>
-	
-	var jq = $.noConflict();
-	jq(document).ready( function() {
-		jq('#datepicker').multiDatesPicker();
-		
-			var today = new Date();
-			jq('#datepicker').multiDatesPicker({
-				minDate: 0,
-				maxDate: 30
-			});
-		});
-	
+<!-- loads jquery and jquery ui -->
+<!-- -->
+<script type="text/javascript" src="js/jquery-1.11.1.js"></script>
+<script type="text/javascript" src="js/jquery-ui-1.11.1.js"></script>
+<!-- loads mdp -->
+<script type="text/javascript" src="js/jquery-ui.multidatespicker.js"></script>
+
+<script type="text/javascript">
+	$('#datepicker').multiDatesPicker();
+
+
 	/* function sample6_execDaumPostcode() {
 		new daum.Postcode({
 			oncomplete : function(data) {
@@ -97,74 +90,83 @@
 		<script type="text/javascript"
 			src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea5cb03a486060e94b82b64937721b6d&libraries=services"></script>
 		<script>
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div
+			mapOption = {
+				center : new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
+				level : 5
+			// 지도의 확대 레벨
+			};
 
-    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
-        mapOption = {
-            center: new daum.maps.LatLng(37.537187, 127.005476), // 지도의 중심좌표
-            level: 5 // 지도의 확대 레벨
-        };
+			//지도를 미리 생성
+			var map = new daum.maps.Map(mapContainer, mapOption);
+			//주소-좌표 변환 객체를 생성
+			var geocoder = new daum.maps.services.Geocoder();
+			//마커를 미리 생성
+			var marker = new daum.maps.Marker({
+				position : new daum.maps.LatLng(37.537187, 127.005476),
+				map : map
+			});
 
-    //지도를 미리 생성
-    var map = new daum.maps.Map(mapContainer, mapOption);
-    //주소-좌표 변환 객체를 생성
-    var geocoder = new daum.maps.services.Geocoder();
-    //마커를 미리 생성
-    var marker = new daum.maps.Marker({
-        position: new daum.maps.LatLng(37.537187, 127.005476),
-        map: map
-    });
+			function sample5_execDaumPostcode() {
+				new daum.Postcode(
+						{
+							oncomplete : function(data) {
+								// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+								// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+								var fullAddr = data.address; // 최종 주소 변수
+								var extraAddr = ''; // 조합형 주소 변수
 
+								// 기본 주소가 도로명 타입일때 조합한다.
+								if (data.addressType === 'R') {
+									//법정동명이 있을 경우 추가한다.
+									if (data.bname !== '') {
+										extraAddr += data.bname;
+									}
+									// 건물명이 있을 경우 추가한다.
+									if (data.buildingName !== '') {
+										extraAddr += (extraAddr !== '' ? ', '
+												+ data.buildingName
+												: data.buildingName);
+									}
+									// 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
+									fullAddr += (extraAddr !== '' ? ' ('
+											+ extraAddr + ')' : '');
+								}
 
-    function sample5_execDaumPostcode() {
-        new daum.Postcode({
-            oncomplete: function(data) {
-                // 각 주소의 노출 규칙에 따라 주소를 조합한다.
-                // 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
-                var fullAddr = data.address; // 최종 주소 변수
-                var extraAddr = ''; // 조합형 주소 변수
+								// 주소 정보를 해당 필드에 넣는다.
+								document.getElementById('postnum').value = data.zonecode; //5자리 새우편번호 사용
+								document.getElementById('addr1').value = fullAddr;
 
-                // 기본 주소가 도로명 타입일때 조합한다.
-                if(data.addressType === 'R'){
-                    //법정동명이 있을 경우 추가한다.
-                    if(data.bname !== ''){
-                        extraAddr += data.bname;
-                    }
-                    // 건물명이 있을 경우 추가한다.
-                    if(data.buildingName !== ''){
-                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                    }
-                    // 조합형주소의 유무에 따라 양쪽에 괄호를 추가하여 최종 주소를 만든다.
-                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                }
+								// 커서를 상세주소 필드로 이동한다.
+								document.getElementById('addr2').focus();
+								// 주소로 상세 정보를 검색
+								geocoder
+										.addressSearch(
+												data.address,
+												function(results, status) {
+													// 정상적으로 검색이 완료됐으면
+													if (status === daum.maps.services.Status.OK) {
 
-                // 주소 정보를 해당 필드에 넣는다.
-                document.getElementById('postnum').value = data.zonecode; //5자리 새우편번호 사용
-                document.getElementById('addr1').value = fullAddr;
+														var result = results[0]; //첫번째 결과의 값을 활용
 
-                // 커서를 상세주소 필드로 이동한다.
-                document.getElementById('addr2').focus();
-                // 주소로 상세 정보를 검색
-                geocoder.addressSearch(data.address, function(results, status) {
-                    // 정상적으로 검색이 완료됐으면
-                    if (status === daum.maps.services.Status.OK) {
-
-                        var result = results[0]; //첫번째 결과의 값을 활용
-
-                        // 해당 주소에 대한 좌표를 받아서
-                        var coords = new daum.maps.LatLng(result.y, result.x);
-                        // 지도를 보여준다.
-                        mapContainer.style.display = "block";
-                        map.relayout();
-                        // 지도 중심을 변경한다.
-                        map.setCenter(coords);
-                        // 마커를 결과값으로 받은 위치로 옮긴다.
-                        marker.setPosition(coords)
-                    }
-                });
-            }
-        }).open();
-    }
-</script>
+														// 해당 주소에 대한 좌표를 받아서
+														var coords = new daum.maps.LatLng(
+																result.y,
+																result.x);
+														// 지도를 보여준다.
+														mapContainer.style.display = "block";
+														map.relayout();
+														// 지도 중심을 변경한다.
+														map.setCenter(coords);
+														// 마커를 결과값으로 받은 위치로 옮긴다.
+														marker
+																.setPosition(coords)
+													}
+												});
+							}
+						}).open();
+			}
+		</script>
 
 		편의시설<br> <input type="checkbox" name="conv" value="필수품목">필수
 		품목(수건,침대시트,비누,화장지)<br> <input type="checkbox" name="conv"
@@ -193,12 +195,11 @@
 		<div>
 			내용<br>
 			<textarea name="content" rows="10" cols="60"></textarea>
-			<br> 
-			방이름<input type="text" name="roomname"><br> 
-			방가격<input type="number" name="roomprice"><br> 
-			안돼는날자<input type="text" name="nodate" id="datepicker"><br> 
-			체크인<input type="text" name="checkin"><br> 
-			체크아웃<input type="text" name="checkout"><br>
+			<br> 방이름<input type="text" name="roomname"><br> 방가격<input
+				type="number" name="roomprice"><br> 안돼는날자<input
+				type="text" name="nodate" id="datepicker"><br> 체크인<input
+				type="text" name="checkin"><br> 체크아웃<input type="text"
+				name="checkout"><br>
 		</div>
 		<input type="submit" value="등록">
 	</form>
