@@ -10,7 +10,7 @@ public interface RoomreqDAO {
 
 	public RoomreqDTO RoomreqOK(int idx);
 
-	public List<RoomreqDTO> roomreqList(String userId, int cp, int listSize);
+	public List<Map<String, Object>>roomreqList(String userId, int cp, int listSize);
 
 	public int roomReqTotalCnt(String userId);
 
