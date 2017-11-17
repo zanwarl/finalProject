@@ -170,8 +170,18 @@ public class RoomAddController {
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
 		
 		String filepath = req.getSession().getServletContext().getContextPath();
-		String path= filepath+"/img/"; 
-	    
+		String path= filepath+"/img/room"; 
+		
+		//////////////////////////////////////////////
+		String savePath = req.getRealPath("img/room/");
+		System.out.println("savepath : " + savePath);
+		
+		path = savePath;
+		
+		System.out.println("path : " + path);
+	    //////////////////////////////////////////
+		
+		
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
 		Iterator<String> iterator = mhsq.getFileNames();
@@ -186,7 +196,6 @@ public class RoomAddController {
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
-		System.out.println(path);
 		while (iterator.hasNext()) {
 			multipartFile = mhsq.getFile(iterator.next());
 			if (multipartFile.isEmpty() == false) {
@@ -194,7 +203,10 @@ public class RoomAddController {
 				originalFileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
 				storedFileName = UUID.randomUUID().toString().replaceAll("-", "") + originalFileExtension;
 
-				file = new File(path+storedFileName);
+				
+				file = new File(path+"/"+storedFileName);
+				
+				System.out.println("저장: " + storedFileName);
 				req.getSession().setAttribute("file", file);
 				multipartFile.transferTo(file);
 

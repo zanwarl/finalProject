@@ -92,11 +92,12 @@ html, body {
 <title>Insert title here</title>
 </head>
 <body>
+	<c:set var="contextPath" value="<%= request.getContextPath()%>"></c:set>  
 	<c:set var="arr" value="${rdto}" />
 	<c:forEach var="imageList" items="${imageList}">
-		<input type="text" value="${imageList.filename}">
+		<input type="hidden" value="${imageList.filename}">
+		<img src="${contextPath}/img/room/${imageList.filename}" width="500">
 	</c:forEach>
-		<img src="E:/finalProject/img/063584f38daf4874928eb03c6df7ec9c.jpg">
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
