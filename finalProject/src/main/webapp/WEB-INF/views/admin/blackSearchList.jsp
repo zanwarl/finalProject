@@ -67,7 +67,7 @@ tfoot td {
 		<c:if test="${empty list }">
 		
 			<tr>
-				<td>검색 결과가 없습니다. </td>
+				<td colspan="2">검색 결과가 없습니다. </td>
 			</tr>
 		</c:if>
 			<c:forEach var ="dto" items ="${list }">
@@ -94,11 +94,17 @@ tfoot td {
 				<td colspan="2">${pageStr} </td>
 			</tr>
 		</c:if>
+		
+		
 		<tr>
 			<td colspan="2"><form action="blackSearchList.do">
 			ID	<input type="text" name="id" placeholder="${param.id }">
-				<input type="submit" value="검색" >
-			</form> </td>
+				<input type="submit" value="검색" style="border: none;">
+							<a href="blackList.do">목록으로</a>
+							
+			</form> 
+
+			</td>
 		</tr>
 	
 	</tfoot>

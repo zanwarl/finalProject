@@ -7,6 +7,27 @@
 <html>
 <head>
 
+<style type="text/css">
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 8px;
+	text-align: center
+	;
+	border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+	background-color: #f5f5f5
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 
 <meta charset=UTF-8">
@@ -27,7 +48,6 @@
 
 		<div class="w3-container w3-teal">
 			<h1>슈퍼호스트</h1>
-			<a href="superHostUpdate.do">수정</a>
 		</div>
 
 
@@ -35,6 +55,13 @@
 		<div class="w3-container">
 
 
+<br>
+
+			<form action="superHostUpdate.do" method="post">
+				<input type="text" name="point" style="width: 50px">포인트 이상 보유했을 시,
+				슈퍼호스트 자격을 얻게 됩니다. <input type="submit" value="ok" style="border: none;">
+			</form>
+			<br>
 			<table>
 
 				<thead>
@@ -71,15 +98,15 @@
 
 						<tr>
 
-							<td>${pageStr }</td>
+							<td colspan="3">${pageStr }</td>
 						</tr>
 					</c:if>
 					
 					<tr>
-						<td>
+						<td colspan="3">
 							<form action="superHostSearch.do">
-								<input type="text" name="id" >
-								<input type="submit" value="검색">
+								ID <input type="text" name="id" >
+								<input type="submit" value="검색" style="border: none;">
 							</form>
 						</td>
 					</tr>
@@ -96,24 +123,6 @@
 		</div>
 
 	</div>
-
-
-
-	<%-- <jsp:include page="loginInfo.jsp"></jsp:include>
- <c:if test="${empty sId }">
-	
-	<a href="adminLogin.do">로그인</a>
-
-</c:if>
-<c:if test="${!empty sId }">
-	${sId }님 로그인중 ...<a href="adminLogout.do">로그아웃</a>
-</c:if>
-  
-	<a href="adminLogin.do">관리자로그인</a>
-	
- --%>
-
-
 
 
 

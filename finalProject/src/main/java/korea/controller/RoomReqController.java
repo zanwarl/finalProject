@@ -184,8 +184,6 @@ public class RoomReqController {
 				String count =String.valueOf(list.get(i).get("COUNT"));
 				String reqidx =String.valueOf(list.get(i).get("REQIDX"));
 				
-				
-			//	String count = (String) list.get(i).get("COUNT");
 				String end = (String) list.get(i).get("ENDDATE");
 				String end1 =end.substring(5);
 				
