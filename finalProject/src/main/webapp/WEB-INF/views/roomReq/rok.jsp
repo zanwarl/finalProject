@@ -43,25 +43,15 @@ function ok(reqIdx, amt){
 });
 	
 }
+
 	
 </script>
 <title>Insert title here</title>
 </head>
-
-<form name="payMent" action="payMent.do">
-<body>
+<body>	
 <section>
+<form name="payMent" action="payMent.do">
 	<table>
-		<c:if test="${empty sId }">
-   <script type="text/javascript">
-   
-   window.alert ('로그인 하세요');
-   location.href ='main.do';
-   
-   
-   </script>   
-</c:if>	
-
 	<c:set var="arr" value="${rdto}"/>
 
 		<tr>
@@ -91,7 +81,7 @@ function ok(reqIdx, amt){
 			<td>	 </td>
 		</tr>	 	   
 	</table>
+	</form>
 </section>
 </body>
-</form>
 </html>

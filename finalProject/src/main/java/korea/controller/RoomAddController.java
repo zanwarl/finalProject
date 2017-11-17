@@ -169,8 +169,8 @@ public class RoomAddController {
 		
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
 		
-		String filepath = req.getSession().getServletContext().getRealPath("/img/");  
-	    
+		String filepath = req.getSession().getServletContext().getRealPath("/img"+"/");  
+	   
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
 		Iterator<String> iterator = mhsq.getFileNames();
@@ -185,7 +185,7 @@ public class RoomAddController {
 		if (file.exists() == false) {
 			file.mkdirs();
 		}
-
+		 
 		while (iterator.hasNext()) {
 			multipartFile = mhsq.getFile(iterator.next());
 			if (multipartFile.isEmpty() == false) {
@@ -204,6 +204,7 @@ public class RoomAddController {
 				listMap.put("filesize", multipartFile.getSize());
 			
 				radao.fileupload(listMap);
+				 System.out.println(filepath);
 			}
 		}
 		return new ModelAndView("redirect:home.do");

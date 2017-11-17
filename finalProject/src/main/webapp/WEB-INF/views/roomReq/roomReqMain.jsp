@@ -99,11 +99,17 @@ text-align:center;
 			jq("#datepicker1").datepicker({ minDate:0, numberOfMonths:2 , beforeShowDay: disableAllTheseDays,
 				onSelect: function(selected) {
 				jq("#datepicker").datepicker("option","maxDate", selected)
-				}
+				} 
 			
-			});
+				});
 			});	
 	
+	
+	
+	$( ".selector" ).datepicker({
+	    altField: ".selecter"
+	});
+
 	var disabledDays = ["2017-11-22"];
 	
 	function disableAllTheseDays(date) { 
@@ -115,7 +121,6 @@ text-align:center;
 	   } 
 	   return [true]; 
 	}
-	
 
 
 
@@ -185,6 +190,15 @@ text-align:center;
 </script>
 </head>
 <body>
+	<c:if test="${empty sId }">
+	<script type="text/javascript">
+
+		 window.alert ('로그인 하세요');
+		 location.href ='main.do';
+	
+	</script>
+	</c:if>	
+	
 <%@ include file="../header.jsp" %>
 <div id="contents">
 <form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
