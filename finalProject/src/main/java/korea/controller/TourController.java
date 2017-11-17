@@ -46,6 +46,7 @@ public class TourController {
 		BufferedInputStream reader = null;
 		try {
 			URL url = new URL(tour_api_url);
+			System.out.println("url " + url);
 			reader = new BufferedInputStream(url.openStream());
 			StringBuffer buffer = new StringBuffer();
 			int i;
@@ -117,7 +118,7 @@ public class TourController {
 		tour_code = "areaBasedList";
 		param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
 				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
-				+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=50&pageNo=" + cp;
+				+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=30&pageNo=" + cp;
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
@@ -151,11 +152,13 @@ public class TourController {
 		System.out.println("areacode : " + areaCode);
 		System.out.println("검색 : " + txt);
 		
+		//txt = "%EB%A7%8C%EB%91%90";
+		
 		if(txt==null || txt.equals("")) {
 			tour_code = "areaBasedList";
 			param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
 					+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
-					+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=50&pageNo=" + cp;
+					+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=30&pageNo=" + cp;
 
 			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 					+ service_key + param_1 + data_type;
@@ -163,7 +166,7 @@ public class TourController {
 			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=" +
 			           "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D" +
 			           "&keyword=" + txt + "&areaCode=" + areaCode + 
-			           "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=50&pageNo=1&_type=json";	
+			           "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=30&pageNo=1&_type=json";	
 		}
 		
 		System.out.println(tour_api_url);

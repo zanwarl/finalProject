@@ -34,6 +34,14 @@
   width: 60%;
   height: 850px;
 }
+#cityContent {
+  background: #FFBB00;
+  float: left;
+  width: 60%;
+  height: 850px;
+}
+
+
 #map {
   width: auto;
   height: 850px;
@@ -76,6 +84,11 @@
 }
 .wrap_cityList {
 	height: 120px;
+	cursor: pointer;
+}
+
+.list_item {
+	cursor: pointer;
 }
 .form_cityList {
 	overflow:auto;	
@@ -102,6 +115,8 @@ var iConArray = [];
 var markers = [];
 var iterator = 0;
 var markerArray = [];
+
+var markers = [];
 
 var initx = '';
 var inity = '';
@@ -189,8 +204,26 @@ $(document).ready(function() {
 		output += '</div>';
 		order++;
 		$('#planList').append(output);
-		
 	});
+	
+	$('#cityList').on('mouseover','.wrap_cityList',function() {
+		var no = $(this).attr('data-no');
+		markers[no].setIcon('img/mouseovermarker.png');  
+
+	});
+	
+	$('#cityList').on('mouseout','.wrap_cityList',function() {
+		var no = $(this).attr('data-no');
+		markers[no].setIcon('img/defaultmarker.png');  
+
+	});
+	
+	$('#cityList').on('click','.wrap_cityList',function() {
+		var no = $(this).attr('data-no');
+		alert(no);
+
+	});
+	
 	
 });
 	
@@ -267,6 +300,7 @@ jq(document).ready(function() {
 					initx = val.mapx;
 				});
 				output += '</div>';
+				initMap2();
 				
 				$('#cityList').append(output);
 				/* $("#cityList").html(output); */
@@ -279,20 +313,45 @@ jq(document).ready(function() {
 	    
 	    
 	    
-	    jq('#tour_search').keyup(function() {
+	    jq('#tour_search').keyup(function(e) {
 	    	var txt = $(this).val();
-            	
+	    	/* var txt = '';
+	    	switch (e.which)
+			{
+				case 16: break; // Shift
+				case 17: break; // Ctrl
+				case 18: break; // Alt
+				case 27: this.value = ''; break; // Esc: clear entry
+				case 35: break; // End
+				case 36: break; // Home
+				case 37: break; // cursor left
+				case 38: break; // cursor up
+				case 39: break; // cursor right
+				case 40: break; // cursor down
+				case 78: break; // N (Opera 9.63+ maps the "." from the number key section to the "N" key too!) (See: http://unixpapa.com/js/key.html search for ". Del")
+				case 110: break; // . number block (Opera 9.63+ maps the "." from the number block to the "N" key (78) !!!)
+				case 190: break; // .
+				default:
+					txt= $("#tour_search").val();
+				// add your code here which will execute by default
+		    } */
 	    	jq.ajax({
-            	url:"tourSearch.do?txt="+ txt +"&areaCode=${pdto.plan_place}&cp="+cp,
+            	url:"tourSearch.do?txt="+ encodeURI(encodeURIComponent(txt)) +"&areaCode=${pdto.plan_place}&cp="+cp,
 				type:"GET",
 				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
                 success : function(msg) {
+                	
+                	//배열 초기화
+                	contentArray = [];
+       				markerArray = [];
+                	
                 	jq('.form_cityList').remove();
                 	// console.log(msg.response.body.items.item);
         			var myItem = msg.response.body.items.item;
         			
         			
         			var totalCnt = msg.response.body.totalCount;
+        			console.log(totalCnt);
         			var pageName = 'city.do?areaCode='+ 1;
         			var listSize = 10;
         			var pageSize = 5;
@@ -300,7 +359,7 @@ jq(document).ready(function() {
         			var queryStr = '123123';
         			
         			var output ='<div class="form_cityList">';
-        			
+        			var tmp = '';
         			jq.each(myItem, function(key, val) {
         				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
         				if(val.firstimage == null) {
@@ -319,15 +378,21 @@ jq(document).ready(function() {
         				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
         				inity = val.mapy;
         				initx = val.mapx;
+        				
+        				
+        				
         			});
         			output += '</div>';
-        			
+        			initMap2();
         			jq('#cityList').append(output);
         			},
         			error : function(xhr, status, error) {
         				alert("에러발생");
         			}
+        			
             }); // end ajax
+            
+            
 	    });
 	});
 
@@ -361,11 +426,30 @@ function initMap() {
   	    }
 }
 
+function initMap2() {
+	//iterator 초기화
+	iterator = 0;
+	
+	var mapOptions = {
+  	        zoom: 10,
+  	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+  	        //각 지역의 중심 좌표로
+  	        center: new google.maps.LatLng(inity, initx)
+  	    };
+  	 
+  	    map = new google.maps.Map(document.getElementById('map'),mapOptions);
+  	    for (var i = 0; i < markerArray.length; i++) {
+  	        addMarker();
+  	    }
+}
+
 function addMarker() {
 	//지도에 마커 띄우기
+	var img = 'img/defaultmarker.png';
    	var marker = new google.maps.Marker({
    		position: markerArray[iterator],
-   		map: map
+   		map: map,
+   		icon: img
    	});
 	markers.push(marker);
 	
@@ -376,11 +460,10 @@ function addMarker() {
 	google.maps.event.addListener(marker, 'click', function() {
         infowindow.open(map,marker);
     });
+	google.maps.event.addListener(marker, 'mouseover', function(){
+	});  
+	
 	iterator++;
-}
-
-function plan() {
-	window.alert("zzz");
 }
 
 function plan_display() {
@@ -433,10 +516,16 @@ jq(document).ready(function() {
 			<div id="search">
 				<!-- 홍주영 작업중.. -->
 				<input type="hidden" value="${pdto.plan_place }">
-				<input type="text" id="tour_search" name="tour_search" placeholder="장소 검색"><br>
+				<input type="text" id="tour_search" name="txt" placeholder="장소 검색"><br>
 				<span class="orderList" data="arrange" data-val="A">이름순</span>
 				<span class="orderList" data="arrange" data-val="B">인기순</span>
 			</div>
+		
+		<div id="cityContent" >
+			<div id="contentBox">
+			tlqk
+			</div>
+		</div>
 		</div>
 	</div>
 	
