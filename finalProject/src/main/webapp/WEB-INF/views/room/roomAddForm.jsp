@@ -18,8 +18,8 @@
 
 <script>
 //header에 있는 js와 충돌나서 noConflict설정
+var today = new Date();
 var jq = $.noConflict();
-
 jq(document).ready(function() {
 	
 	jq("#datepicker").multiDatesPicker({
@@ -75,6 +75,7 @@ jq(document).ready(function() {
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<h1>숙소등록페이지</h1>
 	<form name="roomadd.do" action="imageUploadForm.do" method="post">
 		<div>
@@ -215,5 +216,6 @@ jq(document).ready(function() {
 		</div>
 		<input type="submit" value="등록">
 	</form>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
