@@ -24,7 +24,12 @@
   <![CDATA[ 
   select * from (
   select rownum rnum,a.* from 
-  (select * from voc where writer = #{writer} order by ref desc,sunbun asc) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  (select * from voc 
+where ref in (
+
+select ref from voc where writer =#{writer}
+)
+   order by ref desc,sunbun asc) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]></select>
 
 
@@ -39,8 +44,13 @@
 
 	</select>
 	<select id="vocTotalMyCnt" resultType="int" parameterType="String">
-		select count(*) from voc where writer = #{writer}
+<!-- 		select count(*) from voc where writer = #{writer}
+ -->
 
+	select count ( *) from voc 
+where ref in (
+
+select ref from voc where writer =#{writer}) 
 	</select>
 
 

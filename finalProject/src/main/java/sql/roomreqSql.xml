@@ -27,7 +27,11 @@
 	</select>
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
-		select count(*) from roomreq where userId = #{userId}
+	
+				select count (*)from roomReq , roomadd
+				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
+ 	
+	
 		<!-- roomReqTotalCnt -->
 	</select>
 
@@ -48,10 +52,19 @@
 				(select rownum rnum,a.* 
 					from (
 
-				select reqidx,PAID,  roomreq.roomidx,  count,reqdate, checkindate , checkoutdate, total_pay, concat (addr1, addr2)as addr
+				select reqidx,PAID,  roomreq.roomidx,  count,substr ( reqdate, 1, 10) as reqdate, 
+				roomname,
+				(substr (checkindate, 7,4))||'/'||(substr(checkindate,1,2))||'/'||(substr(checkindate, 4,2)) as checkindate,
+				 
+TRUNC (
+TO_DATE( CHECKINDATE , 'MM/DD/YYYY')-SYSDATE )AS CANCELDATE, 
+				
+		(substr(checkoutdate, 7,4))||'/'||(substr (checkoutdate,
+		1,2))||'/'||(substr(checkoutdate, 4,2)) as checkoutdate
+				, total_pay, concat (addr1, addr2)as addr
 					from roomReq , roomadd
-				where userId =#{userId}and roomadd.roomidx= roomreq.roomidx
- 				order by reqidx  
+				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
+ 				order by reqidx  desc
  
  
  				 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 

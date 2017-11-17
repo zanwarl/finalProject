@@ -11,6 +11,7 @@ import korea.roomAdd.model.RoomAddDTO;
 import korea.roomreq.model.RoomreqDAO;
 import korea.roomreq.model.RoomreqDTO;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -90,7 +91,8 @@ public class RoomReqController {
 	}
 
 	@RequestMapping(value = "/roomReqList.do")
-	public ModelAndView roomReqList(@RequestParam(value = "cp", defaultValue = "1") int cp, HttpServletRequest req,
+	public ModelAndView roomReqList(@RequestParam(value = "cp", defaultValue = "1") int cp,
+			HttpServletRequest req,
 			HttpServletResponse resp) {
 		HttpSession session = req.getSession();
 
@@ -101,11 +103,25 @@ public class RoomReqController {
 
 		int totalCnt = rdao.roomReqTotalCnt(userId);
 
+/*	
+		Calendar now = Calendar.getInstance(); 
+		int y= now.get(Calendar.YEAR);
+		int m = now.get(Calendar.MONTH)+1; 
+		int d = now .get(Calendar.DATE);*/
+		
+		
+		
+		
+		
+		
 		 List<Map<String, Object>> list = rdao.roomreqList(userId, cp, listSize);
-
+//System.out.println(list);
+		
 		String pageStr = korea.page.PageModule.makePage("roomReqList.do", totalCnt, listSize, pageSize, cp);
-
+System.out.println(list);
 		ModelAndView mav = new ModelAndView();
+/*		mav.addObject("now", y+""+m+""+d);*/
+		
 		mav.setViewName("roomReq/roomReqList");
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("list", list);
@@ -119,13 +135,13 @@ public class RoomReqController {
 		int res = rdao.roomCancel(reqIdx);
 
 		String msg = res > 0 ? "취소되었습니다." : "오류";
-		String goURL = "roomReqList.do";
+	//	String goURL = "roomReqList.do";
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("msg", msg);
-		mav.addObject("goURL", goURL);
+//		mav.addObject("goURL", goURL);
 
-		mav.setViewName("admin/adminMsg");
+		mav.setViewName("admin/closeMsg");
 		return mav;
 
 	}
