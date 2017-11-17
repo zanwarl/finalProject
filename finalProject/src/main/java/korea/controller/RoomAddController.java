@@ -81,6 +81,7 @@ public class RoomAddController {
 		
 		HttpSession session = req.getSession(); 
 		String writer = (String) session.getAttribute("sId");
+		int useridx = mdao.getUserIdx(writer);
 		
 		
 		if ( writer==null || writer.equals("")){
@@ -91,7 +92,7 @@ public class RoomAddController {
 		}
 		else {
 			
-			mav.addObject("useridx", writer);
+			mav.addObject("useridx", useridx);
 			mav.setViewName("room/roomAddForm");
 			return mav;
 			
