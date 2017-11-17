@@ -79,7 +79,7 @@ function ok(reqIdx, amt){
 		</tr>
 		<tr>
 			<td colspan="2" align="center">	 
-				<input type="button" value="결제" onclick="ok('26', ${total_pay})"> 
+				<input type="button" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> 
 			</td>
 			<td>	 </td>
 		</tr>	 	   

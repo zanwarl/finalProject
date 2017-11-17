@@ -221,7 +221,7 @@ text-align:center;
 		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="total_pay" id="roomp" value="${arr.roomprice}" onkeyup="call()" readonly>
+			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()" readonly>
 		</p>
 		<p class="req">
             <input type="submit" class="reqBtn" value="예약하기">
