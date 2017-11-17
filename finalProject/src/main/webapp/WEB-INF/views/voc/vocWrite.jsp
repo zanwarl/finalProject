@@ -6,6 +6,39 @@
 <head>
 <meta charset=UTF-8">
 <title>Insert title here</title>
+
+
+<style type="text/css">
+table, td, th {
+	margin-top: 50px;
+	border: 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	height: 100% ; 
+	width: 100%;
+}
+
+input button {
+	border: none;
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
+
 </head>
 <body>
 
@@ -36,18 +69,19 @@
 
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="subject"> </td>
+			<td><input type="text" name="subject" style="width: 100%"> </td>
 		
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-			<textarea  name="content"></textarea>
+			<textarea  name="content" rows="10"></textarea>
 			</td>
 		
 		</tr>
 		<tr>
-			<td colspan="2"> <input type="submit" value="submit"> </td>
+			<td colspan="2" style="text-align: center;" > 
+			<input type="submit" value="문의하기" style="border: none;"> </td>
 		
 		</tr>
 	</table>

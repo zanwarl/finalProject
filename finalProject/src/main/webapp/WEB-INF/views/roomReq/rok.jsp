@@ -13,7 +13,7 @@ function paid (reqIdx){
 	location.href ="paidOk.do?reqIdx="+reqIdx; 
 }
 function ok(reqIdx, amt){
-	var IMP = window.IMP; // 생략가능	
+	var IMP = window.IMP; 
 	IMP.init('imp23082100');  // 가맹점 식별 코드
 
 	IMP.request_pay({
@@ -48,12 +48,15 @@ function ok(reqIdx, amt){
 </script>
 <title>Insert title here</title>
 </head>
+
+
 <body>	
-<section>
+
 <form name="payMent" action="payMent.do">
 	<table>
 	<c:set var="arr" value="${rdto}"/>
 
+	<h2> 선택한 예약내역</h2>
 		<tr>
 			<th>예약인원수</th>
 			<th>${arr.count}</th>
@@ -76,12 +79,12 @@ function ok(reqIdx, amt){
 		</tr>
 		<tr>
 			<td colspan="2" align="center">	 
-				<input type="button" value="결제" onclick="ok('26', ${total_pay})"> 
+				<input type="button" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> 
 			</td>
 			<td>	 </td>
 		</tr>	 	   
 	</table>
 	</form>
-</section>
+</div>
 </body>
 </html>

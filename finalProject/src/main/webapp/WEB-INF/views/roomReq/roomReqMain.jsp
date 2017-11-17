@@ -103,12 +103,11 @@ text-align:center;
 			
 				});
 			});	
+		
 	
-	
-	
-	$( ".selector" ).datepicker({
+/* 	$( ".selector" ).datepicker({
 	    altField: ".selecter"
-	});
+	}); */
 
 	var disabledDays = ["2017-11-22"];
 	
@@ -156,7 +155,7 @@ text-align:center;
 		} 
 		
 		date = day2 - day1;
-		date = date + 1;
+		date = date;
 		var num = frm.count.value;
 		var sum = price*num*date;
 		$('#roomp').val(sum);
@@ -222,7 +221,7 @@ text-align:center;
 		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="total_pay" id="roomp" value="${arr.roomprice}" onkeyup="call()" readonly>
+			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()" readonly>
 		</p>
 		<p class="req">
             <input type="submit" class="reqBtn" value="예약하기">

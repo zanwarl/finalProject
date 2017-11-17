@@ -56,7 +56,7 @@ public class RoomReqController {
 		String goURL = "roomReqOK.do?reqidx=" + rdto.getReqidx() + "&total_pay=" + total_pay;
 		// System.out.println(rdto.getReqidx());
 
-		String msg = result > 0 ? "확인" : "다시 예약해주세요.";
+		String msg = result > 0 ? "결제 하시겠습니까?" : "예약오류 : 다시 예약해주세요.";
 		ModelAndView mav = new ModelAndView();
 
 		mav.addObject("msg", msg);
@@ -232,5 +232,25 @@ public class RoomReqController {
 		
 	}
 	
+	@RequestMapping ("/paidOk.do")
+	public ModelAndView paid (
+			@RequestParam(value="reqIdx")int reqIdx
+			)
+	
+	{
+		
+		ModelAndView mav = new  ModelAndView(); 
+		int res = rdao.paid(reqIdx);
+		
+		String msg = res > 0 ? "예약완료" : "오류";
+		String goURL = "main.do";
+
+		mav.addObject("msg", msg);
+		mav.addObject("goURL", goURL);
+
+		mav.setViewName("admin/adminMsg");
+		return mav;
+
+	}
 	
 }
