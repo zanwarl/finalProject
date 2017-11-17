@@ -8,7 +8,25 @@
 <html>
 <head>
 
+<style type="text/css">
 
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tfoot td{
+text-align: center;
+}
+
+tr:hover{background-color:#f5f5f5}
+</style>
 <meta  charset=UTF-8">
 <title>Insert title here</title>
 </head>
@@ -43,7 +61,7 @@
 
 	<thead>
 		<tr>
-			<th>idx</th>
+			<th>글번호</th>
 			<th>제목</th>
 			<th>글쓴이</th>
 			<th>날짜</th>
@@ -56,7 +74,7 @@
 		<c:if test="${empty list }">
 		
 			<tr>
-				<td>등록된 공지사항이 없습니다. </td>
+				<td colspan="4">등록된 공지사항이 없습니다. </td>
 			</tr>
 		</c:if>
 			<c:forEach var ="dto" items ="${list }">
@@ -79,12 +97,17 @@
 	</tbody>	
 
 	<tfoot>
-		<tr>
-			<td>${pageStr}</td>
+	
+			<c:if test="${not empty list }">
+		
+				<tr>
+			<td colspan="4">${pageStr}</td>
 		</tr>
 	
+		</c:if>
+
 		<tr>
-			<td><a href="noticeWrite.do">글쓰기</a></td>
+			<td colspan="4"><a href="noticeWrite.do">글쓰기</a></td>
 		</tr>
 	
 	</tfoot>

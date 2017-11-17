@@ -11,6 +11,32 @@
 
 <meta charset=UTF-8">
 <title>Insert title here</title>
+
+
+
+<style type="text/css">
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 8px;
+	text-align: center
+	;
+	border-bottom: 1px solid #ddd;
+}
+
+tr:hover {
+	background-color: #f5f5f5
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
+
 </head>
 <body>
 
@@ -27,13 +53,18 @@
 
 		<div class="w3-container w3-teal">
 			<h1>슈퍼호스트</h1>
-			<a href="superHostUpdate.do">수정</a>
 		</div>
 
 
 
 		<div class="w3-container">
+<br>
 
+			<form action="superHostUpdate.do" method="post">
+				<input type="text" name="point" style="width: 50px">포인트 이상 보유했을 시,
+				슈퍼호스트 자격을 얻게 됩니다. <input type="submit" value="ok" style="border: none;">
+			</form>
+			<br>
 
 			<table>
 
@@ -71,15 +102,15 @@
 
 						<tr>
 
-							<td>${pageStr }</td>
+							<td colspan="3">${pageStr }</td>
 						</tr>
 					</c:if>
 					
 					<tr>
-						<td>
+						<td colspan="3">
 							<form action="superHostSearch.do">
-							ID	<input type="text" name="id" >
-								<input type="submit" value="검색">
+							ID <input type="text" name="id" placeholder="${param.id }">
+								<input type="submit" value="검색" style="border: none">
 							</form>
 						</td>
 					</tr>

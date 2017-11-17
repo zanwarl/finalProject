@@ -11,6 +11,37 @@
 
 <meta  charset=UTF-8">
 <title>Insert title here</title>
+<style>
+table, td, th {
+	margin-top: 50px; border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+tfoot td{
+	
+	
+	text-align: center;
+	
+}
+
+</style>
+
 </head>
 <body>
 
@@ -31,14 +62,12 @@
 
 
 <div class="w3-container">
-
-<h2>vocCon.jsp</h2>
 <table>
 
 <c:set var="dto" value="${con}" ></c:set>
 
 		<tr>
-			<th>글번호</th>
+			<th>문의번호</th>
 			<td>${dto.idx }  </td>
 		
 		</tr>
@@ -61,14 +90,22 @@
 		
 		</tr>
 		<tr>
-			<th>내용</th>
-			<td>${dto.content } </td>
+			<th colspan="2" style="text-align: center;">내용</th>
+		
+		
+		</tr>
+		<tr>
+			<td colspan="2" style="text-align: center;">${dto.content } </td>
+		
+		
 		
 		</tr>
 
 		
-	</table>
-	<c:url var="reWriteURL" value = "vocReWrite.do" >
+		<tfoot>
+		<tr>
+		<td colspan="2">
+		<c:url var="reWriteURL" value = "vocReWrite.do" >
 		<c:param name="idx">${dto.idx }</c:param>
 		<c:param name="ref">${dto.ref}</c:param>
 		<c:param name="lev">${dto.lev }</c:param>
@@ -83,9 +120,13 @@
 	
 	</c:url>
 	<a href="${reWriteURL }">답글쓰기</a>
-	|
+	|<a href="vocListAdmin.do">목록으로</a>
+		
+		</td>
+		</tr>
+		</tfoot>
+	</table>
 	
-	<a href="${delURL }">삭제하기</a>
 
 
 	

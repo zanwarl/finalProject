@@ -1,13 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>    
+<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <h2>리뷰게시판</h2>
 <table border="1" cellspacing="0" width="450">
 	<thead>
@@ -42,14 +45,22 @@
 		<c:url var="contentUrl" value="reBbsContent.do">
 			<c:param name="idx">${dto.rebbs_idx }</c:param>
 		</c:url>
-		<td><a href="${contentUrl }">${dto.subject }</a></td>	
+		<td>
+			%{dto.lev}
+			<c:forEach var="i" begin="0" end="${dto.lev }">
+				<c:if test="${0<i }">
+					&nbsp;
+				</c:if>
+			</c:forEach>
+			<a href="${contentUrl }">${dto.subject }</a>
+		</td>	
 		<td>${dto.writer }</td>
 		<td>${dto.readnum }</td>
 	</tr>
 	</c:forEach>	
 	</tbody>
-
 </table>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
 

@@ -14,6 +14,9 @@
 </head>
 <body>
 
+<%@ include file="../header.jsp" %>
+
+<div id="contents">
   <h1>예약내역</h1>
 
 
@@ -22,13 +25,14 @@
 	<thead>
 		<tr>
 			<th>예약번호</th>
-			<th>회원아이디</th>
+			
 			<th>방번호</th>
 			<th>인원수</th>
 			<th>신청일</th>
 			<th>체크인</th>
 			<th>체크아웃</th>
-			<th>상태</th>
+			<th>가격</th>
+			<th>주소</th>
 		</tr>
 	</thead>
 		
@@ -44,18 +48,18 @@
 			<c:forEach var ="dto" items ="${list }">
 				<tr>
 				
-					<td>${dto.reqidx }</td>
+					<td>${dto.REQIDX }</td>
 				
 					
 				
 					
-					<td>${dto.userid }</td>
-					<td>${dto.roomidx }</td>
-					<td>${dto.count }</td>
-					<td>${dto.reqDate }</td>
-					<td>${dto.checkindate }</td>
-					<td>${dto.checkoutdate }</td>
-					<td>${dto.paid }</td>
+					<td>${dto.ROOMIDX }</td>
+					<td>${dto.COUNT }</td>
+					<td>${dto.REQDATE }</td>
+					<td>${dto.CHECKINDATE }</td>
+					<td>${dto.CHECKOUTDATE }</td>
+					<td>${dto.TOTAL_PAY }</td>
+					<td>${dto.ADDR }</td>
 
 				</tr>
 				<tr>
@@ -66,7 +70,7 @@
 						<c:param name="reqIdx" value="${dto.reqidx}"></c:param>
 					
 					</c:url>
-					<c:if test="${dto.paid !=-1 }">
+					<c:if test="${dto.PAID !=-1 }">
 					<td colspan="6">
 					<a href="${roomCancelURL }">취소하기</a>
 					</td>
@@ -92,7 +96,8 @@
 </table>
 
 
-
+</div>
+<%@ include file="../footer.jsp" %>
 
 
 

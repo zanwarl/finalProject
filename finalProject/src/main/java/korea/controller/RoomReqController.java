@@ -101,7 +101,7 @@ public class RoomReqController {
 
 		int totalCnt = rdao.roomReqTotalCnt(userId);
 
-		List<RoomreqDTO> list = rdao.roomreqList(userId, cp, listSize);
+		 List<Map<String, Object>> list = rdao.roomreqList(userId, cp, listSize);
 
 		String pageStr = korea.page.PageModule.makePage("roomReqList.do", totalCnt, listSize, pageSize, cp);
 
@@ -118,7 +118,7 @@ public class RoomReqController {
 	public ModelAndView roomCancel(@RequestParam("reqIdx") int reqIdx) {
 		int res = rdao.roomCancel(reqIdx);
 
-		String msg = res > 0 ? "占쏙옙占쏙옙占쏙옙 占쏙옙撚퓸占쏙옙占쏙옙求占�" : "占쏙옙占쏙옙";
+		String msg = res > 0 ? "취소되었습니다." : "오류";
 		String goURL = "roomReqList.do";
 
 		ModelAndView mav = new ModelAndView();
@@ -179,8 +179,6 @@ public class RoomReqController {
 				String count =String.valueOf(list.get(i).get("COUNT"));
 				String reqidx =String.valueOf(list.get(i).get("REQIDX"));
 				
-				
-			//	String count = (String) list.get(i).get("COUNT");
 				String end = (String) list.get(i).get("ENDDATE");
 				String end1 =end.substring(5);
 				
