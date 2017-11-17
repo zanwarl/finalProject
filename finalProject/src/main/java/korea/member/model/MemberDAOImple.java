@@ -1,6 +1,8 @@
 package korea.member.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import korea.member.model.MemberDTO;
 
@@ -62,6 +64,24 @@ public class MemberDAOImple implements MemberDAO {
 	public int memberUpdate(MemberDTO dto) {
 		int count=sqlMap.update("memberUpdate", dto);
 		return count;
+	}
+	
+	public String idSeach(String member_name, String member_email) {
+		
+		Map<String, Object> iseach = new HashMap<String, Object>();
+		iseach.put("member_name",member_name);
+		iseach.put("member_email",member_email);
+		String listt = sqlMap.selectOne("idSeachSql", iseach);
+		return listt;
+	}
+
+	public String pwdSeach(String member_id, String member_email) {
+		
+		Map<String, Object> pseach = new HashMap<String, Object>();
+		pseach.put("member_id",member_id);
+		pseach.put("member_email",member_email);
+		String list2 = sqlMap.selectOne("pwdSeachSql", pseach);
+		return list2;
 	}
 
 

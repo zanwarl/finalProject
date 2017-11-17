@@ -9,7 +9,7 @@ font-family: 'Open Sans', Helvetica, Arial, sans-serif;
 font-weight: 300;
 background-color: #fff;}
 
-#contents {clear:both; height:100%; }
+#contents {clear:both; height:100%;}
 a {text-decoration:none; color:#000;}
 
 /*상단,메인메뉴를 감싸고 있는 영역*/
@@ -34,10 +34,12 @@ width:900px;
 z-index:130000000;
 position:relative;
 margin:0 auto;
+
 font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
 }
 #main_menu > ul {
   font-size: 20px; /*폰트사이즈설정*/
+  
   line-height: 20px; /*수직가운데정렬*/
   font-weight:bold;
   width: auto; /*가로자동*/
@@ -162,13 +164,13 @@ font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰�
 /*슬라이드*/
 .flicker-example{z-index:100;}
 /*컨텐츠영역*/
-#contents {min-height:100%; margin:0; background:#0FC;}
+#contents {padding-top:20px; height:auto; margin:0;}
 
 /*하단푸터영역*/
 #footer {clear:both; background:#c0c0c0;color:#808080;}
 
 #footer_menu {width:1100px; height:100px;margin:0 auto;}
 #footer_menu ul {list-style:none; }
-#footer_menu ul li {float:left; ine-height:50px;  margin-right:20px; }
+#footer_menu ul li {float:left; line-height:50px;  margin-right:20px; }
 .copyright{clear:both;font-size:12px;}
 .flick-title, .flick-sub-text {text-shadow:2px 2px 2px gray;}

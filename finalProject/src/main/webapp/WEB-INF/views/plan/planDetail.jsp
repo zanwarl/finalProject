@@ -77,9 +77,12 @@
 .wrap_cityList {
 	height: 120px;
 }
-
+.form_cityList {
+	overflow:auto;	
+	height: 620px;
+}
 #search {
-	height: 200px;
+	height: 180px;
 	background: white;
 }
 
@@ -124,7 +127,7 @@ var inity = '';
 			
 			var queryStr = '123123';
 			
-			var output = '';
+			var output ='<div class="form_cityList">';
 			
 			$.each(myItem, function(key, val) {
 				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
@@ -138,12 +141,14 @@ var inity = '';
 				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
 				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
 				output += '</div>';
+				
 	
 				contentArray[key] = val.title;
 				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
 				inity = val.mapy;
 				initx = val.mapx;
 			});
+			output += '</div>';
 			
 			$('#cityList').append(output);
 			/* $("#cityList").html(output); */
@@ -218,8 +223,113 @@ jq(document).ready(function() {
 		        ui.item.attr('data',set_order);
 			}
 	    });
+	    
+	    jq('.orderList').on('click', function() {
+	    	var arrange = jq(this).attr('data-val');
+	    	$('.form_cityList').remove();
+	    	
+	    	$.ajax({
+				url:"areaBasedList.do?areaCode=${pdto.plan_place}&cp="+cp+"&arrange="+arrange,
+				type:"GET",
+				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+			 	async:false, // 이 한줄만 추가해주시면 됩니다.
+				success : function(msg) {
+				// console.log(msg.response.body.items.item);
+				var myItem = msg.response.body.items.item;
+				
+				
+				var totalCnt = msg.response.body.totalCount;
+				var pageName = 'city.do?areaCode='+ 1;
+				var listSize = 10;
+				var pageSize = 5;
+				
+				var queryStr = '123123';
+				
+				var output ='<div class="form_cityList">';
+				
+				$.each(myItem, function(key, val) {
+					output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+					if(val.firstimage == null) {
+						output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+					} else {
+						output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+					}
+					output += '<div class="info">'+val.title+'</div>';
+					output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+					output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+					output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+					output += '</div>';
+					
+		
+					contentArray[key] = val.title;
+					markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+					inity = val.mapy;
+					initx = val.mapx;
+				});
+				output += '</div>';
+				
+				$('#cityList').append(output);
+				/* $("#cityList").html(output); */
+				},
+				error : function(xhr, status, error) {
+					alert("에러발생");
+				}
+			});
+	    });
+	    
+	    
+	    
+	    jq('#tour_search').keyup(function() {
+	    	var txt = $(this).val();
+            	
+	    	jq.ajax({
+            	url:"tourSearch.do?txt="+ txt +"&areaCode=${pdto.plan_place}&cp="+cp,
+				type:"GET",
+				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+                success : function(msg) {
+                	jq('.form_cityList').remove();
+                	// console.log(msg.response.body.items.item);
+        			var myItem = msg.response.body.items.item;
+        			
+        			
+        			var totalCnt = msg.response.body.totalCount;
+        			var pageName = 'city.do?areaCode='+ 1;
+        			var listSize = 10;
+        			var pageSize = 5;
+        			
+        			var queryStr = '123123';
+        			
+        			var output ='<div class="form_cityList">';
+        			
+        			jq.each(myItem, function(key, val) {
+        				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+        				if(val.firstimage == null) {
+        					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+        				} else {
+        					output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+        				}
+        				output += '<div class="info">'+val.title+'</div>';
+        				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+        				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+        				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+        				output += '</div>';
+        				
+        	
+        				contentArray[key] = val.title;
+        				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+        				inity = val.mapy;
+        				initx = val.mapx;
+        			});
+        			output += '</div>';
+        			
+        			jq('#cityList').append(output);
+        			},
+        			error : function(xhr, status, error) {
+        				alert("에러발생");
+        			}
+            }); // end ajax
+	    });
 	});
-
 
 });
 </script>
@@ -319,9 +429,13 @@ jq(document).ready(function() {
 				</div>
 			</c:forEach>
 		</div>
-		<div id="cityList" style="overflow:auto;">
+		<div id="cityList" >
 			<div id="search">
-				${areaCode }
+				<!-- 홍주영 작업중.. -->
+				<input type="hidden" value="${pdto.plan_place }">
+				<input type="text" id="tour_search" name="tour_search" placeholder="장소 검색"><br>
+				<span class="orderList" data="arrange" data-val="A">이름순</span>
+				<span class="orderList" data="arrange" data-val="B">인기순</span>
 			</div>
 		</div>
 	</div>
@@ -347,8 +461,7 @@ jq(document).ready(function() {
 				<form name="plan_make" action="planDetailWrite.do">
 				<!-- <form name="plan_make" action="planDetailWrite.do"> -->
 				<script>
-				function submit() {
-
+				function planSubmit() {
 					var nlist = '';
 					var count = '0';
 					
@@ -406,15 +519,15 @@ jq(document).ready(function() {
 						<tbody>
 							<tr>
 								<th>여행 제목</th>
-								<td><input type="text" name="plan_subject"></td>
+								<td><input type="text" name="plan_subject" value="${pdto.plan_subject }"></td>
 							</tr>
 							<tr>
 								<th>출발일</th>
-								<td><input type="text" id="plan_start" name="plan_start" id="datepicker"></td>
+								<td><input type="text" id="plan_start" name="plan_start" id="datepicker" value="${pdto.plan_start }"></td>
 							</tr>
 							<tr>
 								<th>설명</th>
-								<td><textarea name="plan_explain" cols="20" rows="5"></textarea></td>
+								<td><textarea name="plan_explain" cols="20" rows="5" >${pdto.plan_explain }</textarea></td>
 							</tr>
 							<tr>
 								<td colspan="2"><hr>비공개 <input type="checkbox" name="plan_public"></td>
@@ -428,15 +541,13 @@ jq(document).ready(function() {
 									<input type="hidden" id="plan_writer" name="plan_writer" value="${sIdx }">
 									<input type="hidden" name="plan_name" value="${sName }">
 									<input type="hidden" id="str" name="str">
-									<input type="text" id="plan_idx" name="plan_idx" value=${plan_idx }>
+									<input type="hidden" id="plan_idx" name="plan_idx" value=${plan_idx }>
 								</td>
 							</tr>
 						</tfoot>
 					</table>
 				<button data-remodal-action="cancel" class="remodal-cancel">취소</button>
-				<button class="remodal-confirm" onclick="submit();">완료</button>
-				<a href="javascript:submit()">[완료]</a> 
-				<!-- <a class="remodal-confirm" href="planDetail.do">완료</a> -->
+				<button class="remodal-confirm" onclick="planSubmit(); return false;">완료</button>
 				</form>
 			</div>	
 		</div>

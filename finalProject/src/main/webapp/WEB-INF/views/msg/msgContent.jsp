@@ -33,7 +33,7 @@ function load(id, cnt, btn) {
 }
 </script>
 
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
 
@@ -51,6 +51,8 @@ a{
 }
 .container{
   width:400px;
+  overflow:scroll; 
+  height:600px;
   display:block;
   margin:0 auto;
   box-shadow:0 2px 5px rgba(0,0,0,0.4);
@@ -76,6 +78,7 @@ a{
   border-radius:2px;
 }
 .chat-box, .enter-message{
+  
   background:#ECECEC;
   padding:0 20px;
   color:#a1a1a1;

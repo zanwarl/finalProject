@@ -12,8 +12,8 @@
 <div id="contents">
 ${pdto.plan_name }님의 일정 <hr>
 <c:forEach var="list" items="${list }">
-${list.pland_day }
-${list.pland_order } &nbsp;
+Day : ${list.pland_day }
+순서 : ${list.pland_order } &nbsp;
 <a href="tourDetail.do?contentTypeId=${list.pland_typeid }&contentId=${list.pland_code }">
 <c:choose>
 <c:when test="${list.pland_img eq 'undefined' }">

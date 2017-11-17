@@ -6,6 +6,30 @@
 <!DOCTYPE html >
 <html>
 <head>
+<style>
+table, td, th {
+border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
+</style>
+
 <script type="text/javascript">
 
 	function givePenalty(x) {
@@ -26,7 +50,6 @@
 </head>
 <body>
 
-	${param.idx }
 
 
 
@@ -36,8 +59,6 @@
 
 	</c:url>
 
-	<input type="button" value="패널티주기"
-		onclick="givePenalty('${givePenaltyURL}')">
 	<%-- 
 <a href="${givePenaltyURL }">패널티주기</a> --%>
 
@@ -48,7 +69,11 @@
 	<table align="center" style="text-align: left;">
 		<tr>
 			<th>아이디</th>
-			<td>${dto.member_id}</td>
+			<td>${dto.member_id}
+				<input type="button" value="패널티주기"
+		onclick="givePenalty('${givePenaltyURL}')">
+			
+			</td>
 		</tr>
 
 
@@ -58,10 +83,11 @@
 		</tr>
 		<tr>
 			<th>성별</th>
-			<td><c:if test="${dto.member_sex==1 }">
+			<td>
+			<c:if test="${dto.member_sex==1 }">
 					M
-		</c:if>
-			<td><c:if test="${dto.member_sex==2 }">
+			</c:if>
+			<c:if test="${dto.member_sex==2 }">
 					F
 		</c:if></td>
 		</tr>

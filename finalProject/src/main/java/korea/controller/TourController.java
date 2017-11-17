@@ -111,11 +111,13 @@ public class TourController {
 	// JSON
 	@RequestMapping("/areaBasedList.do")
 	public ModelAndView areaBasedList(@RequestParam(value = "areaCode") String areaCode,@
-			RequestParam(value="cp",required=false,defaultValue="1")int cp) throws Exception {
+			RequestParam(value="cp",required=false,defaultValue="1")int cp, 
+			@RequestParam(value="arrange",required=false,defaultValue="A") String arrange) throws Exception {
+		
 		tour_code = "areaBasedList";
 		param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
 				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
-				+ "TourAPI3.0_Guide&arrange=A&numOfRows=12&pageNo=" + cp;
+				+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=50&pageNo=" + cp;
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
@@ -139,6 +141,45 @@ public class TourController {
 		mav.addObject("jsonObject", jsonObject);
 		return mav;
 
+	}
+	
+	@RequestMapping("/tourSearch.do")
+	public ModelAndView tourSearch(@RequestParam(value = "areaCode") String areaCode,@
+			RequestParam(value="cp",required=false,defaultValue="1")int cp, 
+			@RequestParam(value="arrange",required=false,defaultValue="A") String arrange,
+			@RequestParam(value="txt")String txt) throws ParseException, Exception {
+		System.out.println("areacode : " + areaCode);
+		System.out.println("검색 : " + txt);
+		
+		if(txt==null || txt.equals("")) {
+			tour_code = "areaBasedList";
+			param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
+					+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
+					+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=50&pageNo=" + cp;
+
+			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
+					+ service_key + param_1 + data_type;
+		} else {
+			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey=" +
+			           "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D" +
+			           "&keyword=" + txt + "&areaCode=" + areaCode + 
+			           "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=50&pageNo=1&_type=json";	
+		}
+		
+		System.out.println(tour_api_url);
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
+		
+		System.out.println("jsonobject : " + jsonObject);
+		JSONObject json = (JSONObject) jsonObject.get("response");
+		json = (JSONObject) json.get("body");
+		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
+
+		
+		ModelAndView mav = new ModelAndView();
+
+		mav.setViewName("tour/areaBasedList");
+		mav.addObject("jsonObject", jsonObject);
+		return mav;
 	}
 
 	// 실제 페이지 이동

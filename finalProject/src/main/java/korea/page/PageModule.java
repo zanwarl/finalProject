@@ -188,7 +188,7 @@ public class PageModule {
 		}
 		
 		if(startNum!=1) {
-			System.out.println("1");
+		//	System.out.println("1");
 			sb.append("<a href='");
 			sb.append(pageName);
 			if (queryStr != null) {

@@ -54,8 +54,8 @@ function pwd(){
 	</tr>
 	<tr>
 		<th>생년월일</th>
-		<td><input type="text" maxlength="6" name="member_birth" placeholder="생년월일">
-		<span style="font: 8pt 돋움; color: black">&nbsp; (주민번호 앞6자리 입력)
+		<td><input type="text" maxlength="8" name="member_birth" placeholder="생년월일 8자리">
+		<span style="font: 8pt 돋움; color: black">&nbsp; (생년월일 8자리 입력)
 		</span></td>
 	</tr>
 	<tr>

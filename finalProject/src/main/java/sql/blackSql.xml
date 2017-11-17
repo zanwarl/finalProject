@@ -4,27 +4,65 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.black">
 	<!-- select -->
-	<select id="blackListSql" resultType="korea.black.model.BlackDTO" parameterType="map">
+	<select id="blackListSql" resultType="map" parameterType="map">
   <![CDATA[ 
-  select * from (select rownum rnum,a.* from (select * from blackList  ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+  select * from (select rownum rnum,a.* from (
+  
+select member_id as id, member_idx as idx
+from member 
+where member_idx in (
+select useridx from blackList 
+)
+ 
+    ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
    ]]>
-   </select>
-   
-   
-     <select id="totalCntSql" resultType="int" >
-       select count(*) from blackList
-       
-   </select>
-   
-   
-   <insert id="updateBlackListSql"  >
+	</select>
+	<select id="blackSearchListSql" resultType="map" parameterType="map">
+  <![CDATA[ 
+  select * from (select rownum rnum,a.* from (
+  
+select member_id as id, member_idx as idx
+from member 
+where member_idx in (
+select useridx 
+from blackList 
+)
+and member_id = #{id}
+ 
+    ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 
+   ]]>
+	</select>
+
+
+
+
+	<select id="totalSearchCntSql" resultType="int" parameterType="String">
+		select count(*) from
+		blackList
+		where useridx = (
+		select member_idx from member
+		where member_id = #{id}
+		)
+
+	</select>
+
+	<select id="totalCntSql" resultType="int">
+		select count(*) from
+		blackList
+
+	</select>
+
+
+	<insert id="updateBlackListSql">
     <![CDATA[
 	 insert into blackList (select member_idx from member where member_host_grade<-2 and member_idx not in (select useridx from blacklist))
    ]]>
-   </insert>
-   
+	</insert>
 
-   
-   
-   
+
+
+
+
+
+
 </mapper>

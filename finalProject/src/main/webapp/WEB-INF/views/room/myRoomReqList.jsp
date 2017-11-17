@@ -8,8 +8,11 @@
 <html>
 <head>
 
+<style>
 
-<meta charset=UTF-8">
+
+</style>
+<meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
 <body>

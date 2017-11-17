@@ -82,10 +82,19 @@ jq(document).ready(function() {
 });
 </script>
 
-<meta charset=UTF-8">
+<meta charset="UTF-8">
 <title>Insert title here</title>
 
+<style>
+#calender_wrap {width:900px; margin:0 auto;  margin-bottom:20px;}
 
+#calendar{width:900px; height:auto; margin:0 auto; margin-bottom:10px;}
+
+.listBtn {text-align:right;}
+
+.listBtn input {width:100px; height:35px; background:#fff; border:1px solid #999;}
+
+</style>
 
 
 </head>
@@ -101,10 +110,12 @@ jq(document).ready(function() {
 	<div id="contents">
 
 		<!-- ---------본문내용---------------  -->
-
+		<div id="calender_wrap">
 		<div id="calendar"></div>
-		<input type="button" onclick="location.href ='myRoomReqList.do'" value="목록으로">
-		
+			<p class="listBtn">
+			<input type="button" onclick="location.href ='myRoomReqList.do'" value="목록으로">
+			</p>
+		</div>
 		</div>
 
 
