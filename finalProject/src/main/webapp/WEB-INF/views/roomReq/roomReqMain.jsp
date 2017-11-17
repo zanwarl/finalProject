@@ -103,12 +103,11 @@ text-align:center;
 			
 				});
 			});	
+		
 	
-	
-	
-	$( ".selector" ).datepicker({
+/* 	$( ".selector" ).datepicker({
 	    altField: ".selecter"
-	});
+	}); */
 
 	var disabledDays = ["2017-11-22"];
 	
@@ -156,7 +155,7 @@ text-align:center;
 		} 
 		
 		date = day2 - day1;
-		date = date + 1;
+		date = date;
 		var num = frm.count.value;
 		var sum = price*num*date;
 		$('#roomp').val(sum);
