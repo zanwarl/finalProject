@@ -168,9 +168,8 @@ public class RoomAddController {
 		
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
 		
-		String filepath = req.getSession().getServletContext().getRealPath("/resources/upload/");  
+		String filepath = req.getSession().getServletContext().getRealPath("/img/");  
 	    
-
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
 		Iterator<String> iterator = mhsq.getFileNames();
