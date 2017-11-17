@@ -173,7 +173,7 @@ public class RoomAddController {
 		String path= filepath+"/img/room"; 
 		
 		//////////////////////////////////////////////
-		String savePath = req.getRealPath("img/room/");
+		String savePath = req.getSession().getServletContext().getRealPath("/img/room/");
 		System.out.println("savepath : " + savePath);
 		
 		path = savePath;
@@ -205,6 +205,8 @@ public class RoomAddController {
 
 				
 				file = new File(path+"/"+storedFileName);
+				
+				System.out.println("절대경로 : " + file.getAbsolutePath());
 				
 				System.out.println("저장: " + storedFileName);
 				req.getSession().setAttribute("file", file);
