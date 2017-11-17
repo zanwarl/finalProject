@@ -81,6 +81,7 @@ public class RoomAddController {
 		
 		HttpSession session = req.getSession(); 
 		String writer = (String) session.getAttribute("sId");
+		int useridx = mdao.getUserIdx(writer);
 		
 		
 		if ( writer==null || writer.equals("")){
@@ -91,7 +92,7 @@ public class RoomAddController {
 		}
 		else {
 			
-			mav.addObject("useridx", writer);
+			mav.addObject("useridx", useridx);
 			mav.setViewName("room/roomAddForm");
 			return mav;
 			
@@ -168,9 +169,8 @@ public class RoomAddController {
 		
 		RoomAddDTO rdto = (RoomAddDTO) req.getSession().getAttribute("rdto");
 		
-		String filepath = req.getSession().getServletContext().getRealPath("/resources/upload/");  
+		String filepath = req.getSession().getServletContext().getRealPath("/img/");  
 	    
-
 		radao.roomAdd(rdto);
 		int roomidx = rdto.getRoomidx();
 		Iterator<String> iterator = mhsq.getFileNames();
