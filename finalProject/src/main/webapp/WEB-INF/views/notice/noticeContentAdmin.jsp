@@ -39,7 +39,7 @@
 
 
 <table>
-<c:set var ="dto" value=  "${con}"></c:set>
+<c:set var ="dto" value="${con}"></c:set>
 
 	<thead>
 	

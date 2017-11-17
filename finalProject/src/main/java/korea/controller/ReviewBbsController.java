@@ -41,7 +41,7 @@ public class ReviewBbsController {
 	@RequestMapping(value="/reBbsWrite.do", method=RequestMethod.POST)
 	public ModelAndView reBbsWriteSubmit(ReBbsDTO dto){
 		int result=rbdao.reBbsWrite(dto);
-		String msg=result>0?"µî·Ï¼º°ø":"µî·Ï½ÇÆÐ";
+		String msg=result>0?"ê¸€ì“°ê¸° ì„±ê³µ":"ê¸€ì“°ê¸° ì‹¤íŒ¨";
 		ModelAndView mav=new ModelAndView();
 		mav.setViewName("reBbs/reBbsMsg");
 		mav.addObject("msg", msg);

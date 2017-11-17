@@ -15,6 +15,31 @@ public class ReBbsDAOImple implements ReBbsDAO {
 		this.sqlMap = sqlMap;
 	}
 	
+	public int reBbsGetRefMax(ReBbsDTO dto){
+		int count=sqlMap.selectOne("reBbsGetRefMax", dto);
+		return count;
+	}
+	
+	public int reBbsSunbunUpdate(ReBbsDTO dto){
+		int count=sqlMap.update("reBbsSunbunUpdate", dto);
+		return count;
+	}
+	
+	public int reBbsReWrite(ReBbsDTO dto){
+		int count=sqlMap.insert("reBbsReWrite", dto);
+		return count;
+	}
+	
+	public int reBbsDelete(){
+		int count=sqlMap.delete("reBbsDelete");
+		return count;
+	}
+	
+	public int reBbsChange(ReBbsDTO dto){
+		int count=sqlMap.update("reBbsChange", dto);
+		return count;
+	}
+	
 	public int reBbsWrite(ReBbsDTO dto){
 		int count=sqlMap.insert("reBbsWrite", dto);
 		return count;
