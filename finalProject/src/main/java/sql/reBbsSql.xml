@@ -3,6 +3,40 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.rebbs">
+	<select id="reBbsGetRefMax" parameterType="int" resultType="korea.rebbs.model.ReBbsDTO">
+		select max(ref) from rebbs
+	</select>
+	
+	<update id="reBbsSunbunUpdate" parameterType="korea.rebbs.model.ReBbsDTO">
+		update rebbs set sunbun=#{sunbun}+1 where ref=#{ref} and sunbun>=#{sunbun}
+	</update>
+	
+	<insert id="reBbsReWrite" parameterType="korea.rebbs.model.ReBbsDTO">
+		insert into rebbs value(
+			rebbs_idx.nextval,
+			#{writer},
+			#{pwd},
+			#{subject},
+			#{content},
+			#{ref},
+			#{lev}+1,
+			#{sunbun}+1
+		)
+	</insert>
+	
+	<delete id="reBbsDelete">
+		delete from rebbs where rebbs_idx=#{rebbs_idx}
+	</delete>
+	
+	<update id="reBbsChange" parameterType="korea.rebbs.model.ReBbsDTO">
+		update rebbs 
+		set 
+		subject=#{subject}, 
+		content=#{content}, 
+		writedate=sysdate
+		where rebbs_idx=#{rebbs_idx}	
+	</update>
+	
 	<insert id="reBbsWrite" parameterType="korea.rebbs.model.ReBbsDTO">
 		insert into
 			rebbs
