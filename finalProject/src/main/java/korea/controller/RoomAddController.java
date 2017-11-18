@@ -2,6 +2,7 @@ package korea.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -76,7 +77,6 @@ public class RoomAddController {
 		 */
 		
 		ModelAndView mav = new ModelAndView();
-		
 		HttpSession session = req.getSession(); 
 		String writer = (String) session.getAttribute("sId");
 		int useridx = mdao.getUserIdx(writer);
@@ -161,6 +161,27 @@ public class RoomAddController {
 		return mav;
 	}
 	
+	@RequestMapping(value= "/imageUpdate.do",method = RequestMethod.GET)
+	public ModelAndView rimageUpdateForm(HttpServletRequest req,@RequestParam("idx") int idx){
+		ModelAndView mav = new ModelAndView();
+		List<ImageDTO> imageList = radao.fileList(idx);
+		mav.addObject("idx",idx);
+		mav.addObject("list",imageList);
+		mav.setViewName("room/fileUpdate");
+		return mav;
+	}
+	
+	@RequestMapping(value= "/imageUpdate.do",method = RequestMethod.POST)
+		public ModelAndView rimageUpdate(@RequestParam Map<String, Object> map, HttpServletRequest req) throws Exception{
+		
+		
+		ModelAndView mav = new ModelAndView("redirect:roomContent.do");
+		radao.updateFile(map, req);
+		mav.addObject("roomidx", map.get("roomidx"));
+		
+		return mav;
+	}
+	
 	@RequestMapping(value = "/imageUpload.do")
 	public ModelAndView rimage(HttpServletRequest req, MultipartHttpServletRequest mhsq)
 			throws IllegalStateException, IOException {
@@ -221,5 +242,6 @@ public class RoomAddController {
 		}
 		return new ModelAndView("redirect:home.do");
 	}
+	
 
 }

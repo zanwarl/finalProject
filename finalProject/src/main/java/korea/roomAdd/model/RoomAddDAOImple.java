@@ -4,7 +4,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import food.model.FoodDTO;
 import korea.room.model.RoomAddrDTO;
@@ -56,6 +59,22 @@ public class RoomAddDAOImple implements RoomAddDAO {
 	public List<ImageDTO> fileList(int idx) {
 		List<ImageDTO> imageList = sqlMap.selectList("imageList",idx);
 		return imageList;
+	}
+
+	public void updateFile(Map<String, Object> map ,HttpServletRequest req) throws Exception {
+		
+		sqlMap.delete("rImageDelete", map);
+		List<Map<String,Object>> list = FileUtils.parseUpdateFileInfo(map, req);
+		Map<String,Object> tempMap = null;
+		for(int i=0, size=list.size(); i<size; i++){
+			tempMap = list.get(i);
+			if(tempMap.get("IS_NEW").equals("Y")){
+				sqlMap.insert("rImageFile",tempMap);
+			}
+			else{
+				sqlMap.update("rImageUpdate",tempMap);
+			}
+		}
 	}
 	
 	
