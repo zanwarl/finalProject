@@ -5,6 +5,85 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+.contents_top b {
+	font-size: 200%;
+}
+.contents_mid b {
+	font-size: 220%;
+}
+.city_item {
+	float: left;
+}
+.city_list {
+    width: 350px;
+    height: 350px;
+    border: 1px solid #dfdfdf;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+.item_name {
+	width: 200px;
+    height: 20px;
+    overflow: hidden;
+}
+.category {
+	height: 25px;
+}
+.category_item {
+	float: left;
+	width: 100px;
+	height: 20px;
+	cursor: pointer;
+}
+.item_img_box {
+	width: 265px;
+    height: 230px;
+}
+
+.city_img {
+	width: 350px;
+    height: 300px;
+    position: relative;
+    background-size: cover;
+}
+.bg_wrap{
+   position: absolute;
+   height: 300px;
+   width: 350px;
+   background-color: rgba(0, 0, 0, 1);                                                                 
+   z-index:1;
+}
+.city_list .name{
+     position: absolute;
+     top:50%;
+     left:50%;
+     transform: translate(-50%, -50%);                                                                   
+     font-size:3rem;
+     color: white;
+     z-index: 2;
+     text-align: center;
+}
+
+
+    
+}
+
+.wrap_content_city_list {
+	width: 1500px;
+	height: 650px;
+    position: relative;
+} 
+.content_city_list {
+	width: 1500px;
+	height: 600px;
+    position: relative;
+} 
+</style>
 <script type="text/JavaScript"
     src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script type="text/javascript">
@@ -20,9 +99,37 @@
 	        	   var dataLen = msg.response.body.items.item;
 	        	   
                    var output = '';
-	        	   for(var i=0; i<myItem.length; i++){
-	                    output += '<h4><a href="city.do?areaCode='+myItem[i].code+'">'+myItem[i].name+'</a></h4>';
-	                }
+	        	   //for(var i=0; i<6; i++){
+	        		   output += '<div class="wrap_city_list">';
+	                    output += '<a class="city_list" href="city.do?areaCode=1">';
+	                    output += '<div class="name">서울</div>';
+	            		output += '<div class="bg_wrap">';
+	            		output += '<div class="bg">';
+	            		output += '<img class="city_img" src="img/city/seoul.jpg"></div></div></a>';
+	            		
+	                    output += '<a class="city_list" href="city.do?areaCode=6">';
+	                    output += '<div class="name">부산</div>';
+	                    output += '<div class="bg"><img class="city_img" src="img/city/busan.jpg"></div></a>';	
+	                    
+	                    output += '<a class="city_list" href="city.do?areaCode=39">';
+	                    output += '<div class="name">제주도</div>';
+	                    output += '<div class="bg"><img class="city_img" src="img/city/jeju.jpg"></div></a>';	
+	                    
+	                    output += '<a class="city_list" href="city.do?areaCode=3">';
+	                    output += '<div class="name">대전</div>';
+	                    output += '<div class="bg"><img class="city_img" src="img/city/daejeon.jpg"></div></a>';	
+	                    
+	                    output += '<a class="city_list" href="city.do?areaCode=4">';
+	                    output += '<div class="name">대구</div>';
+	                    output += '<div class="bg"><img class="city_img" src="img/city/daegu.jpg"></div></a>';	
+	                    
+	                    output += '<a class="city_list" href="city.do?areaCode=2">';
+	                    output += '<div class="name">인천</div>';
+	                    output += '<div class="bg"><img class="city_img" src="img/city/incheon.jpg"></div></a>';	
+	                    
+                   		
+	                    output += '</div>';
+	                //}
 	        	   $(".panel").html(output);
 	           },
 	           error : function(xhr, status, error) {
@@ -35,21 +142,27 @@
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-<form>
-	<table>
-		<thead>
-			<tr>
-				<th><a href="tour.do">홈</a></th>
-				<th><a href="area.do">주요도시</a></th>
-				<th><a href="attraction.do">관광명소</a></th>
-				<th><a href="shopping.do">쇼핑</a></th>
-				<th><a href="plan.do">여행1정</a></th>
-			</tr>
-		</thead>
-	</table>
-	<div class="panel">
+	<div class="contents_top">
+		<div class="city_title"><b>${cityName }</b></div>
+		<div class="menu">1홈</a>
+			<a href="area.do">주요도시</a>
+			<a href="attraction.do">관광명소</a>
+			<a href="shopping.do">음식점</a>
+			<a href="shopping.do">쇼핑</a>
+			<a href="plan.do">여행일정 </a>
+		
+		</div>
 	</div>
-</form>
+	
+	<div class="contents_mid">
+		<div class="category">
+			<div class="category_item" data-cate="12">관광명소</div>
+			<div class="category_item" data-cate="39">음식</div>
+			<div class="category_item" data-cate="38">쇼핑</div>
+		</div>
+		<div class="popular"><b>인기 도시</b></div>
+		<div class="panel"></div>
+	</div>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

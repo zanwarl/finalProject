@@ -46,7 +46,7 @@ public class TourController {
 		BufferedInputStream reader = null;
 		try {
 			URL url = new URL(tour_api_url);
-			System.out.println("url " + url);
+			//System.out.println("url " + url);
 			reader = new BufferedInputStream(url.openStream());
 			StringBuffer buffer = new StringBuffer();
 			int i;
@@ -64,7 +64,7 @@ public class TourController {
 	//JSON
 	@RequestMapping("/areaCode.do")
 	public ModelAndView areaCode() throws Exception {
-		System.out.println("타니");
+		//System.out.println("타니");
 		tour_code = "areaCode";
 		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=20&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
 
@@ -73,7 +73,7 @@ public class TourController {
 
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		JSONObject json = (JSONObject) jsonObject.get("response");
-		System.out.println(json);
+		//System.out.println(json);
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
 
@@ -100,7 +100,7 @@ public class TourController {
 	}
 	
 	// 실제 페이지 이동
-	@RequestMapping("/area.do")
+	@RequestMapping("/tour.do")
 	public ModelAndView areaList() {
 
 		ModelAndView mav = new ModelAndView();
@@ -117,7 +117,7 @@ public class TourController {
 			@RequestParam(value="contentTypeId", required=false,defaultValue="") String contentTypeId) throws Exception {
 		
 		System.out.println("cp : " + cp);
-		System.out.println("contenttypeid : " + contentTypeId);
+		//System.out.println("contenttypeid : " + contentTypeId);
 		tour_code = "areaBasedList";
 		param_1 = "&contentTypeId="+ contentTypeId + "&areaCode=" + areaCode
 				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
@@ -127,11 +127,11 @@ public class TourController {
 				+ service_key + param_1 + data_type;
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
-		System.out.println("jsonobject : " + jsonObject);
+		//System.out.println("jsonobject : " + jsonObject);
 		JSONObject json = (JSONObject) jsonObject.get("response");
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
-		System.out.println(totalCount);
+		//System.out.println(totalCount);
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
 				+ tour_code
@@ -153,8 +153,8 @@ public class TourController {
 			RequestParam(value="cp",required=false,defaultValue="1")int cp, 
 			@RequestParam(value="arrange",required=false,defaultValue="A") String arrange,
 			@RequestParam(value="txt")String txt) throws ParseException, Exception {
-		System.out.println("areacode : " + areaCode);
-		System.out.println("검색 : " + txt);
+		//System.out.println("areacode : " + areaCode);
+		//System.out.println("검색 : " + txt);
 		
 		//txt = "%EB%A7%8C%EB%91%90";
 		
@@ -173,10 +173,10 @@ public class TourController {
 			           "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&arrange=A&numOfRows=30&pageNo=1&_type=json";	
 		}
 		
-		System.out.println(tour_api_url);
+		//System.out.println(tour_api_url);
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		
-		System.out.println("jsonobject : " + jsonObject);
+		//System.out.println("jsonobject : " + jsonObject);
 		JSONObject json = (JSONObject) jsonObject.get("response");
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
@@ -196,7 +196,7 @@ public class TourController {
 
 			ModelAndView mav = new ModelAndView();
 			
-			System.out.println("현재 페이지 : " + cp);
+			//System.out.println("현재 페이지 : " + cp);
 			
 			String cityName = tDAO.areaCode(areaCode);
 			
@@ -212,6 +212,7 @@ public class TourController {
 			@RequestParam(value = "contentTypeId") String contentTypeId) throws Exception{
 		
 		System.out.println("contentid : " + contentId);
+		System.out.println("contenttypeid : " + contentTypeId);
 		tour_code = "detailCommon";
 		param_1 = "&contentTypeId=" + contentTypeId + "&contentId=" + contentId
 				+ "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y"
@@ -221,7 +222,7 @@ public class TourController {
 				+ service_key + param_1 + data_type;
 
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
-
+		System.out.println(jsonObject);
 		ModelAndView mav = new ModelAndView();
 
 		mav.setViewName("tour/contentid");
@@ -233,10 +234,14 @@ public class TourController {
 	
 	@RequestMapping("citycate.do")
 	public ModelAndView categoryList(@RequestParam(value="contentTypeId") int contentTypeId,
-									 @RequestParam(value="areaCode") int areaCode) {
+									 @RequestParam(value="areaCode") int areaCode,
+									 @RequestParam(value="cp",required=false,defaultValue="1")int cp) {
 		
-		System.out.println(contentTypeId + " " + areaCode);
+		//System.out.println(contentTypeId + " " + areaCode);
 		ModelAndView mav = new ModelAndView();
+		mav.addObject("contentTypeId", contentTypeId);
+		mav.addObject("areaCode", areaCode);
+		mav.addObject("cp",cp);
 		mav.setViewName("tour/info");
 		return mav;
 	}
@@ -257,7 +262,6 @@ public class TourController {
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp, queryStr);
 		
 		List<tourCmtDTO> list = tDAO.tourcmtList(contentId,cp,listSize);
-		System.out.println("-------" + contentTypeId);
 		mav.setViewName("tour/tourDetail");
 		mav.addObject("contentId", contentId);
 		mav.addObject("contentTypeId", contentTypeId);
@@ -266,7 +270,7 @@ public class TourController {
 		return mav;
 	}
 	
-	// 실제 페이지 이동
+/*	// 실제 페이지 이동
 	@RequestMapping("/tour.do")
 	public ModelAndView tourList() throws Exception {
 
@@ -276,7 +280,7 @@ public class TourController {
 
 		return mav;
 	}
-	
+	*/
 	@RequestMapping("/tourMap.do")
 	public ModelAndView tourMap(@RequestParam(value="mapx") String mapx, @RequestParam(value="mapy") String mapy) {
 		
@@ -317,7 +321,6 @@ public class TourController {
 		
 		//댓글 작성 후 돌아갈 페이지 주소 설정
 		
-		System.out.println(idx);
 		
 		String queryStr = "tourDetail.do?contentTypeId=" + contentTypeId + "&contentId=" + contentId;
 		int result = tDAO.tourcmtDel(idx);

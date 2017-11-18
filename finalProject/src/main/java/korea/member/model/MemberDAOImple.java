@@ -90,5 +90,13 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
+	public List<Map<String, Object>> myPlanListProfile(String userId) {
+		// TODO Auto-
+
+		return sqlMap.selectList("myPlanListProfileSql", userId);
+		
+		
+	}
+
 
 }
