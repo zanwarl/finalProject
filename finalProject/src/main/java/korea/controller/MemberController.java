@@ -1,5 +1,8 @@
 package korea.controller;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -183,4 +186,22 @@ public class MemberController {
 		
 		return mav; 
 	}
+	
+	@RequestMapping(value = "/userProfile.do")
+	public ModelAndView userProfile (@RequestParam("userId")String userId
+		) {
+		
+		ModelAndView mav= new ModelAndView(); 
+
+
+		List<Map<String, Object>> list = memberDao.myRoomListProfile(userId);
+		mav.addObject("list", list);
+		
+		
+		mav.setViewName("member/userProfile");
+		
+		return mav; 
+	}
+
+
 }

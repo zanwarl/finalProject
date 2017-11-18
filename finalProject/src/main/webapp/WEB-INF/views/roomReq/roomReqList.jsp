@@ -122,7 +122,9 @@ tfoot td {
 			</tr>
 			<tr>
 				<th>여행 기간</th>
-				<td colspan="3">${dto.CHECKINDATE }~${dto.CHECKOUTDATE }</td>
+				<td >${dto.CHECKINDATE }~${dto.CHECKOUTDATE }</td>
+				<th>예약신청일</th>
+				<td>${dto.REQDATE }</td>
 			</tr>
 			<tr>
 				<th>인원수</th>

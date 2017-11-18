@@ -27,11 +27,13 @@
 	</select>
 
 	<select id="roomReqTotalCntSql" resultType="int" parameterType="String">
-	
-				select count (*)from roomReq , roomadd, rimage
-				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
- 	and roomadd.roomidx = rimage.roomidx
-	
+
+		select count (*)from roomReq , roomadd, rimage
+		where userId =#{userId}
+		and roomadd.roomidx= roomreq.roomidx
+		and roomadd.roomidx =
+		rimage.roomidx
+
 		<!-- roomReqTotalCnt -->
 	</select>
 
@@ -52,20 +54,27 @@
 				(select rownum rnum,a.* 
 					from (
 
-				select reqidx,PAID,  roomreq.roomidx,  count,substr ( reqdate, 1, 10) as reqdate, 
-				roomname,filename,
-				(substr (checkindate, 7,4))||'/'||(substr(checkindate,1,2))||'/'||(substr(checkindate, 4,2)) as checkindate,
-				 
-TRUNC (
-TO_DATE( CHECKINDATE , 'MM/DD/YYYY')-SYSDATE )AS CANCELDATE, 
-				
-		(substr(checkoutdate, 7,4))||'/'||(substr (checkoutdate,
+select c.roomname as roomname , c.filename as filename , c.roomidx, roomreq.count, roomreq.paid, 
+roomreq.total_pay, c.addr, TRUNC (
+TO_DATE( roomreq.CHECKINDATE , 'MM/DD/YYYY')-SYSDATE )AS CANCELDATE,
+substr ( reqdate, 1, 10) as reqdate, 
+(substr (checkindate, 7,4))||'/'||(substr(checkindate,1,2))||'/'||(substr(checkindate, 4,2)) as checkindate,
+
+(substr(checkoutdate, 7,4))||'/'||(substr (checkoutdate,
 		1,2))||'/'||(substr(checkoutdate, 4,2)) as checkoutdate
-				, total_pay, concat (addr1, addr2)as addr
-					from roomReq , roomadd, rimage
-				where userId =#{userId} and roomadd.roomidx= roomreq.roomidx
- 				and roomadd.roomidx = rimage.roomidx
- 				order by reqidx  desc
+		
+ from (
+
+select roomadd.roomidx,  concat (addr1, addr2)as addr,filename, roomadd.roomname from (
+
+select  rimage.roomidx, rimage.filename  from (
+select max (imgaeidx ) as imageidx, roomidx  from rimage group by roomidx
+having roomidx in (
+
+select roomidx from roomreq where userid=#{userId}
+) )a join rimage on a.roomidx = rimage.roomidx
+and imageidx = imgaeidx)b join roomadd on b.roomidx = roomadd.roomidx )c join roomreq 
+on c.roomidx = roomreq.roomidx 
  
  
  				 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 

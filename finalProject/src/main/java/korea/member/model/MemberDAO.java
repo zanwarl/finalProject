@@ -1,5 +1,8 @@
 package korea.member.model;
 
+import java.util.List;
+import java.util.Map;
+
 import korea.member.model.MemberDTO;
 
 public interface MemberDAO {
@@ -18,4 +21,8 @@ public interface MemberDAO {
 	public int memberUpdate(MemberDTO dto);
 	public String idSeach(String member_name, String member_email);
 	public String pwdSeach(String member_id, String member_email);
+	
+	
+	public List<Map<String, Object>> myRoomListProfile(String userId);
+	
 }

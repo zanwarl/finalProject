@@ -84,5 +84,11 @@ public class MemberDAOImple implements MemberDAO {
 		return list2;
 	}
 
+	public List<Map<String, Object>> myRoomListProfile(String userId) {
+		
+		return sqlMap.selectList("myRoomListProfileSql", userId);
+		
+	}
+
 
 }
