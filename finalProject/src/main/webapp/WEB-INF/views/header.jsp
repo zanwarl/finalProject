@@ -15,9 +15,8 @@
     <!--Include flickerplate-->
     <link rel="stylesheet" href="css/style.css">
 	<link href="css/flickerplate.css"  type="text/css" rel="stylesheet">
-	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
     <script src="js/min/flickerplate.min.js" type="text/javascript"></script>
-	<script src="js/script.js" type="text/javascript"></script>
+
 	
 	<!--Execute flickerplate-->
 	<script>
@@ -59,59 +58,60 @@
 	<div id="logo">
 	<a href="index.do"><img src="img/logo.png" height="100"></a>
 	</div>
-	<div id="main_menu">
+	<div class="menubar">
+<ul>
+ <li><a href="tour.do" id="current">여행지</a>
 	<ul>
-  	 	<li class='has-sub'><a href='tour.do'><span>여행지</span></a>
-   			<!-- <ul>
-		         <li><a href='#'><span>서울경기</span></a></li>
-		         <li><a href='#'><span>강원도</span></a></li>
-		         <li><a href='#'><span>충청도</span></a></li>
-		         <li><a href='#'><span>전라도</span></a></li>
-		         <li><a href='#'><span>경상도</span></a></li>
-		         <li class='last'><a href='#'><span>제주도</span></a></li>
-      		</ul> -->
-  		</li>
- 	<li class='has-sub'><a href='#'><span>숙소</span></a>
-   		<ul>
-	         <li><a href='#'><span>홈쉐어</span></a></li>
-	         <li><a href='#'><span>한옥스테이</span></a></li>
-	         <li><a href='#'><span>템플스테이</span></a></li>
-	         <li class='last'><a href='#'><span>게스트하우스</span></a></li>
-     	 </ul>
-   </li>
-   <!-- <li class='has-sub'><a href='#'><span>음식점</span></a>
-   		<ul>
-	         <li><a href='#'><span>한식</span></a></li>
-	         <li><a href='#'><span>일식</span></a></li>
-	         <li><a href='#'><span>양식</span></a></li>
-	         <li><a href='#'><span>중식</span></a></li>
-	         <li class='last'><a href='#'><span>그외</span></a></li>
-      </ul>
-   </li>
-   <li class='has-sub'><a href='#'><span>문화/체험</span></a>
-	   <ul>
-	         <li><a href='#'><span>역사</span></a></li>
-	         <li><a href='#'><span>스포츠</span></a></li>
-	         <li class='last'><a href='#'><span>그외</span></a></li>
-	  	</ul>
-   </li>  -->
-   <li class='has-sub'><a href="plan.do"><span>여행일지</span></a>
-	   <ul>
-	     	<li><a href='plan.do'><span>공유일정보기</span></a></li>
-	     	<c:if test="${sId ne null }">
-	     		<li class='last'><a href='myPlan.do'><span>내가 만든 일정</span></a></li>
-	     	</c:if>
-	     	
-	   </ul>
-   </li>
-   <li class='has-sub'><a href='#'><span>고객센터</span></a>
-   	  <ul>
-         <li><a href='noticeList.do'><span>공지사항</span></a></li>
-         <li class='last'><a href='vocWrite.do'><span>질문답변</span></a></li>
-      </ul>
-   </li>
+        <li><a href='#'>서울경기</a></li>
+	<li><a href='#'>강원도</a></li>
+	<li><a href='#'>충청도</a></li>
+	<li><a href='#'>전라도</a></li>
+	<li><a href='#'>경상도</a></li>
+	<li><a href='#'>제주도</a></li>
+    </ul>
+ </li>
+ <li><a href="#" id="current">숙소</a>
+	<ul>
+        <li><a href='#'>홈쉐어</a></li>
+         <li><a href='#'>한옥스테이</a></li>
+         <li><a href='#'>템플스테이</a></li>
+         <li><a href='#'>게스트하우스</a></li>
+    </ul>
+
+</li>
+ <li><a href="#" id="current">음식점</a>
+	<ul>
+	<li><a href='#'>한식</a></li>
+         <li><a href='#'>일식</a></li>
+         <li><a href='#'>양식</a></li>
+         <li><a href='#'>중식</a></li>
+         <li><a href='#'>그외</a></li>
+	</ul>
+</li>
+ <li><a href="#" id="current">문화/체험</a>
+   <ul>
+         <li><a href='#'>역사</a></li>
+         <li><a href='#'>스포츠</a></li>
+         <li><a href='#'>그외</a></li>
+   </ul>
+</li>
+ <li><a href="plan.do" id="current">여행일지</a>
+   <ul>
+         <li><a href=''>공유된일정보기</a></li>
+         <c:if test="${sId ne null }">
+         <li><a href="myPlan.do"></a></li>
+	 </c:if>
+   </ul>
+</li>
+  <li><a href="noticeList.do" id="current">고객센터</a>
+  <ul>
+  
+	    <li><a href='noticeList.do'>공지사항</a></li>
+         <li><a href='vocWrite.do'>질문답변</a></li>
+  </ul>
+  </li>
 </ul>
-	</div>
+</div>
 </div>
 </body>
 </html>

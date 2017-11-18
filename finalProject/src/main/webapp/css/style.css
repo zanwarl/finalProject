@@ -28,139 +28,101 @@ a {text-decoration:none; color:#000;}
 #logo{clear:both; width:200px; height:110px; margin:0 auto; margin-top:20px; 
 margin-bottom:1px;background:#fff;}
 
-/*여행지,숙소,음식점 등 메인메뉴*/
-#main_menu {
+/*메인메뉴*/
+.menubar{
+border:none;
+border:0px;
+margin:0px;
+padding:0px;
 width:900px;
-z-index:130000000;
-position:relative;
 margin:0 auto;
-
-font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, Sans-Serif; /*폰트설정*/
+font: 67.5% "Lucida Sans Unicode", "Bitstream Vera Sans", "Trebuchet Unicode MS", "Lucida Grande", Verdana, Helvetica, sans-serif;
+font-size:14px;
+font-weight:bold;
 }
-#main_menu > ul {
-  font-size: 20px; /*폰트사이즈설정*/
+
+.menubar ul{
+background:#fff;
+height:50px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+.menubar li{
+float:left;
+margin:0 15px;
+padding:0px;
+}
+
+.menubar li a{
+background:#fff;
+color:#000;
+display:block;
+font-size:20px;
+font-weight:bold;
+line-height:50px;
+margin:0px;
+padding:0px 25px;
+text-align:center;
+text-decoration:none;
+}
+
+.menubar li a:hover, .menubar ul li:hover a{
+background: rgb(71,71,71);
+color:#FFFFFF;
+text-decoration:none;
+}
+
+.menubar li ul{
+background: rgb(109,109,109);
+display:none; /* 평상시에는 드랍메뉴가 안보이게 하기 */
+height:auto;
+padding:0px;
+margin:0px;
+border:0px;
+position:absolute;
+width:200px;
+z-index:200;
+/*top:1em;
+/*left:0;*/
+}
+
+.menubar li:hover ul{
+display:block; /* 마우스 커서 올리면 드랍메뉴 보이게 하기 */
+}
+
+.menubar li li {
+background: rgb(109,109,109);
+display:block;
+float:none;
+margin:0px;
+padding:0px;
+width:200px;
+}
+
+.menubar li:hover li a{
+background:none;
+}
+
+.menubar li ul a{
+display:block;
+height:50px;
+font-size:12px;
+font-style:normal;
+margin:0px;
+padding:0px 10px 0px 15px;
+text-align:left;
+}
+
+.menubar li ul a:hover, .menubar li ul li:hover a{
+background: rgb(71,71,71);
+border:0px;
+color:#ffffff;
+text-decoration:none;
+}
+
   
-  line-height: 20px; /*수직가운데정렬*/
-  font-weight:bold;
-  width: auto; /*가로자동*/
-  list-style-type: none; /*ul 리스트 구분기호 없애기*/
-  margin-bottom:30px;
-  
-  /*안쪽여백 바깥족여백 0*/
-  padding: 0; 
-  margin: 0;
-  
-  background: #ffffff;/*배경색*/
-
-}
-/*브라우저 사이즈 줄었을 때 보이는 메뉴, 최대화했을 때는 보이지 않게 숨기기*/
-#main_menu > ul li#responsive-tab {
-  display: none;
-  /* Hide for large screens */
-
-}
-#main_menu > ul li {
-	
-  display: inline-block;
-  *display: inline;
-  zoom: 1;
-}
-#main_menu > ul li.has-sub {
-  width:150px;
-  	position: relative;
- 
-}
-#main_menu > ul li.has-sub:hover ul {
-  display: block;
-}
-#main_menu > ul li.has-sub ul {
-  display: none;
-  width:170px;
-  position: absolute;
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  background: #ffffff;
-  border: 1px solid #ece6e8;
-  border-bottom: 3px solid #d9d9d9;
-  border-top: 0 none;
-}
-#main_menu > ul li.has-sub ul li {
-
-  display: block;
-}
-
-#main_menu > ul li a {
-	
-  display: block;
-  padding: 12px 24px 11px 24px;
-  text-decoration: none;
-  color: #1f1f1f;
-    text-align:center;
-  text-shadow: 0px 1px 0px #fff;
-}
-#main_menu > ul li a.active,
-#main_menu > ul li a:hover {
-  background: #f4f4f4;
- 
-}
-@media (max-width: 600px) {
-  #main_menu > ul {
-    width: 100%;
-  }
-  #main_menu > ul li#responsive-tab {
-    display: block;
-  }
-  #main_menu > ul li#responsive-tab a {
-    background: url('img/menu.png') no-repeat;
-    background-position: 95% -35%;
-  }
-  #main_menu > ul li#responsive-tab a:hover {
-    background-color: #f4f4f4;
-    background-position: 95% 135%;
-  }
-  #main_menu > ul li {
-    display: none;
-  }
-  #main_menu > ul li.right {
-    float: none;
-  }
-  #main_menu > ul li.has-sub {
-    position: relative;
-  }
-  #main_menu > ul li.has-sub ul {
-    display: block;
-    position: static;
-    width: 100%;
-    background: #ffffff;
-    border: 0 none;
-  }
-  #main_menu > ul li.has-sub ul li {
-    display: block !important;
-  }
-  #main_menu > ul li.has-sub ul li a span {
-    display: block;
-    
-  }
-  #main_menu > ul li.has-sub > a {
-    background-image: none;
-  }
-  
-
-}
-/* Make sure they show even if hidden in mobile view by JS */
-@media (min-width: 600px) {
-  #main_menu > ul > li.collapsed {
-    display: inline-block !important;
-    *display: inline;
-    zoom: 1;
-  }
-  #main_menu > ul ul li.collapsed {
-    display: block !important;
-  }
-
-}
-}
 /*슬라이드*/
 .flicker-example{z-index:100;}
 /*컨텐츠영역*/
