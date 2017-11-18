@@ -69,19 +69,20 @@ tfoot td {
 
 		<tr>
 			<th>제목</th>
-			<td><input type="text" name="subject" style="width: 100%"> </td>
+			<td><input type="text" required="required" name="subject" style="width: 100%"> </td>
 		
 		</tr>
 		<tr>
 			<th>내용</th>
 			<td>
-			<textarea  name="content" rows="10"></textarea>
+			<textarea  name="content" required="required" rows="10"></textarea>
 			</td>
 		
 		</tr>
 		<tr>
 			<td colspan="2" style="text-align: center;" > 
-			<input type="submit" value="문의하기" style="border: none;"> </td>
+			<input type="submit" value="문의하기" style="border: none;"> 
+			<input type="button" value="목록으로" style="border: none;" onclick="location.href='vocList.do'"> </td>
 		
 		</tr>
 	</table>

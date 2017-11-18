@@ -32,8 +32,26 @@ html, body {
 	line-height: 30px;
 	padding-left: 10px;
 }
+
+.slider>img{
+	width: 70%;
+	margin: auto;
+	align: center;
+}
 </style>
 
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+  <script>
+  var jq = $.noConflict();
+  jq(document).ready(function() {
+    jq(document).ready(function(){
+      jq('.slider').bxSlider();
+    });
+  });
+  </script>
 
 <script>
 	/*  function initMap() {
@@ -73,6 +91,9 @@ html, body {
 	    }
 	  });
 	} */
+	
+	
+	
 	function golist() {
 		location.href = "home.do";
 	}
@@ -92,12 +113,16 @@ html, body {
 <title>Insert title here</title>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
 	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
+
+	<ul class="slider">
 	<c:forEach var="imageList" items="${imageList}">
-		<img src="${src }${imageList.filename}" width="500">
+		<li><img src="${src }${imageList.filename}" width="40%"></li>
 	</c:forEach>
+  	</ul>
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
@@ -177,5 +202,6 @@ html, body {
 	</c:if>
 	
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

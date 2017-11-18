@@ -99,7 +99,7 @@
    <ul>
          <li><a href=''>공유된일정보기</a></li>
          <c:if test="${sId ne null }">
-         <li><a href="myPlan.do"></a></li>
+         <li><a href="myPlan.do">내가 만든 일정</a></li>
 	 </c:if>
    </ul>
 </li>

@@ -24,6 +24,7 @@
 <ul>
 	<li><a href="memberUpdate.do" >회원정보수정</a></li>
 	<li><a href="myComplainList.do" >나의 신고 내역</a></li>
+	<li><a href="vocList.do" >1:1문의 내역</a></li>
 	
 
 

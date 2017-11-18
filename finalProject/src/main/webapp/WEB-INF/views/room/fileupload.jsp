@@ -9,6 +9,7 @@
 
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 	<form id="frm" name="frm" enctype="multipart/form-data">
 		<div id="fileDiv">
 			<p>
@@ -62,5 +63,6 @@
 			obj.parent().remove();
 		}
 	</script>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

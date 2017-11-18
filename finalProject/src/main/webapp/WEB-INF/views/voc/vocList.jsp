@@ -49,8 +49,8 @@ tr:hover {
 			<thead>
 				<tr>
 					<th>글번호</th>
-					<th>subject</th>
-					<th>writeDate</th>
+					<th style="width: 70%; ">제목</th>
+					<th>작성일</th>
 
 
 
