@@ -76,7 +76,7 @@ public class MsgController {
 		ModelAndView mav = new ModelAndView();
 		int res = mdao.sendMsg(dto);
 		String goURL = res > 0 ? "msgContent.do?msgIdx="+dto.getMsgIdx() : "/sendMsg.do?receiver=" + receiver;
-		String msg = res > 0 ? "����" : "����	";
+		String msg = res > 0 ? "성공" : "실패";
 		mav.addObject("msg", msg);
 
 		mav.addObject("goURL", goURL);
@@ -104,7 +104,7 @@ public class MsgController {
 		if ( userIdx==null || userIdx.equals("")){
 		mav.setViewName("admin/adminMsg");
 		mav.addObject("goURL", "main.do");
-		mav.addObject("msg", "�α����ϼ���");
+		mav.addObject("msg", "로그인 하세요.");
 		return mav; 
 		
 		}else {
@@ -115,13 +115,13 @@ public class MsgController {
 			int pageSize = 5;
 
 			List<MsgDTO> list = mdao.msgList(cp, listSize, userIdx);
+			
 
 			String pageStr = korea.page.PageModule.makePage("msgList.do", totalCnt, listSize, pageSize, cp);
 
 		
 			mav.addObject("list", list);
 			mav.addObject("pageStr", pageStr);
-			// mav.addObject("sIdx", userIdx);
 
 			mav.setViewName("msg/msgList");
 

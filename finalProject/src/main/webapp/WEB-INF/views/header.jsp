@@ -79,7 +79,7 @@
     </ul>
 
 </li>
- <li><a href="#" id="current">음식점</a>
+ <!-- <li><a href="#" id="current">음식점</a>
 	<ul>
 	<li><a href='#'>한식</a></li>
          <li><a href='#'>일식</a></li>
@@ -94,7 +94,7 @@
          <li><a href='#'>스포츠</a></li>
          <li><a href='#'>그외</a></li>
    </ul>
-</li>
+</li> -->
  <li><a href="plan.do" id="current">여행일지</a>
    <ul>
          <li><a href=''>공유된일정보기</a></li>

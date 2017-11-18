@@ -122,4 +122,5 @@ public class PlanDAOImple implements PlanDAO {
 	public int planWrite() {
 		return 0;
 	}
+	
 }

@@ -44,18 +44,27 @@ function load(id, cnt, btn) {
   font-size:14px;
   margin:0;
 }
+
+/*word-break:break-all;  */
+
 a{
   font-weight:bold;
   color:#fff;
   text-decoration:none;
 }
 .container{
-  width:400px;
-  overflow:scroll; 
-  height:600px;
+
+height : 600px; 
+overflow:scroll
+; 
+
+  width:430px;
   display:block;
   margin:0 auto;
   box-shadow:0 2px 5px rgba(0,0,0,0.4);
+  word-break:break-all; 
+  
+  
 }
 .header{
   padding:20px 20px 18px 20px;
@@ -78,7 +87,6 @@ a{
   border-radius:2px;
 }
 .chat-box, .enter-message{
-  
   background:#ECECEC;
   padding:0 20px;
   color:#a1a1a1;
@@ -186,7 +194,7 @@ a{
     <h2>${partner }님과의 대화</h2>
     
   </div>
-		<div class="chat-box">
+		<div class="chat-box" >
 		<!--  chat box == content  -->
 		
 		
@@ -215,10 +223,7 @@ a{
 						<div class="message-box right-img">
 				<div class="picture">
 					<span>${dto.sender } </span> 
-				<%-- 	
-					<span class="time">${fn:substring (writedate,0,4 )}년
-					${fn:substring (writedate,5,7 )}월
-					${fn:substring (writedate,8,10 )}일</span> --%>
+	
 				</div>
 				<div class="message">
 					<span> ${dto.content}</span>
@@ -280,238 +285,3 @@ a{
 </html>
 
 
-
-<%-- 
-
-${partner}님과의 대화입니다.
-
-
-
-<table>
-	<thead>
-	
-	
-		<tr>
-			<th>idx</th>
-			<th>보낸사람</th>
-			<th>받는사람</th>
-			<th>내용</th>
-			<th>날짜</th>
-			
-		</tr>
-	</thead>
-	<tbody>
-		<c:if test="${empty list}">
-      <tr>
-         <td colspan="5" align="center">
-         메시지가 없습니다. 
- 		 </td>
-      </tr>
-   </c:if>
-   <c:forEach var="dto" items="${list}">
-      
- 
-      
-      <tr>
-      
-       
-         <td>${dto.idx}</td>
-         <td>${dto.sender }</td>
-         <td>${dto.receiver }</td>
-         
-
-
-         <td>${dto.content}</td>
-         <td>${dto.writedate}</td>
-       
-      </tr>
-   </c:forEach>
-	
-	</tbody>
-	
-	
-	
-	<tfoot>
-
-		
-			<tr>
-			
-				<td colspan="5">
-				<form action="sendMsg.do" method="post">
-					
-sender	<input type="text" name="sender" value="${sId}" readonly="readonly">
-
-<br>
-receiver
-	<input type="text" name="receiver" value="${partner}">
-	
-	<br>
-	<textarea rows="5" cols="10" name="content">
-	
-		
-	</textarea>
-	
-	<input type="submit" value="보내기">
-				
-		</form>
-		
-				
-				</td>
-			</tr>
-	
-
-
-	</tfoot>
-
-</table>
-<hr>
-<hr>
-
-
-
-
- --%>
-
-
-
-
-
-<%-- 
-
-    <h2>[${partner }]님과의 대화</h2>
-<div class="container">
-
-		<div class="chat-input">
-		
-		
-		   <form action="sendMsg.do" method="post" name="sendMsgFm">
-    				<fieldset>
-				<input type="hidden" name="sender" value="${sId}" readonly="readonly">
-
-	<input type="hidden" name="receiver" value="${partner}">
-				   <input type="text" placeholder="Enter your message.." name="content"/>
-				<button type="submit"><i class="fa fa-lg fa-send"></i></button>
-			</fieldset>
-     
-      </form>
-		
-		
-		
-		
-		
-		
-		
-		
-	</div>
-	<div class="phone">
-	
-	
-	
-			<c:forEach var="dto" items="${list}">
-				<c:if test="${sId==dto.sender }">
-						<div class="message left">
-		<figure class="chat">
-			<p>
-				
-					${dto.content }
-					</p>
-			<figcaption>1:50 PM</figcaption>
-		</figure>
-	</div>
-					
-				</c:if>
-				<c:if test="${partner == dto.sender}">
-					<div class="message right">
-		<figure class="chat">
-			<p>
-				${dto.content }
-								
-		</p>
-			<figcaption>1:55 PM</figcaption>
-		</figure>	
-	</div>
-
-				</c:if>
-
-
-
-			</c:forEach>
-	
-	<!-- 
-	<div class="message left">
-		<figure class="chat">
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae architecto quas doloribus facere sapiente facilis voluptatibus eaque, magnam suscipit similique aut aperiam assumenda a nostrum, odit sed accusantium. Nihil, a.
-			</p>
-			<figcaption>1:50 PM</figcaption>
-		</figure>
-	</div>
-	
-	<div class="message right">
-		<figure class="chat">
-			<p>
-				Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eius sit, error modi cupiditate quae minus nemo maiores odio qui ex. Praesentium totam optio sed rerum.
-			</p>
-			<figcaption>1:55 PM</figcaption>
-		</figure>	
-	</div>
-	 -->
-
-
-	</div>
-	
-</div>
- --%>
-<!-- ------------------------- -->
-
-<%-- 
-<br>
-<hr>
-<div class="container">
-  <div class="header">
-    <h2>[${partner }]님과의 대화</h2>
-  
-  </div>
-  <div class="chat-box">
-      <div class="enter-message">
-    <form action="sendMsg.do" method="post" name="sendMsgFm">
-    	<input type="hidden" name="sender" value="${sId}" readonly="readonly">
-
-	<input type="hidden" name="receiver" value="${partner}">
-      <input type="text" placeholder="Enter your message.." name="content"/>
-      <a href="javascript:document.sendMsgFm.submit()"  class="send">Send</a>
-      </form>
-    </div>
-
-
-			<c:forEach var="dto" items="${list}">
-				<c:if test="${sId==dto.sender }">
-					<div class="message-box right-img">
-
-						<div class="message">
-
-							<p>${dto.content }</p>
-
-						</div>
-					</div>
-				</c:if>
-				<c:if test="${partner == dto.sender}">
-					<div class="message-box left-img">
-
-						<div class="message">
-
-							<p>${dto.content }</p>
-						</div>
-					</div>
-
-				</c:if>
-
-
-
-			</c:forEach>
-
-
-
-
-		</div>
-</div> --%>
