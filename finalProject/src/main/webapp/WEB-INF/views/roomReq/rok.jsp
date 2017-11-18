@@ -5,7 +5,76 @@
 <html>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
+
 <head>
+<style type="text/css">
+
+.req1 {
+  width: 30%;
+  height: 30%;
+  margin: 40px auto;
+  background: #CCCCFF;
+  background:rgba(240,120,100,0.2)
+}
+
+.req2{
+  width: 30%;
+  height: 30%;
+  margin: 40px auto;
+}
+
+h1{
+ 	width: 30%;
+	height: 30%;
+  	margin: 40px auto;
+    color: #FCA205;
+    font-family: 'Lobster';
+    font-size: 30pt;
+}
+
+}
+label{
+	font-size: 30pt;
+	align : center;	
+}
+text{
+	font-size: 20pt;
+	align : center;	
+
+}
+.reqBtn{
+ display: inline-block;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+    background-color: #538fbe;
+    padding: 10px 10px;
+    font-size: 15px;
+    border: 1px solid #2d6898;
+    background-image: linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
+    background-image: -o-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
+    background-image: -moz-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
+    background-image: -webkit-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
+    background-image: -ms-linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
+ 
+    background-image: -webkit-gradient(
+        linear,
+        left bottom,
+        left top,
+        color-stop(0, rgb(73,132,180)),
+        color-stop(1, rgb(97,155,203))
+    );
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    text-shadow: 0px -1px 0px rgba(0,0,0,.5);
+    -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+    -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+    box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+}
+
+</style>
+
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script>
 
@@ -46,45 +115,43 @@ function ok(reqIdx, amt){
 
 	
 </script>
-<title>Insert title here</title>
+<title></title>
 </head>
 
 
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-	<h2> 선택한 예약내역</h2>
+	<img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+	<h1> 확인 및 결제 </h1>
 <form name="payMent" action="payMent.do">
+	
+	<div class=req1>
 	<table>
-	<c:set var="arr" value="${rdto}"/>
-
-
-		<tr>
-			<th>예약인원수</th>
-			<th>${arr.count}</th>
-		</tr>
-		<tr>
-			<th>예약일시</th>
-			<th>${arr.reqDate}</th>
-		</tr>
-		<tr>
-			<th>체크인</th>
-			<th>${arr.checkindate}</th>
-		</tr>
-		<tr>
-			<th>체크아웃</th>
-			<th>${arr.checkoutdate}</th>
-		</tr>
-		<tr>
-			<th>총 합계</th>
-			<th>${total_pay}</th>
-		</tr>
-		<tr>
-			<td colspan="2" align="center">	 
-				<input type="button" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> 
-			</td>
-			<td>	 </td>
-		</tr>	 	   
+	<c:set var="arr" value="${rdto}"/>	
+	
+		<label>예약인원수</label></br>
+		<text> ${arr.count} </text></br>
+		
+		<label>예약일시 </label></br>
+		<text>${arr.reqDate}</text></br>
+		
+		<label>체크인</label></br>
+		<text>${arr.checkindate}</text></br>
+	
+		<label>체크아웃 </label></br>
+		<text>${arr.checkoutdate}</text></br>
+	
+		<label>총 합계</label></br>
+		<text>${total_pay}</text></br>
+		
+		</div>
+		<div class=req2>
+			<label>	 
+				<input type="button" class="reqBtn" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> 
+			</label>
+		</div>
+ 	   
 	</table>
 	</form>
 </div>
