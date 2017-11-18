@@ -14,7 +14,8 @@
 	</select>
 
 	<select id="getUserEmail" parameterType="int" resultType="String">
-		select member_email from member where member_idx = #{memIdx}
+		select
+		member_email from member where member_idx = #{memIdx}
 	</select>
 
 	<select id="memberloginSql" resultType="String" parameterType="String">
@@ -30,14 +31,16 @@
 	<!-- <select id="getUserInfoSql" parameterType="int" resultType="korea.member.model.MemberDTO"> 
 		select * from member where member_idx = #{memberIdx} </select> -->
 	<update id="memberUpdate" parameterType="korea.member.model.MemberDTO">
-		update member set member_pwd=#{member_pwd}, member_tel=#{member_tel},
+		update member set
+		member_pwd=#{member_pwd}, member_tel=#{member_tel},
 		member_email=#{member_email}, member_addr=#{member_addr} where
 		member_id=#{member_id}
 	</update>
 
 	<select id="idSeachSql" resultType="String"
 		parameterType="korea.member.model.MemberDTO">
-		select member_id from member where member_name=#{member_name} and
+		select member_id from member where
+		member_name=#{member_name} and
 		member_email=#{member_email}
 	</select>
 
@@ -50,25 +53,39 @@
 
 		select member_id as userId, member_name as userName
 		from member
-		where member_id = #{userId}
+		where
+		member_id = #{userId}
 	</select>
 
 	<select id="myRoomListProfileSql" resultType="java.util.Map"
 		parameterType="String">
 
-		
-select roomadd.roomidx, filename, roomadd.roomname from (
 
-select  rimage.roomidx, rimage.filename  from (
-select max (imgaeidx ) as imageidx, roomidx  from rimage group by roomidx
-having roomidx in (
+		select roomadd.roomidx, filename, roomadd.roomname from (
 
-select roomidx from roomadd where useridx= (
+		select rimage.roomidx, rimage.filename from (
+		select max (imgaeidx ) as imageidx, roomidx from rimage group by roomidx
+		having roomidx in (
 
-select member_idx from member where member_id =#{userId}
-)
-) )a join rimage on a.roomidx = rimage.roomidx
-and imageidx = imgaeidx)b join roomadd on b.roomidx = roomadd.roomidx 
+		select roomidx from roomadd where useridx= (
+
+		select member_idx from member where member_id =#{userId}
+		)
+		) )a join rimage on a.roomidx = rimage.roomidx
+		and imageidx = imgaeidx)b join roomadd on b.roomidx = roomadd.roomidx
+
+	</select>
+
+	<select id="myPlanListProfileSql" resultType="map"
+		parameterType="String">
+
+
+select a.pidx, a.title, a.writedate , member_id as userid from 
+
+(select plan_idx as pidx, plan_subject as title,substr ( plan_writedate,1,10 ) as writedate ,plan_public as open, plan_writer as useridx 
+from plan_main)a join member 
+on a.useridx = member.member_idx and member_id = #{userId} and open= 'Y'
+
 
 	</select>
 

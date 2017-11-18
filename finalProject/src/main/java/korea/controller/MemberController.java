@@ -20,6 +20,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import korea.member.model.MemberDAO;
 import korea.member.model.MemberDTO;
+import korea.plan.model.PlanDTO;
 
 @Controller
 @SessionAttributes({"sId","sName","sIdx"})
@@ -191,11 +192,18 @@ public class MemberController {
 	public ModelAndView userProfile (@RequestParam("userId")String userId
 		) {
 		
+		
+		
+
+		
 		ModelAndView mav= new ModelAndView(); 
 
+		List<Map<String, Object>> planList = memberDao.myPlanListProfile(userId);
+		
 
 		List<Map<String, Object>> list = memberDao.myRoomListProfile(userId);
 		mav.addObject("list", list);
+		mav.addObject("planList", planList);
 		
 		
 		mav.setViewName("member/userProfile");
