@@ -113,10 +113,13 @@ public class TourController {
 	@RequestMapping("/areaBasedList.do")
 	public ModelAndView areaBasedList(@RequestParam(value = "areaCode") String areaCode,@
 			RequestParam(value="cp",required=false,defaultValue="1")int cp, 
-			@RequestParam(value="arrange",required=false,defaultValue="A") String arrange) throws Exception {
+			@RequestParam(value="arrange",required=false,defaultValue="A") String arrange,
+			@RequestParam(value="contentTypeId", required=false,defaultValue="") String contentTypeId) throws Exception {
 		
+		System.out.println("cp : " + cp);
+		System.out.println("contenttypeid : " + contentTypeId);
 		tour_code = "areaBasedList";
-		param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
+		param_1 = "&contentTypeId="+ contentTypeId + "&areaCode=" + areaCode
 				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp="
 				+ "TourAPI3.0_Guide&arrange=" + arrange + "&numOfRows=30&pageNo=" + cp;
 
@@ -128,6 +131,7 @@ public class TourController {
 		JSONObject json = (JSONObject) jsonObject.get("response");
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
+		System.out.println(totalCount);
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/"
 				+ tour_code
@@ -187,16 +191,19 @@ public class TourController {
 
 	// 실제 페이지 이동
 	@RequestMapping("/city.do")
-	public ModelAndView cityList(@RequestParam(value = "areaCode") String areaCode,
+	public ModelAndView cityList(@RequestParam(value = "areaCode") int areaCode,
 			@RequestParam(value="cp",required=false,defaultValue="1")int cp) throws Exception {
 
 			ModelAndView mav = new ModelAndView();
 			
 			System.out.println("현재 페이지 : " + cp);
 			
+			String cityName = tDAO.areaCode(areaCode);
+			
 			mav.setViewName("tour/cityList");
 			mav.addObject("areaCode",areaCode);
 			mav.addObject("cp",cp);
+			mav.addObject("cityName",cityName);
 			return mav;
 		}
 	
@@ -221,6 +228,17 @@ public class TourController {
 		mav.addObject("jsonObject", jsonObject);
 		return mav;
 
+	}
+	
+	
+	@RequestMapping("citycate.do")
+	public ModelAndView categoryList(@RequestParam(value="contentTypeId") int contentTypeId,
+									 @RequestParam(value="areaCode") int areaCode) {
+		
+		System.out.println(contentTypeId + " " + areaCode);
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("tour/info");
+		return mav;
 	}
 
 	//여행지 페이지 상세 정보 + 댓글 리스트

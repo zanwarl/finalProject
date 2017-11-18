@@ -41,4 +41,9 @@ public class tourDAOImple implements tourDAO {
 		List<tourCmtDTO> list = sqlMap.selectList("tourCmtList", map);
 		return list;
 	}
+	
+	public String areaCode(int areaCode) {
+		String result = sqlMap.selectOne("areaCode", areaCode);
+		return result;
+	}
 }

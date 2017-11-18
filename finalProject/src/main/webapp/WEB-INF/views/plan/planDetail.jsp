@@ -520,12 +520,12 @@ jq(document).ready(function() {
 				<span class="orderList" data="arrange" data-val="A">이름순</span>
 				<span class="orderList" data="arrange" data-val="B">인기순</span>
 			</div>
-		
+		</div>
 		<div id="cityContent" >
 			<div id="contentBox">
 			tlqk
 			</div>
-		</div>
+		
 		</div>
 	</div>
 	

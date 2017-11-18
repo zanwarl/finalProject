@@ -17,6 +17,10 @@
 		<select id="tourTotalCnt" resultType="int">
 			select count(*) from tour_comment where tour_cmt_pidx = #{contentId}
 		</select>
+		
+		<select id="areaCode" resultType="String" parameterType="int">
+			select name from areaCode where areacode = #{areaCode}
+		</select>
 	
 	<!-- select end -->
 		
