@@ -100,11 +100,14 @@ html, body {
 	function goUpdate(idx) {
 		location.href = 'roomUpdate.do?idx=' + idx;
 	}
+	function roomReq(idx) {
+		location.href = 'roomReq.do?roomIdx=' + idx;
+	}
 	function goDelete(idx) {
 		location.href = 'roomDelete.do?idx=' + idx;
 	}
-	function roomReq(idx) {
-		location.href = 'roomReq.do?roomIdx=' + idx;
+	function goImageUpdate(idx) {
+		location.href = 'imageUpdate.do?idx=' + idx;
 	}
 </script>
 <!-- <script async defer
@@ -197,7 +200,8 @@ html, body {
 	<input type="button" value="목록으로" onclick="golist()">
 	<c:if test="${sIdx ==arr.useridx }">
 	
-	<input type="button" value="수정하기" onclick="goUpdate('${arr.roomidx}')">
+	<input type="button" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
+	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
 	

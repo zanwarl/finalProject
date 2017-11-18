@@ -35,10 +35,22 @@
 		delete from roomadd where roomidx=#{idx}
 	</delete>
 	<insert id="rImageFile" parameterType="HashMap">
-  	    insert into rimage values (image_seq.nextval, #{oname}, #{filename}, #{filesize}, #{roomidx})
+  	    insert into rimage values (image_seq.nextval, #{oname}, #{filename}, #{filesize}, #{roomidx},'N')
 	</insert>
 	<select id="imageList" parameterType="int" resultType="korea.roomAdd.model.ImageDTO">
-		select * from rimage where roomidx = #{idx}
+		select * from rimage where roomidx=#{idx} and DEL_GB = 'N'
 	</select>
+	<update id="rImageDelete" parameterType="hashmap">
+			UPDATE rimage SET 
+				DEL_GB = 'Y' 
+			WHERE 
+				roomidx = #{roomidx}	
+	</update>
+	<update id="rImageUpdate" parameterType="Hashmap">
+			UPDATE rimage SET
+				DEL_GB = 'N'
+			WHERE
+				imgaeidx = #{imgaeidx}	
+	</update>
 
 </mapper>

@@ -9,7 +9,7 @@
 			(select rownum as rnum, a.* from
 			(select * from plan_main order by plan_idx desc) a) b 
 			<![CDATA[
-				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} and plan_public = 'Y'
    			]]>
 		</select>
 		
@@ -80,7 +80,7 @@
 	<!-- update start -->
 		<select id="planMainUpdate" parameterType="korea.plan.model.PlanDTO" resultType="int">
 			update plan_main
-			set plan_explain = #{plan_explain}, plan_name = #{plan_name}
+			set plan_explain = #{plan_explain}, plan_name = #{plan_name} , plan_public = #{plan_public}
 			where plan_idx = #{plan_idx}
 		</select>
 		

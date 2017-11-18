@@ -2,7 +2,7 @@ package korea.roomAdd.model;
 
 public class ImageDTO {
 	
-	private int imageidx;
+	private int imgaeidx;
 	private String oname;
 	private String filename;
 	private int filesize;
@@ -10,11 +10,12 @@ public class ImageDTO {
 	
 	
 	
-	public int getImageidx() {
-		return imageidx;
+	
+	public int getImgaeidx() {
+		return imgaeidx;
 	}
-	public void setImageidx(int imageidx) {
-		this.imageidx = imageidx;
+	public void setImgaeidx(int imgaeidx) {
+		this.imgaeidx = imgaeidx;
 	}
 	public String getOname() {
 		return oname;

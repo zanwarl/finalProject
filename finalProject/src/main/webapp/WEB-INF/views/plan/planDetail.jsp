@@ -563,6 +563,10 @@ jq(document).ready(function() {
 					
 					var array = new Array();
 					
+					$('.plan_public').on('click',function() {
+						alert("z");
+					});
+					
 					$('.list_item').each(function(key,val){
 						/* txt += 'order?' + $(this).attr('data');
 						txt += 'type?' + $(this).attr('data-type');
@@ -619,7 +623,7 @@ jq(document).ready(function() {
 								<td><textarea name="plan_explain" cols="20" rows="5" >${pdto.plan_explain }</textarea></td>
 							</tr>
 							<tr>
-								<td colspan="2"><hr>비공개 <input type="checkbox" name="plan_public"></td>
+								<td colspan="2"><hr>비공개 <input type="checkbox" name="plan_public" value="N"></td>
 							</tr>
 						</tbody>
 						<tfoot>
