@@ -100,7 +100,7 @@ public class TourController {
 	}
 	
 	// 실제 페이지 이동
-	@RequestMapping("/area.do")
+	@RequestMapping("/tour.do")
 	public ModelAndView areaList() {
 
 		ModelAndView mav = new ModelAndView();
@@ -270,7 +270,7 @@ public class TourController {
 		return mav;
 	}
 	
-	// 실제 페이지 이동
+/*	// 실제 페이지 이동
 	@RequestMapping("/tour.do")
 	public ModelAndView tourList() throws Exception {
 
@@ -280,7 +280,7 @@ public class TourController {
 
 		return mav;
 	}
-	
+	*/
 	@RequestMapping("/tourMap.do")
 	public ModelAndView tourMap(@RequestParam(value="mapx") String mapx, @RequestParam(value="mapy") String mapy) {
 		

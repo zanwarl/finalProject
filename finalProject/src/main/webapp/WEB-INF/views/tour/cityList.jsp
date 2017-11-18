@@ -114,7 +114,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	                    output += '</div></a>';
 	                }
 	        	   output += '</div>';
-	        	   output += '<a class="more_info" href="citycate.do?areaCode=1&contentTypeId='+contentTypeId+'">' + moreInfo + '</a>';
+	        	   output += '<a class="more_info" href="citycate.do?areaCode=${areaCode}&contentTypeId='+contentTypeId+'">' + moreInfo + '</a>';
 	        	   output += '</div>';
 	        	   $('.contents_mid').append(output);
 	        	   
@@ -192,8 +192,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 <div id="contents">
 	<div class="contents_top">
 		<div class="city_title"><b>${cityName }</b></div>
-		<div class="menu">
-			<a href="tour.do">1홈</a>
+		<div class="menu">홈</a>
 			<a href="area.do">호텔</a>
 			<a href="attraction.do">관광명소</a>
 			<a href="shopping.do">음식점</a>

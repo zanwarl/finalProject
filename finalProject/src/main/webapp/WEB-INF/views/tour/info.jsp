@@ -106,8 +106,7 @@ var cp = ${cp};
 	        	   //page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
 	        	   
 	        	   var totalCnt =msg.response.body.totalCount;
-	        	   var pageName = 'citycate.do?areaCode='+ ${areaCode} +"&contentTypeId=12";
-	        	  	//				 citycate.do?areaCode=1&contentTypeId=12
+	        	   var pageName = 'citycate.do?areaCode='+ ${areaCode} +"&contentTypeId=${contentTypeId}";
 	        	   var listSize = 5;
 	        	   var pageSize = 5;
 	        	   
