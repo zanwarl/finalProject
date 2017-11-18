@@ -334,11 +334,12 @@ section {
 }
 </style>
 <style type="text/css">
-.homeTb td  {
-	width: 40%; 
-	
+.homeTb td {
+	width: 40%;
 }
-
+.homeTb td{
+padding-top: 5px; 
+}
 </style>
 <meta charset=UTF-8">
 <title>Insert title here</title>
@@ -351,7 +352,7 @@ section {
 
 
 	<div id="contents">
-	<h1 align="center">${param.userId }님의 프로필 페이지</h1>
+		<h1 align="center">${param.userId }님의프로필 페이지</h1>
 		<div class="container">
 			<!-- Top Navigation -->
 			<div class="wrapper">
@@ -364,69 +365,42 @@ section {
 						class="fa fa-plus-square"></i>REVIEWS</label>
 					<div class="panels">
 						<div class="panel">
-							<h1>${param.userId}님이가지고 계신 숙소</h1>
+							<h1>${param.userId}님이가지고계신 숙소</h1>
 							<div class="grid cc-text-center">
-							<!-- 
-								<c:set value="0" var="i"></c:set>
-								<c:set value="3" var="j"></c:set>
-								<table border="1">
-								<c:forEach items="${list }" var="dto">
-										<c:url value="roomContent.do" var="roomConURL">
-										<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
-									</c:url>
-									<c:url value="${contextPath }/img/room/" var="src" />
-
-									<c:if test="${i mod j==0 }">
-									<tr>
-									</c:if>
-
-								
-									<td><h3>${dto.ROOMNAME }</h3>
-									<div style="width: 100%; height:200px;" ><a href="${roomConURL }"><img src="${src }${dto.FILENAME}" width="100%" height="100%"></a>
-										</div>
-										</td>
-										<c:if test="${i mod j==j-1 }">
-										</tr>
-										
-										</c:if>
-									
-									<c:set value="${i+1 }" var="i" ></c:set>
-								</c:forEach>
-							
-							 -->
 							
 								<c:set value="0" var="i"></c:set>
 								<c:set value="2" var="j"></c:set>
-							<table class="homeTb">
-							
-							
-							<c:forEach items="${list }" var="dto">
+								<table border="1" class="homeTb">
+
+
+									<c:forEach items="${list }" var="dto">
 										<c:url value="roomContent.do" var="roomConURL">
-										<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
-									</c:url>
-									<c:url value="${contextPath }/img/room/" var="src" />
+											<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
+										</c:url>
+										<c:url value="${contextPath }/img/room/" var="src" />
 
-									<c:if test="${i mod j==0 }">
-									<tr>
-									</c:if>
-
-								
-									<td><h3>${dto.ROOMNAME }</h3>
-									<div style="width: 100%; height:200px;" ><a href="${roomConURL }"><img src="${src }${dto.FILENAME}" width="100%" height="100%"></a>
-										</div>
-										</td>
-										<c:if test="${i mod j==j-1 }">
-										</tr>
-										
+										<c:if test="${i mod j==0 }">
+											<tr>
 										</c:if>
-									
-									<c:set value="${i+1 }" var="i" ></c:set>
-								</c:forEach>
+
+
+										<td><h3>${dto.ROOMNAME }</h3>
+											<div style="width: 100%; height: 200px; text-align: center;">
+												<a href="${roomConURL }"><img
+													src="${src }${dto.FILENAME}" style="max-height: 200px;height: 100%; "></a>
+											</div></td>
+										<c:if test="${i mod j==j-1 }">
+											</tr>
+
+										</c:if>
+
+										<c:set value="${i+1 }" var="i"></c:set>
+									</c:forEach>
 								</table>
 
 							</div>
 						</div>
-		
+
 						<div class="panel">
 
 							<h1>${param.userId}님의일정</h1>
@@ -434,33 +408,33 @@ section {
 								<c:set value="0" var="i"></c:set>
 								<c:set value="3" var="j"></c:set>
 								<table border="1">
-								<c:forEach items="${planList }" var="dto">
-									<c:url value="planContent.do" var="planConURL">
-										<c:param name="pidx" value="${dto.PIDX }"></c:param>
-									</c:url>
-									
-									<c:if test="${i mod j==0 }">
-									<tr>
-									</c:if>
+									<c:forEach items="${planList }" var="dto">
+										<c:url value="planContent.do" var="planConURL">
+											<c:param name="pidx" value="${dto.PIDX }"></c:param>
+										</c:url>
 
-								
-									<td>
-										<h3>
-											<a href="${planConURL }">${dto.TITLE }</a>
-										</h3>
-										<p>
-											<a href="${planConURL }">${dto.WRITEDATE }</a>
-										</p>
+										<c:if test="${i mod j==0 }">
+											<tr>
+										</c:if>
+
+
+										<td>
+											<h3>
+												<a href="${planConURL }">${dto.TITLE }</a>
+											</h3>
+											<p>
+												<a href="${planConURL }">${dto.WRITEDATE }</a>
+											</p>
 										</td>
 										<c:if test="${i mod j==j-1 }">
-										</tr>
-										
+											</tr>
+
 										</c:if>
-									
-									<c:set value="${i+1 }" var="i" ></c:set>
-								</c:forEach>
-</table>
-	
+
+										<c:set value="${i+1 }" var="i"></c:set>
+									</c:forEach>
+								</table>
+
 							</div>
 						</div>
 
