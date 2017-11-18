@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -50,13 +50,15 @@ function ok(reqIdx, amt){
 </head>
 
 
-<body>	
-
+<body>
+<%@ include file="../header.jsp" %>
+<div id="contents">
+	<h2> 선택한 예약내역</h2>
 <form name="payMent" action="payMent.do">
 	<table>
 	<c:set var="arr" value="${rdto}"/>
 
-	<h2> 선택한 예약내역</h2>
+
 		<tr>
 			<th>예약인원수</th>
 			<th>${arr.count}</th>
@@ -86,5 +88,6 @@ function ok(reqIdx, amt){
 	</table>
 	</form>
 </div>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>

@@ -55,7 +55,7 @@ tfoot td{
 
 
 
-  <h1>공지사항내용</h1>
+  <h1>공지사항</h1>
 
 
 <table>
@@ -83,7 +83,7 @@ tfoot td{
 	
 	
 	<tfoot>
-
+	<tr><td colspan="4" style="text-align: center;"><a href="noticeList.do">목록으로</a></td></tr>
 	</tfoot>	
 
 
