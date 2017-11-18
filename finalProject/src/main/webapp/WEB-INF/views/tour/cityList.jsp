@@ -66,9 +66,10 @@
     src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src="js/jsPaging.js" type="text/javascript"></script>    
 <script type="text/javascript">
-var cp = ${cp };
+var cp = 1;
 $(document).ready(function() {
-var contentTypeId = $('.category_item').attr('data-cate');   
+var contentTypeId = $('.category_item').attr('data-cate'); 
+
 		 /* ajax start */
 		 $.ajax({
 	    	   
@@ -77,8 +78,6 @@ var contentTypeId = $('.category_item').attr('data-cate');
 				type:"GET",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           success : function(msg) {
-	        	   
-	        	  
 	        	  // console.log(msg.response.body.items.item);
 	        	   var myItem = msg.response.body.items.item;
 	        	   
@@ -100,7 +99,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
                    var chkImg = '';
 
                    var iterator = 0;
-	        	   for(var i=1; i<=listSize; i++){
+	        	   for(var i=0; i<listSize; i++){
 	                   
 	        		   
 	        		   output += '<a class="item" href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+'&contentId='+myItem[i].contentid+'">';
@@ -194,7 +193,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	<div class="contents_top">
 		<div class="city_title"><b>${cityName }</b></div>
 		<div class="menu">
-			<a href="tour.do">홈</a>
+			<a href="tour.do">1홈</a>
 			<a href="area.do">호텔</a>
 			<a href="attraction.do">관광명소</a>
 			<a href="shopping.do">음식점</a>
