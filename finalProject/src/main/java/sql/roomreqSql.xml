@@ -47,7 +47,10 @@
 
 
 	<select id="roomreqList" resultType="map" parameterType="map">
-		<!-- select * from roomreq where userId = #{userId} -->
+		<!-- select * from roomreq where userId = #{userId} 
+		게스트 측에서 나의예약조회
+		
+		-->
 		 <![CDATA[ 
 
 				select * from 
@@ -55,7 +58,7 @@
 					from (
 
 select c.roomname as roomname , c.filename as filename , c.roomidx, roomreq.count, roomreq.paid, 
-roomreq.total_pay, c.addr, TRUNC (
+roomreq.total_pay, c.addr,roomreq.reqidx,  TRUNC (
 TO_DATE( roomreq.CHECKINDATE , 'MM/DD/YYYY')-SYSDATE )AS CANCELDATE,
 substr ( reqdate, 1, 10) as reqdate, 
 (substr (checkindate, 7,4))||'/'||(substr(checkindate,1,2))||'/'||(substr(checkindate, 4,2)) as checkindate,
