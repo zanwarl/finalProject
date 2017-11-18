@@ -16,6 +16,7 @@ function roomadd() {
 </head>
 <body>
 <%@ include file="../header.jsp" %>
+<c:url value="${contextPath }/img/room/" var="src"/> 
 	<table>
 		<tr>
 			<th>숙소이름</th>
@@ -32,7 +33,10 @@ function roomadd() {
 			<c:url var="Url" value="roomContent.do">
 				<c:param name="roomidx" value="${rdto.roomidx}"></c:param>
 			</c:url>
-			<td><a href="${Url}">${rdto.roomname}</a></td>
+			<td>
+			<a href="${Url}"><img src="${src}${rdto.filename}" width="50%"></a><br>
+			<a href="${Url}">${rdto.roomname}</a>
+			</td>
 		</c:forEach>
 	</table>
 	<c:if test="${not empty sId }">

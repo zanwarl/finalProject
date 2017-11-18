@@ -27,6 +27,7 @@ import korea.msg.model.MsgDAO;
 import korea.roomAdd.model.ImageDTO;
 import korea.roomAdd.model.RoomAddDAO;
 import korea.roomAdd.model.RoomAddDTO;
+import korea.roomAdd.model.RoomJoinDTO;
 import korea.voc.model.VocDAO;
 
 @Controller
@@ -44,10 +45,7 @@ public class RoomAddController {
 	public ModelAndView roomList(HttpServletRequest req) {
 		
 		
-		
-		
-
-		List<RoomAddDTO> list = radao.roomList();
+		List<RoomJoinDTO> list = radao.roomList();
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("sId");
