@@ -240,6 +240,10 @@ public class PlanController {
 		arrayObj=(JSONArray) object;
 		System.out.println("Json object :: "+arrayObj);*/
 		
+		System.out.println("체크여부 : " + pdto.getPlan_public());
+		if(pdto.getPlan_public()==null || pdto.getPlan_public().equals("")) {
+			pdto.setPlan_public("Y");
+		}
 		JSONParser parser = new JSONParser();
 		Object obj = parser.parse(str);
 		JSONArray jsonArray = (JSONArray)obj;
