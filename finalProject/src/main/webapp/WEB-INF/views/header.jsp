@@ -62,12 +62,12 @@
 <ul>
  <li><a href="tour.do" id="current">여행지</a>
 	<ul>
-        <li><a href='#'>서울경기</a></li>
-	<li><a href='#'>강원도</a></li>
-	<li><a href='#'>충청도</a></li>
-	<li><a href='#'>전라도</a></li>
-	<li><a href='#'>경상도</a></li>
-	<li><a href='#'>제주도</a></li>
+        <!-- <li><a href='#'>서울경기</a></li>
+		<li><a href='#'>강원도</a></li>
+		<li><a href='#'>충청도</a></li>
+		<li><a href='#'>전라도</a></li>
+		<li><a href='#'>경상도</a></li>
+		<li><a href='#'>제주도</a></li> -->
     </ul>
  </li>
  <li><a href="#" id="current">숙소</a>
