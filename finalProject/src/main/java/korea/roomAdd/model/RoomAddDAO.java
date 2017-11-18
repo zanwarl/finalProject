@@ -8,7 +8,7 @@ import food.model.FoodDTO;
 public interface RoomAddDAO {
 
 	public int roomAdd(RoomAddDTO dto);
-	public List<RoomAddDTO> roomList(); 
+	public List<RoomJoinDTO> roomList(); 
 	public RoomAddDTO roomContent(int idx);
 	public List<ImageDTO> fileList(int idx);
 	public RoomAddDTO roomUpdateData(int idx);

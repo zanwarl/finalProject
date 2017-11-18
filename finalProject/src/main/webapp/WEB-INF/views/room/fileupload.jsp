@@ -22,7 +22,6 @@
 		<a href="#this" class="btn" id="write">작성하기</a>
 		
 	</form>
-	
 	<script type="text/javascript">
 		var gfv_count = 1;
 	

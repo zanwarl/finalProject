@@ -14,8 +14,8 @@
 		#{nodate}, #{checkin}, #{checkout}
 		)
 	</insert>
-	<select id="roomList" resultType="korea.roomAdd.model.RoomAddDTO">
-		select * from roomadd order by roomidx
+	<select id="roomList" resultType="korea.roomAdd.model.RoomJoinDTO">
+		select r.roomidx,r.useridx,r.roomname,i.filename from roomadd r,rimage i where r.roomidx = i.roomidx
 	</select>
 	<select id="roomContent" parameterType="int"
 		resultType="korea.roomAdd.model.RoomAddDTO">
