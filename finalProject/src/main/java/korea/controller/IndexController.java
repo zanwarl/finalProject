@@ -17,9 +17,15 @@ public class IndexController {
 	PlanDAO pdao;
 	
 	@RequestMapping("/index.do")
-	public String index() {
+	public ModelAndView index() {
+		ModelAndView mav = new ModelAndView();
 		
-		return "index";
+		List<PlanDTO> list = pdao.favPlanList();
+		int count = pdao.totalCnt();
+		mav.addObject("list", list);
+		mav.addObject("count",count);
+		mav.setViewName("main");
+		return mav;
 	}
 	
 	@RequestMapping("/main.do")

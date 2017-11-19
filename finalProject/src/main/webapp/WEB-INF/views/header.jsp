@@ -95,7 +95,7 @@
 </li> -->
  <li><a href="plan.do" id="current">여행일지</a>
    <ul>
-         <li><a href=''>공유된일정보기</a></li>
+         <li><a href='plan.do'>공유된일정보기</a></li>
          <c:if test="${sId ne null }">
          <li><a href="myPlan.do">내가 만든 일정</a></li>
 	 </c:if>
