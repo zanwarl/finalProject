@@ -10,6 +10,8 @@ public interface PlanDAO {
 	public List<PlanDTO> planList(int cp, int pageRow);
 	//모든 일정 숫자
 	public int totalCnt();
+	//인기 일정 리스트
+	public List<PlanDTO> favPlanList();
 	
 	public PlanDTO pdtoInfo(int idx);
 	

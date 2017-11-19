@@ -1,12 +1,47 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!--Title-->
     <title>대한민국 길잡이</title>
-
+<style>
+#main_contents {
+	width: 1500px;
+	height: 750px;
+}
+.wrap_content_plan_list {
+	width: 1500px;
+	height: 550px;
+    position: relative;
+} 
+.content_plan_list {
+	width: 1500px;
+	height: 500px;
+    position: relative;
+} 
+.writer {
+	height: 30px;
+	float: left;
+}
+.plan_img {
+	width: 300px;
+	height: 150px;
+}
+.plan_list {
+    width: 350px;
+    height: 220px;
+    border: 1px solid #dfdfdf;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+</style>
 </head>
 <body>
 <%@ include file="header.jsp" %>
@@ -32,7 +67,34 @@
 		</ul>
 		
 	</div>
-	<div id="contents">본문</div>
+	<div id="main_contents"> <!-- 본문 영역 -->
+	
+	<!-- 인기 여행일지 정보 게시판 영역 start-->
+	<div class="wrap_content_plan_list">
+		<div class="header_plan_list"><span class="header_plan_title"><b>인기 여행일정</b></span></div>
+		<div class="content_plan_list">
+		<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
+		<c:forEach var="list" items="${list }">
+			<a class="plan_list" href="planContent.do?pidx=${list.plan_idx}">
+		        <div class="name">${list.plan_subject }</div>
+		        <div class="bg"></div>
+	        	<img class="plan_img" src="${src }${list.plan_file}">
+	        	<div class="explain">${list.plan_explain }</div>
+	        	<div class="bottom">
+		        	<div class="writer">${list.plan_name }</div>
+	        		<div class="readnum">조회수 ${list.plan_readnum }</div>
+	        	</div>
+	        </a>
+		</c:forEach>	
+		</div>
+		<div class="bot_plan_list">모든 일정 보기</div>
+	</div>
+	<!-- 인기 여행일지 정보 게시판 영역 end-->
+	
+	<div class="wrap_content_room_list">
+		인기 숙소 영역?
+	</div>
+	</div>
 
 <%@ include file="footer.jsp" %>
 </body>

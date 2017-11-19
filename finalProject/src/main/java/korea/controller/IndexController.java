@@ -1,11 +1,21 @@
 package korea.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import korea.plan.model.PlanDAO;
+import korea.plan.model.PlanDTO;
 
 @Controller
 public class IndexController {
 
+	@Autowired
+	PlanDAO pdao;
+	
 	@RequestMapping("/index.do")
 	public String index() {
 		
@@ -13,9 +23,14 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/main.do")
-	public String main() {
+	public ModelAndView main() {
+		ModelAndView mav = new ModelAndView();
 		
-		return "main";
+		List<PlanDTO> list = pdao.favPlanList();
+		
+		mav.addObject("list", list);
+		mav.setViewName("main");
+		return mav;
 	}
 	
 	@RequestMapping("/header.do")
