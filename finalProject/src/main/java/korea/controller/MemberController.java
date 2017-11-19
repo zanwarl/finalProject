@@ -2,6 +2,7 @@ package korea.controller;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.SynchronousQueue;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -202,7 +203,20 @@ public class MemberController {
 		
 
 		List<Map<String, Object>> list = memberDao.myRoomListProfile(userId);
-		mav.addObject("list", list);
+		int listSize = list.size() ; 
+
+		System.out.println(listSize);
+		List<Map<String, Object>> list1= list.subList(0, listSize/2);
+		System.out.println("list1:"+list1);
+	
+		List<Map<String, Object>> list2= list.subList(listSize/2, listSize);
+		
+		
+		System.out.println("list2:"+list2);
+
+		
+		mav.addObject("list1", list1);
+		mav.addObject("list2", list2);
 		mav.addObject("planList", planList);
 		
 		
