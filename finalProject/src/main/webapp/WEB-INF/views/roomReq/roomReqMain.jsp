@@ -9,6 +9,29 @@
 
 #roomReqFm {width:340px; margin:0 auto; margin-top:20px;}
 .req {text-align:center; margin:20px;}
+
+.reqWrap {
+  margin: 20px auto;
+  width: 343px; 
+  height: 400px; 
+  -webkit-border-radius: 8px/7px; 
+  -moz-border-radius: 8px/7px; 
+  border-radius: 8px/7px; 
+  background-color: #ebebeb; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  border: solid 1px #cbc9c9;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #4c4c4c;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
 #roomReqFm label {float:left; width:90px; margin-left:20px; font-size:20px;}
 #datepicker,#datepicker1,#roomp {width:150px; height:30px; border:1px solid #e9e9e9;}
 #SUB_NUM,#ADD_NUM {
@@ -39,7 +62,7 @@ text-align:center;
 }	
 	
 .reqBtn{
- display: inline-block;
+ 	display: inline-block;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
@@ -140,11 +163,11 @@ text-align:center;
 		
 		var frm = document.roomReqFm;
 			
-		 var test2 = document.roomReqFm.NO_DATE.value;
+/* 		 var test2 = document.roomReqFm.NO_DATE.value;
 	      test2 = test2.replace(/\//g , "-");
 	      test2 = test2.replace(/(\s*)/g, "");
 	      var noDate = [test2]; 
-	      alert(noDate);
+	      alert(noDate); */
 		
 		var day1 = $('#datepicker').val();
 		
@@ -235,8 +258,11 @@ text-align:center;
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
-<img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
-<form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
+ <img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+<div class="reqWrap">
+<H2>Reservation</H2>
+<hr>
+<form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post" required="required">
 <input type="hidden" value="${roomIdx }" name="roomidx">
 
 <c:set var="arr" value="${rdto}"/>   
@@ -244,11 +270,11 @@ text-align:center;
              
        	<p class="req">
             <label>체크인</label>
-            <input type="text" name="checkindate" id="datepicker"> 
+            <input type="text" name="checkindate" id="datepicker" required="required"> 
   		</p>
      	<p class="req">
             <label>체크아웃 </label>
-            <input type="text" name="checkoutdate" id="datepicker1">    	
+            <input type="text" name="checkoutdate" id="datepicker1" required="required">    	
 		</p>
 		<p class="req">
        		<label>예약인원</label> 
@@ -258,7 +284,7 @@ text-align:center;
   		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" style="border:0;" name="total_pay" id="roomp" value=<fmt:formatNumber value="${arr.roomprice}" pattern="#,###,###" /> onkeyup="call()" readonly>
+			<input type="text" style="border:0;" name="total_pay" id="roomp" value=<fmt:formatNumber value="${arr.roomprice}" pattern="#,###,###" /> onkeyup="call()" required="required" readonly>
 		</p>
 		<p class="req">
             <input type="button" class="reqBtn" value="예약하기" onclick="fnSubmit();">
