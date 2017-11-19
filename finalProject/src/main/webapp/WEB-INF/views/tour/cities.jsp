@@ -72,7 +72,7 @@
 	-webkit-transition: all 3.6s;
 }
 /* .img{
-   position: absolute;
+   position: abhttp://localhost:9090/finalProject/city.do?areaCode=1solute;
    height: 300px;
    width: 350px;
    

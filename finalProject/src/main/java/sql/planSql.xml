@@ -68,8 +68,8 @@
 		
 	<!-- insert start -->
 		<select id="planMainWrite" parameterType="korea.plan.model.PlanDTO" resultType="int">
-			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum,plan_place) values
-			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0,#{plan_place})	
+			insert into plan_main (plan_idx,plan_subject,plan_writer,plan_writedate,plan_start,plan_readnum,plan_place,plan_file) values
+			(plan_idx.nextval,#{plan_subject},#{plan_writer},sysdate,#{plan_start},0,#{plan_place},#{plan_file})	
 		</select>
 		
 		<select id="planDetailWrite" parameterType="korea.plan.model.PlanDetailDTO" resultType="int">

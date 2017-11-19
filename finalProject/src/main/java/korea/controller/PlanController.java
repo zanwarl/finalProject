@@ -1,10 +1,13 @@
 package korea.controller;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -138,11 +141,26 @@ public class PlanController {
 	
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
 	@RequestMapping("/planMainSaveDb.do")
-	public ModelAndView planMainSaveDb(PlanDTO pdto) {
+	public ModelAndView planMainSaveDb(HttpServletRequest req,PlanDTO pdto) {
 		int idx = pdao.lastSaveIdx(pdto);
-		System.out.println(idx);
-		System.out.println("areacode : " + pdto.getPlan_place());
 		pdto.setPlan_idx(idx);
+		
+		//랜덤 이미지 저장하기 start
+		int areaCode = Integer.parseInt(pdto.getPlan_place());
+		String savePath = req.getSession().getServletContext().getRealPath("/img/city/thumb/");
+		
+		
+		String plan_file = randomImage(savePath,areaCode);
+		
+		String db_fileName = "";
+		switch(areaCode) {
+		case 1: db_fileName = "\\seoul\\"; break;
+		case 6: db_fileName = "\\busan\\"; break;
+		case 39: db_fileName = "\\jeju\\"; break;
+		default: db_fileName = "\\etc\\";
+		}
+		pdto.setPlan_file(db_fileName + plan_file);
+		//랜덤 이미지 저장하기 end
 		
 		int result = pdao.planMainWrite(pdto);
 		ModelAndView mav = new ModelAndView();
@@ -154,6 +172,41 @@ public class PlanController {
 		mav.setViewName("plan/planDetailOk");
 		mav.addObject("url", str);
 		return mav;
+	}
+	
+	public String randomImage(String savePath,int code) {
+
+		Vector<String> vector = new Vector<String>();
+		Random random = new Random();
+
+		String name = "";
+		switch(code) {
+		case 1: name = savePath + "\\seoul\\"; break;
+		case 6: name = savePath + "\\busan\\"; break;
+		case 39: name = savePath + "\\jeju\\"; break;
+		default: name = savePath + "\\etc\\";
+		}
+		
+		File f = new File(name);
+		 boolean isExists = f.exists();
+         
+	        if(!isExists) {
+	        }
+	         
+	        if(f.isDirectory()) {
+	            File[] fileList = f.listFiles();
+	            for(File tFile : fileList) {
+	                System.out.print(tFile.getName());             
+	                if(tFile.isDirectory()) {
+	                } else {
+	                	vector.addElement(tFile.getName());
+	                }
+	            }          
+	        } else {
+	        }
+	        
+	        int randName= random.nextInt(vector.size());
+		return vector.elementAt(randName);
 	}
 	
 	/**세부 일정 작성*/ 

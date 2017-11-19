@@ -14,6 +14,7 @@
 <c:set var="i" value="0" />
 <c:set var="j" value="4" />
 <table width="600" height="auto" border="1" cellspacing="0">
+<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
 	<thead>
 	<!-- 분류 영역 -->
 		<tr>
@@ -27,9 +28,9 @@
 	<tr>
 	</c:if>
 		<td>
-		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_idx }</a>
 		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_explain }</a> <br>
 		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_subject }</a>
+		<img src="${src}${list.plan_file}" width="350" height="150">
 		조회수 : ${list.plan_readnum } <br>
 		${list.plan_name }
 		</td>
