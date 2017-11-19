@@ -177,6 +177,7 @@ public class RoomAddController {
 		
 		ModelAndView mav = new ModelAndView("redirect:roomContent.do");
 		radao.updateFile(map, req);
+		
 		mav.addObject("roomidx", map.get("roomidx"));
 		
 		return mav;
