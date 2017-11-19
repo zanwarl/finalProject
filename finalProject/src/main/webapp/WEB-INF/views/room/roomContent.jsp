@@ -40,6 +40,7 @@ html, body {
 </style>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+  <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
@@ -116,32 +117,23 @@ html, body {
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<div id="contents">
-	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
+<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
+<div id="content">
 	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
-
-	<ul class="slider">
-	<c:forEach var="imageList" items="${imageList}">
-		<li><img src="${src }${imageList.filename}" width="40%"></li>
-	</c:forEach>
-  	</ul>
+	
 	<input type="hidden" id="addr1" value="${arr.addr1}">
 	<input type="hidden" id="addr2" value="${arr.addr2}">
 	<input type="hidden" id="postnum" value="${arr.postnum}">
-	숙소이름:${arr.roomname}
-	<br> 설명
-	<br>
-	<textarea rows="10" cols="50">${arr.content}</textarea>
-	<br> conv
-	<br> ${arr.conv}
-	<br> 안전시설
-	<br> ${arr.safe}
-	<br> 공간
-	<br> ${arr.space}
-	<br>
-
-	<div id="map" style="width: 100%; height: 350px;">지도</div>
+	<ul class="slider">
+		<c:forEach var="imageList" items="${imageList}">
+			<li><img src="${src }${imageList.filename}"></li>
+		</c:forEach>
+  	</ul>
+ </div>
+<div class="product_desc">
+      <h1>${arr.roomname}</h1>  
+       <span class="price">${arr.roomprice}/1박</span>	
 
 	<!-- https://developers.kakao.com/apps 에서 localhost 뒤에 오는 포트 번호는 사람마다 다르니 추가 해줘야 함 -->
 	<!-- localhost:8080, localhost:9090 -->
@@ -196,16 +188,49 @@ html, body {
 			}
 		});
 	</script>
-
+ 	<div class="tabular">
+        <ul class="tabs group">
+          <li><a class="active" href="#/one">상세설명</a></li>
+          <li><a href="#/two">위치정보</a></li>
+         
+        </ul>
+          <div id="content">
+            <aside id="one">
+              <p>${arr.content}</p>
+			  <p>conv<br>
+				 ${arr.conv}
+				<br> 안전시설
+				<br> ${arr.safe}
+				<br> 공간
+				<br> ${arr.space}
+				<br>
+			  </p>
+			  <p>체크인시간 ${arr.checkin} <br>
+			  	  체크아웃시간 ${arr.checkout} 
+			  </p>
+			</aside>
+            <aside id="two">
+              <div id="map" style="width: 100%; height: 350px;">지도</div>
+                
+            </aside>
+               
+              
+              
+          
+          </div>
+      </div>
+    </div>
+  </div>
+  </div>
+	
 	<input type="button" value="목록으로" onclick="golist()">
 	<c:if test="${sIdx ==arr.useridx }">
-	
 	<input type="button" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
 	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
-</div>
+
 <%@ include file="../footer.jsp" %>
 </body>
 </html>
