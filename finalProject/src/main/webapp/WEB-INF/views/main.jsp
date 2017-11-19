@@ -28,7 +28,7 @@
 	float: left;
 }
 .plan_img {
-	width: 300px;
+	width: 350px;
 	height: 150px;
 }
 .plan_list {
@@ -77,9 +77,9 @@
 		<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
 		<c:forEach var="list" items="${list }">
 			<a class="plan_list" href="planContent.do?pidx=${list.plan_idx}">
-		        <div class="name">${list.plan_subject }</div>
 		        <div class="bg"></div>
 	        	<img class="plan_img" src="${src }${list.plan_file}">
+	        	<div class="name">${list.plan_subject }</div>
 	        	<div class="explain">${list.plan_explain }</div>
 	        	<div class="bottom">
 		        	<div class="writer">${list.plan_name }</div>
