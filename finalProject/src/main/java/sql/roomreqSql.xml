@@ -141,4 +141,11 @@ on c.roomidx = roomreq.roomidx
 
 	</select>
 
+	<select id="getNoDateSql" parameterType="int" resultType="String" >
+	
+		select nodate from roomadd where roomidx = #{roomidx}
+	
+	</select>
+
+
 </mapper>

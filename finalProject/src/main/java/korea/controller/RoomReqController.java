@@ -30,12 +30,39 @@ public class RoomReqController {
 
 	@RequestMapping("/roomReq.do")
 	public ModelAndView roomReq(@RequestParam(value = "roomIdx") int idx) {
+	//123 test
+		
 		
 		RoomAddDTO rdto = radao.roomContent(idx);
+		
+		String map = rdao.getNoDate(idx);
+		map = map.replace("/", "-");
+		map = map.replace(" ", "");
+		
+		System.out.println(map);
+		String [] arr ; 
+		arr= map.split(",");
+		System.out.println(arr[0]);
+		
+		
+		String str ="";
+		
+		for ( int i =0; i<arr.length-1 ; i ++){
+			str = str +"'"+arr[i]+"'"+","; 
+		}
+		
+		str = str +"'"+arr[arr.length-1]+"'"; 
+		
+		System.out.println(str);
+		
+		
+		
+		
 				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
 		mav.addObject("rdto", rdto);		
+		mav.addObject("str", str);		
 		mav.addObject("roomIdx", idx);
 
 		return mav; 

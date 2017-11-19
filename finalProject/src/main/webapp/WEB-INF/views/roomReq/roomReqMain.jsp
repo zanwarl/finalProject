@@ -127,7 +127,7 @@ text-align:center;
 	    altField: ".selecter"
 	}); */
 
-	var disabledDays = ["2017-11-22"];
+	var disabledDays = [${str}];
 	
 	function disableAllTheseDays(date) { 
 	   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 

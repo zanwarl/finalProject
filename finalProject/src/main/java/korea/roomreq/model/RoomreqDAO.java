@@ -27,5 +27,7 @@ public interface RoomreqDAO {
 	public String total(String roomIdx);
 	public List<RoomreqDTO> total2(); 
 	
+	public String getNoDate (int roomidx);
+	
 
 }
