@@ -203,7 +203,6 @@ html, body {
 	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
-	
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
 <%@ include file="../footer.jsp" %>
 </body>

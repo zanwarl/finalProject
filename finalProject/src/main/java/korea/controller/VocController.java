@@ -154,7 +154,7 @@ public class VocController {
 		
 		List<VocDTO> list = vdao.vocMyList(cp, listSize, writer);
 		
-		String pageStr = korea.page.PageModule.makePage("vocSearchList.do", totalCnt, listSize, pageSize, cp);
+		String pageStr = korea.page.PageModule.makePage("vocSearchList.do?writer="+writer, totalCnt, listSize, pageSize, cp, writer);
 		
 		mav.addObject("pageStr", pageStr);
 		mav.addObject("list", list);
