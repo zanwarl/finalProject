@@ -5,26 +5,19 @@ public class RoomJoinDTO {
 	 private int useridx; 	
 	 private String roomname;
 	 private String filename;
+	 private String roomprice;
 	 
 	 public RoomJoinDTO() {
 		// TODO Auto-generated constructor stub
 	}
-	 
-	public RoomJoinDTO(int roomidx, int useridx, String roomname, String filename) {
+
+	public RoomJoinDTO(int roomidx, int useridx, String roomname, String filename, String roomprice) {
 		super();
 		this.roomidx = roomidx;
 		this.useridx = useridx;
 		this.roomname = roomname;
 		this.filename = filename;
-	}
-
-	
-	public String getRoomname() {
-		return roomname;
-	}
-
-	public void setRoomname(String roomname) {
-		this.roomname = roomname;
+		this.roomprice = roomprice;
 	}
 
 	public int getRoomidx() {
@@ -43,6 +36,14 @@ public class RoomJoinDTO {
 		this.useridx = useridx;
 	}
 
+	public String getRoomname() {
+		return roomname;
+	}
+
+	public void setRoomname(String roomname) {
+		this.roomname = roomname;
+	}
+
 	public String getFilename() {
 		return filename;
 	}
@@ -50,6 +51,15 @@ public class RoomJoinDTO {
 	public void setFilename(String filename) {
 		this.filename = filename;
 	}
+
+	public String getRoomprice() {
+		return roomprice;
+	}
+
+	public void setRoomprice(String roomprice) {
+		this.roomprice = roomprice;
+	}
 	 
+	
 	 
 }
