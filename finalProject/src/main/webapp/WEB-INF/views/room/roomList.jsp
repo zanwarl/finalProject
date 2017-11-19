@@ -78,10 +78,9 @@ img {
 </script>
 <script type="text/javascript">
 function roomadd() {
-	location.href="loginCk.do";
 	location.href="roomadd.do";
 }
-	<jsp:include page="/loginCk.do"></jsp:include>
+
 </script>
 <title>Insert title here</title>
 </head>
@@ -98,7 +97,7 @@ function roomadd() {
 		</c:if>
 		<c:forEach var="rdto" items="${list}" varStatus="status">
 			<c:if test="${status.index%4==0}">
-				<tr></tr>
+				<tr ></tr>
 			</c:if>
 			<td>
 			<div>

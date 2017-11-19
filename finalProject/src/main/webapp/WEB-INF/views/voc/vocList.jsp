@@ -34,7 +34,6 @@ tr:hover {
 
 
 
-	<jsp:include page="/loginCk.do"></jsp:include>
 	<jsp:include page="/header.do"></jsp:include>
 
 
