@@ -80,6 +80,7 @@ img {
 function roomadd() {
 	location.href="roomadd.do";
 }
+
 </script>
 <title>Insert title here</title>
 </head>
