@@ -58,14 +58,11 @@ public class PlanDAOImple implements PlanDAO {
 		
 	}
 	public int planMainUpdate(PlanDTO pdto) {
-		System.out.println("idx : " + pdto.getPlan_idx());
 		int result = sqlMap.update("planMainUpdate", pdto);
 		return result;
 	}
 	
 	public int planDetailWrite(PlanDetailDTO pddto) {
-		System.out.println(pddto.getPland_img());
-		System.out.println(pddto.getPland_order());
 		int result = sqlMap.insert("planDetailWrite", pddto);
 		return result;
 	}
@@ -82,9 +79,7 @@ public class PlanDAOImple implements PlanDAO {
 	
 	
 	public int lastSaveIdx(PlanDTO pdto) {
-		System.out.println("idx : " + pdto.getPlan_writer());
 		int result = sqlMap.selectOne("lastSaveIdx", pdto);
-		System.out.println("result :" + result);
 		return result;
 	}
 	
@@ -114,7 +109,6 @@ public class PlanDAOImple implements PlanDAO {
 		return pdto;
 	}
 	public List<PlanDetailDTO> planDetail(int pidx) {
-		System.out.println("-------");
 		List<PlanDetailDTO> pddto = sqlMap.selectList("planDetail", pidx);
 		return pddto;
 	}
