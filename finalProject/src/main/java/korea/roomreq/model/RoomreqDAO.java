@@ -28,6 +28,7 @@ public interface RoomreqDAO {
 	public List<RoomreqDTO> total2(); 
 	
 	public String getNoDate (int roomidx);
+	public List<	Map<String, Object> > getBookedDate	(int reqidx );
 	
 
 }

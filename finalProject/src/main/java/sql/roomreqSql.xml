@@ -155,7 +155,8 @@ on c.roomidx = roomreq.roomidx
 		
 		(substr(checkoutdate, 7,4))||'-'||
 		(substr (checkoutdate,1,2))||'-'||
-		(substr(checkoutdate, 4,2)) as ENDDATE
+		(substr(checkoutdate, 4,2)) as ENDDATE, 
+		to_date(checkoutdate, 'mm/dd/yyyy') - to_date (checkindate, 'mm/dd/yyyy') as temp
 		
 		from roomreq 
 		where roomidx = #{roomidx}

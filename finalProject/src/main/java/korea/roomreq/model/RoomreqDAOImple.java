@@ -118,4 +118,11 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return list;
 		
 	}
+
+	public List<Map<String, Object> > getBookedDate(int reqidx) {
+	List<	Map<String, Object> >list =  sqlMap.selectList("getBookedDateSql", reqidx);
+		
+		return list; 
+		
+	}
 }
