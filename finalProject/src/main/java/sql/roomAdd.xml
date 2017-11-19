@@ -9,8 +9,8 @@
 		</selectKey>
 		insert into roomAdd values(
 		room_idx.nextval, #{useridx},#{btype}, #{rtype}, #{maxcount},
-		#{addr1}, #{addr2}, #{postnum}, #{conv}, #{safe},
-		#{space}, #{content}, #{roomname}, #{roomprice},
+		#{addr1}, #{addr2}, #{postnum}, #{conv,jdbcType=VARCHAR}, #{safe,jdbcType=VARCHAR},
+		#{space,jdbcType=VARCHAR}, #{content}, #{roomname}, #{roomprice},
 		#{nodate}, #{checkin}, #{checkout}
 		)
 	</insert>
@@ -29,8 +29,8 @@
 	</select>
 	<update id="roomUpdate" parameterType="korea.roomAdd.model.RoomAddDTO">
 		update roomadd set btype=#{btype}, rtype=#{rtype},maxcount=#{maxcount},
-		addr1=#{addr1},addr2=#{addr2},postnum=#{postnum},conv=#{conv},safe=#{safe},
-		space=#{space},content=#{content},roomname=#{roomname},roomprice=#{roomprice},
+		addr1=#{addr1},addr2=#{addr2},postnum=#{postnum},conv=#{conv,jdbcType=VARCHAR},safe=#{safe,jdbcType=VARCHAR},
+		space=#{space,jdbcType=VARCHAR},content=#{content},roomname=#{roomname},roomprice=#{roomprice},
 		nodate=#{nodate},checkin=#{checkin},checkout=#{checkout} where roomidx=#{roomidx}
 	</update>
 	<delete id="roomDelete" parameterType="int">

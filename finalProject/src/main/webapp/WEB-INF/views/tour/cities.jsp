@@ -51,13 +51,32 @@
     position: relative;
     background-size: cover;
 }
-.bg_wrap{
+.bg{
    position: absolute;
    height: 300px;
    width: 350px;
-   background-color: rgba(0, 0, 0, 1);                                                                 
-   z-index:1;
+   background-color: rgba(0, 0, 0, 0.4);                                                                 
+   z-index:44;
 }
+.bg:hover {
+   position: absolute;
+   height: 300px;
+   width: 350px;
+   background-color: rgba(0, 0, 0, 0); 
+   -webkit-transition: all 1s;                                                                
+   z-index:44;
+   
+}
+.bg:hover .city_img{
+	transform: scale(1.2);
+	-webkit-transition: all 3.6s;
+}
+/* .img{
+   position: absolute;
+   height: 300px;
+   width: 350px;
+   
+} */
 .city_list .name{
      position: absolute;
      top:50%;
@@ -65,13 +84,15 @@
      transform: translate(-50%, -50%);                                                                   
      font-size:3rem;
      color: white;
-     z-index: 2;
+     z-index: 55;
      text-align: center;
 }
-
+.contents_mid {
+	width: 1200px;
+	height: 1000px;
+}
 
     
-}
 
 .wrap_content_city_list {
 	width: 1500px;
@@ -100,32 +121,37 @@
 	        	   
                    var output = '';
 	        	   //for(var i=0; i<6; i++){
-	        		   output += '<div class="wrap_city_list">';
+						output += '<div class="wrap_city_list">';
+						
 	                    output += '<a class="city_list" href="city.do?areaCode=1">';
 	                    output += '<div class="name">서울</div>';
-	            		output += '<div class="bg_wrap">';
 	            		output += '<div class="bg">';
-	            		output += '<img class="city_img" src="img/city/seoul.jpg"></div></div></a>';
+	            		output += '</div><img class="city_img" src="img/city/seoul.jpg"></a>';
 	            		
 	                    output += '<a class="city_list" href="city.do?areaCode=6">';
 	                    output += '<div class="name">부산</div>';
-	                    output += '<div class="bg"><img class="city_img" src="img/city/busan.jpg"></div></a>';	
+	                    output += '<div class="bg">';
+	            		output += '</div><img class="city_img" src="img/city/busan.jpg"></a>';
 	                    
 	                    output += '<a class="city_list" href="city.do?areaCode=39">';
 	                    output += '<div class="name">제주도</div>';
-	                    output += '<div class="bg"><img class="city_img" src="img/city/jeju.jpg"></div></a>';	
+	                    output += '<div class="bg">';
+	            		output += '</div><img class="city_img" src="img/city/jeju.jpg"></a>';
 	                    
 	                    output += '<a class="city_list" href="city.do?areaCode=3">';
 	                    output += '<div class="name">대전</div>';
-	                    output += '<div class="bg"><img class="city_img" src="img/city/daejeon.jpg"></div></a>';	
+	                    output += '<div class="bg">';
+	            		output += '</div><img class="city_img" src="img/city/daejeon.jpg"></a>';
 	                    
 	                    output += '<a class="city_list" href="city.do?areaCode=4">';
 	                    output += '<div class="name">대구</div>';
-	                    output += '<div class="bg"><img class="city_img" src="img/city/daegu.jpg"></div></a>';	
+	                    output += '<div class="bg">';
+	            		output += '</div><img class="city_img" src="img/city/daegu.jpg"></a>';
 	                    
 	                    output += '<a class="city_list" href="city.do?areaCode=2">';
 	                    output += '<div class="name">인천</div>';
-	                    output += '<div class="bg"><img class="city_img" src="img/city/incheon.jpg"></div></a>';	
+	                    output += '<div class="bg">';
+	            		output += '</div><img class="city_img" src="img/city/incheon.jpg"></a>';
 	                    
                    		
 	                    output += '</div>';
@@ -162,6 +188,10 @@
 		</div>
 		<div class="popular"><b>인기 도시</b></div>
 		<div class="panel"></div>
+	</div>
+	
+	<div class="contents_bot">
+		모든도시보긔
 	</div>
 </div>
 <%@ include file="../footer.jsp" %>
