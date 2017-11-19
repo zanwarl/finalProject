@@ -108,12 +108,12 @@ text-align:center;
 	
 	function disableAllTheseDays(date) {
 	/* 	var test = ["2017-11-28" ,"2017-11-29"]; */
-		var test2 = document.roomReqFm.NO_DATE.value;
+/* 		var test2 = document.roomReqFm.NO_DATE.value;
 		test2 = test2.replace(/\//g , "-");
 		test2 = test2.replace(/(\s*)/g, "");
 		var noDate = [test2]; 
 		
-		var disabledDays = noDate;
+		var disabledDays = noDate; */
 		
 	   	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
 	   	for (i = 0; i < disabledDays.length; i++) { 

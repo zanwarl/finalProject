@@ -146,6 +146,24 @@ on c.roomidx = roomreq.roomidx
 		select nodate from roomadd where roomidx = #{roomidx}
 	
 	</select>
+	
+	<select id="getBookedDateSql" parameterType="int" resultType="map">
+		select 
+		(substr (checkindate, 7,4))||'-'||
+		(substr(checkindate,1,2))||'-'||
+		(substr(checkindate, 4,2)) as STARTDATE,
+		
+		(substr(checkoutdate, 7,4))||'-'||
+		(substr (checkoutdate,1,2))||'-'||
+		(substr(checkoutdate, 4,2)) as ENDDATE
+		
+		from roomreq 
+		where roomidx = #{roomidx}
+		
+	
+	
+	</select>
+	
 
 
 </mapper>

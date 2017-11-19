@@ -36,25 +36,31 @@ public class RoomReqController {
 		RoomAddDTO rdto = radao.roomContent(idx);
 		
 		String map = rdao.getNoDate(idx);
-		map = map.replace("/", "-");
-		map = map.replace(" ", "");
-		
-		System.out.println(map);
-		String [] arr ; 
-		arr= map.split(",");
-		System.out.println(arr[0]);
-		
-		
+
 		String str ="";
 		
-		for ( int i =0; i<arr.length-1 ; i ++){
-			str = str +"'"+arr[i]+"'"+","; 
+		if(!( map ==null || map .equals(""))){
+			
+			map = map.replace("/", "-");
+			map = map.replace(" ", "");
+			
+			System.out.println(map);
+			String [] arr ; 
+			arr= map.split(",");
+			System.out.println(arr[0]);
+			
+			
+			for ( int i =0; i<arr.length-1 ; i ++){
+				str = str +"'"+arr[i]+"'"+","; 
+			}
+			
+			str = str +"'"+arr[arr.length-1]+"'"; 
+			
 		}
-		
-		str = str +"'"+arr[arr.length-1]+"'"; 
-		
+	
 		System.out.println(str);
 		
+	
 		
 		
 		
