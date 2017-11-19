@@ -30,12 +30,76 @@ public class RoomReqController {
 
 	@RequestMapping("/roomReq.do")
 	public ModelAndView roomReq(@RequestParam(value = "roomIdx") int idx) {
+	//123 test
+		
 		
 		RoomAddDTO rdto = radao.roomContent(idx);
+		
+		String map = rdao.getNoDate(idx);
+
+		String str ="";
+		
+		if(!( map ==null || map .equals(""))){
+			
+			map = map.replace("/", "-");
+			map = map.replace(" ", "");
+			
+			System.out.println(map);
+			String [] arr ; 
+			arr= map.split(",");
+			System.out.println(arr[0]);
+			
+			
+			for ( int i =0; i<arr.length-1 ; i ++){
+				str = str +"'"+arr[i]+"'"+","; 
+			}
+			
+			str = str +"'"+arr[arr.length-1]+"'"; 
+			
+		}
+	
+	//	System.out.println(str);
+		
+	
+		List<Map<String, Object>> bookedDates = rdao.getBookedDate(idx);
+		//System.out.println(bookedDates);
+		
+		
+	
+		String str2 = ""
+;
+		for ( int i =0; i< bookedDates.size(); i ++){
+			int y= Integer.parseInt(((String)  bookedDates.get(i).get("STARTDATE")).substring(0, 4));
+			int m= Integer.parseInt(((String)  bookedDates.get(i).get("STARTDATE")).substring(5, 7));
+			int d= Integer.parseInt(((String)  bookedDates.get(i).get("STARTDATE")).substring(8, 10));
+		//	System.out.println(d);
+			
+			str2=str2+"'"+bookedDates.get(i).get("STARTDATE")+"',";
+			
+			
+			Calendar date = Calendar.getInstance(); 
+			date.set(y, m-1, d);
+			
+			int temp = Integer.parseInt(bookedDates.get(i).get("TEMP").toString());
+			
+			for ( int j=0; j<temp-1; j ++){
+				date.add(Calendar.DATE, 1);
+				str2 =str2+"'"+date.get(Calendar.YEAR)+"-"+(date.get(Calendar.MONTH)+1)+"-"+date.get(Calendar.DATE)+"',";
+				
+			}
+			
+			
+			
+		}
+		str2=str2.substring(0, str2.length()-1);
+		//System.out.println(str2);
+		
 				
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("roomReq/roomReqMain");
 		mav.addObject("rdto", rdto);		
+		mav.addObject("str", str);		
+		mav.addObject("str2", str2);		
 		mav.addObject("roomIdx", idx);
 
 		return mav; 
