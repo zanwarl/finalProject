@@ -44,9 +44,6 @@
 </c:if>
 
 </li>
-				
-				<li><a href="#">언어설정</a></li>
-				<li><a href="#">환율</a></li>
 				<li><a href="msgList.do">메세지</a></li>
 				<li><a href="mypageMain.do">마이페이지</a></li>
 				
