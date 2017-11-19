@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="EUC-KR"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -8,44 +10,42 @@
 
 <head>
 <style type="text/css">
-.rokImage {width:80px; display:block; float:left; margin-left:10px;}
 
-.reqWrap {
-  margin: 20px auto;
-  width:400px; 
-  height: 400px; 
-  -webkit-border-radius: 8px/7px; 
-  -moz-border-radius: 8px/7px; 
-  border-radius: 8px/7px; 
-  background-color: #ebebeb; 
-  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
-  border: solid 1px #cbc9c9;
+.req1 {
+  width: 30%;
+  height: 30%;
+  margin: 40px auto;
+  background: #CCCCFF;
+  background:rgba(240,120,100,0.2)
 }
 
-.req {text-align:center; margin:20px;}
-
-h2 {
-  font-size: 32px;
-  font-weight: 300;
-  color: #4c4c4c;
-  text-align: center;
-  padding-top: 10px;
-  margin-bottom: 10px;
+.req2{
+  width: 30%;
+  height: 30%;
+  margin: 40px auto;
 }
 
-#payMent label {float:left; width:100px; margin-left:20px; font-size:20px;}
-
-.text {
-width:200px;
-font-size:20px;
-font-weight:bold;
-text-align:center;
+h1{
+ 	width: 30%;
+	height: 30%;
+  	margin: 40px auto;
+    color: #FCA205;
+    font-family: 'Lobster';
+    font-size: 30pt;
 }
 
+}
+label{
+	font-size: 30pt;
+	align : center;	
+}
+text{
+	font-size: 20pt;
+	align : center;	
+
+}
 .reqBtn{
-	display: inline-block;
+ display: inline-block;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
@@ -77,7 +77,7 @@ text-align:center;
 
 </style>
 
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <script>
 
 function paid (reqIdx){
@@ -85,29 +85,29 @@ function paid (reqIdx){
 }
 function ok(reqIdx, amt){
 	var IMP = window.IMP; 
-	IMP.init('imp23082100');  // ê°€ë§¹ì  ì‹ë³„ ì½”ë“œ
+	IMP.init('imp23082100');  // °¡¸ÍÁ¡ ½Äº° ÄÚµå
 
 	IMP.request_pay({
     pg : 'html5_inicis',
     pay_method : 'card',
     merchant_uid : 'merchant_' + new Date().getTime(),
-    name : 'ì£¼ë¬¸ëª…:'+reqIdx,
+    name : 'ÁÖ¹®¸í:'+reqIdx,
     amount : amt,
     buyer_email : 'iamport@siot.do',
     buyer_name : '${sId}',
     buyer_tel : '010-3043-2881',
-    buyer_addr : 'ì„œìš¸íŠ¹ë³„ì‹œ ê°•ë‚¨êµ¬ ì‚¼ì„±ë™',
+    buyer_addr : '¼­¿ïÆ¯º°½Ã °­³²±¸ »ï¼ºµ¿',
     buyer_postcode : '123-456'
 }, function(rsp) {
     if ( rsp.success ) {
- 	       var msg = 'ê²°ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤.';
+ 	       var msg = '°áÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù.';
  	       paid(reqIdx);      	
         	
         	
  	       
     } else {
-        var msg = 'ê²°ì œì— ì‹¤íŒ¨í•˜ì˜€ìŠµë‹ˆë‹¤.';
-        msg += 'ì—ëŸ¬ë‚´ìš© : ' + rsp.error_msg;
+        var msg = '°áÁ¦¿¡ ½ÇÆĞÇÏ¿´½À´Ï´Ù.';
+        msg += '¿¡·¯³»¿ë : ' + rsp.error_msg;
     }
 
     alert(msg);
@@ -124,41 +124,38 @@ function ok(reqIdx, amt){
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-	<div class="reqWrap">
-	<form name="payMent" id="payMent" action="payMent.do">
-	<img src="img/reser.PNG" class="rokImage"><h2>ì˜ˆì•½ í™•ì¸ ë° ê²°ì œ</h2>
-	<hr>
+	<img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+	<h1> È®ÀÎ ¹× °áÁ¦ </h1>
+<form name="payMent" action="payMent.do">
+	
+	<div class=req1>
+	<table>
 	<c:set var="arr" value="${rdto}"/>	
-		<p class="req">
-		<label>ì˜ˆì•½ì¸ì›ìˆ˜</label>
-			<span class="text">${arr.count}</span>
-		</p>
-		
-		<p class="req">
-		<label>ì˜ˆì•½ì¼ì‹œ </label>
-		<span class="text">${arr.reqDate}</span>
-		</p>
-		
-		<p class="req">
-		<label>ì²´í¬ì¸</label>
-		<span class="text">${arr.checkindate}</span>
-		</p>
 	
-		<p class="req">
-		<label>ì²´í¬ì•„ì›ƒ </label>
-		<span class="text">${arr.checkoutdate}</span>
-		</p>
-	
-		<p class="req">
-		<label>ì´ í•©ê³„</label>
-		<span class="text">${total_pay}</span>
-		</p>
+		<label>¿¹¾àÀÎ¿ø¼ö</label></br>
+		<text> ${arr.count} </text></br>
 		
-		<p class="req">
-		<input type="button" class="reqBtn" value="ê²°ì œ" onclick="ok('${param.reqidx }', ${total_pay})"> 
-		</p>
-		</form>
-	</div>
+		<label>¿¹¾àÀÏ½Ã </label></br>
+		<text>${arr.reqDate}</text></br>
+		
+		<label>Ã¼Å©ÀÎ</label></br>
+		<text>${arr.checkindate}</text></br>
+	
+		<label>Ã¼Å©¾Æ¿ô </label></br>
+		<text>${arr.checkoutdate}</text></br>
+	
+		<label>ÃÑ ÇÕ°è</label></br>
+		<text><fmt:formatNumber value="${total_pay}" pattern="#,###,###" /></text></br>
+		
+		</div>
+		<div class=req2>
+			<label>	 
+				<input type="button" class="reqBtn" value="°áÁ¦" onclick="ok('${param.reqidx }', ${total_pay})"> 
+			</label>
+		</div>
+ 	   
+	</table>
+	</form>
 </div>
 <%@ include file="../footer.jsp" %>
 </body>
