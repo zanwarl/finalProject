@@ -97,4 +97,16 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return list;
 	}
 
+	
+	public String total(String roomIdx) {
+		Map<String, Object> dill = new HashMap<String, Object>();
+		dill.put("roomIdx",roomIdx);
+		String t2 = sqlMap.selectOne("totalSql", dill);
+		return t2;
+	}
+	public List<RoomreqDTO> total2(){
+		List<RoomreqDTO> listt=sqlMap.selectList("total2Sql");
+		
+		return listt;
+	}
 }

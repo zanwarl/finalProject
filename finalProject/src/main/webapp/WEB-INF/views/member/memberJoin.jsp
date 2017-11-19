@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
-<script>
+<script> 
 function openMemberCheck(){
 	window.open('memberCheckForm.do','memberCheck','width=450,height=200');
 }
@@ -28,33 +28,33 @@ function pwd(){
 <table align="center" style="text-align: left;">
 	<tr>
 		<th>아이디</th>
-		<td><input type="text" name="member_id" placeholder="아이디" maxlength="16" readonly>
+		<td><input type="text" name="member_id" placeholder="아이디" maxlength="16" readonly required>
 		<input type="button" value="중복확인" onclick="openMemberCheck()"></td>
 	</tr>
 	
 	<tr>
 		<th>비밀번호</th>
-		<td><input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호"></td>
+		<td><input type="password" id="member_pwd" name="member_pwd" placeholder="비밀번호" required></td>
 	</tr>
 	<tr>
 		<th>비밀번호확인</th>
-		<td><input type="password" id="member_pwd2" name="member_pwd2" placeholder="비밀번호확인" onkeyup="pwd()">&nbsp;
+		<td><input type="password" id="member_pwd2" name="member_pwd2" placeholder="비밀번호확인" onkeyup="pwd()" required>&nbsp;
 		<input type="text" id="pwd3" name="pwd3" readonly style="background-color:transparent;border:0 solid black;text-align:left; color: #FF6000; font: 7pt 돋움;">
 		
 		</td>
 	</tr>
 	<tr>
 		<th>이름</th>
-		<td><input type="text" maxlength="16" name="member_name" placeholder="이름"></td>
+		<td><input type="text" maxlength="16" name="member_name" placeholder="이름" required></td>
 	</tr>
 	<tr>
 		<th>성별</th>
-		<td><input type="radio" name="member_sex" value="1">남자
+		<td><input type="radio" name="member_sex" value="1" required>남자
 		<input type="radio" name="member_sex" value="2">여자</td>
 	</tr>
 	<tr>
 		<th>생년월일</th>
-		<td><input type="text" maxlength="8" name="member_birth" placeholder="생년월일 8자리">
+		<td><input type="text" maxlength="8" name="member_birth" placeholder="생년월일 8자리" required>
 		<span style="font: 8pt 돋움; color: black">&nbsp; (생년월일 8자리 입력)
 		</span></td>
 	</tr>
@@ -71,18 +71,18 @@ function pwd(){
 						</select> - <input type="text" name="member_tel" 
 								size="4" maxlength="4"> - <input type="text"
 								name="member_tel" size="4"
-								maxlength="4"></td>
+								maxlength="4" required></td>
 	</tr>
 	<tr>
 		<th>E-mail</th>
-		<td><input type="text" name="member_email" placeholder="이메일"></td>
+		<td><input type="text" name="member_email" placeholder="이메일" required></td>
 	</tr>
 	<tr>
 		<th>주소</th>
 		<td><input type="text" name="member_addr" id="sample6_postcode" placeholder="우편번호" readonly>
 <input type="button" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 <input type="text" name="member_addr" id="sample6_address" placeholder="주소" readonly>
-<input type="text" name="member_addr" id="sample6_address2" placeholder="상세주소">
+<input type="text" name="member_addr" id="sample6_address2" placeholder="상세주소" required>
 
 <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>

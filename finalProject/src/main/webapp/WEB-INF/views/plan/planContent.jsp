@@ -9,8 +9,11 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
+<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
 <div id="contents">
-${pdto.plan_name }님의 일정 <hr>
+${pdto.plan_name }님의 일정<hr>
+<img src="${src}${pdto.plan_file}" width="960">
+ <hr>
 <c:forEach var="list" items="${list }">
 Day : ${list.pland_day }
 순서 : ${list.pland_order } &nbsp;

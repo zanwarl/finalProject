@@ -1,10 +1,13 @@
 package korea.controller;
 
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Random;
+import java.util.Vector;
 import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
@@ -63,7 +66,6 @@ public class PlanController {
 		
 		String url = "plan.do";
 		
-		System.out.println(totalCnt);
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
 		
 		mav.addObject("list", list);
@@ -82,7 +84,6 @@ public class PlanController {
 	
 	@RequestMapping("/planAreaCode.do")
 	public ModelAndView areaCode() throws Exception {
-		System.out.println("타니");
 		tour_code = "areaCode";
 		param_1 = "&contentTypeId=&" + tour_code + "&numOfRows=10&pageNo=1&MobileOS=ETC&MobileApp=TestApp";
 
@@ -94,8 +95,6 @@ public class PlanController {
 		json = (JSONObject) json.get("body");
 		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
 
-		//System.out.println("총 지역 수 : " +totalCount);
-		//System.out.println(jsonObject);
 		json = (JSONObject) json.get("items");
 		JSONArray list = (JSONArray) json.get("item");
 		JSONArray arrayName = new JSONArray();
@@ -104,7 +103,6 @@ public class PlanController {
 
 			JSONObject entity = (JSONObject) list.get(i);
 			String name = (String) entity.get("name");
-			// System.out.println(name);
 			arrayName.add(name);
 
 		}
@@ -118,7 +116,6 @@ public class PlanController {
 	
 	// rest api 주소 실행하는 method
 	private static String readUrl(String tour_api_url) throws Exception {
-		//System.out.println(tour_api_url);
 		BufferedInputStream reader = null;
 		try {
 			URL url = new URL(tour_api_url);
@@ -138,22 +135,70 @@ public class PlanController {
 	
 	//상세 일정 추가 페이지 가기 전에 DB에 main 저장하기
 	@RequestMapping("/planMainSaveDb.do")
-	public ModelAndView planMainSaveDb(PlanDTO pdto) {
+	public ModelAndView planMainSaveDb(HttpServletRequest req,PlanDTO pdto) {
 		int idx = pdao.lastSaveIdx(pdto);
-		System.out.println(idx);
-		System.out.println("areacode : " + pdto.getPlan_place());
 		pdto.setPlan_idx(idx);
+		
+		//랜덤 이미지 저장하기 start
+		int areaCode = Integer.parseInt(pdto.getPlan_place());
+		String savePath = req.getSession().getServletContext().getRealPath("/img/city/thumb/");
+		
+		
+		String plan_file = randomImage(savePath,areaCode);
+		
+		String db_fileName = "";
+		switch(areaCode) {
+		case 1: db_fileName = "\\seoul\\"; break;
+		case 6: db_fileName = "\\busan\\"; break;
+		case 39: db_fileName = "\\jeju\\"; break;
+		default: db_fileName = "\\etc\\";
+		}
+		pdto.setPlan_file(db_fileName + plan_file);
+		//랜덤 이미지 저장하기 end
 		
 		int result = pdao.planMainWrite(pdto);
 		ModelAndView mav = new ModelAndView();
-		System.out.println("2");
 		String str = "planDetail.do";
 		str = str +  "?plan_idx="+pdto.getPlan_idx();
 		
-		System.out.println(str);
 		mav.setViewName("plan/planDetailOk");
 		mav.addObject("url", str);
 		return mav;
+	}
+	
+	public String randomImage(String savePath,int code) {
+
+		Vector<String> vector = new Vector<String>();
+		Random random = new Random();
+
+		String name = "";
+		switch(code) {
+		case 1: name = savePath + "\\seoul\\"; break;
+		case 6: name = savePath + "\\busan\\"; break;
+		case 39: name = savePath + "\\jeju\\"; break;
+		default: name = savePath + "\\etc\\";
+		}
+		
+		File f = new File(name);
+		 boolean isExists = f.exists();
+         
+	        if(!isExists) {
+	        }
+	         
+	        if(f.isDirectory()) {
+	            File[] fileList = f.listFiles();
+	            for(File tFile : fileList) {
+	                System.out.print(tFile.getName());             
+	                if(tFile.isDirectory()) {
+	                } else {
+	                	vector.addElement(tFile.getName());
+	                }
+	            }          
+	        } else {
+	        }
+	        
+	        int randName= random.nextInt(vector.size());
+		return vector.elementAt(randName);
 	}
 	
 	/**세부 일정 작성*/ 
@@ -209,7 +254,6 @@ public class PlanController {
 		
 		String url = "myPlan.do";
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
-		System.out.println(page);
 		List<PlanDTO> list = pdao.myPlanList(idx, cp, pageSize);
 		
 		mav.setViewName("plan/myPlanList");
@@ -218,28 +262,9 @@ public class PlanController {
 		return mav;
 	}
 	
-	/*@RequestMapping("/planDetailWrite.do")
-	public ModelAndView planDetailWrite(PlanDetailDTO pddto, PlanDTO pdto, @RequestParam(value="str") String[] str) {
-		
-		System.out.println(str.length);
-
-		
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("plan/planOk");
-		return mav;
-	}*/
-	
 	@RequestMapping("/planDetailWrite.do")
 	public ModelAndView getListParam(@RequestParam(value="str")String str, PlanDTO pdto) throws ParseException{
-		
-		
-		/*Object object=null;
-		JSONArray arrayObj=null;
-		JSONParser jsonParser=new JSONParser();
-		object=jsonParser.parse(str);
-		arrayObj=(JSONArray) object;
-		System.out.println("Json object :: "+arrayObj);*/
-		
+
 		System.out.println("체크여부 : " + pdto.getPlan_public());
 		if(pdto.getPlan_public()==null || pdto.getPlan_public().equals("")) {
 			pdto.setPlan_public("Y");
@@ -277,14 +302,11 @@ public class PlanController {
 	@RequestMapping("/planEdit.do")
 	public ModelAndView planEdit(int plan_idx) {
 		
-		System.out.println("수정 할 번호 : " + plan_idx);
 		List<PlanDetailDTO> list = pdao.planEditList(plan_idx);
 		
 		PlanDTO pdto = pdao.pdtoInfo(plan_idx);
 		//plan_detail 테이블의 마지막 order를 불러와서 넘김
 		int lastOrder = pdao.lastOrder(plan_idx);
-		
-		System.out.println("lastOrder : " + lastOrder);
 		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("plan/planDetail");

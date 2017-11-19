@@ -31,6 +31,10 @@
     height: 20px;
     overflow: hidden;
 }
+.item_img {
+	width: 100%;
+    height: 100%;
+}
 .category {
 	height: 25px;
 }
@@ -94,12 +98,12 @@
 
     
 
-.wrap_content_city_list {
+.wrap_content_food_list {
 	width: 1500px;
 	height: 650px;
     position: relative;
 } 
-.content_city_list {
+.content_food_list {
 	width: 1500px;
 	height: 600px;
     position: relative;
@@ -110,52 +114,46 @@
 <script type="text/javascript">
 	$(document).ready(function() {
 	     $.ajax({
-	           url:"areaCode.do",
+	    	 url:"areaBasedList.do?areaCode=${areaCode}&arrange=B&contentTypeId=39",
 	           type:"POST",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           success : function(msg) {
-	        	  // console.log(msg.response.body.items.item);
+	        	// console.log(msg.response.body.items.item);
 	        	   var myItem = msg.response.body.items.item;
 	        	   
-	        	   var dataLen = msg.response.body.items.item;
+	        	   //page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
 	        	   
-                   var output = '';
-	        	   //for(var i=0; i<6; i++){
-						output += '<div class="wrap_city_list">';
-						
-	                    output += '<a class="city_list" href="city.do?areaCode=1">';
-	                    output += '<div class="name">서울</div>';
-	            		output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/seoul.jpg"></a>';
-	            		
-	                    output += '<a class="city_list" href="city.do?areaCode=6">';
-	                    output += '<div class="name">부산</div>';
-	                    output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/busan.jpg"></a>';
-	                    
-	                    output += '<a class="city_list" href="city.do?areaCode=39">';
-	                    output += '<div class="name">제주도</div>';
-	                    output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/jeju.jpg"></a>';
-	                    
-	                    output += '<a class="city_list" href="city.do?areaCode=3">';
-	                    output += '<div class="name">대전</div>';
-	                    output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/daejeon.jpg"></a>';
-	                    
-	                    output += '<a class="city_list" href="city.do?areaCode=4">';
-	                    output += '<div class="name">대구</div>';
-	                    output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/daegu.jpg"></a>';
-	                    
-	                    output += '<a class="city_list" href="city.do?areaCode=2">';
-	                    output += '<div class="name">인천</div>';
-	                    output += '<div class="bg">';
-	            		output += '</div><img class="city_img" src="img/city/incheon.jpg"></a>';
-	                    
-                   		
-	                    output += '</div>';
-	                //}
+	        	   var totalCnt =msg.response.body.totalCount;
+	        	   var pageName = 'city.do?areaCode=';
+	        	   var listSize = 10;
+	        	   var pageSize = 5;
+	        	   
+	        	   var queryStr = '${pageContext.request.queryString}';
+	        	   //alert(queryStr);
+	        	   //var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
+	        	   var moreInfo = totalCnt +'개의 정보 모두보기';
+
+	        	   //총 게시물 수 myItem.length + 페이징처리 
+                   var output = '<div class="wrap_content_food_list">';
+                   output += '<span>총 '+msg.response.body.totalCount + ' 개</span>';
+                   output += '<div class="content_food_list">';
+                   var chkImg = '';
+
+                   var iterator = 0;
+	        	   for(var i=0; i<listSize; i++){
+						output += '<a class="item" href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+'&contentId='+myItem[i].contentid+'">';
+                  		output += '<div class="item_name">' +myItem[i].title+ '</div>' ;
+                  		output += '<div class="item_img_box">';
+	                    if(myItem[i].firstimage==undefined) {
+	                    	output += '<img src="img/notimage.png" alt class="item_img">';             	
+	                    } else {
+	                    	output += '<img src="'+myItem[i].firstimage+'" alt class="item_img">';
+	                    }
+	                    output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
+	                    output += '</div></a>';
+	        	   }
+	        	   output += '</div>';
+	        	   output += '</div>';
 	        	   $(".panel").html(output);
 	           },
 	           error : function(xhr, status, error) {
@@ -171,7 +169,7 @@
 	<div class="contents_top">
 		<div class="city_title"><b>${cityName }</b></div>
 		<div class="menu">1홈</a>
-			<a href="area.do">주요도시</a>
+			<a href="tour.do">주요도시</a>
 			<a href="attraction.do">관광명소</a>
 			<a href="foodList.do">음식점</a>
 			<a href="shopping.do">쇼핑</a>
@@ -181,12 +179,7 @@
 	</div>
 	
 	<div class="contents_mid">
-		<div class="category">
-			<div class="category_item" data-cate="12">관광명소</div>
-			<div class="category_item" data-cate="39">음식</div>
-			<div class="category_item" data-cate="38">쇼핑</div>
-		</div>
-		<div class="popular"><b>인기 도시</b></div>
+		<div class="foodList"><b>음식점</b></div>
 		<div class="panel"></div>
 	</div>
 	
