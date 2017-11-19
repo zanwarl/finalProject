@@ -8,6 +8,31 @@
 
 #roomReqFm {width:340px; margin:0 auto; margin-top:20px;}
 .req {text-align:center; margin:20px;}
+
+.reqWrap {
+  margin: 20px auto;
+  width: 343px; 
+  height: 400px; 
+  -webkit-border-radius: 8px/7px; 
+  -moz-border-radius: 8px/7px; 
+  border-radius: 8px/7px; 
+  background-color: #ebebeb; 
+  -webkit-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  -moz-box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  box-shadow: 1px 2px 5px rgba(0,0,0,.31); 
+  border: solid 1px #cbc9c9;
+}
+h2 {
+  font-size: 32px;
+  font-weight: 300;
+  color: #4c4c4c;
+  text-align: center;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+
 #roomReqFm label {float:left; width:90px; margin-left:20px; font-size:20px;}
 #datepicker,#datepicker1,#roomp {width:150px; height:30px; border:1px solid #e9e9e9;}
 #SUB_NUM,#ADD_NUM {
@@ -38,7 +63,7 @@ text-align:center;
 }	
 	
 .reqBtn{
- display: inline-block;
+ 	display: inline-block;
     text-decoration: none;
     color: #fff;
     font-weight: bold;
@@ -193,7 +218,10 @@ text-align:center;
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
+<div class="reqWrap">
+<h2>예약하기</h2>
 <form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
+<hr>
 <input type="hidden" value="${roomIdx }" name="roomidx">
 
 <c:set var="arr" value="${rdto}"/>   
@@ -214,7 +242,7 @@ text-align:center;
 		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()" readonly>
+			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()">
 		</p>
 		<p class="req">
             <input type="submit" class="reqBtn" value="예약하기">
@@ -223,6 +251,7 @@ text-align:center;
 var price = document.getElementById('roomp').value;
 </script>
 </form>
+</div>
 </div>
 
 <%@ include file="../footer.jsp" %>
