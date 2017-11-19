@@ -15,4 +15,10 @@ public interface tourDAO {
 	
 	public String areaCode(int areCode);
 	
+	public List<SigunguDTO> sigunguCode();
+	
+	public String sigunguName(int areaCode, String sigunguCode);
+	
+	
+	
 }

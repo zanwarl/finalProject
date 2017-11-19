@@ -42,4 +42,17 @@ public class tourDAOImple implements tourDAO {
 		String result = sqlMap.selectOne("areaCode", areaCode);
 		return result;
 	}
+	
+	public List<SigunguDTO> sigunguCode() {
+		List<SigunguDTO> list = sqlMap.selectList("sigunguCode");
+		return list;
+	}
+	
+	public String sigunguName(int areaCode, String sigunguCode) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("areaCode", areaCode);
+		map.put("sigunguCode", sigunguCode);
+		
+		return sqlMap.selectOne("sigunguName", map);
+	}
 }

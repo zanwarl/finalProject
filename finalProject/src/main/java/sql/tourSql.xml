@@ -22,6 +22,13 @@
 			select name from areaCode where areacode = #{areaCode}
 		</select>
 	
+		<select id="sigunguCode" resultType="korea.tour.model.SigunguDTO">
+			select * from sigungu order by readnum desc
+		</select>
+		
+		<select id="sigunguName" parameterType="map" resultType="String">
+			select name from sigungu where areaCode = #{areaCode} and sigunguCode = #{sigunguCode}
+		</select>
 	<!-- select end -->
 		
 	<!-- insert -->

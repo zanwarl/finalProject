@@ -15,7 +15,7 @@
 }
 .wrap_content_plan_list {
 	width: 1500px;
-	height: 550px;
+	height: 600px;
     position: relative;
 } 
 .content_plan_list {
@@ -27,9 +27,21 @@
 	height: 30px;
 	float: left;
 }
-.plan_img {
+.bg .plan_img {
 	width: 350px;
 	height: 150px;
+}
+.plan_list .bg:hover .plan_img {
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transition: all 1s ease-in-out; 
+	
+}
+.bg {
+	overflow:hidden 
 }
 .plan_list {
     width: 350px;
@@ -41,6 +53,12 @@
     display: block;
     cursor: pointer;
     position: relative;
+}
+.header_plan_list {
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
 }
 </style>
 </head>
@@ -72,13 +90,13 @@
 	
 	<!-- 인기 여행일지 정보 게시판 영역 start-->
 	<div class="wrap_content_plan_list">
-		<div class="header_plan_list"><span class="header_plan_title"><b>인기 여행일정</b></span></div>
+		<div class="header_plan_list">인기 여행일정</div>
 		<div class="content_plan_list">
 		<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
 		<c:forEach var="list" items="${list }">
 			<a class="plan_list" href="planContent.do?pidx=${list.plan_idx}">
-		        <div class="bg"></div>
-	        	<img class="plan_img" src="${src }${list.plan_file}">
+		        <div class="bg">
+	        	<img class="plan_img" src="${src }${list.plan_file}"></div>
 	        	<div class="name">${list.plan_subject }</div>
 	        	<div class="explain">${list.plan_explain }</div>
 	        	<div class="bottom">
@@ -88,7 +106,7 @@
 	        </a>
 		</c:forEach>	
 		</div>
-		<div class="bot_plan_list">모든 일정 보기</div>
+		<div class="bot_plan_list"><a href="plan.do">${count }개의 모든 일정 보기</a></div>
 	</div>
 	<!-- 인기 여행일지 정보 게시판 영역 end-->
 	

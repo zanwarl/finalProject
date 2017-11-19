@@ -93,28 +93,24 @@ var itemAddr = [];
 var itemOverView = [];
 var itemTel = [];
 
-
 var cp = ${cp};
 	$(document).ready(function() {
 	     $.ajax({
-	    	 	url:"areaBasedList.do?areaCode=${areaCode}&arrange=B&contentTypeId=${contentTypeId}&cp="+cp,
+	    	 	url:"${queryStr}",
 	           type:"POST",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           success : function(msg) {
  					var myItem = msg.response.body.items.item;
-	        	   
 	        	   //page(String pageName, int totalCnt, int listSize, int pageSize, int cp, String queryStr) {
-	        	   
 	        	   var totalCnt =msg.response.body.totalCount;
-	        	   var pageName = 'citycate.do?areaCode='+ ${areaCode} +"&contentTypeId=${contentTypeId}";
+	        	   var si = '${sigunguCode}';
+	        	   var pageName = 'citycate.do?areaCode=${areaCode}&sigunguCode=${sigunguCode}&contentTypeId=${contentTypeId}';
 	        	   var listSize = 5;
 	        	   var pageSize = 5;
-	        	   
-	        	   var queryStr = '${pageContext.request.queryString}';
-	        	   //alert(queryStr);
-	        	   var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
+	        	   var queryString = '${pageContext.request.queryString}';
+	        	   var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryString);
 	        	   var moreInfo = totalCnt +'개의 정보 모두보기';
-
+	
 	        	   //총 게시물 수 myItem.length + 페이징처리 
                    var output = '<div class="wrap_content_city_list">';
                    output += '<div class="content_city_list">';

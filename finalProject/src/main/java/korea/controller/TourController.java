@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import korea.tour.model.SigunguDTO;
 import korea.tour.model.tourCmtDTO;
 import korea.tour.model.tourDAO;
 
@@ -107,16 +108,24 @@ public class TourController {
 	public ModelAndView areaBasedList(@RequestParam(value = "areaCode") String areaCode,
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam(value = "arrange", required = false, defaultValue = "A") String arrange,
-			@RequestParam(value = "contentTypeId", required = false, defaultValue = "") String contentTypeId)
+			@RequestParam(value = "contentTypeId", required = false, defaultValue = "") String contentTypeId,
+			@RequestParam(value = "sigunguCode", required = false, defaultValue = "") String sigunguCode,
+			@RequestParam(value = "row", required = false, defaultValue = "10") int row)
 			throws Exception {
-
+		
+		
+		System.out.println("타입 : " + contentTypeId);
+		System.out.println("areabased : "  + sigunguCode);
+		System.out.println("row : " + row);
 		tour_code = "areaBasedList";
 		param_1 = "&contentTypeId=" + contentTypeId + "&areaCode=" + areaCode
-				+ "&sigunguCode=&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=" + "TourAPI3.0_Guide&arrange="
-				+ arrange + "&numOfRows=30&pageNo=" + cp;
+				+ "&sigunguCode=" + sigunguCode + "&cat1=&cat2=&cat3=&listYN=Y&MobileOS=ETC&MobileApp=" + "TourAPI3.0_Guide&arrange="
+				+ arrange + "&numOfRows=11&pageNo=" + cp;
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
+		
+		System.out.println(tour_api_url);
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 
 		JSONObject json = (JSONObject) jsonObject.get("response");
@@ -171,16 +180,28 @@ public class TourController {
 	// 실제 페이지 이동
 	@RequestMapping("/city.do")
 	public ModelAndView cityList(@RequestParam(value = "areaCode") int areaCode,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) throws Exception {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "sigunguCode", required = false, defaultValue = "") String sigunguCode) throws Exception {
 
 		ModelAndView mav = new ModelAndView();
 
 		String cityName = tDAO.areaCode(areaCode);
-
-		mav.setViewName("tour/cityList");
+		
+		System.out.println("---------");
+		
+		String sigunguName = tDAO.sigunguName(areaCode, sigunguCode);
+		int contentTypeId = 1;
+		mav.addObject("contentTypeId", contentTypeId);
 		mav.addObject("areaCode", areaCode);
+		if(sigunguCode==null || sigunguCode.equals("")) {
+		}else {
+			mav.addObject("sigunguCode", sigunguCode);
+			mav.addObject("sigunguName",sigunguName);
+		}
 		mav.addObject("cp", cp);
 		mav.addObject("cityName", cityName);
+		
+		mav.setViewName("tour/cityList");
 		return mav;
 	}
 
@@ -208,12 +229,22 @@ public class TourController {
 	@RequestMapping("citycate.do")
 	public ModelAndView categoryList(@RequestParam(value = "contentTypeId") int contentTypeId,
 			@RequestParam(value = "areaCode") int areaCode,
-			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+			@RequestParam(value = "sigunguCode", required = false, defaultValue = "") String sigunguCode) {
 
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("contentTypeId", contentTypeId);
 		mav.addObject("areaCode", areaCode);
+		
+		String queryStr = "";
+		if(sigunguCode==null || sigunguCode.equals("")) {
+			queryStr = "areaBasedList.do?areaCode="+areaCode+"&arrange=B&contentTypeId="+contentTypeId+"&cp="+cp;
+		}else {
+			mav.addObject("sigunguCode", sigunguCode);
+			queryStr = "areaBasedList.do?areaCode="+areaCode+"&sigunguCode="+sigunguCode+"&arrange=B&contentTypeId="+contentTypeId+"&cp="+cp;
+		}
 		mav.addObject("cp", cp);
+		mav.addObject("queryStr", queryStr);
 		mav.setViewName("tour/info");
 		return mav;
 	}
@@ -308,9 +339,36 @@ public class TourController {
 	}
 	
 	@RequestMapping("/foodList.do")
-	public ModelAndView foodAllList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp) {
+	public ModelAndView foodAllList(@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
+									@RequestParam(value = "areaCode", required = false, defaultValue = "") int areaCode) {
 		ModelAndView mav = new ModelAndView();
+		String cityName = tDAO.areaCode(areaCode);
 		mav.setViewName("tour/food");
+		mav.addObject("areaCode", areaCode);
+		mav.addObject("cityName", cityName);
+		return mav;
+	}
+	
+	@RequestMapping("/allCity.do")
+	public ModelAndView cityAllList() throws ParseException, Exception {
+		
+		/*String url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaCode?ServiceKey="
+				   + "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D&" 
+				   + "areaCode=1&numOfRows=30&pageNo=1&MobileOS=ETC&MobileApp=AppTest&_type=json";
+		
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(url));
+
+		JSONObject json = (JSONObject) jsonObject.get("response");
+		json = (JSONObject) json.get("body");
+		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
+
+		System.out.println(jsonObject);
+		System.out.println(totalCount); */
+		
+		List<SigunguDTO> list = tDAO.sigunguCode();
+		ModelAndView mav = new ModelAndView();
+		mav.addObject("list", list);
+		mav.setViewName("tour/allCity");
 		return mav;
 	}
 }

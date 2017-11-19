@@ -55,7 +55,27 @@
 	width: 1500px;
 	height: 650px;
     position: relative;
+	margin: 0 auto;
 } 
+.contents_top {
+	margin: 0 auto;
+}
+.category {
+	 text-align: center;
+}
+.more_info{
+    text-align: center;
+}
+.popular {
+    text-align: center;
+}
+.contents_mid{
+    text-align: center;
+    margin: 0 auto;
+}
+.category_item {
+    text-align: center;
+}
 .content_city_list {
 	width: 1500px;
 	height: 600px;
@@ -74,7 +94,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 		 $.ajax({
 	    	   
     	 		//기본 베이스는 관광지(contenttypeid = 12)
-				url:"areaBasedList.do?areaCode=${areaCode}&arrange=B&contentTypeId=12",
+				url:"areaBasedList.do?areaCode=${areaCode}&sigunguCode=${sigunguCode}&arrange=B&contentTypeId=12",
 				type:"GET",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           success : function(msg) {
@@ -90,7 +110,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	        	   
 	        	   var queryStr = '${pageContext.request.queryString}';
 	        	   //alert(queryStr);
-	        	   //var pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
+	        	   //pageStr = paging(pageName, totalCnt, listSize, pageSize, cp, queryStr);
 	        	   var moreInfo = totalCnt +'개의 정보 모두보기';
 
 	        	   //총 게시물 수 myItem.length + 페이징처리 
@@ -103,18 +123,24 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	                   
 	        		   
 	        		   output += '<a class="item" href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+'&contentId='+myItem[i].contentid+'">';
-                   		output += '<div class="item_name">' +myItem[i].title+ '</div>' ;
                    		output += '<div class="item_img_box">';
 	                    if(myItem[i].firstimage==undefined) {
 	                    	output += '<img src="img/notimage.png" alt class="item_img">';             	
 	                    } else {
 	                    	output += '<img src="'+myItem[i].firstimage+'" alt class="item_img">';
 	                    }
+	                    output += '<div class="item_name">' +myItem[i].title+ '</div>' ;
 	                    output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
 	                    output += '</div></a>';
 	                }
+	        	   
+	        	   var si = '${sigunguCode}';
 	        	   output += '</div>';
-	        	   output += '<a class="more_info" href="citycate.do?areaCode=${areaCode}&contentTypeId='+contentTypeId+'">' + moreInfo + '</a>';
+	        	   if(si=='') {
+						output += '<a class="more_info" href="citycate.do?areaCode=${areaCode}&contentTypeId=12">' + moreInfo + '</a>';
+	        	   } else {
+        	   			output += '<a class="more_info" href="citycate.do?areaCode=${areaCode}&sigunguCode=${sigunguCode}&contentTypeId=12">' + moreInfo + '</a>';
+	        	   }
 	        	   output += '</div>';
 	        	   $('.contents_mid').append(output);
 	        	   
@@ -136,7 +162,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 			$.ajax({
 		    	   
     	 		//기본 베이스는 관광지(contenttypeid = 12)
-				url:"areaBasedList.do?areaCode=${areaCode}&cp="+cp+"&arrange=B&contentTypeId="+contentTypeId,
+				url:"areaBasedList.do?areaCode=${areaCode}&cp="+cp+"&arrange=B&row=10&contentTypeId="+contentTypeId,
 				type:"GET",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           success : function(msg) {
@@ -148,7 +174,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	        	   
 	        	   var moreInfo = totalCnt +'개의 정보 모두보기';
 	        	   var pageName = 'city.do?areaCode='+ ${areaCode};
-	        	   var listSize = 10;
+	        	   var listSize = 5;
 	        	   var pageSize = 5;
 	        	   
 	        	   var queryStr = '${pageContext.request.queryString}';
@@ -163,13 +189,14 @@ var contentTypeId = $('.category_item').attr('data-cate');
                    var iterator = 0;
 	        	   for(var i=1; i<=listSize; i++){
 	                    output += '<a class="item" href="tourDetail.do?contentTypeId='+myItem[i].contenttypeid+'&contentId='+myItem[i].contentid+'">';
-                   		output += '<div class="item_name">' +myItem[i].title+ '</div>' ;
+                   		
                    		output += '<div class="item_img_box">';
 	                    if(myItem[i].firstimage==undefined) {
 	                    	output += '<img src="img/notimage.png" alt class="item_img">';             	
 	                    } else {
 	                    	output += '<img src="'+myItem[i].firstimage+'" alt class="item_img">';
 	                    }
+	                    output += '<div class="item_name">' +myItem[i].title+ '</div>' ;
 	                    output += '<input type="hidden" name="contentid" value="'+myItem[i].contentid+'">';
 	                    output += '</div></a>';
 	                }
@@ -191,11 +218,10 @@ var contentTypeId = $('.category_item').attr('data-cate');
 <%@ include file="../header.jsp" %>
 <div id="contents">
 	<div class="contents_top">
-		<div class="city_title"><b>${cityName }</b></div>
+		<div class="city_title"></div>
 		<div class="menu">홈</a>
-			<a href="area.do">호텔</a>
 			<a href="attraction.do">관광명소</a>
-			<a href="shopping.do">음식점</a>
+			<a href="foodList.do?areaCode=${areaCode }">음식점</a>
 			<a href="shopping.do">쇼핑</a>
 			<a href="plan.do">여행일정 </a>
 		
@@ -203,7 +229,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	</div>
 	
 	<div class="contents_mid">
-		<div class="popular"><b>${cityName } 인기장소</b></div>
+		<div class="popular"><b>${cityName } ${sigunguName } 인기장소</b></div>
 		<div class="category">
 			<div class="category_item" data-cate="12">관광명소</div>
 			<div class="category_item" data-cate="39">음식</div>

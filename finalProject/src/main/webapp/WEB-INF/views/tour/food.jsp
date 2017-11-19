@@ -125,7 +125,7 @@
 	        	   
 	        	   var totalCnt =msg.response.body.totalCount;
 	        	   var pageName = 'city.do?areaCode=';
-	        	   var listSize = 10;
+	        	   var listSize = 3;
 	        	   var pageSize = 5;
 	        	   
 	        	   var queryStr = '${pageContext.request.queryString}';
@@ -179,7 +179,7 @@
 	</div>
 	
 	<div class="contents_mid">
-		<div class="foodList"><b>음식점</b></div>
+		<div class="foodList"><b>${cityName }의 음식점</b></div>
 		<div class="panel"></div>
 	</div>
 	

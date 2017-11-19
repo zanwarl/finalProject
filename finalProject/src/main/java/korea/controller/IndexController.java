@@ -27,8 +27,9 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView();
 		
 		List<PlanDTO> list = pdao.favPlanList();
-		
+		int count = pdao.totalCnt();
 		mav.addObject("list", list);
+		mav.addObject("count",count);
 		mav.setViewName("main");
 		return mav;
 	}
