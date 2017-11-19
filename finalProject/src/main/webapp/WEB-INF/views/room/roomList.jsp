@@ -78,10 +78,9 @@ img {
 </script>
 <script type="text/javascript">
 function roomadd() {
-	location.href="loginCk.do";
 	location.href="roomadd.do";
 }
-	<jsp:include page="/loginCk.do"></jsp:include>
+
 </script>
 <title>Insert title here</title>
 </head>

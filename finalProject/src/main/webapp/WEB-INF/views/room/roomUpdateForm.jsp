@@ -21,6 +21,34 @@ var today = new Date();
 var jq = $.noConflict();
 jq(document).ready(function() {
 	
+	var conv = document.getElementById("conv").value;
+	var arrConv = conv.split(',');
+	
+    jq('.conv').prop('checked', false); // 일단 모두 uncheck
+
+    for (var nArrCnt in arrConv) {
+       jq("input[name=conv][value="+arrConv[nArrCnt]+"]").prop("checked",true);
+     }
+    
+    var safe = document.getElementById("safe").value;
+	var arrSafe = safe.split(',');
+	
+    jq('.safe').prop('checked', false); // 일단 모두 uncheck
+
+    for (var nArrCnt in arrSafe) {
+       jq("input[name=safe][value="+arrSafe[nArrCnt]+"]").prop("checked",true);
+     }    
+    
+    var space = document.getElementById("space").value;
+	var arrSpace = space.split(',');
+	
+    jq('.space').prop('checked', false); // 일단 모두 uncheck
+
+    for (var nArrCnt in arrSpace) {
+       jq("input[name=space][value="+arrSpace[nArrCnt]+"]").prop("checked",true);
+     }    
+
+	
 	jq("#datepicker").multiDatesPicker({
 		minDate: 0,
 		maxDate: 30,
@@ -34,9 +62,10 @@ jq(document).ready(function() {
 <%@ include file="../header.jsp" %>
 	<h1>숙소수정페이지</h1>
 	<c:set var="r" value="${rdto}" />
-	<form name="roomUpdate.do" action="roomUpdate.do" method="post">
+	<form name="room.do" action="roomUpdate.do" method="post">
+	<input type="hidden" name="roomidx" value="${r.roomidx}">
+ 	<input type="hidden" name="useridx" value="${r.useridx}"><br>
  	<div>
- 	유저번호:<input type="text" name="useridx" value="${r.useridx}"><br>
  	방타입:<select name="btype">
  		<option value="집">집</option>
  		<option value="호텔">호텔</option>
@@ -129,36 +158,39 @@ jq(document).ready(function() {
 </script>
  	
  	편의시설<br>
- 	<input type="checkbox" name="conv" value="필수품목">필수 품목(수건,침대시트,비누,화장지)<br>
- 	<input type="checkbox" name="conv" value="무선인터넷">무선인터넷<br>
- 	<input type="checkbox" name="conv" value="샴푸">샴푸<br>
- 	<input type="checkbox" name="conv" value="옷장">옷장<br>
- 	<input type="checkbox" name="conv" value="TV">TV<br>
- 	<input type="checkbox" name="conv" value="난방">에어컨<br>
- 	<input type="checkbox" name="conv" value="조식">조식,커피,차<br>
- 	<input type="checkbox" name="conv" value="책상">책상/작업공간<br>
- 	<input type="checkbox" name="conv" value="다리미">다리미<br>
- 	<input type="checkbox" name="conv" value="헤어드라이기">헤어드라이기<br>
+ 	<input type="hidden" id="conv" value="${r.conv}">
+ 	<input type="checkbox" name="conv" class="conv" value="필수품목">필수 품목(수건,침대시트,비누,화장지)<br>
+ 	<input type="checkbox" name="conv" class="conv" value="무선인터넷">무선인터넷<br>
+ 	<input type="checkbox" name="conv" class="conv" value="샴푸">샴푸<br>
+ 	<input type="checkbox" name="conv" class="conv" value="옷장">옷장<br>
+ 	<input type="checkbox" name="conv" class="conv" value="TV">TV<br>
+ 	<input type="checkbox" name="conv" class="conv" value="난방">에어컨<br>
+ 	<input type="checkbox" name="conv" class="conv" value="조식">조식,커피,차<br>
+ 	<input type="checkbox" name="conv" class="conv" value="책상">책상/작업공간<br>
+ 	<input type="checkbox" name="conv" class="conv" value="다리미">다리미<br>
+ 	<input type="checkbox" name="conv" class="conv" value="헤어드라이기">헤어드라이기<br>
  	<div>안전시설<br>
- 	<input type="checkbox" name="safe" value="연기감지기">연기감지기<br>
- 	<input type="checkbox" name="safe" value="구급상자">구급상자<br>
- 	<input type="checkbox" name="safe" value="소화기">소화기<br>
+ 	<input type="hidden" id="safe" value="${r.safe}">
+ 	<input type="checkbox" name="safe" class="safe" value="연기감지기">연기감지기<br>
+ 	<input type="checkbox" name="safe" class="safe" value="구급상자">구급상자<br>
+ 	<input type="checkbox" name="safe" class="safe" value="소화기">소화기<br>
  	</div>
  	공간<br>
- 	<input type="checkbox" name="space" value="개인거실">개인거실<br>
- 	<input type="checkbox" name="space" value="부엌">부엌<br>
- 	<input type="checkbox" name="space" value="세탁기">세탁기<br>
- 	<input type="checkbox" name="space" value="건조기">건조기<br>
- 	<input type="checkbox" name="space" value="주차">주차<br>
- 	<input type="checkbox" name="space" value="엘리베이터">엘리베이터<br>
- 	<input type="checkbox" name="space" value="헬스장">헬스장<br>
+ 	<input type="hidden" id="space" value="${r.space}">
+ 	<input type="checkbox" name="space" class="space" value="개인거실">개인거실<br>
+ 	<input type="checkbox" name="space" class="space" value="부엌">부엌<br>
+ 	<input type="checkbox" name="space" class="space" value="세탁기">세탁기<br>
+ 	<input type="checkbox" name="space" class="space" value="건조기">건조기<br>
+ 	<input type="checkbox" name="space" class="space" value="주차">주차<br>
+ 	<input type="checkbox" name="space" class="space" value="엘리베이터">엘리베이터<br>
+ 	<input type="checkbox" name="space" class="space" value="헬스장">헬스장<br>
  	
  	<div>
  	내용<br>
  	<textarea name="content" value="${r.content}" rows="10" cols="60"></textarea><br>
  	방이름<input type="text" name="roomname" value="${r.roomname}"><br>
  	방가격<input type="number" name="roomprice" value="${r.roomprice}"><br>
- 	안돼는날자<input type="text" name="nodate" value="${r.nodate}" id="datepicker"><br>
+ 	안돼는날자<input type="text" name="nodate" value="${r.nodate}" id="datepicker" readonly="readonly"><br>
  	체크인<input type="text" name="checkin" value="${r.checkin}"><br>
  	체크아웃<input type="text" name="checkout" value="${r.checkout}"><br>
  	</div>
