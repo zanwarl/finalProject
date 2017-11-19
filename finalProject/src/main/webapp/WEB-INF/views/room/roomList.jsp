@@ -5,9 +5,8 @@
 <html>
 <head>
 <style>
-div{
-	width: 400px;
-}
+table {width:900px; margin:0 auto;}
+
 img {
   	max-width: 100%;
   	height: auto;
@@ -45,6 +44,7 @@ function roomadd() {
 </head>
 <body>
 <%@ include file="../header.jsp" %>
+<div id="contents">
 <c:url value="${contextPath }/img/room/" var="src"/> 
 	<table>
 		<c:if test="${empty list}">
@@ -66,7 +66,7 @@ function roomadd() {
 					<li><a href="${Url}"><img src="${src}${item}"></a></li> 
 				</c:forTokens>
 			</ul>
-			<a href="${Url}">${rdto.roomname}</a>
+			<a href="${Url}" class="roomTitle">${rdto.roomname}</a>
 			</div>
 			</td>
 		</c:forEach>
@@ -75,6 +75,7 @@ function roomadd() {
 	
 		<input type="button" value="숙소등록" onclick="roomadd()">
 	</c:if>
+</div>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>
