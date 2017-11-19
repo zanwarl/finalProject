@@ -8,4 +8,12 @@
    select pwd from admin where idx= #{idx}
    </select>
    
+   <select id="totalSql" resultType="String" parameterType="korea.member.model.MemberDTO">
+	select sum(total_pay) from roomreq where roomidx=#{roomIdx}
+	</select>
+	
+	<select id="total2Sql" resultType="String">
+	select * from roomreq
+	</select>
+   
 </mapper>
