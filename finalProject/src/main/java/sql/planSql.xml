@@ -13,6 +13,15 @@
    			]]>
 		</select>
 		
+		<select id="favPlanList" resultType="korea.plan.model.PlanDTO">
+			select * from
+			(select rownum as rnum, a.* from
+			(select * from plan_main order by plan_readnum desc) a) b 
+			<![CDATA[
+				where plan_public = 'Y'	and rnum <=8
+   			]]>
+		</select>
+		
 		<select id="lastSaveIdx" parameterType="korea.plan.model.PlanDTO" resultType="int">
 			<!-- select plan_idx from plan_main  
 			where rownum = 1 and plan_writer = #{plan_writer}
