@@ -12,7 +12,7 @@
 
 <style>
 #left_box {
-	width: 550px;
+	width: 570px;
 	float: left;
 }
 
@@ -23,7 +23,8 @@
 
 #planList {
 	backgroud: skyblue; 
-	width: 40%;
+	width: 220px;
+	border-right: solid #a9a9a9 1px;
 	float: left;
 	height: 850px;
 }
@@ -31,16 +32,21 @@
 #cityList {
   background: #FFBB00;
   float: left;
-  width: 60%;
+  width: 345px;
   height: 850px;
+  border-right: solid #a9a9a9 1px;
 }
 #cityContent {
-  background: #FFBB00;
-  float: left;
-  width: 60%;
-  height: 850px;
+	position:absolute;
+	width:345px;
+	height: 850px;
+	
+	top:350px;
+	left:250px;
+	background: #FFBB00;
+	float: left;
+	display:none;
 }
-
 
 #map {
   width: auto;
@@ -94,14 +100,29 @@
 	overflow:auto;	
 	height: 620px;
 }
-#search {
+#search_box {
 	height: 180px;
 	background: white;
 }
 
 #top_bar {
-	height: 100px;
-	background: #FFE08C;
+	height: 50px;
+	background: #A0D9E2;
+}
+.orderList {
+	cursor: pointer;
+}
+.search_bar {
+	height: 50px;
+}
+.category {
+	width: 250px;
+	height: 50px;
+}
+.category_item {
+	width: 80px;
+	float: left;
+	text-align: center;
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -223,6 +244,10 @@ $(document).ready(function() {
 
 	});
 	
+	$('#cityList').on('click','.img',function() {
+		$('#cityContent').show();
+	});
+	
 	
 });
 	
@@ -282,12 +307,12 @@ jq(document).ready(function() {
 				$.each(myItem, function(key, val) {
 					output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
 					if(val.firstimage == null) {
-						output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+						output += '<div class="img" fl="'+val.firstmiage+'"><img class="tour_info" src="img/notimage.png" width="100" height="100"></div>'; 
 					} else {
-						output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+						output += '<div class="img" fl='+val.firstimage+'"><img class="tour_info" src="'+val.firstimage+'" width="100" height="90"></div>';
 					}
 					output += '<div class="info">'+val.title+'</div>';
-					output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+					output += '<div class="add"><img  src="img/plan/add_button.png" width="17"></div>';
 					output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
 					output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
 					output += '</div>';
@@ -512,17 +537,26 @@ jq(document).ready(function() {
 			</c:forEach>
 		</div>
 		<div id="cityList" >
-			<div id="search">
+			<div id="search_box">
+				<div class="search_bar">
+					<input type="text" id="tour_search" name="txt" placeholder="장소 검색"><br>
+				</div>
 				<!-- 홍주영 작업중.. -->
 				<input type="hidden" value="${pdto.plan_place }">
-				<input type="text" id="tour_search" name="txt" placeholder="장소 검색"><br>
-				<span class="orderList" data="arrange" data-val="A">이름순</span>
-				<span class="orderList" data="arrange" data-val="B">인기순</span>
+				<div class="range">
+					<span class="orderList" data="arrange" data-val="A">이름순</span>
+					<span class="orderList" data="arrange" data-val="B">인기순</span>
+				</div>
+				<div class="category">
+					<div class="category_item" data-cate="12">관광명소</div>
+					<div class="category_item" data-cate="39">음식</div>
+					<div class="category_item" data-cate="38">쇼핑</div>
+				</div>
 			</div>
 		</div>
 		<div id="cityContent" >
 			<div id="contentBox">
-			tlqk
+			infomation
 			</div>
 		
 		</div>

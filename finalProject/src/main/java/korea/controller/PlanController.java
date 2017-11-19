@@ -59,10 +59,10 @@ public class PlanController {
 		ModelAndView mav = new ModelAndView();
 		
 		int totalCnt = pdao.totalCnt();
-		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int listSize = 8;	//한 페이지에서 보여질 게시물 수
 		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
 		
-		List<PlanDTO> list = pdao.planList(cp,pageSize);
+		List<PlanDTO> list = pdao.planList(cp,listSize);
 		
 		String url = "plan.do";
 		
@@ -249,12 +249,12 @@ public class PlanController {
 		ModelAndView mav = new ModelAndView();
 		
 		int totalCnt = pdao.myTotalCnt(idx);
-		int listSize = 5;	//한 페이지에서 보여질 게시물 수
+		int listSize = 8;	//한 페이지에서 보여질 게시물 수
 		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
 		
 		String url = "myPlan.do";
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
-		List<PlanDTO> list = pdao.myPlanList(idx, cp, pageSize);
+		List<PlanDTO> list = pdao.myPlanList(idx, cp, listSize);
 		
 		mav.setViewName("plan/myPlanList");
 		mav.addObject("list", list);

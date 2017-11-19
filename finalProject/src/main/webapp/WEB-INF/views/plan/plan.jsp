@@ -28,9 +28,10 @@
 	<tr>
 	</c:if>
 		<td>
-		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_explain }</a> <br>
-		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_subject }</a>
+		<a href="planContent.do?pidx=${list.plan_idx}">
 		<img src="${src}${list.plan_file}" width="350" height="150">
+		${list.plan_explain }</a> <br>
+		<a href="planContent.do?pidx=${list.plan_idx}">${list.plan_subject }</a>
 		조회수 : ${list.plan_readnum } <br>
 		${list.plan_name }
 		</td>

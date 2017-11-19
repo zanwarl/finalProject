@@ -11,10 +11,17 @@
 <link rel="stylesheet" href="/resources/demos/style.css">
 <style>
 #cityList {
-  background: #FFFFC6;
   float: left;
-  width: 300px;
+  width: 250px;
   height: 950px;
+}
+.info {
+	float: left;
+	width: 200px;
+	height: 50px;
+}
+.add {
+	height: 50px;
 }
 #map {
   width: auto;
@@ -23,11 +30,10 @@
  }
 #select_detail_view_city{
 	position:absolute;
-	width:310px;
-	height:200px;
+	width:270px;
+	height: auto;
 	left:350px;
 	top:400px;
-	padding-bottom:20px;
 	background:#fff;
 	border-radius:5px;
 	display:none;
@@ -42,6 +48,23 @@
 .remodal-bg.with-red-theme.remodal-is-opening,
 .remodal-bg.with-red-theme.remodal-is-opened{
 	filter: none;
+}
+#plan_date {
+	background: #A0D9E2;
+}
+.remodal-bg {
+	background: #A0D9E2;
+}
+.city_name {
+	width: 100px;
+	float: left;
+}
+.start_date {
+	width: 70px;
+	float: left;
+}
+#datepicker {
+	width: 70px;
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -181,6 +204,7 @@ var jq = $.noConflict();
 
 jq(document).ready(function() {
 	
+	
 	jq("#datepicker").datepicker({
 		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
   	});
@@ -194,7 +218,7 @@ jq(document).ready(function() {
 		<!-- 도시 선택 시 띄워주는 화면 -->
 		<div id="select_detail_view_city">
 			<div id="plan_date">
-				여행도시 출발일
+				<div class="city_name">여행도시</div> <div class="start_date">출발일</div>
 				<input type="text" name="plan_start" id="datepicker">
 			</div>
 			
@@ -207,7 +231,7 @@ jq(document).ready(function() {
 				<div class="remodal-bg"><a href="#modal">상세 일정만들기</a></div>
 			</div>
 			
-			<input type="text" name="acode" id="acode">
+			<input type="hidden" name="acode" id="acode">
 		</div>
 
 		<!-- modal div start -->	
@@ -221,11 +245,11 @@ jq(document).ready(function() {
 								<tbody>
 									<tr>
 										<th>여행 제목</th>
-										<td><input type="text" name="plan_subject"></td>
+										<td><input type="text" name="plan_subject" value=""></td>
 									</tr>
 									<tr>
 										<th>출발일</th>
-										<td><input type="text" name="plan_start" id="datepicker"></td>
+										<td><input type="text" name="plan_start" id="datepicker" value=""></td>
 									</tr>
 								</tbody>
 								<tfoot>

@@ -8,12 +8,18 @@
 <style>
 .wrap_content_city_list {
 	width: 1500px;
-	height: 1500px;
+	height: 1130px;
     position: relative;
+    margin: 0 auto;
 } 
+.menu {
+	width: 1500px;
+	margin: 0 auto;
+	
+}
 .content_city_list {
 	width: 1500px;
-	height: 1450px;
+	height: 1100px;
     position: relative;
 } 
 .item_img_box {
@@ -92,7 +98,6 @@ var contentId = [];
 var itemAddr = [];
 var itemOverView = [];
 var itemTel = [];
-
 var cp = ${cp};
 	$(document).ready(function() {
 	     $.ajax({

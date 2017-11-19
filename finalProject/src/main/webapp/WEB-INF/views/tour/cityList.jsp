@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+.menu {
+	margin: 0 auto;
+	width: 1500px;
+	text-align: center;
+}
 .contents_top b {
 	font-size: 200%;
 }
@@ -33,7 +38,9 @@
     overflow: hidden;
 }
 .category {
+	width: 1500px;
 	height: 25px;
+	margin: 0 auto;
 }
 .category_item {
 	float: left;
