@@ -209,9 +209,9 @@ jq(document).ready(function() {
 			내용<br>
 			<textarea name="content" rows="10" cols="60"></textarea>
 			<br> 방이름<input type="text" name="roomname"><br> 방가격<input
-				type="number" name="roomprice"><br> 안돼는날자<input
-				type="text" name="nodate" id="datepicker"><br> 체크인<input
-				type="text" name="checkin"><br> 체크아웃<input type="text"
+				type="number" name="roomprice"><br> 
+				안되는날자 <input type="text" name="nodate" id="datepicker" readonly="readonly"><br> 
+				체크인<input type="text" name="checkin"><br> 체크아웃<input type="text"
 				name="checkout"><br>
 		</div>
 		<input type="submit" value="등록">
