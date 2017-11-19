@@ -109,4 +109,20 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		
 		return listt;
 	}
+
+	public String getNoDate(int roomidx) {
+		// TODO Auto-generated method stub
+		String list = (String) sqlMap.selectList("getNoDateSql", roomidx).get(0);
+		
+
+		return list;
+		
+	}
+
+	public List<Map<String, Object> > getBookedDate(int reqidx) {
+	List<	Map<String, Object> >list =  sqlMap.selectList("getBookedDateSql", reqidx);
+		
+		return list; 
+		
+	}
 }

@@ -67,12 +67,13 @@
 		<li><a href='#'>제주도</a></li> -->
     </ul>
  </li>
- <li><a href="#" id="current">숙소</a>
+ <li><a href="home.do" id="current">숙소</a>
 	<ul>
-        <li><a href='#'>홈쉐어</a></li>
+       <!--  
+       	<li><a href='#'>홈쉐어</a></li>
          <li><a href='#'>한옥스테이</a></li>
          <li><a href='#'>템플스테이</a></li>
-         <li><a href='#'>게스트하우스</a></li>
+         <li><a href='#'>게스트하우스</a></li> -->
     </ul>
 
 </li>

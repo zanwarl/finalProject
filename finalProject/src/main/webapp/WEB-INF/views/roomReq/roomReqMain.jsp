@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -30,8 +31,6 @@ h2 {
   padding-top: 10px;
   margin-bottom: 10px;
 }
-
-
 
 #roomReqFm label {float:left; width:90px; margin-left:20px; font-size:20px;}
 #datepicker,#datepicker1,#roomp {width:150px; height:30px; border:1px solid #e9e9e9;}
@@ -117,6 +116,7 @@ text-align:center;
 			jq("#datepicker1").datepicker({ minDate:0, numberOfMonths:2 , beforeShowDay: disableAllTheseDays,
 				onSelect: function(selected) {
 				jq("#datepicker").datepicker("option","maxDate", selected)
+				call();
 				} 
 			
 				});
@@ -127,55 +127,90 @@ text-align:center;
 	    altField: ".selecter"
 	}); */
 
-	var disabledDays = ["2017-11-22"];
+	var disabledDays = [${str}, ${str2}];
 	
-	function disableAllTheseDays(date) { 
-	   var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
-	   for (i = 0; i < disabledDays.length; i++) { 
-	       if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
-	           return [false]; 
-	       } 
-	   } 
-	   return [true]; 
+	function disableAllTheseDays(date) {
+	/* 	var test = ["2017-11-28" ,"2017-11-29"]; */
+/* 		var test2 = document.roomReqFm.NO_DATE.value;
+		test2 = test2.replace(/\//g , "-");
+		test2 = test2.replace(/(\s*)/g, "");
+		var noDate = [test2]; 
+		
+		var disabledDays = noDate; */
+		
+	   	var m = date.getMonth(), d = date.getDate(), y = date.getFullYear(); 
+	   	for (i = 0; i < disabledDays.length; i++) { 
+	       	if($.inArray(y + '-' +(m+1) + '-' + d,disabledDays) != -1) { 
+	           	return [false]; 
+	       	} 
+	   	} 
+	   	return [true]; 
 	}
 
 
 
-	window.onload = function TimeBtn(){
+	/* window.onload = function TimeBtn(){
 		var timediv = document.getElementById("button");
 		for(var i=0;i<10;i++){
 			timediv.innerHTML += '<input type="button" name="t_btn'+i+'" value="'+i+'"> ';
 		}	
-		
-	}
+	} */
+	
 
 	var date = 1;
+	var gSum = 1;
 	function call() {
 		
 		var frm = document.roomReqFm;
+			
+/* 		 var test2 = document.roomReqFm.NO_DATE.value;
+	      test2 = test2.replace(/\//g , "-");
+	      test2 = test2.replace(/(\s*)/g, "");
+	      var noDate = [test2]; 
+	      alert(noDate); */
 		
 		var day1 = $('#datepicker').val();
-		day1 = day1.substring(3,5);
+		
+		day1 = day1.replace(/\//g , "-");
+		var day1M = day1.substring(0,2);
+		var day1D = day1.substring(3,5);
+		var day1Y = day1.substring(6,10);
+		
+		var day1Date = new Date(day1Y, day1M, day1D);
+		
+		/* day1 = day1.substring(3,5);
 		
 		(day1.charAt(0));
 		
 		if(day1.charAt(0)==0) {
 			day1 = day1.charAt(1);
-		} 
+		}  */
 		
 		var day2 = $('#datepicker1').val();
-		day2 = day2.substring(3,5);
+		day2 = day2.replace(/\//g , "-");
+		var day2M = day2.substring(0,2);
+		var day2D = day2.substring(3,5);
+		var day2Y = day2.substring(6,10);
+		
+		var day2Date = new Date(day2Y, day2M, day2D);
+		
+		/* day2 = day2.substring(3,5);
 		
 		(day2.charAt(0));
 		
 		if(day2.charAt(0)==0) {
 			day2 = day2.charAt(1);
-		} 
+		} */ 
 		
-		date = day2 - day1;
-		date = date;
+		date = day2Date - day1Date;
+		date = date/(24*60*60*1000);
+		
 		var num = frm.count.value;
+		price = price.replace(/,/g , "");
 		var sum = price*num*date;
+		gSum = sum;
+		sum = String(sum);
+		sum = sum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$('#roomp').val(sum);
 	}
 	
@@ -203,6 +238,11 @@ text-align:center;
 		}
 	}
 
+	function fnSubmit(){
+		$('#roomp').val(gSum);
+		document.roomReqFm.action = "roomReqFm.do";
+		document.roomReqFm.submit();
+	}
 
 </script>
 </head>
@@ -211,48 +251,51 @@ text-align:center;
 	<script type="text/javascript">
 
 		 window.alert ('로그인 하세요');
-		 location.href ='main.do';
+		 location.href ='memberLogin.do';
 	
 	</script>
 	</c:if>	
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
+ <img src="img/gaga.png" width="1000" height="300" style="margin-left: auto; margin-right: auto; display: block;">
 <div class="reqWrap">
-<h2>예약하기</h2>
-<form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
+<H2>Reservation</H2>
 <hr>
+<form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post" required="required">
 <input type="hidden" value="${roomIdx }" name="roomidx">
 
 <c:set var="arr" value="${rdto}"/>   
+<input type="hidden" name="NO_DATE" value="${arr.nodate}" />
              
        	<p class="req">
-       		<label>예약인원</label> 
-         	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="count" id="num" value="1" onchange="call()" style="width:30px;" required="required">
-  			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
-  		</p>
-   		<p class="req">
-            <label>check in</label>
+            <label>체크인</label>
             <input type="text" name="checkindate" id="datepicker" required="required"> 
   		</p>
      	<p class="req">
-            <label>check out </label>
-            <input type="text" name="checkoutdate" id="datepicker1" required="required">          	
+            <label>체크아웃 </label>
+            <input type="text" name="checkoutdate" id="datepicker1" required="required">    	
 		</p>
+		<p class="req">
+       		<label>예약인원</label> 
+         	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
+ 			<input type="text" name="count" id="num" value="1" onchange="call()" style="width:30px;">
+  			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
+  		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()" required="required">
+			<input type="text" style="border:0;" name="total_pay" id="roomp" value=<fmt:formatNumber value="${arr.roomprice}" pattern="#,###,###" /> onkeyup="call()" required="required" readonly>
 		</p>
 		<p class="req">
-            <input type="submit" class="reqBtn" value="예약하기">
+            <input type="button" class="reqBtn" value="예약하기" onclick="fnSubmit();">
         </p>   
 <script>
 var price = document.getElementById('roomp').value;
 </script>
 </form>
 </div>
-</div>
+
 <%@ include file="../footer.jsp" %>
+
 </body>
 </html>
