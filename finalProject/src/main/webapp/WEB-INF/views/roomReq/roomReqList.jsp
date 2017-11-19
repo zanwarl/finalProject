@@ -142,11 +142,17 @@ tfoot td {
 			<br>
 		</c:forEach>
 
+
+		<c:if test="${not empty list }">
 		<table>
 			<tr>
+			
+			
 				<td style="text-align: center;">${pageStr}</td>
 			</tr>
 		</table>
+		</c:if>
+		
 		<%-- 	<table>
 
 			<thead>

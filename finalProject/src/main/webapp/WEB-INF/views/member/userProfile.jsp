@@ -10,104 +10,102 @@
 
 
 <script type="text/javascript">
-function two() {
-    var elements = document.getElementsByClassName("column");
-    var i;
-    for (i = 0; i < elements.length; i++) {
-        elements[i].style.width = "50%";
-    }
-}
-
+	function two() {
+		var elements = document.getElementsByClassName("column");
+		var i;
+		for (i = 0; i < elements.length; i++) {
+			elements[i].style.width = "50%";
+		}
+	}
 </script>
 <style>
+
+
+
+
+
 * {
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 body {
-    margin: 0;
-    font-family: Arial;
+	margin: 0;
+	font-family: Arial;
 }
 
 .header {
-    text-align: center;
-    padding: 32px;
+	text-align: center;
+	padding: 32px;
 }
 
 /* Create four equal columns that floats next to each other */
 .column {
-    float: left;
-    width: 25%;
-    padding: 10px;
+	float: left;
+	width: 25%;
+	padding: 10px;
 }
 
 .column img {
-    margin-top: 12px;
-   /* 
+	margin-top: 12px;
+	/* 
   opacity: 1;
   display: block;
   width: 100%;
   height: auto;
   transition: .5s ease;
   backface-visibility: hidden; */
-
-
 }
 
 /* Clear floats after the columns */
 .row:after {
-    content: "";
-    display: table;
-    clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 /* Responsive layout - makes a two column-layout instead of four columns */
-@media (max-width: 800px) {
-    .column {
-        width: 50%;
-    }
+@media ( max-width : 800px) {
+	.column {
+		width: 50%;
+	}
 }
 
 /* Responsive layout - makes the two columns stack on top of each other instead of next to each other */
-@media (max-width: 600px) {
-    .column {
-        width: 100%;
-    }
+@media ( max-width : 600px) {
+	.column {
+		width: 100%;
+	}
 }
 
 /*dddddddddddddddddddddddddddddddddddddddddddddd */
-
 .container1 {
-  position: relative;
-
+	position: relative;
 }
+
 .middle {
-  transition: .5s ease;
-  opacity: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%)
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%)
 }
 
 .container1:hover .image {
-  opacity: 0.3;
+	opacity: 0.3;
 }
 
 .container1:hover .middle {
-  opacity: 1;
+	opacity: 1;
 }
 
 .text {
-  background-color: gray;
-  color: white;
-  font-size: 16px;
-  padding: 16px 32px;
+	background-color: gray;
+	color: white;
+	font-size: 16px;
+	padding: 16px 32px;
 }
-
-
-
 </style>
 
 
@@ -457,13 +455,14 @@ section {
 
 
 	<div id="contents">
-		<h1 align="center">${param.userId }님의프로필페이지</h1>
+	
+		<h1 align="center">${param.userId }님의 프로필 페이지</h1>
 		<div class="container">
 			<!-- Top Navigation -->
 			<div class="wrapper">
 				<div class="cctabs">
 					<input checked id="one" name="tabs" type="radio"> <label
-						for="one"  ><i class="fa fa-pencil-square-o"></i> HOMES</label> <input
+						for="one"><i class="fa fa-pencil-square-o"></i> HOMES</label> <input
 						id="two" name="tabs" type="radio" value="Two"> <label
 						for="two"><i class="fa fa-magic"></i> PLAN</label> <input
 						id="three" name="tabs" type="radio"> <label for="three"><i
@@ -471,57 +470,72 @@ section {
 					<div class="panels">
 						<div class="panel">
 							<div class="headline">
-								<h1>${param.userId}님이가지고계신 숙소</h1>
+								<h1>${param.userId}님이 가지고계신 숙소</h1>
 							</div>
-						<c:url value="${contextPath }/img/room/" var="src" />
-							
-						<div class="row">
-							<div class="column">
-							<c:forEach items="${list1 }" var="dto" varStatus="status">
-								<div class="container1">
-								<a href="${roomConURL }"> <img class="image" src="${src }${dto.FILENAME}" style="width: 100%; "></a>
-														<div class="middle">
-								<div class="text">
-								
-								${dto.ROOMNAME }
-								</div>
-								
-								</div>
-								</div>
-								
-								
-								</c:forEach>
-							
-							</div>
-							<div class="column">
-							<c:forEach items="${list2 }" var="dto" varStatus="status">
-								<div class="container1">		<a href="${roomConURL }"> <img class="image" src="${src }${dto.FILENAME}" style="width: 100%; "></a>
-								
-								<div class="middle">
-								<div class="text">
-								
-								${dto.ROOMNAME }
-								</div>
-								
-								</div>
-								</div>
-						
-								</c:forEach>
-							
-							</div>
-				
+							<c:if test="${empty list1  and empty list2}">
+								<br>
+								<h5 align="center">등록된 숙소가 없습니다.</h5>
+							</c:if>
+
+							<c:url value="${contextPath }/img/room/" var="src" />
+
+							<div class="row">
+								<div class="column">
+									<c:forEach items="${list1 }" var="dto" varStatus="status">
+									<c:url value="roomContent.do" var="roomConURL">
+ -										<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
+ -									</c:url>
+									
+										<div class="container1">
+											<a href="${roomConURL }"> <img class="image"
+												src="${src }${dto.FILENAME}" style="width: 100%;"></a>
+											<div class="middle">
+												<div class="text">${dto.ROOMNAME }</div>
+
+											</div>
+										</div>
 
 
-						
+									</c:forEach>
 
-						</div>
+								</div>
+								<div class="column">
+									<c:forEach items="${list2 }" var="dto" varStatus="status">
+									<c:url value="roomContent.do" var="roomConURL">
+ -										<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
+ -									</c:url>
+										<div class="container1">
+											<a href="${roomConURL }"> <img class="image"
+												src="${src }${dto.FILENAME}" style="width: 100%;"></a>
+
+											<div class="middle">
+												<div class="text">${dto.ROOMNAME }</div>
+
+											</div>
+										</div>
+
+									</c:forEach>
+
+								</div>
+
+
+
+
+
+							</div>
 						</div>
 
 						<div class="panel">
 
 							<div class="headline">
-								<h1>${param.userId}님이작성하신 일정</h1>
+								<h1>${param.userId}님이 작성하신 일정</h1>
+								<br>
 							</div>
+
+							<c:if test="${empty planList }">
+								<br>
+								<h5 align="center">작성하신 일정이 없습니다.</h5>
+							</c:if>
 
 
 							<c:forEach items="${planList }" var="dto">
@@ -529,13 +543,11 @@ section {
 									<c:param name="pidx" value="${dto.PIDX }"></c:param>
 								</c:url>
 
-								<table>
+								<table class="planTb" style=" border: 1px solid gray;  width: 100%; height: 80px; " >
 									<tr>
 
-										<th width="70%" style="border-right-color: white;"><a
-											href="${planConURL }">${dto.TITLE }</a></th>
-										<td width="30%" style="border-left-color: white;"><a
-											href="${planConURL }">${dto.WRITEDATE }</a></td>
+										<th width="70%" style=" padding-left: 10%;  text-align: left;"><a href="${planConURL }">${dto.TITLE }</a></th>
+										<td width="30%" ><a href="${planConURL }">${dto.WRITEDATE }</a></td>
 									</tr>
 
 								</table>
@@ -546,77 +558,23 @@ section {
 							</c:forEach>
 
 						</div>
+						<div class="panel">
+						<div class="headline">
+							<h1>리뷰게시판</h1>
+							<!-- 제목 -->
+						</div>
+						
+						<!-- -------여기아래에 내용작성--------------- -->
+						
+						내용 
+						<!-- ----------여기아래 내용작성--------- -->
+						</div>
 
 					</div>
 				</div>
 			</div>
 		</div>
-		<%-- 
-<br>
-<!--  -->
-		<h1>${param.userId }님의 프로필 페이지입니다.</h1>
 
-		 <br> ${param.userId }님의 숙소 리스트
-		<c:if test="${empty list  }">
-			<table class="roomTb">
-				<tr>
-					<td>등록된 숙소가 없습니다.</td>
-				</tr>
-			</table>
-		</c:if>
-
-		<c:forEach var="dto" items="${list }">
-
-
-			<c:url value="${contextPath }/img/room/" var="src" />
-
-
-			<table class="roomTb">
-				<c:url value="roomContent.do" var="roomConURL">
-					<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
-				</c:url>
-				<tr>
-					<th><a href="${roomConURL }"><img
-							src="${src }${dto.FILENAME}"></a></th>
-
-				</tr>
-				<tr>
-					<td><a href="${roomConURL }">${dto.ROOMNAME } </a></td>
-
-				</tr>
-			</table>
-		</c:forEach>
-
-		<br> ${param.userId }님의 여행 일정 목록
-		<c:if test="${empty planList }">
-			<table class="planTb">
-				<tr>
-					<td>등록된 일정이 없습니다</td>
-				</tr>
-			</table>
-		</c:if>
-
-		<c:forEach var="dto" items="${planList }">
-
-
-			<table class="planTb">
-
-
-				<c:url value="planContent.do" var="planConURL">
-					<c:param name="pidx" value="${dto.PIDX }"></c:param>
-				</c:url>
-				<tr>
-					<th><a href="${planConURL }">${dto.TITLE }</a></th>
-
-
-					<td>${dto.WRITEDATE }</td>
-
-				</tr>
-			</table>
-		</c:forEach>
-
-
- --%>
 	</div>
 
 	<jsp:include page="/footer.do"></jsp:include>
