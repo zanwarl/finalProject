@@ -31,12 +31,13 @@ public class RoomReqController {
 	public ModelAndView roomReq(@RequestParam(value = "roomIdx") int idx) {
 		
 		RoomAddDTO rdto = radao.roomContent(idx);
-				
+			
 		ModelAndView mav = new ModelAndView();
+	
 		mav.setViewName("roomReq/roomReqMain");
 		mav.addObject("rdto", rdto);		
 		mav.addObject("roomIdx", idx);
-
+	
 		return mav; 
 	}
 

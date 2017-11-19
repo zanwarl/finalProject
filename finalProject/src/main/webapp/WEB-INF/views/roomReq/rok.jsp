@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="EUC-KR"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>    
    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+   
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.min.js" ></script>
@@ -143,7 +145,7 @@ function ok(reqIdx, amt){
 		<text>${arr.checkoutdate}</text></br>
 	
 		<label>ÃÑ ÇÕ°è</label></br>
-		<text>${total_pay}</text></br>
+		<text><fmt:formatNumber value="${total_pay}" pattern="#,###,###" /></text></br>
 		
 		</div>
 		<div class=req2>

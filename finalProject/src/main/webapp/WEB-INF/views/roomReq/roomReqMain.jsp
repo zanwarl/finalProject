@@ -105,11 +105,11 @@ text-align:center;
 	}); */
 	
 	function disableAllTheseDays(date) {
-		var test = ["2017-11-28" ,"2017-11-29"];
+	/* 	var test = ["2017-11-28" ,"2017-11-29"]; */
 		var test2 = document.roomReqFm.NO_DATE.value;
 		test2 = test2.replace(/\//g , "-");
 		test2 = test2.replace(/(\s*)/g, "");
-		var noDate = [test2];
+		var noDate = [test2]; 
 		
 		var disabledDays = noDate;
 		
@@ -133,9 +133,16 @@ text-align:center;
 	
 
 	var date = 1;
+	var gSum = 1;
 	function call() {
 		
 		var frm = document.roomReqFm;
+			
+		 var test2 = document.roomReqFm.NO_DATE.value;
+	      test2 = test2.replace(/\//g , "-");
+	      test2 = test2.replace(/(\s*)/g, "");
+	      var noDate = [test2]; 
+	      alert(noDate);
 		
 		var day1 = $('#datepicker').val();
 		
@@ -174,7 +181,9 @@ text-align:center;
 		date = date/(24*60*60*1000);
 		
 		var num = frm.count.value;
+		price = price.replace(/,/g , "");
 		var sum = price*num*date;
+		gSum = sum;
 		sum = String(sum);
 		sum = sum.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 		$('#roomp').val(sum);
@@ -204,6 +213,11 @@ text-align:center;
 		}
 	}
 
+	function fnSubmit(){
+		$('#roomp').val(gSum);
+		document.roomReqFm.action = "roomReqFm.do";
+		document.roomReqFm.submit();
+	}
 
 </script>
 </head>
@@ -211,7 +225,7 @@ text-align:center;
 	<c:if test="${empty sId }">
 	<script type="text/javascript">
 
-		 window.alert ('로그인 하세요.');
+		 window.alert ('로그인 하세요');
 		 location.href ='memberLogin.do';
 	
 	</script>
@@ -219,6 +233,7 @@ text-align:center;
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
+<img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
 <form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
 <input type="hidden" value="${roomIdx }" name="roomidx">
 
@@ -226,12 +241,12 @@ text-align:center;
 <input type="hidden" name="NO_DATE" value="${arr.nodate}" />
              
        	<p class="req">
-            <label>check in</label>
-            <input type="text" name="checkindate" id="datepicker" onchange="call()"> 
+            <label>체크인</label>
+            <input type="text" name="checkindate" id="datepicker"> 
   		</p>
      	<p class="req">
-            <label>check out </label>
-            <input type="text" name="checkoutdate" id="datepicker1" onchange="call()">    	
+            <label>체크아웃 </label>
+            <input type="text" name="checkoutdate" id="datepicker1">    	
 		</p>
 		<p class="req">
        		<label>예약인원</label> 
@@ -244,7 +259,7 @@ text-align:center;
 			<input type="text" style="border:0;" name="total_pay" id="roomp" value=<fmt:formatNumber value="${arr.roomprice}" pattern="#,###,###" /> onkeyup="call()" readonly>
 		</p>
 		<p class="req">
-            <input type="submit" class="reqBtn" value="예약하기">
+            <input type="button" class="reqBtn" value="예약하기" onclick="fnSubmit();">
         </p>   
 <script>
 var price = document.getElementById('roomp').value;
