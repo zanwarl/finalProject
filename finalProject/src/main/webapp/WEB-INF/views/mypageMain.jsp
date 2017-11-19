@@ -14,6 +14,16 @@
 <body>
 
 
+<c:if test="${empty sId }">
+
+	<script type="text/javascript">
+	window.alert ('로그인 하세요');
+	 location.href='main.do';
+	
+	</script>
+
+</c:if>
+
 
 
 <jsp:include page="/header.do"></jsp:include>
