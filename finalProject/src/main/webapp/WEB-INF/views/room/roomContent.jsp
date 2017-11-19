@@ -116,6 +116,7 @@ html, body {
 </head>
 <body>
 <%@ include file="../header.jsp" %>
+<div id="contents">
 	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
 	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
@@ -203,8 +204,8 @@ html, body {
 	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
-	
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
+</div>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>

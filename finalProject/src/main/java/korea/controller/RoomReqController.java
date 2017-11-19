@@ -3,6 +3,7 @@ package korea.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -255,11 +256,37 @@ System.out.println(list);
 		String goURL = "main.do";
 
 		mav.addObject("msg", msg);
-		mav.addObject("goURL", goURL);
+		mav.addObject("goURL", goURL);	
 
 		mav.setViewName("admin/adminMsg");
 		return mav;
 
+	}
+	
+	@RequestMapping(value="/total.do",
+			method=RequestMethod.GET)
+	public ModelAndView totalForm() {
+		List<RoomreqDTO> listt=rdao.total2();
+		ModelAndView mav=
+				new ModelAndView();
+		mav.addObject("listt",listt);
+		mav.setViewName("admin/adminTotal");
+		return mav;
+		
+	}
+	
+	@RequestMapping(value = "/total.do", method = RequestMethod.POST)
+	public ModelAndView total2 (@RequestParam("roomIdx")String roomIdx 
+			) {
+		
+		String t2=rdao.total(roomIdx);
+						
+		ModelAndView mav= new ModelAndView(); 
+				
+		mav.addObject("t2",t2);
+		mav.setViewName("admin/adminTotal_ok");
+		
+		return mav; 
 	}
 	
 }

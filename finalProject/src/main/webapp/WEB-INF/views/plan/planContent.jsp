@@ -9,12 +9,15 @@
 </head>
 <body>
 <%@ include file="../header.jsp" %>
+<c:url value="${contextPath }/img/city/thumb/" var="src"/> 
 <div id="contents">
-${pdto.plan_name }님의 일정 <hr>
+${pdto.plan_name }님의 일정<hr>
+<img src="${src}${pdto.plan_file}" width="960">
+ <hr>
 <c:forEach var="list" items="${list }">
 Day : ${list.pland_day }
 순서 : ${list.pland_order } &nbsp;
-<a href="tourDetail.do?contentTypeId=${list.pland_typeid }&contentId=${list.pland_code }">
+<a href="tourDetail.do?contentTypeId=${list.pland_typeid }&contentId=${list.pland_code }" target="_blank">
 <c:choose>
 <c:when test="${list.pland_img eq 'undefined' }">
 <img src="img/notimage.png" width="100" height="90">${list.pland_subject } <br>

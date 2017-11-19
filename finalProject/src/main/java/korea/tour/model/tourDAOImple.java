@@ -20,19 +20,15 @@ public class tourDAOImple implements tourDAO {
 	}
 	
 	public int tourcmtDel(int idx) {
-		System.out.println("000000" + idx);
 		int result = sqlMap.delete("tourCmtDel", idx);
 		return result;
 	}
 	
 	public int totalCnt(String contentId) {
 		int result = sqlMap.selectOne("tourTotalCnt", contentId);
-		System.out.println("otalcnt" + result);
 		return result;
 	}
 	public List<tourCmtDTO> tourcmtList(String tour_cmt_pidx, int cp, int pageRow) {
-		//System.out.println("sql : " + tour_cmt_pidx);
-		
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("tour_cmt_pidx", tour_cmt_pidx);
 		map.put("cp", cp);

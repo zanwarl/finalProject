@@ -220,7 +220,6 @@ $(document).ready(function() {
 	
 	$('#cityList').on('click','.wrap_cityList',function() {
 		var no = $(this).attr('data-no');
-		alert(no);
 
 	});
 	
@@ -564,7 +563,6 @@ jq(document).ready(function() {
 					var array = new Array();
 					
 					$('.plan_public').on('click',function() {
-						alert("z");
 					});
 					
 					$('.list_item').each(function(key,val){
