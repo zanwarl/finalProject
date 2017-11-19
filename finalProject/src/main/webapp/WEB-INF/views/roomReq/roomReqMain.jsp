@@ -220,7 +220,7 @@ text-align:center;
 <div id="contents">
 <div class="reqWrap">
 <h2>예약하기</h2>
-<form name="roomReqFm" id="roomReqFm" action="roReqFm.do" method="post">
+<form name="roomReqFm" id="roomReqFm" action="roomReqFm.do" method="post">
 <hr>
 <input type="hidden" value="${roomIdx }" name="roomidx">
 
@@ -229,20 +229,20 @@ text-align:center;
        	<p class="req">
        		<label>예약인원</label> 
          	<input type="button" id="SUB_NUM" value="-" onclick="subNum()">
- 			<input type="text" name="count" id="num" value="1" onchange="call()" style="width:30px;">
+ 			<input type="text" name="count" id="num" value="1" onchange="call()" style="width:30px;" required="required">
   			<input type="button" id="ADD_NUM" value="+" onclick="addNum()">
   		</p>
    		<p class="req">
             <label>check in</label>
-            <input type="text" name="checkindate" id="datepicker"> 
+            <input type="text" name="checkindate" id="datepicker" required="required"> 
   		</p>
      	<p class="req">
             <label>check out </label>
-            <input type="text" name="checkoutdate" id="datepicker1">          	
+            <input type="text" name="checkoutdate" id="datepicker1" required="required">          	
 		</p>
 		<p class="req">
 			<label>가격</label>
-			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()">
+			<input type="text" name="total_pay" id="roomp" value="100" onkeyup="call()" required="required">
 		</p>
 		<p class="req">
             <input type="submit" class="reqBtn" value="예약하기">
