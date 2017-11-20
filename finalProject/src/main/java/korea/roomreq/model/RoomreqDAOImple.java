@@ -107,7 +107,7 @@ public class RoomreqDAOImple implements RoomreqDAO {
 	public List<Map<String, Object>> total2(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		List<Map<String, Object>> listt=sqlMap.selectList("total2Sql",map);
-		
+		 
 		return listt;
 	}
 
