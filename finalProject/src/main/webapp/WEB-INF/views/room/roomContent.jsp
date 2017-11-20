@@ -176,7 +176,7 @@ html, body {
 	<c:param name="userId" value="${receiver }"></c:param>
 </c:url>
 	
-	<a href="${profileURL }">${receiver }님의 프로필 보기</a>
+	<a href="${profileURL}">${receiver}님의 프로필 보기</a>
 
 	<div id="map" style="width: 100%; height: 350px;">지도</div>
 
