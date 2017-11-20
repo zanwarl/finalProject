@@ -125,5 +125,12 @@ public class PlanDAOImple implements PlanDAO {
 	public int planWrite() {
 		return 0;
 	}
+
+	public String getPuserId(int pIdx) {
+		//
+	
+		return sqlMap.selectOne("getPuserIdSql", pIdx);
+		
+	}
 	
 }

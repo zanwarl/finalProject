@@ -9,20 +9,41 @@
 <title>Insert title here</title>
 
 <style>
+table, td, th {
+border : 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
 
-*{text-align:center;}
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	width: 100% ; 
+}
+input {
+	border: none;
+}
 </style>
+
+
 </head>
 <body>
 <form name="comReq" action="comReqWrite.do" method="post">
 <table>
-	<tr>
+<%-- 	<tr>
 		<th>신고대상자</th>
 		<td><input type="text" name="receiver" value="${receiver }"></td>
-	</tr>
+	</tr> --%>
 	<tr>
 		<th>분류</th>
-		<td><select name="type">
+		<td style="text-align: center;"><select name="type">
 			<option value="1">호스트->게스트</option>
 			<option value="2">게스트->호스트</option>
 			<option value="3">일반</option>
@@ -30,12 +51,12 @@
 	</tr>
 	<tr>
 		<th>신고내용</th>
-		<td><textarea rows="10" cols="30" name="content"></textarea></td>
+		<td style="text-align: left;" ><textarea rows="10" cols="30" name="content"></textarea></td>
 	</tr>
 	<tr>
-		<td colspan="2">
+		<td colspan="2" style="text-align: center;">
 		<input type="submit" value="신고하기">
-		<input type="reset" value="다시작성">
+
 		</td>
 	</tr>
 </table>
