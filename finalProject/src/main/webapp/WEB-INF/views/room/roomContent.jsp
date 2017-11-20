@@ -435,7 +435,7 @@ function goImageUpdate(idx) {
 	
        <ul class="slider">
 		<c:forEach var="imageList" items="${imageList}">
-			<li><img src="${src}${imageList.filename}" width="100%" height="750"></li>
+			<li><img src="${src}${imageList.filename}" width="100%" height="650"></li>
 		</c:forEach>
   		</ul>
 <div id="wrap">
@@ -447,7 +447,8 @@ function goImageUpdate(idx) {
           
           	<p>
           	<strong>체크인:</strong>${arr.checkin}<br>
-          	<strong>체크아웃:</strong>${arr.checkout}
+          	<strong>체크아웃:</strong>${arr.checkout}<br>
+          	<strong>숙박최대인원:</strong>${arr.maxcount}
           	</p>
           	<p>
           	<strong>conv:</strong>${arr.conv}<br>
@@ -468,7 +469,10 @@ function goImageUpdate(idx) {
           </div>
          	 <div class="buying">
                  <div class="cart">
-                   <a href="" class="add">예매하기</a>
+                 <c:url var="Url" value="roomReq.do">
+					<c:param name="roomIdx" value="${arr.roomidx}"></c:param>
+				</c:url>
+                   <a href="${Url}" class="add">예약하기</a>
                  </div>
           	</div>
       </div>
@@ -485,6 +489,7 @@ function goImageUpdate(idx) {
       </div>
     </div>
   </div>
+   <input type="button" class="but" value="목록으로" onclick="golist()">
    <c:if test="${sIdx ==arr.useridx}">
 	
 	<input type="button" class="but" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
@@ -493,8 +498,6 @@ function goImageUpdate(idx) {
 	</c:if>
 	
 	<c:if test="${not empty sId }">
-	<input type="button" class="but" value="예약하기" onclick="roomReq('${arr.roomidx}')">
-
 	<c:url value="sendMsg.do" var="sendMsgURL">
 		<c:param name="receiver" value="${receiver }"></c:param>
 	</c:url>
@@ -520,7 +523,7 @@ function goImageUpdate(idx) {
 })(jQuery);
 </script>
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea5cb03a486060e94b82b64937721b6d&libraries=services"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9251be7575bdb59bd3083f1f226f6a13&libraries=services"></script>
 <script>
 	var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 	mapOption = {

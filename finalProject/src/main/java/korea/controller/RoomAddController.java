@@ -133,7 +133,7 @@ public class RoomAddController {
 		RoomAddDTO rdto = radao.roomUpdateData(idx);
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("room/roomUpdateForm1");
+		mav.setViewName("room/roomUpdateForm");
 		return mav;
 	}
 
