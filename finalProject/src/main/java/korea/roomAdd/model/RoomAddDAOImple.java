@@ -76,6 +76,13 @@ public class RoomAddDAOImple implements RoomAddDAO {
 			}
 		}
 	}
+
+	public String getUserId(int useridx) {
+		
+		String userId =sqlMap.selectOne("getUserIdSql_room", useridx);
+	return userId; 
+	
+	}
 	
 	
 }

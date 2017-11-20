@@ -124,5 +124,15 @@
 	<!-- delete end -->
 	
 	
+	<select id="getPuserIdSql" parameterType="int" resultType="String">
+	
+	select member_id from member 
+where member_idx = (
+select plan_writer
+from plan_main
+where plan_idx = #{pIdx}
+)
+	</select>
+	
 	
 </mapper>

@@ -88,6 +88,13 @@ on a.useridx = member.member_idx and member_id = #{userId} and open= 'Y'
 
 
 	</select>
+	
+	<select id="isBLackListSql" resultType="map" parameterType="String">
+		select useridx from blacklist
+where useridx = (
+select member_idx from member where member_id = #{userid}
+)
+	</select>
 
 
 </mapper>

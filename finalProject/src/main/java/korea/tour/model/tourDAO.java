@@ -14,6 +14,7 @@ public interface tourDAO {
 	public List<tourCmtDTO> tourcmtList(String tour_cmt_pidx, int cp, int pageRow);	
 	
 	public String areaCode(int areCode);
+	//public List<String> areaCode(int areCode);
 	
 	public List<SigunguDTO> sigunguCode();
 	

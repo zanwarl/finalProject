@@ -25,23 +25,25 @@
 	backgroud: skyblue; 
 	width: 220px;
 	border-right: solid #a9a9a9 1px;
+	border-left: solid #a9a9a9 1px;
 	float: left;
 	height: 850px;
 }
 
 #cityList {
-  background: #FFBB00;
+  background: white;
   float: left;
   width: 345px;
   height: 850px;
   border-right: solid #a9a9a9 1px;
+  border-bottom: solid #a9a9a9 1px;
 }
 #cityContent {
 	position:absolute;
-	width:345px;
+	width:348px;
 	height: 850px;
 	
-	top:350px;
+	top:353px;
 	left:250px;
 	background: #FFBB00;
 	float: left;
@@ -91,6 +93,7 @@
 .wrap_cityList {
 	height: 120px;
 	cursor: pointer;
+	border-bottom: solid #a9a9a9 1px;
 }
 
 .list_item {
@@ -103,6 +106,7 @@
 #search_box {
 	height: 180px;
 	background: white;
+	border-bottom: solid #a9a9a9 1px;
 }
 
 #top_bar {
@@ -248,6 +252,12 @@ $(document).ready(function() {
 		$('#cityContent').show();
 	});
 	
+	$('#cityContent').on('click',function() {
+		$('#cityContent').hide();
+	});
+	
+	contentBox
+	
 	
 });
 	
@@ -338,7 +348,7 @@ jq(document).ready(function() {
 	    
 	    
 	    jq('#tour_search').keyup(function(e) {
-	    	var txt = $(this).val();
+	    	var txt = $(this).val();	
 	    	/* var txt = '';
 	    	switch (e.which)
 			{

@@ -77,7 +77,7 @@ having roomidx in (
 select roomidx from roomreq where userid=#{userId}
 ) )a join rimage on a.roomidx = rimage.roomidx
 and imageidx = imgaeidx)b join roomadd on b.roomidx = roomadd.roomidx )c join roomreq 
-on c.roomidx = roomreq.roomidx 
+on c.roomidx = roomreq.roomidx order by roomreq.reqdate desc
  
  
  				 ) a)b where rnum>=#{startNum} and rnum<=#{endNum} 

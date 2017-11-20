@@ -34,12 +34,17 @@ import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
 import korea.plan.model.PlanDetailDTO;
 import korea.plan.model.PlanMainDetailDTO;
+import korea.roomAdd.model.RoomAddDAO;
+import korea.tour.model.tourDAO;
 
 @Controller
 public class PlanController {
 
 	@Autowired
 	private PlanDAO pdao;
+	@Autowired
+	private tourDAO tDAO;
+	private RoomAddDAO radao;
 	
 	// 최상위 api 주소 세팅
 	public final static String service_key = "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D";
@@ -70,6 +75,13 @@ public class PlanController {
 		List<PlanDTO> list = pdao.planList(cp,listSize,sort);
 		
 		String url = "plan.do";
+		
+		/*for(int i=0; i<list.size();i++) {
+			list.get(i).getPlan_place();
+			List<String> cityName = tDAO.areaCode(areaCode);
+			
+			
+		}*/
 		
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
 		
@@ -236,9 +248,19 @@ public class PlanController {
 		pdao.readNumUpdate(pidx);
 		
 		ModelAndView mav = new ModelAndView();
+		
+		String pId= pdao.getPuserId(pidx);
+		
+		
 		PlanDTO pdto = pdao.planMainContent(pidx);
+
+
+
+		
+		
 		List<PlanDetailDTO> list = pdao.planDetail(pidx);	
 		mav.addObject("list", list);
+		mav.addObject("pId", pId);
 		mav.addObject("pdto", pdto);
 		mav.setViewName("plan/planContent");
 		return mav;

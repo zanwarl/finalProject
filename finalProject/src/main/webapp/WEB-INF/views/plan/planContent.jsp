@@ -174,9 +174,22 @@ margin-top: 35px;
 		${pdto.plan_explain }
 	</div>
 	<div class="cover_writer">
-		${pdto.plan_name }님의 일정
+	
+<c:url var="profileURL" value="userProfile.do">
+		<c:param name="userId" value="${pId }"></c:param>
+</c:url>
+	
+	<a href="${profileURL }">${pdto.plan_name}</a>님의 일정
 	</div>
 </div>
+
+
+<!-- 
+
+
+	<a href="${profileURL }">${receiver }님의 프로필 보기</a>
+
+ -->
 
 
 </div>

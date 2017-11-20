@@ -84,37 +84,54 @@ public class MemberController {
 			@RequestParam (value="saveId", required=false)String saveId
 			) {
 		ModelAndView mav= new ModelAndView(); 
-		boolean res = memberDao.login(member_id, member_pwd);
-		if (res){
-			HttpSession session = req.getSession();
-			session.setAttribute("sId", member_id);
-			
-			//2017.11.13 홍주영 memberdto 세션 추가!
-			MemberDTO mdto = memberDao.memberInfo(member_id);
-			
-			mav.addObject("sIdx",mdto.getMember_idx());
-			mav.addObject("sName",mdto.getMember_name());
-		}
 		
-		Cookie ck2 = new Cookie( "saveId2", member_id);
-		if(saveId==null ||saveId.equals("") ){
-			ck2.setMaxAge(0);
+		boolean isblack = memberDao.isBlack(member_id);
+		if (isblack){
+			mav.setViewName("admin/adminMsg");
+			mav.addObject("msg", "정지된 계정입니다.");
 			
+			mav.addObject("goURL", "index.do");
+			return mav; 
+			
+			//blacklist 
 		}
 		else {
-			ck2.setMaxAge(60*5);
-		} 	
-		resp.addCookie(ck2);
+
+			boolean res = memberDao.login(member_id, member_pwd);
+			if (res){
+				HttpSession session = req.getSession();
+				session.setAttribute("sId", member_id);
+				
+				//2017.11.13 홍주영 memberdto 세션 추가!
+				MemberDTO mdto = memberDao.memberInfo(member_id);
+				
+				mav.addObject("sIdx",mdto.getMember_idx());
+				mav.addObject("sName",mdto.getMember_name());
+			}
+			
+			Cookie ck2 = new Cookie( "saveId2", member_id);
+			if(saveId==null ||saveId.equals("") ){
+				ck2.setMaxAge(0);
+				
+			}
+			else {
+				ck2.setMaxAge(60*5);
+			} 	
+			resp.addCookie(ck2);
+			
+			String msg = res? "환영합니다^^": "fail";
+			String goURL = res? "index.do": "memberLogin.do";
+			
+			
+			mav.setViewName("member/loginMsg");
+			mav.addObject("msg", msg);
+			mav.addObject("goURL", goURL);
+			
+			return mav; 
+		}
 		
-		String msg = res? "환영합니다^^": "fail";
-		String goURL = res? "index.do": "memberLogin.do";
 		
 		
-		mav.setViewName("member/loginMsg");
-		mav.addObject("msg", msg);
-		mav.addObject("goURL", goURL);
-		
-		return mav; 
 	}
 	
 	
