@@ -50,6 +50,7 @@
 	background: #FFBB00;
 	float: left;
 	display:none;
+	overflow: auto;
 }
 
 #map {
@@ -256,7 +257,7 @@ $(document).ready(function() {
 		var contentTypeId = $(this).attr('data');
 		var contentId = $(this).attr('data-type');
 		$.ajax({
-	   		   url:"tourDetailJSON.do?contentTypeId="+contentTypeId+"+&contentId="+contentId,
+	   		   url:"tourDetailJSON.do?contentTypeId="+contentId+"+&contentId="+contentTypeId,
 	           type:"GET",
 	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
 	           async:false, // 이 한줄만 추가해주시면 됩니다.
@@ -445,8 +446,67 @@ jq(document).ready(function() {
 	    
 	    
 	    
-	    jq('#tour_search').keyup(function(e) {
-	    	var txt = $(this).val();	
+	    //jq('#tour_search').keyup(function(e) {
+	    	//엔터치면 검색하도록 변경..
+ 			jq("#tour_search[type=text]").keypress(function(e) { 
+				if (e.keyCode == 13) {
+					var txt = $(this).val();	
+					jq.ajax({
+		            	//url:"tourSearch.do?txt="+ encodeURI(encodeURIComponent(txt)) +"&areaCode=${pdto.plan_place}&cp="+cp,
+		            	url:"tourSearch.do?txt="+ txt +"&areaCode=${pdto.plan_place}&cp="+cp,
+						type:"GET",
+						dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+		                success : function(msg) {
+		                	
+		                	//배열 초기화
+		                	contentArray = [];
+		       				markerArray = [];
+		                	
+		                	jq('.form_cityList').remove();
+		                	// console.log(msg.response.body.items.item);
+		        			var myItem = msg.response.body.items.item;
+		        			
+		        			var totalCnt = msg.response.body.totalCount;
+		        			console.log(totalCnt);
+		        			var pageName = 'city.do?areaCode='+ 1;
+		        			var listSize = 10;
+		        			var pageSize = 5;
+		        			
+		        			var queryStr = '123123';
+		        			
+		        			var output ='<div class="form_cityList">';
+		        			var tmp = '';
+		        			jq.each(myItem, function(key, val) {
+		        				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+		        				if(val.firstimage == null) {
+		        					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
+		        				} else {
+		        					output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
+		        				}
+		        				output += '<div class="info">'+val.title+'</div>';
+		        				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
+		        				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+		        				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+		        				output += '</div>';
+		        	
+		        				contentArray[key] = val.title;
+		        				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+		        				inity = val.mapy;
+		        				initx = val.mapx;
+		        				
+		        			});
+		        			output += '</div>';
+		        			initMap2();
+		        			jq('#cityList').append(output);
+		        			},
+		        			error : function(xhr, status, error) {
+		        				alert("에러발생");
+		        			}
+		        			
+		            }); // end ajax
+		    	}    
+
+	    	
 	    	/* var txt = '';
 	    	switch (e.which)
 			{
@@ -467,62 +527,7 @@ jq(document).ready(function() {
 					txt= $("#tour_search").val();
 				// add your code here which will execute by default
 		    } */
-	    	jq.ajax({
-            	url:"tourSearch.do?txt="+ encodeURI(encodeURIComponent(txt)) +"&areaCode=${pdto.plan_place}&cp="+cp,
-				type:"GET",
-				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
-                success : function(msg) {
-                	
-                	//배열 초기화
-                	contentArray = [];
-       				markerArray = [];
-                	
-                	jq('.form_cityList').remove();
-                	// console.log(msg.response.body.items.item);
-        			var myItem = msg.response.body.items.item;
-        			
-        			
-        			var totalCnt = msg.response.body.totalCount;
-        			console.log(totalCnt);
-        			var pageName = 'city.do?areaCode='+ 1;
-        			var listSize = 10;
-        			var pageSize = 5;
-        			
-        			var queryStr = '123123';
-        			
-        			var output ='<div class="form_cityList">';
-        			var tmp = '';
-        			jq.each(myItem, function(key, val) {
-        				output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
-        				if(val.firstimage == null) {
-        					output += '<div class="img" fl="'+val.firstmiage+'"><img src="img/notimage.png" width="100" height="100"></div>'; 
-        				} else {
-        					output += '<div class="img" fl='+val.firstimage+'"><img src="'+val.firstimage+'" width="100" height="90"></div>';
-        				}
-        				output += '<div class="info">'+val.title+'</div>';
-        				output += '<div class="add"><img src="img/plan/add_button.png" width="17"></div>';
-        				output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
-        				output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
-        				output += '</div>';
-        				
-        	
-        				contentArray[key] = val.title;
-        				markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
-        				inity = val.mapy;
-        				initx = val.mapx;
-        				
-        				
-        				
-        			});
-        			output += '</div>';
-        			initMap2();
-        			jq('#cityList').append(output);
-        			},
-        			error : function(xhr, status, error) {
-        				alert("에러발생");
-        			}
-        			
-            }); // end ajax
+	    	
             
             
 	    });

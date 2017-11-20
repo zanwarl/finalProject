@@ -4,19 +4,25 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="korea.plan">
 	<!-- select start -->
-		<select id="planList" resultType="korea.plan.model.PlanDTO">
+		<select id="planList" resultType="korea.plan.model.PlanJoinDTO">
 			select * from
 			(select rownum as rnum, a.* from
 			<!-- 정렬 조건에 따른 동적 쿼리 -->
 			<choose>
 				<when test='sort.equals("f")'>
-					(select * from plan_main where plan_public = 'Y' order by plan_readnum desc) a) b
+					(select * from plan_main a,areacode b 
+					 where plan_public = 'Y' and a.plan_place = b.areacode 
+					 order by plan_readnum desc) a) b
 			    </when>
 			    <when test='sort.equals("n")'>
-					(select * from plan_main where plan_public = 'Y' order by plan_idx desc) a) b
+					(select * from plan_main a,areacode b 
+					 where plan_public = 'Y' and a.plan_place = b.areacode
+					 order by plan_idx desc) a) b
 			    </when>
-			     <otherwise>
-					(select * from plan_main where plan_public = 'Y' order by plan_idx desc) a) b
+			     <otherwise>	
+					(select * from plan_main a,areacode b 
+					 where plan_public = 'Y' and a.plan_place = b.areacode
+					 order by plan_idx desc) a) b
 			    </otherwise>
 			</choose>
 			<!-- end -->

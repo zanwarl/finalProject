@@ -2,6 +2,7 @@
 package korea.controller;
 
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.List;
 import java.util.Map;
 
@@ -148,7 +149,7 @@ public class TourController {
 			@RequestParam(value = "cp", required = false, defaultValue = "1") int cp,
 			@RequestParam(value = "arrange", required = false, defaultValue = "A") String arrange,
 			@RequestParam(value = "txt") String txt) throws ParseException, Exception {
-
+		
 		if (txt == null || txt.equals("")) {
 			tour_code = "areaBasedList";
 			param_1 = "&contentTypeId=&" + "areaCode=" + areaCode
@@ -158,6 +159,8 @@ public class TourController {
 			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 					+ service_key + param_1 + data_type;
 		} else {
+			txt = URLEncoder.encode(txt, "UTF-8");
+			System.out.println(txt);
 			tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/searchKeyword?ServiceKey="
 					+ "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D"
 					+ "&keyword=" + txt + "&areaCode=" + areaCode
@@ -235,9 +238,9 @@ public class TourController {
 	}
 
 	@RequestMapping("/tourDetailJSON.do")
-	public ModelAndView tourDetailJSON(@RequestParam(value = "contentId") String contentId,
-			@RequestParam(value = "contentTypeId") String contentTypeId) throws Exception {
-		System.out.println(contentId + " " + contentTypeId);
+	public ModelAndView tourDetailJSON(@RequestParam(value = "contentId") String contentTypeId,
+			@RequestParam(value = "contentTypeId") String contentId) throws Exception {
+		System.out.println("contentid " + contentId + " contenttypeid" + contentTypeId);
 		tour_code = "detailCommon";
 		param_1 = "&contentTypeId=" + contentId + "&contentId=" + contentTypeId
 				+ "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y"

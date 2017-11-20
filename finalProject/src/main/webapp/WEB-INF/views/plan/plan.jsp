@@ -37,6 +37,22 @@
     cursor: pointer;
     position: relative;
 }
+.city_name {
+	z-index: 55;
+    width: 215px;
+    height: 25px;
+    left: 0px;
+    bottom: 175px;
+    padding-top: 0px;
+    padding-left: 25px;
+    padding-right: 10px;
+    position: absolute;
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    float: left;
+}
 </style>
 </head>
 <body>
@@ -53,6 +69,7 @@
 			        <div class="bg">
 		        	<img class="plan_img" src="${src }${list.plan_file}"></div>
 		        	<div class="name">${list.plan_subject }</div>
+		        	<div class="city_name">${list.name }</div>
 		        	<%-- <div class="explain">${list.plan_explain }</div> --%>
 		        	<div class="bottom">
 			        	<div class="writer">${list.plan_name }</div>
