@@ -96,15 +96,15 @@ public class MemberController {
 			mav.addObject("sName",mdto.getMember_name());
 		}
 		
-		Cookie ck = new Cookie( "saveId", member_id);
+		Cookie ck2 = new Cookie( "saveId2", member_id);
 		if(saveId==null ||saveId.equals("") ){
-			ck.setMaxAge(0);
+			ck2.setMaxAge(0);
 			
 		}
 		else {
-			ck.setMaxAge(60*5);
+			ck2.setMaxAge(60*5);
 		} 	
-		resp.addCookie(ck);
+		resp.addCookie(ck2);
 		
 		String msg = res? "환영합니다^^": "fail";
 		String goURL = res? "main.do": "memberLogin.do";
