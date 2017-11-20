@@ -237,15 +237,16 @@ public class TourController {
 	@RequestMapping("/tourDetailJSON.do")
 	public ModelAndView tourDetailJSON(@RequestParam(value = "contentId") String contentId,
 			@RequestParam(value = "contentTypeId") String contentTypeId) throws Exception {
-
+		System.out.println(contentId + " " + contentTypeId);
 		tour_code = "detailCommon";
-		param_1 = "&contentTypeId=" + contentTypeId + "&contentId=" + contentId
+		param_1 = "&contentTypeId=" + contentId + "&contentId=" + contentTypeId
 				+ "&MobileOS=ETC&MobileApp=TourAPI3.0_Guide&defaultYN=Y&firstImageYN=Y&areacodeYN=Y&catcodeYN=Y"
 				+ "&addrinfoYN=Y&mapinfoYN=Y&overviewYN=Y&transGuideYN=Y";
 
 		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/" + tour_code + "?ServiceKey="
 				+ service_key + param_1 + data_type;
-
+		
+		System.out.println(tour_api_url);
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		ModelAndView mav = new ModelAndView();
 		
