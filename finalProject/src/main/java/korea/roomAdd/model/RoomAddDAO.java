@@ -20,4 +20,7 @@ public interface RoomAddDAO {
 	public int roomDelete(int idx);
 	public void fileupload(Map<String, Object> map);
 	public void updateFile(Map<String, Object> map, HttpServletRequest req) throws Exception;
+	
+	public String getUserId ( int useridx); 
+	
 }

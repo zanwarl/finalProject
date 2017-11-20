@@ -119,9 +119,14 @@ public class RoomAddController {
 		ModelAndView mav = new ModelAndView();
 		
 		/*mav.addObject("useridx", useridx);*/
+	System.out.println(rdto.getUseridx());
+		
+		String userid = radao.getUserId(rdto.getUseridx());
+		
 		
 		mav.addObject("imageList",imageList);
 		mav.addObject("rdto", rdto);
+		mav.addObject("receiver", userid);
 		mav.setViewName("room/roomContent");
 
 		return mav;
