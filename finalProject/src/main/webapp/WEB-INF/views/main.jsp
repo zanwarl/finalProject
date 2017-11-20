@@ -10,18 +10,18 @@
     <title>대한민국 길잡이</title>
 <style>
 #main_contents {
-	width: 1500px;
+	width: 100%;
 	height: 750px;
 	margin: 0 auto;
 }
 .wrap_content_plan_list {
-	width: 1500px;
+	width: 100%;
 	height: 600px;
     position: relative;
     margin: 0 auto;
 } 
 .content_plan_list {
-	width: 1500px;
+	width: 100%;
 	height: 600px;
     position: relative;
     margin: 0 auto;
@@ -30,7 +30,7 @@
 	text-align: center;
 }
 .content_plan_list {
-	width: 1500px;
+	width: 100%;
 	height: 500px;
     position: relative;
 } 

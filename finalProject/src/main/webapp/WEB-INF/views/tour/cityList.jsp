@@ -9,7 +9,7 @@
 <style>
 .menu {
 	margin: 0 auto;
-	width: 1500px;
+	width: 1280px;
 	text-align: center;
 }
 .contents_top b {
@@ -22,8 +22,8 @@
 	float: left;
 }
 .item {
-    width: 265px;
-    height: 265px;
+    width: 200px;
+    height: 200px;
     border: 1px solid #dfdfdf;
     float: left;
     margin-right: 16px;
@@ -38,7 +38,7 @@
     overflow: hidden;
 }
 .category {
-	width: 1500px;
+	width: 1280px;
 	height: 25px;
 	margin: 0 auto;
 }
@@ -49,8 +49,8 @@
 	cursor: pointer;
 }
 .item_img_box {
-	width: 265px;
-    height: 230px;
+	width: 200px;
+    height: 200px;
 }
 
 .item_img {
@@ -59,7 +59,7 @@
 }
 
 .wrap_content_city_list {
-	width: 1500px;
+	width: 1280px;
 	height: 650px;
     position: relative;
 	margin: 0 auto;
@@ -84,9 +84,10 @@
     text-align: center;
 }
 .content_city_list {
-	width: 1500px;
+	width: 1280px;
 	height: 600px;
     position: relative;
+    padding-left: 80px;
 } 
 </style>
 <script type="text/JavaScript"

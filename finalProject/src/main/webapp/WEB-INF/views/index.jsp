@@ -10,37 +10,39 @@
     <title>대한민국 길잡이</title>
 <style>
 #main_contents {
-	width: 1500px;
+	width: 1100px;
 	height: 750px;
 	margin: 0 auto;
 }
 .wrap_content_plan_list {
-	width: 1500px;
-	height: 600px;
+	width: 1100px;
+	height: 500px;
     position: relative;
     margin: 0 auto;
 } 
+
+.wrap_content_room_list {
+	width: 1100px;
+	height: 500px;
+    position: relative;
+    margin: 0 auto;	
+}
 .content_plan_list {
-	width: 1500px;
-	height: 600px;
+	width: 1100px;
+	height: 400px;
     position: relative;
     margin: 0 auto;
 } 
 .bot_plan_list {
 	text-align: center;
 }
-.content_plan_list {
-	width: 1500px;
-	height: 500px;
-    position: relative;
-} 
 .writer {
 	height: 30px;
 	float: left;
 }
 .bg .plan_img {
-	width: 350px;
-	height: 150px;
+	width: 250px;
+	height: 120px;
 }
 .plan_list .bg:hover .plan_img {
 	transform: scale(1.2);
@@ -55,8 +57,8 @@
 	overflow:hidden 
 }
 .plan_list {
-    width: 350px;
-    height: 220px;
+    width: 250px;
+    height: 180px;
     border: 1px solid #dfdfdf;
     float: left;
     margin-right: 16px;
@@ -70,6 +72,15 @@
 	text-align: center;
 	font-size: 20px;
 	font-weight: bold;
+	padding-top: 20px;
+}
+
+.header_room_list {
+	height: 50px;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	padding-top: 20px;
 }
 </style>
 </head>
@@ -109,7 +120,7 @@
 		        <div class="bg">
 	        	<img class="plan_img" src="${src }${list.plan_file}"></div>
 	        	<div class="name">${list.plan_subject }</div>
-	        	<div class="explain">${list.plan_explain }</div>
+	        	<%-- <div class="explain">${list.plan_explain }</div> --%>
 	        	<div class="bottom">
 		        	<div class="writer">${list.plan_name }</div>
 	        		<div class="readnum">조회수 ${list.plan_readnum }</div>
@@ -122,7 +133,7 @@
 	<!-- 인기 여행일지 정보 게시판 영역 end-->
 	
 	<div class="wrap_content_room_list">
-		인기 숙소 영역
+		<div class="header_room_list">인기 숙소</div>
 	</div>
 	</div>
 
