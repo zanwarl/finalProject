@@ -103,7 +103,7 @@ public class MsgController {
 		
 		if ( userIdx==null || userIdx.equals("")){
 		mav.setViewName("admin/adminMsg");
-		mav.addObject("goURL", "main.do");
+		mav.addObject("goURL", "index.do");
 		mav.addObject("msg", "로그인 하세요.");
 		return mav; 
 		

@@ -93,11 +93,11 @@ tfoot td {
 			</tr>
 			<tr>
 				<td rowspan="5" >
-				<img src="${src }${dto.FILENAME}" width="40%">
+				<img src="${src }${dto.FILENAME}" width="100%">
 				</td>
 			</tr>
 			<tr>
-				<th>방 이름</th>
+				<th st>방 이름</th>
 				<c:url value="roomContent.do" var="roomInfoURL">
 					<c:param name="roomidx" value="${dto.ROOMIDX }"></c:param>
 				</c:url>
