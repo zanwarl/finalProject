@@ -242,6 +242,9 @@ System.out.println(list);
 		ModelAndView mav = new ModelAndView();
 		List<Map<String, Object>> list = rdao.roomReqInfo(roomIdx);
 
+		String roomName = rdao.getRoomName(roomIdx);
+		//System.out.println(roomName);
+		
 		
 		String event = "";
 				
@@ -282,6 +285,7 @@ System.out.println(list);
 
 		mav.setViewName("room/roomReqInfo");
 		mav.addObject("event", event);
+		mav.addObject("roomName", roomName);
 		return mav;
 
 	}

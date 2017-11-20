@@ -97,8 +97,9 @@ jq(document).ready(function() {
 
 
 	<div id="contents">
-	${roomName }의 예약 현황
 
+
+<h1 align="center">${roomName }의 예약 현황입니다.</h1>
 		<!-- ---------본문내용---------------  -->
 		<div id="calender_wrap">
 		<div id="calendar"></div>

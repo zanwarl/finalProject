@@ -125,4 +125,10 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return list; 
 		
 	}
+
+	public String getRoomName(int roomidx) {
+		// TODO Auto-generated method stub
+		return sqlMap.selectOne("getRoomNameSql", roomidx);
+		
+	}
 }
