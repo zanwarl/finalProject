@@ -34,12 +34,15 @@ import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
 import korea.plan.model.PlanDetailDTO;
 import korea.plan.model.PlanMainDetailDTO;
+import korea.tour.model.tourDAO;
 
 @Controller
 public class PlanController {
 
 	@Autowired
 	private PlanDAO pdao;
+	@Autowired
+	private tourDAO tDAO;
 	
 	// 최상위 api 주소 세팅
 	public final static String service_key = "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D";
@@ -70,6 +73,13 @@ public class PlanController {
 		List<PlanDTO> list = pdao.planList(cp,listSize,sort);
 		
 		String url = "plan.do";
+		
+		/*for(int i=0; i<list.size();i++) {
+			list.get(i).getPlan_place();
+			List<String> cityName = tDAO.areaCode(areaCode);
+			
+			
+		}*/
 		
 		String page = korea.page.PageModule.page(url, totalCnt, listSize, pageSize, cp);
 		

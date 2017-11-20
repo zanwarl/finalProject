@@ -24,7 +24,7 @@ public class IndexController {
 		int count = pdao.favTotalCnt();
 		mav.addObject("list", list);
 		mav.addObject("count",count);
-		mav.setViewName("main");
+		mav.setViewName("index");
 		return mav;
 	}
 	
