@@ -55,12 +55,12 @@ jq(document).ready(function() {
        jq("input[name=space][value="+arrSpace[nArrCnt]+"]").prop("checked",true);
      }    
 
-	
 	jq("#datepicker").multiDatesPicker({
 		minDate: 0,
 		maxDate: 30,
 		dateFormat: 'yy/mm/dd' //데이터포멧(ex - 2012.12.13)
   	});
+	
 });
 
 function goList() {
