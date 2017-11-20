@@ -258,7 +258,7 @@ text-align:center;
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
- <img src="img/gaga.png" width="1000" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+ <img src="img/gaga.png" width="600" height="200" style="margin-left: auto; margin-right: auto; display: block;">
 <div class="reqWrap">
 <H2>Reservation</H2>
 <hr>
