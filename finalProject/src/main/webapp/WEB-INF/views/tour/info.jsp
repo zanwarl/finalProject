@@ -7,21 +7,29 @@
 <title>Insert title here</title>
 <style>
 .wrap_content_city_list {
-	width: 1500px;
+	width: 1263px;
 	height: 1130px;
     position: relative;
     margin: 0 auto;
 } 
 .menu {
-	width: 1500px;
+	width: 1163px;
 	margin: 0 auto;
-	
+	padding-left: 100px;
+	padding-bottom: 20px;
 }
 .content_city_list {
-	width: 1500px;
+	width: 1163px;
 	height: 1100px;
     position: relative;
+    padding-left: 100px;
 } 
+.page_form{
+	width: 1163px;
+	height: 50px;
+    position: relative;
+    padding-left: 100px;
+}
 .item_img_box {
 	width: 230px;
     height: 160px;
@@ -144,6 +152,8 @@ var cp = ${cp};
 	                }
 	        	   output += '</div>';
 	        	   output += '</div>';
+	        	   output += '<div class="page_form"></div>';
+	        	   
 	        	   $('#contents').append(output);
 	        	   for(var i=1; i<=listSize; i++){
 		        	   $.ajax({
@@ -181,7 +191,8 @@ var cp = ${cp};
 	        		   $('#contents .item'+i).append(itemAddr[i]);
 	        		   //$('#contents .item'+i).append(itemTel[i]);
 	        	   }
-	        	   $('#contents').append(pageStr);
+	        	   //$('#contents').append(pageStr);
+	        	   $('.page_form').append(pageStr);
 	        	
 	           },
 	           error : function(xhr, status, error) {

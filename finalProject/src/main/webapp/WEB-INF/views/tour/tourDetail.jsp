@@ -8,14 +8,28 @@
 
 <style>
 #content_wrap {
-	width:1200px; 
-	height:500px; 
+	width:1263px; 
+	height:800px; 
 	background:#ddd; 
 	margin:0 auto; 
 	padding:5px;
-	background:white;}
-.content {
-float: left;
+	background:white;
+	border: 1px solid #dfdfdf;
+	float: left;
+}
+.content_left {
+	padding-left: 200px;
+	width: 500px;
+	height: 800px;
+	float: left;
+	padding-right: 50px;
+	border-right: 1px solid #dfdfdf;
+}
+.content_right {
+	width: 300px;
+	height: 71z`0px;
+	float: left;
+	border: 1px solid #dfdfdf;
 }
 .content_block{
 float: left;
@@ -23,13 +37,14 @@ width: 100px;
 height: 100px;
 }
 #map {
-height: 400px;
-width: 400px;;
+height: 300px;
+width: 300px;
 float: left;
 }
 #cmtform {
 	width: 1000px;
 	margin: 0 auto;
+	padding: 200px;
 }
 .cmtf {
 	margin: 0 auto;
@@ -39,23 +54,30 @@ float: left;
 	margin: 0 auto;
 }
 .info {
-	width: 1000px;
+	width: 500px;
+	height: 400px;
 	margin: 0 auto;
+	overflow:auto;	
 }
 .contents_top {
 	width: 1000px;
 	margin: 0 auto;
-}
-#content_wrap {
-	width: 1000px;
-	border: 1px solid #dfdfdf;
+	padding-left: 150px;
 }
 .wrap_info {
+	width: 500px;
 	border: 1px solid #dfdfdf;
 }
 .title {
 	font-weight: bold;
 	font-size: 20px;
+}
+#near_info {
+	position:absolute;
+	top:630px;
+	left:760px;
+	width: 300px;
+	height: 300px;
 }
 </style>
 <title>Insert title here</title>
@@ -101,7 +123,7 @@ float: left;
 								}
 							$(".info").html(output);
 							$(".city_title").html(title);
-							$(".content").html(img);
+							$(".content_img").html(img);
 							//document.body.innerHTML += output;
 	        	   
 	           },
@@ -148,15 +170,23 @@ float: left;
 		</div>
 	</div>
 	<div id="content_wrap">
-		<div class="content"></div>
-		<div class="content_block"></div>
-		<div id="map"></div>
-	</div>
+		<div class="content_left">
+			<div class="content_img">이미지</div>
+			<div class="wrap_info">
+				<div class="info">개요 들어갈 부분</div>
+			</div>
 
-	<div class="wrap_info">
-		<div class="info">
+		</div>
+		<div class="content_right">
+			<div id="near_info">근처 음식점</div>
+			<div id="map"></div>
 		</div>
 	</div>
+
+	<!-- <div class="wrap_info">
+		<div class="info">
+		</div>
+	</div> -->
 	<div id="cmtform">
 	<form class="cmtf" action="tourCmtWrite.do">
 		${sId } : 

@@ -15,6 +15,13 @@
 .city_item {
 	float: left;
 }
+.menu {
+	font-size: 20px;
+}
+.menu_bar {
+	background: #3173b7;
+	float: left;
+}
 .city_list {
     width: 270px;
     height: 250px;
@@ -25,11 +32,6 @@
     display: block;
     cursor: pointer;
     position: relative;
-}
-.contents_mid {
-	height: 700px;
-	margin: 0 auto;
-	padding-left: 200px;
 }
 .item_name {
 	width: 200px;
@@ -87,19 +89,24 @@
      top:50%;
      left:50%;
      transform: translate(-50%, -50%);                                                                   
-     font-size:3rem;
+     font-size:2.5rem;
      color: white;
      z-index: 55;
      text-align: center;
 }
 .contents_mid {
-	width: 1100px;
+	width: 1000px;
 	height: 600px;
 	margin: 0 auto;
 	position: relative;
+	padding-left: 150px;
 }
 .contents_top {
 	text-align: center;
+	width: 600px;
+	height: 50px;
+	margin: 0 auto;
+	padding-left: 300px;
 }
 .contents_bot {
 	text-align: center;
@@ -188,12 +195,14 @@
 <div id="contents">
 	<div class="contents_top">
 		<div class="city_title"><b>${cityName }</b></div>
-		<div class="menu">홈</a>
-			<a href="attraction.do">관광명소</a>
-			<a href="foodList.do">음식점</a>
-			<a href="shopping.do">쇼핑</a>
-			<a href="plan.do">여행일정 </a>
-		
+		<div class="menu">
+			<div class="menu_bar">
+				<a href="tour.do">홈</a>
+				<a href="attraction.do">관광명소</a>
+				<a href="foodList.do">음식점</a>
+				<a href="shopping.do">쇼핑</a>
+				<a href="plan.do">여행일정 </a>
+			</div>
 		</div>
 	</div>
 	

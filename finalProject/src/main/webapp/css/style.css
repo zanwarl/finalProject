@@ -14,7 +14,7 @@ a {text-decoration:none; color:#000;}
 
 /*상단,메인메뉴를 감싸고 있는 영역*/
 #nav{
-	width:1280px; 
+	width:1263px; 
 	margin:0 0 15px 0; 
 	padding:0px;
 	}
@@ -31,7 +31,7 @@ a {text-decoration:none; color:#000;}
 #nav ul li {float:left;}
 
 /*로그인,회원가입,언어설정 상단메뉴*/
-#top_menu{width:1280px; height:40px; border-bottom: 1px solid #dedede;}
+#top_menu{width:1263px; height:40px; border-bottom: 1px solid #dedede;}
 #top_menu ul {
 	width: 520px;
 	float:right;
