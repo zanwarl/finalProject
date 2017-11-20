@@ -9,7 +9,7 @@
 <style>
 .menu {
 	margin: 0 auto;
-	width: 1280px;
+	width: 1263px;
 	text-align: center;
 }
 .contents_top b {
@@ -23,7 +23,7 @@
 }
 .item {
     width: 200px;
-    height: 200px;
+    height: 210px;
     border: 1px solid #dfdfdf;
     float: left;
     margin-right: 16px;
@@ -38,9 +38,10 @@
     overflow: hidden;
 }
 .category {
-	width: 1280px;
+	width: 1163px;
 	height: 25px;
 	margin: 0 auto;
+	padding-left: 100px;
 }
 .category_item {
 	float: left;
@@ -50,7 +51,7 @@
 }
 .item_img_box {
 	width: 200px;
-    height: 200px;
+    height: 180px;
 }
 
 .item_img {
@@ -59,7 +60,7 @@
 }
 
 .wrap_content_city_list {
-	width: 1280px;
+	width: 1263px;
 	height: 650px;
     position: relative;
 	margin: 0 auto;
@@ -84,10 +85,10 @@
     text-align: center;
 }
 .content_city_list {
-	width: 1280px;
+	width: 1160px;
 	height: 600px;
     position: relative;
-    padding-left: 80px;
+    padding-left: 100px;
 } 
 </style>
 <script type="text/JavaScript"
@@ -182,7 +183,7 @@ var contentTypeId = $('.category_item').attr('data-cate');
 	        	   
 	        	   var moreInfo = totalCnt +'개의 정보 모두보기';
 	        	   var pageName = 'city.do?areaCode='+ ${areaCode};
-	        	   var listSize = 5;
+	        	   var listSize = 10;
 	        	   var pageSize = 5;
 	        	   
 	        	   var queryStr = '${pageContext.request.queryString}';
