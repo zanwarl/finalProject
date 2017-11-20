@@ -121,7 +121,7 @@ public class RoomAddController {
 		mav.addObject("imageList",imageList);
 		mav.addObject("rdto", rdto);
 		mav.addObject("receiver", userid);
-		mav.setViewName("room/roomContent");
+		mav.setViewName("room/roomContent1");
 
 		return mav;
 	}
