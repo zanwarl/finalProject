@@ -169,6 +169,15 @@ on c.roomidx = roomreq.roomidx order by roomreq.reqdate desc
 	
 		select roomname from roomadd where roomidx = #{roomidx}
 	</select>
+	
+	<select id="getdata" resultType="korea.data.model.DataDTO">
+		
+		select userid ,nvl(total_pay, 0) as total_pay, nvl(checkindate , '-1') as checkindate,
+		(select member_sex from member where member_id = rr.userid) as member_sex ,
+		(select member_birth from member where member_id = rr.userid) as member_birth
+		from roomreq rr
+
+	</select>
 
 
 </mapper>

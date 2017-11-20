@@ -161,6 +161,14 @@
 		</constructor-arg>
 	</bean>
 
+	
+	<bean id="DataDAO" class="korea.data.model.DataDAOImple">
+		<constructor-arg>
+			<ref bean="sqlSessionTemplate"/>
+		</constructor-arg>
+	</bean>
+	
+	
 
 	<!-- views -->
 	<bean id="viewResolver"

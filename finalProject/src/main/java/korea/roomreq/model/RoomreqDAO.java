@@ -3,6 +3,8 @@ package korea.roomreq.model;
 import java.util.List;
 import java.util.Map;
 
+import korea.data.model.DataDTO;
+
 public interface RoomreqDAO {
 
 	// public List<RoomreqDTO> roomreqList();
@@ -31,5 +33,7 @@ public interface RoomreqDAO {
 	public List<	Map<String, Object> > getBookedDate	(int reqidx );
 	public String getRoomName ( int roomidx ); 
 	
+	
+	List<DataDTO> Get_DataControll_getList();
 
 }

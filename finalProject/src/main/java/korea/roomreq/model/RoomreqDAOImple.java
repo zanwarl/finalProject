@@ -6,6 +6,8 @@ import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 
+import korea.data.model.DataDTO;
+
 public class RoomreqDAOImple implements RoomreqDAO {
 
 	private SqlSessionTemplate sqlMap;
@@ -132,4 +134,16 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		return sqlMap.selectOne("getRoomNameSql", roomidx);
 		
 	}
+	
+	public List<DataDTO> Get_DataControll_getList() {
+		// TODO Auto-generated method stub
+		System.out.println("1111");
+		List<DataDTO> list = sqlMap.selectList("getdata");
+		System.out.println("22222   =" + list.size());
+		
+		
+		return list;
+	}
+	
+	
 }
