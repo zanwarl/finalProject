@@ -8,11 +8,15 @@
 <title>Insert title here</title>
 <style>
 .content_top {
-width: 1500px;
+width: 1000px;
 	margin: 0 auto;
 }
 .img {
-width: 1500px;
+	width: 1000px;
+	margin: 0 auto;
+}
+.title_img {
+	width: 1000px;
 	margin: 0 auto;
 }
 #content{
@@ -20,13 +24,13 @@ width: 1500px;
 	margin: 0 auto;
 }
 .wrap_content_plan {
-	width: 1500px;
+	width: 1000px;
 	height: auto;
     position: relative;
     margin: 0 auto;
 } 
 .content_plan {
-	width: 1500px;
+	width: 1000px;
 	height: auto;
     position: relative;
     margin: 0 auto;
@@ -36,8 +40,11 @@ width: 1500px;
 
 }
 .day {
-	width: 50px;
+	width: 100px;
 	height: 30px;
+	background: #759be1;
+	color: white;
+	font-weight: bold;
 }
 .order {
 	float: left;
@@ -74,6 +81,62 @@ margin-top: 35px;
 	width: 1500px;
 	margin: 0 auto;
 }
+.title_img {
+	position: relative;
+    background-size: cover;
+}
+.title_img .img_subject {
+	position: absolute;
+	top:50%;
+	left:50%;
+	transform: translate(-50%, -50%);                                                                   
+	font-size:5rem;
+	color: white;
+	z-index: 2;
+	text-align: center;
+}
+.title_img {
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 350px;
+    z-index: 1;
+}
+.cover_bot {
+    z-index: 55;
+    width: 950px;
+    left: 0px;
+    bottom: 50px;
+    padding-top: 90px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.5); 
+}
+.cover_explain {
+    z-index: 55;
+    width: 950px;
+    height: 50px;
+    left: 0px;
+    bottom: 0px;
+    padding-top: 0px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5); 
+}
+.img_cover {
+    
+   	width: 100%;
+    height: 350px;
+    position: relative;
+}
 </style>
 </head>
 <body>
@@ -83,7 +146,17 @@ margin-top: 35px;
 
 <div class="content_top">
 <div class="title">${pdto.plan_name }님의 일정</div>
-<div class="img"><img src="${src}${pdto.plan_file}" width="960"></div>
+<div class="img_cover">
+	<img class="title_img" src="${src}${pdto.plan_file}" width="960">
+	<div class="cover_bot">
+		${pdto.plan_subject }
+	</div>
+	<div class="cover_explain">
+		${pdto.plan_explain }
+	</div>
+</div>
+
+
 </div>
 <div id="wrap_content_plan">
 	<div class="content_plan">

@@ -219,6 +219,8 @@ public class TourController {
 
 		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
 		ModelAndView mav = new ModelAndView();
+		
+		System.out.println(jsonObject);
 
 		mav.setViewName("tour/contentid");
 		mav.addObject("jsonObject", jsonObject);

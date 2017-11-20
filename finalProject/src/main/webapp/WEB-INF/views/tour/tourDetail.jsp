@@ -7,19 +7,56 @@
 <meta charset="UTF-8">
 
 <style>
-#content_wrap {width:1200px; height:300px; background:#ddd; margin:0 auto; padding:5px;background:white;}
+#content_wrap {
+	width:1200px; 
+	height:500px; 
+	background:#ddd; 
+	margin:0 auto; 
+	padding:5px;
+	background:white;}
 .content {
 float: left;
 }
 .content_block{
 float: left;
-width: 200px;
+width: 100px;
+height: 100px;
 }
 #map {
 height: 400px;
 width: 400px;;
 float: left;
- }
+}
+#cmtform {
+	width: 1000px;
+	margin: 0 auto;
+}
+.cmtf {
+	margin: 0 auto;
+}
+.wrap_info {
+	width: 1000px;
+	margin: 0 auto;
+}
+.info {
+	width: 1000px;
+	margin: 0 auto;
+}
+.contents_top {
+	width: 1000px;
+	margin: 0 auto;
+}
+#content_wrap {
+	width: 1000px;
+	border: 1px solid #dfdfdf;
+}
+.wrap_info {
+	border: 1px solid #dfdfdf;
+}
+.title {
+	font-weight: bold;
+	font-size: 20px;
+}
 </style>
 <title>Insert title here</title>
 <script type="text/JavaScript"
@@ -52,15 +89,18 @@ float: left;
 							mapx = myItem.mapy;
 							mapy = myItem.mapx;
 							img += '<img src="'+myItem.firstimage+'" width="500">';
+							title = '';
 							output += '<h4>개요</h4>';
 							output += myItem.overview +'<br>';
 							       
 								if(myItem.contenttypeid!=25) {
+								title += '<span class="title">' + myItem.title + '</span>';
 								output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
 								output += '<h4>전화번호</h4>' + myItem.tel;
 								output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
 								}
 							$(".info").html(output);
+							$(".city_title").html(title);
 							$(".content").html(img);
 							//document.body.innerHTML += output;
 	        	   
@@ -97,28 +137,28 @@ float: left;
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents"><!-- contents -->
-	<table>
-		<thead>
-			<tr>
-				<th><a href="tour.do">홈</a></th>
-				<th><a href="area.do">주요도시</a></th>
-				<th><a href="attraction.do">관광명소</a></th>
-				<th><a href="shopping.do">쇼핑</a></th>
-				<th><a href="plan.do">여행일정</a></th>
-			</tr>
-		</thead>
-	</table>
+	<div class="contents_top">
+		<div class="city_title"></div>
+		<div class="menu">홈
+			<a href="attraction.do">관광명소</a>
+			<a href="foodList.do">음식점</a>
+			<a href="shopping.do">쇼핑</a>
+			<a href="plan.do">여행일정 </a>
+		
+		</div>
+	</div>
 	<div id="content_wrap">
 		<div class="content"></div>
-		<div class="content_block">벌어져</div>
+		<div class="content_block"></div>
 		<div id="map"></div>
 	</div>
 
-	<div class="info">
+	<div class="wrap_info">
+		<div class="info">
+		</div>
 	</div>
-	<hr>
 	<div id="cmtform">
-	<form action="tourCmtWrite.do">
+	<form class="cmtf" action="tourCmtWrite.do">
 		${sId } : 
 		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
