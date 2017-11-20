@@ -65,6 +65,8 @@ public class PlanController {
 		int listSize = 8;	//한 페이지에서 보여질 게시물 수
 		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
 		
+		
+		System.out.println("모든 게시물 수 : " + totalCnt);
 		List<PlanDTO> list = pdao.planList(cp,listSize,sort);
 		
 		String url = "plan.do";

@@ -10,18 +10,18 @@
 			<!-- 정렬 조건에 따른 동적 쿼리 -->
 			<choose>
 				<when test='sort.equals("f")'>
-					(select * from plan_main order by plan_readnum desc) a) b
+					(select * from plan_main where plan_public = 'Y' order by plan_readnum desc) a) b
 			    </when>
 			    <when test='sort.equals("n")'>
-					(select * from plan_main order by plan_idx desc) a) b
+					(select * from plan_main where plan_public = 'Y' order by plan_idx desc) a) b
 			    </when>
 			     <otherwise>
-					(select * from plan_main order by plan_idx desc) a) b
+					(select * from plan_main where plan_public = 'Y' order by plan_idx desc) a) b
 			    </otherwise>
 			</choose>
 			<!-- end -->
 			<![CDATA[
-				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} and plan_public = 'Y'
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} 
    			]]>
 		</select>
 		
