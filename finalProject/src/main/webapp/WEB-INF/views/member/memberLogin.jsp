@@ -263,7 +263,7 @@ body .container .content .signup-cont {
 		<div class="content">
 			<div class="signin-cont cont">
 				<form method="post" action="memberLogin.do">
-					<input type="text" name="member_id" id="id" class="inpt" required="required" placeholder="아이디"  value ="${cookie.saveId.value }">
+					<input type="text" name="member_id" id="id" class="inpt" required="required" placeholder="아이디"  value ="${cookie.saveId2.value }">
 					<label for="id">아이디</label>
 					<input type="password" name="member_pwd" id="password" class="inpt" required="required" placeholder="비밀번호">
                 	<label for="password">비밀번호</label>
