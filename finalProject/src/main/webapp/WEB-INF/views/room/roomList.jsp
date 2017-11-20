@@ -87,7 +87,7 @@ function roomadd() {
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-<h2 class="title">숙소목록</h2>
+<h2 class="title">숙소목록 </h2>
 <c:url value="${contextPath }/img/room/" var="src"/> 
 	<table>
 		<c:if test="${empty list}">
@@ -120,6 +120,9 @@ function roomadd() {
 				<input type="button" class="raddBtn" value="숙소등록" onclick="roomadd()">
 				</c:if>
 			</td>
+		</tr>
+		<tr>	
+			<td>${page }</td>
 		</tr>
 	</table>
 

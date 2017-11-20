@@ -197,11 +197,11 @@
 		<div class="city_title"><b>${cityName }</b></div>
 		<div class="menu">
 			<div class="menu_bar">
-				<a href="tour.do">홈</a>
+				<!-- <a href="tour.do">홈</a>
 				<a href="attraction.do">관광명소</a>
 				<a href="foodList.do">음식점</a>
 				<a href="shopping.do">쇼핑</a>
-				<a href="plan.do">여행일정 </a>
+				<a href="plan.do">여행일정 </a> -->
 			</div>
 		</div>
 	</div>

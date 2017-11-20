@@ -228,11 +228,11 @@ var contentTypeId = $('.category_item').attr('data-cate');
 <div id="contents">
 	<div class="contents_top">
 		<div class="city_title"></div>
-		<div class="menu">홈</a>
-			<a href="attraction.do">관광명소</a>
+		<div class="menu"></a>
+			<%-- <a href="attraction.do">관광명소</a>
 			<a href="foodList.do?areaCode=${areaCode }">음식점</a>
 			<a href="shopping.do">쇼핑</a>
-			<a href="plan.do">여행일정 </a>
+			<a href="plan.do">여행일정 </a> --%>
 		
 		</div>
 	</div>

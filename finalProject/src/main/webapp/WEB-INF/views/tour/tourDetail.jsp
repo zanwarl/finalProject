@@ -126,11 +126,12 @@ float: left;
 							title = '';
 							output += '<h4>개요</h4>';
 							output += myItem.overview +'<br>';
-							       
 								if(myItem.contenttypeid!=25) {
 									title += '<span class="title">' + myItem.title + '</span>';
 									output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
-									output += '<h4>전화번호</h4>' + myItem.tel;
+									if(myItem.tel != null) {
+										output += '<h4>전화번호</h4>' + myItem.tel;
+									}
 									output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
 								}
 							$(".info").html(output);
@@ -204,12 +205,11 @@ float: left;
 <div id="contents"><!-- contents -->
 	<div class="contents_top">
 		<div class="city_title"></div>
-		<div class="menu">홈
-			<a href="attraction.do">관광명소</a>
+		<div class="menu">
+			<!-- <a href="attraction.do">관광명소</a>
 			<a href="foodList.do">음식점</a>
 			<a href="shopping.do">쇼핑</a>
-			<a href="plan.do">여행일정 </a>
-		
+			<a href="plan.do">여행일정 </a> -->
 		</div>
 	</div>
 	<div id="content_wrap">

@@ -15,9 +15,18 @@
 		)
 	</insert>
 	<select id="roomList" resultType="korea.roomAdd.model.RoomJoinDTO">
-		select r.roomidx,r.roomprice,r.useridx,r.roomname,wm_concat(i.filename) as filename
+		<!-- select r.roomidx,r.roomprice,r.useridx,r.roomname,wm_concat(i.filename) as filename
 		from roomadd r,rimage i where r.roomidx = i.roomidx and i.DEL_GB = 'N' 
+		group by r.roomidx,r.useridx,r.roomname,r.roomprice -->
+		select * from  
+		(select rownum as rnum, a.* from     
+		(select r.roomidx,r.roomprice,r.useridx,r.roomname,wm_concat(i.filename) as filename
+		from roomadd r,rimage i where r.roomidx = i.roomidx and i.DEL_GB = 'N'
 		group by r.roomidx,r.useridx,r.roomname,r.roomprice
+		order by r.roomidx desc )a)b
+		<![CDATA[
+				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} 
+		]]>
 	</select>
 	<select id="roomContent" parameterType="int"
 		resultType="korea.roomAdd.model.RoomAddDTO">
@@ -60,6 +69,9 @@
 	
 	</select>
 	
+	<select id="totalCount" resultType="int">
+		select count(*) from roomadd
+	</select>
 	
 
 </mapper>

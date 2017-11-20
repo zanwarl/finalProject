@@ -72,9 +72,9 @@
 			order by pland_day asc, pland_order asc
 		</select>
 		
-		<select id="planMainContent" parameterType="int" resultType="korea.plan.model.PlanDTO">
-			select * from plan_main
-			where plan_idx = #{pidx}
+		<select id="planMainContent" parameterType="int" resultType="korea.plan.model.PlanJoinDTO">
+			select * from plan_main a, areacode b
+			where plan_idx = #{pidx} and a.plan_place = b.areacode
 		</select>
 		
 		<select id="planTotalCnt" resultType="int">

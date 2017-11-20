@@ -43,16 +43,27 @@ public class RoomAddController {
 
 	
 	@RequestMapping(value = "/home.do", method = RequestMethod.GET)
-	public ModelAndView roomList(HttpServletRequest req) {
+	public ModelAndView roomList(HttpServletRequest req,
+			@RequestParam(value="cp",required=false,defaultValue="1")int cp,
+			@RequestParam(value="sort",required=false,defaultValue="f")String sort) {
 		
+		System.out.println("정렬 : " + sort);
 		
-		List<RoomJoinDTO> list = radao.roomList();
+		int totalCnt = radao.totalCount();
+		
+		int listSize = 8;	//한 페이지에서 보여질 게시물 수
+		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
+		
+		String page = korea.page.PageModule.page("home.do", totalCnt, listSize, pageSize, cp);
+		
+		List<RoomJoinDTO> list = radao.roomList(cp,listSize,sort);
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = req.getSession();
 		String userId = (String) session.getAttribute("sId");
 		
 		session.setAttribute("userid", userId);
 		mav.addObject("list", list);
+		mav.addObject("page", page);
 		mav.setViewName("room/roomList");
 		return mav;
 	}

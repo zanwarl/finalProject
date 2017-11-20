@@ -12,7 +12,7 @@ import food.model.FoodDTO;
 public interface RoomAddDAO {
 
 	public int roomAdd(RoomAddDTO dto);
-	public List<RoomJoinDTO> roomList(); 
+	public List<RoomJoinDTO> roomList(int cp,int listSize,String sort); 
 	public RoomAddDTO roomContent(int idx);
 	public List<ImageDTO> fileList(int idx);
 	public RoomAddDTO roomUpdateData(int idx);
@@ -22,5 +22,7 @@ public interface RoomAddDAO {
 	public void updateFile(Map<String, Object> map, HttpServletRequest req) throws Exception;
 	
 	public String getUserId ( int useridx); 
+	
+	public int totalCount();
 	
 }

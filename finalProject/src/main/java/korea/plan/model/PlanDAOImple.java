@@ -113,8 +113,8 @@ public class PlanDAOImple implements PlanDAO {
 		return list;
 	}
 	
-	public PlanDTO planMainContent(int pidx) {
-		PlanDTO pdto = sqlMap.selectOne("planMainContent", pidx);
+	public PlanJoinDTO planMainContent(int pidx) {
+		PlanJoinDTO pdto = sqlMap.selectOne("planMainContent", pidx);
 		return pdto;
 	}
 	public List<PlanDetailDTO> planDetail(int pidx) {

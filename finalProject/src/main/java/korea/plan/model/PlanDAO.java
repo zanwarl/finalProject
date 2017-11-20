@@ -29,7 +29,7 @@ public interface PlanDAO {
 	public int myTotalCnt(int idx);
 	
 	//일정 내용 보여주기
-	public PlanDTO planMainContent(int pidx);
+	public PlanJoinDTO planMainContent(int pidx);
 	public List<PlanDetailDTO> planDetail(int pidx);
 	
 	//일정 수정

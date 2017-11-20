@@ -8,8 +8,9 @@
 <title>Insert title here</title>
 <style>
 .content_top {
-width: 1000px;
+	width: 1000px;
 	margin: 0 auto;
+	padding-bottom: 30px;
 }
 .img {
 	width: 1000px;
@@ -28,6 +29,7 @@ width: 1000px;
 	height: auto;
     position: relative;
     margin: 0 auto;
+    padding-top: 20px;
 } 
 .content_plan {
 	width: 1000px;
@@ -50,10 +52,6 @@ width: 1000px;
 	float: left;
 	width: 30px;
 	height: 30px;
-}
-.content_top {
-	margin: 0 auto;
-	padding-bottom: 20px;
 }
 .order {
 width: 30px;
@@ -150,6 +148,9 @@ margin-top: 35px;
     background-color: rgba(0, 0, 0, 0.5); 
     float: left;
 }
+.cover_name {
+	height: 30px;
+}	
 .img_cover {
     
    	width: 100%;
@@ -172,6 +173,9 @@ margin-top: 35px;
 	</div>
 	<div class="cover_explain">
 		${pdto.plan_explain }
+	</div>
+	<div class="cover_name">
+		${pdto.name }
 	</div>
 	<div class="cover_writer">
 	

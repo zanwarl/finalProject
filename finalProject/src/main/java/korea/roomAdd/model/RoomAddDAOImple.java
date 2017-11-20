@@ -26,8 +26,12 @@ public class RoomAddDAOImple implements RoomAddDAO {
 		return count;
 	}
 
-	public List<RoomJoinDTO> roomList() {
-		List<RoomJoinDTO> list = sqlMap.selectList("roomList");
+	public List<RoomJoinDTO> roomList(int cp,int listSize,String sort) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("cp", cp);
+		map.put("pageRow", listSize);
+		map.put("sort", sort);
+		List<RoomJoinDTO> list = sqlMap.selectList("roomList",map);
 		return list;
 	}
 
@@ -82,6 +86,10 @@ public class RoomAddDAOImple implements RoomAddDAO {
 		String userId =sqlMap.selectOne("getUserIdSql_room", useridx);
 	return userId; 
 	
+	}
+	
+	public int totalCount() {
+		return sqlMap.selectOne("totalCount");
 	}
 	
 	

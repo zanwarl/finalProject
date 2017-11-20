@@ -33,6 +33,7 @@ import org.springframework.web.servlet.ModelAndView;
 import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
 import korea.plan.model.PlanDetailDTO;
+import korea.plan.model.PlanJoinDTO;
 import korea.plan.model.PlanMainDetailDTO;
 import korea.roomAdd.model.RoomAddDAO;
 import korea.tour.model.tourDAO;
@@ -252,7 +253,7 @@ public class PlanController {
 		String pId= pdao.getPuserId(pidx);
 		
 		
-		PlanDTO pdto = pdao.planMainContent(pidx);
+		PlanJoinDTO pdto = pdao.planMainContent(pidx);
 
 
 

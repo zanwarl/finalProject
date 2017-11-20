@@ -39,18 +39,18 @@
 }
 .city_name {
 	z-index: 55;
-    width: 215px;
+    width: 245px;
     height: 25px;
     left: 0px;
     bottom: 175px;
     padding-top: 0px;
-    padding-left: 25px;
-    padding-right: 10px;
+    padding-left: 2px;
+    padding-right: 2px;
     position: absolute;
     color: white;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.5);
+	background: linear-gradient( to top, rgba(0,0,0,0), rgba(0,0,0,0.5));
     float: left;
 }
 </style>
