@@ -44,15 +44,7 @@ jq(document).ready(function() {
 			[
 				
 				${event}
-				
 		
-			/* 
-			
-			{ title: 'All Day Event', start: '2017-11-01' },
-			{ title: 'Long Event', start: '2017-11-07', end: '2017-11-10' }, 
-			{ title: ' Event', start: '2017-11-10', end: '2017-11-11' }, 
-			{ id: 999, title: 'Repeating Event', start: '2017-04-09T16:00:00' }
- */			
 		]  , 
 		eventClick: function (event){
 			if (event.reqidx){
@@ -106,6 +98,8 @@ jq(document).ready(function() {
 
 	<div id="contents">
 
+
+<h1 align="center">${roomName }의 예약 현황입니다.</h1>
 		<!-- ---------본문내용---------------  -->
 		<div id="calender_wrap">
 		<div id="calendar"></div>

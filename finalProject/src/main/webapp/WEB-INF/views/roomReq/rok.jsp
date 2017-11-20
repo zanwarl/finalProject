@@ -21,15 +21,16 @@
 	margin:40px auto;
 	margin-top:20px;
 	border-top: 2px solid #333;
+	border-bottom : 2px solid #333;
 	font-align:center;
 	 		
 }
 
 h1{
- 	width: 30%;
-	height: 30%;
-  	margin: 40px auto;
-    color: #FCA205;
+ 	width:450px;
+	margin:10px auto;
+	margin-top:20px;
+	color: #74d1ea;
     font-family: 'Lobster';
     font-size: 30pt;
 }
@@ -40,6 +41,7 @@ label{
 	color:#000000;
 	font-weight:bold;
 }
+
 text{
 	font-size: 20pt;
 	align : center;	
@@ -74,6 +76,8 @@ text{
     -webkit-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     -moz-box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
     box-shadow: 0px 6px 0px #2b638f, 0px 3px 15px rgba(0,0,0,.4), inset 0px 1px 0px rgba(255,255,255,.3), inset 0px 0px 3px rgba(255,255,255,.5);
+    
+   
 }
 
 </style>

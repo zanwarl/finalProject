@@ -29,15 +29,8 @@ public class IndexController {
 	}
 	
 	@RequestMapping("/main.do")
-	public ModelAndView main() {
-		ModelAndView mav = new ModelAndView();
-		
-		List<PlanDTO> list = pdao.favPlanList();
-		int count = pdao.totalCnt();
-		mav.addObject("list", list);
-		mav.addObject("count",count);
-		mav.setViewName("main");
-		return mav;
+	public String main() {
+		return "indexbak";
 	}
 	
 	@RequestMapping("/header.do")

@@ -270,11 +270,11 @@ text-align:center;
              
        	<p class="req">
             <label>체크인</label>
-            <input type="text" name="checkindate" id="datepicker" required="required"> 
+            <input type="text" name="checkindate" id="datepicker" required="required" readonly> 
   		</p>
      	<p class="req">
             <label>체크아웃 </label>
-            <input type="text" name="checkoutdate" id="datepicker1" required="required">    	
+            <input type="text" name="checkoutdate" id="datepicker1" required="required" readonly>    	
 		</p>
 		<p class="req">
        		<label>예약인원</label> 
