@@ -118,7 +118,7 @@ html, body {
 	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
 	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
-
+	
 	<ul class="slider">
 	<c:forEach var="imageList" items="${imageList}">
 		<li><img src="${src }${imageList.filename}" width="40%"></li>
@@ -130,7 +130,7 @@ html, body {
 	숙소이름:${arr.roomname}
 	<br> 설명
 	<br>
-	<textarea rows="10" cols="50">${arr.content}</textarea>
+	<textarea rows="30" cols="200" readonly="readonly">${arr.content}</textarea>
 	<br> conv
 	<br> ${arr.conv}
 	<br> 안전시설

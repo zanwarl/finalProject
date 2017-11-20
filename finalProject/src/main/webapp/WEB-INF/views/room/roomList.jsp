@@ -109,7 +109,8 @@ function roomadd() {
 					<li><a href="${Url}"><img class="room_img" src="${src}${item}"></a></li> 
 				</c:forTokens>
 			</ul>
-			<a href="${Url}" class="roomName">${rdto.roomname}</a>
+			<a href="${Url}" class="roomName">${rdto.roomname}</a><br>
+			${rdto.roomprice}원/1박
 			</div>
 			</td>
 		</c:forEach>

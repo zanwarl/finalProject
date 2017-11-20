@@ -243,6 +243,4 @@ public class RoomAddController {
 		}
 		return new ModelAndView("redirect:home.do");
 	}
-	
-
 }
