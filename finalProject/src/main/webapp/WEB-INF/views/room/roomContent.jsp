@@ -197,16 +197,16 @@ html, body {
 		});
 	</script>
 
-	<input type="button" value="목록으로" onclick="golist()">
+	<input type="button" class="but" value="목록으로" onclick="golist()">
 	<c:if test="${sIdx ==arr.useridx}">
 	
-	<input type="button" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
-	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
-	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
+	<input type="button" class="but" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
+	<input type="button" class="but" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
+	<input type="button" class="but" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
 	
 	<c:if test="${not empty sId }">
-	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
+	<input type="button" class="but" value="예약하기" onclick="roomReq('${arr.roomidx}')">
 
 	<c:url value="sendMsg.do" var="sendMsgURL">
 		<c:param name="receiver" value="${receiver }"></c:param>
@@ -214,8 +214,8 @@ html, body {
 		<c:url value="comReq.do" var="complainURL">
 		<c:param name="receiver" value="${arr.useridx }"></c:param>
 	</c:url>
-	<input type="button" value="메세지보내기" onclick="window.open('${sendMsgURL}', '_blank', 'width=300, height=300');">
-	<input type="button" value="신고하기" onclick="window.open('${complainURL}', '_blank', 'width=300, height=350');">
+	<input type="button" class="but" value="메세지보내기" onclick="window.open('${sendMsgURL}', '_blank', 'width=300, height=300');">
+	<input type="button" class="but" value="신고하기" onclick="window.open('${complainURL}', '_blank', 'width=300, height=350');">
 
 	
 	
