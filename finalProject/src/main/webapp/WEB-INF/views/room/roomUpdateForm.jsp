@@ -133,7 +133,7 @@ function goList() {
     	 </div>
 	   <div id="map" style="width: 100%; height: 350px; display: none"></div>
 	   <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-	   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ea5cb03a486060e94b82b64937721b6d&libraries=services"></script>
+	   <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9251be7575bdb59bd3083f1f226f6a13&libraries=services"></script>
 	   <script>
 	    var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 	        mapOption = {
