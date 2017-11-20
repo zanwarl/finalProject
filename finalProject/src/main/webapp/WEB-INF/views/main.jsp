@@ -12,12 +12,23 @@
 #main_contents {
 	width: 1500px;
 	height: 750px;
+	margin: 0 auto;
 }
 .wrap_content_plan_list {
 	width: 1500px;
 	height: 600px;
     position: relative;
+    margin: 0 auto;
 } 
+.content_plan_list {
+	width: 1500px;
+	height: 600px;
+    position: relative;
+    margin: 0 auto;
+} 
+.bot_plan_list {
+	text-align: center;
+}
 .content_plan_list {
 	width: 1500px;
 	height: 500px;

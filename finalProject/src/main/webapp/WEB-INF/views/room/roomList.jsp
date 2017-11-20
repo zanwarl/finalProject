@@ -15,7 +15,7 @@ td {text-align:center; }
 
 .title {width:100px; margin:0 auto;}
 
-img {
+.room_img {
   	max-width: 100%;
   	height: auto;
 }
@@ -106,7 +106,7 @@ function roomadd() {
 			</c:url>
 			<ul class="slider">
 				<c:forTokens items="${rdto.filename}" delims="," var="item">
-					<li><a href="${Url}"><img src="${src}${item}"></a></li> 
+					<li><a href="${Url}"><img class="room_img" src="${src}${item}"></a></li> 
 				</c:forTokens>
 			</ul>
 			<a href="${Url}" class="roomName">${rdto.roomname}</a>

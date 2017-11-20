@@ -18,7 +18,7 @@
 	<thead>
 	<!-- 분류 영역 -->
 		<tr>
-			<td colspan="4">인기 | 신규</td>
+			<td colspan="4"><a href="plan.do?sort=f">인기</a> | <a href="plan.do?sort=n">신규</a></td>
 		</tr>
 	</thead>
 	<!-- 본문 영역 -->

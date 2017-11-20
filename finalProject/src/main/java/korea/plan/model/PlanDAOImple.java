@@ -33,10 +33,11 @@ public class PlanDAOImple implements PlanDAO {
 		return list;
 	}
 
-	public List<PlanDTO> planList(int cp, int pageRow) {
+	public List<PlanDTO> planList(int cp, int pageRow, String sort) {
 		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("cp", cp);
 		map.put("pageRow", pageRow);
+		map.put("sort", sort);
 		List<PlanDTO> list = sqlMap.selectList("planList", map);
 		return list;
 	}
@@ -54,7 +55,10 @@ public class PlanDAOImple implements PlanDAO {
 	public PlanDTO pdtoInfo(int idx) {
 		PlanDTO pdto = sqlMap.selectOne("pdtoInfo", idx);
 		return pdto;
-		
+	}
+	
+	public int favTotalCnt() {
+		return sqlMap.selectOne("favTotalCnt");
 	}
 	
 	public int lastOrder(int idx) {

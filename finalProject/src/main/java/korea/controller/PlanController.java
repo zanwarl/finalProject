@@ -54,15 +54,18 @@ public class PlanController {
 	
 	/**일정 메인페이지(List)*/
 	@RequestMapping("/plan.do")
-	public ModelAndView planMain(@RequestParam(value="cp",required=false,defaultValue="1")int cp) {
+	public ModelAndView planMain(@RequestParam(value="cp",required=false,defaultValue="1")int cp,
+			@RequestParam(value="sort",required=false,defaultValue="f")String sort) {
 
+		
+		System.out.println("정렬 : " + sort);
 		ModelAndView mav = new ModelAndView();
 		
 		int totalCnt = pdao.totalCnt();
 		int listSize = 8;	//한 페이지에서 보여질 게시물 수
 		int pageSize = 5; 	//한 페이지에서 보여질 페이지 수
 		
-		List<PlanDTO> list = pdao.planList(cp,listSize);
+		List<PlanDTO> list = pdao.planList(cp,listSize,sort);
 		
 		String url = "plan.do";
 		

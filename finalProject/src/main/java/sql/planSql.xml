@@ -7,7 +7,19 @@
 		<select id="planList" resultType="korea.plan.model.PlanDTO">
 			select * from
 			(select rownum as rnum, a.* from
-			(select * from plan_main order by plan_idx desc) a) b 
+			<!-- 정렬 조건에 따른 동적 쿼리 -->
+			<choose>
+				<when test='sort.equals("f")'>
+					(select * from plan_main order by plan_readnum desc) a) b
+			    </when>
+			    <when test='sort.equals("n")'>
+					(select * from plan_main order by plan_idx desc) a) b
+			    </when>
+			     <otherwise>
+					(select * from plan_main order by plan_idx desc) a) b
+			    </otherwise>
+			</choose>
+			<!-- end -->
 			<![CDATA[
 				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} and plan_public = 'Y'
    			]]>
@@ -38,6 +50,10 @@
 				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow}
    			]]>
 			and plan_writer = #{idx}
+		</select>
+		
+		<select id="favTotalCnt" resultType="int">
+			select count(*) from plan_main where plan_public = 'Y'
 		</select>
 		
 		<select id="myTotalCnt" parameterType="int" resultType="int">

@@ -7,9 +7,12 @@ public interface PlanDAO {
 	//일정 리스트
 	public List<PlanDTO> planList();		
 	//일정 리스트 + 페이징
-	public List<PlanDTO> planList(int cp, int pageRow);
+	public List<PlanDTO> planList(int cp, int pageRow, String sort);
 	//모든 일정 숫자
 	public int totalCnt();
+	//공개 일정 숫자
+	public int favTotalCnt();
+	
 	//인기 일정 리스트
 	public List<PlanDTO> favPlanList();
 	
