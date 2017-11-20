@@ -18,6 +18,7 @@ import korea.data.model.DataDAO;
 import korea.data.model.DataDAOImple;
 import korea.data.model.DataDTO;
 import korea.roomreq.model.RoomreqDAO;
+import korea.roomreq.model.RoomreqDTO;
 
 
 
@@ -62,8 +63,8 @@ public class DataController {
 				month8=0,month9=0,month10=0,month11=0,month12=0,monthtotal = 0;
 		
 		List<DataDTO> list = rdao.Get_DataControll_getList();
-		
-		
+		List<RoomreqDTO> listt=rdao.total2();
+		mv.addObject("listt",listt);
 		for( DataDTO dto : list)
 		{
 			if(!dto.getCheckindate().equals("-1"))

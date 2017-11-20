@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -285,10 +286,10 @@ table{
 
 <section class="row">
   <div class="column">
-    <div class="donut-chart" data-donut-chart="1"></div>
+    <div class="donut-chart" data-donut-chart="1"></div><div align="center">연령</div>
   </div>
   <div class="column">
-    <div class="donut-chart" data-donut-chart="2"></div>
+    <div class="donut-chart" data-donut-chart="2"></div><div align="center">금액(단위:만원)</div>
   </div>
 </section>
 
@@ -303,8 +304,15 @@ table{
 	<thead>
 		<tr>
 		
-			<th>방번호 </th>
-			<th>방이름 </th>
+			<th>
+		예약자
+		</th>
+		<th>숙소번호</th>
+		<th>인원수</th>
+		<th>예약날짜</th>
+		<th>체크인</th>
+		<th>체크아웃</th>
+		<th>숙박요금</th>
 		
 		</tr>
 	</thead> 
@@ -312,23 +320,26 @@ table{
 	
 	<tbody>
 		
-		<c:if test="${empty list }">
+		<c:if test="${empty listt }">
 		
 			<tr>
 				<td>예약내역이 없습니다 </td>
 			</tr>
 		</c:if>
-			<c:forEach var ="dto" items ="${list }">
+			<c:forEach var ="dto" items ="${listt }">
 				<tr>
 				<%-- 
 					<td><c:out value="${dto.roomidx }"></c:out></td>
 					<td><c:out value="${dto.roomname }"></c:out></td> --%>
 				
 				
-					<td>${dto.ROOMIDX}</td>
-					
-					
-					<td>${dto.ROOMNAME}</td> 
+					<td>${dto.userid}</td>
+		<td>${dto.roomidx}</td>
+		<td>${dto.count}</td>
+		<td>${dto.reqDate}</td>
+		<td>${dto.checkindate}</td>
+		<td>${dto.checkoutdate}</td>
+		<td>${dto.total_pay}</td> 
 				
 				
 
@@ -341,9 +352,10 @@ table{
 	
 	
 	</table>
+	</div>
 </section>
 
-</div>
+
 
 
 

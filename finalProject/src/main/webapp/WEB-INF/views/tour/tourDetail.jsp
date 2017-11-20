@@ -72,13 +72,25 @@ float: left;
 	font-weight: bold;
 	font-size: 20px;
 }
-#near_info {
+#wrap_near_info {
 	position:absolute;
 	top:630px;
 	left:760px;
 	width: 300px;
 	height: 300px;
 }
+
+.near_info {
+
+}
+.item {
+	width: 200px;
+	height: 200px;
+}
+.item_img { 
+	width: 150px;
+	height: 120px;
+}	
 </style>
 <title>Insert title here</title>
 <script type="text/JavaScript"
@@ -116,15 +128,46 @@ float: left;
 							output += myItem.overview +'<br>';
 							       
 								if(myItem.contenttypeid!=25) {
-								title += '<span class="title">' + myItem.title + '</span>';
-								output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
-								output += '<h4>전화번호</h4>' + myItem.tel;
-								output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
+									title += '<span class="title">' + myItem.title + '</span>';
+									output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
+									output += '<h4>전화번호</h4>' + myItem.tel;
+									output += '<h4><a href="javascript:showMap('+myItem.mapy+','+myItem.mapx+')">[지도보기]</a></h4>';
 								}
 							$(".info").html(output);
 							$(".city_title").html(title);
 							$(".content_img").html(img);
 							//document.body.innerHTML += output;
+							
+							$.ajax({
+						   		   url:"nearInfo.do?mapx=" + mapx + "&mapy=" + mapy,
+						           type:"GET",
+						           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+						           async:false, // 이 한줄만 추가해주시면 됩니다.
+						           success : function(msg2) {
+				        	   			var myItem2 = msg2.response.body.items.item;
+				        	   			var totalCnt2 =msg2.response.body.totalCount;
+				        	   			var output2 = '';
+				        	   			
+				        	   			for(var i=0; i<3; i++) {
+				     	        		   	output2 += '<a class="item" href="tourDetail.do?contentTypeId='+myItem2[i].contenttypeid+'&contentId='+myItem2[i].contentid+'">';
+			                        		output2 += '<div class="item_img_box">';
+			                        		
+				     	                    if(myItem2[i].firstimage==undefined) {
+				     	                    	output2 += '<img src="img/notimage.png" alt class="item_img">';             	
+				     	                    } else {
+				     	                    	output2 += '<img src="'+myItem2[i].firstimage+'" alt class="item_img">';
+				     	                    }
+				     	                    output2 += '<div class="item_name">' +myItem2[i].title+ '</div>' ;
+				     	                    output2 += '<input type="hidden" name="contentid" value="'+myItem2[i].contentid+'">';
+				     	                    output2 += '</div></a>';
+				     	                }
+				        	   			$(".near_info").append(output2);
+				        	   			
+						           },
+						           error : function(xhr, status, error) {
+						                 alert("에러발생!!");
+						           }
+					    	 });
 	        	   
 	           },
 	           error : function(xhr, status, error) {
@@ -178,7 +221,9 @@ float: left;
 
 		</div>
 		<div class="content_right">
-			<div id="near_info">근처 음식점</div>
+			<div id="wrap_near_info">근처의 음식점
+				<div class="near_info"></div>
+			</div>
 			<div id="map"></div>
 		</div>
 	</div>

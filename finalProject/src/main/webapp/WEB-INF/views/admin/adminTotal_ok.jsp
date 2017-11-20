@@ -47,14 +47,14 @@ tr:hover {
 
 <table>	
 
-<tr><td>매출금액<br>${t2 }</td></tr>
+<tr><td>총매출금액<br>${t2 }</td></tr>
 <c:if test="${empty t2 }">
 
 						<tr>
 							<td>잘못입력 했습니다.</td>
 						</tr>
 					</c:if>
-
+<tr><td><a href="total.do">뒤로</a></td></tr>
 	
 </table>
 </div>

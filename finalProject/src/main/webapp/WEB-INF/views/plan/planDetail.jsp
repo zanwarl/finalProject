@@ -12,15 +12,17 @@
 
 <style>
 #left_box {
-	width: 570px;
+	width: 475px;
 	float: left;
 }
 
 #right_box {
-	width: 800px;
+	width: 700px;
 	float: left;
 }
-
+#tour_search {
+	padding-left: 20px;
+}
 #planList {
 	backgroud: skyblue; 
 	width: 220px;
@@ -33,17 +35,17 @@
 #cityList {
   background: white;
   float: left;
-  width: 345px;
+  width: 250px;
   height: 850px;
   border-right: solid #a9a9a9 1px;
   border-bottom: solid #a9a9a9 1px;
 }
 #cityContent {
 	position:absolute;
-	width:348px;
+	width:250px;
 	height: 850px;
 	
-	top:353px;
+	top:390px;
 	left:250px;
 	background: #FFBB00;
 	float: left;
@@ -51,7 +53,7 @@
 }
 
 #map {
-  width: auto;
+  width: 730px;
   height: 850px;
   position:relative;
  }
@@ -104,7 +106,7 @@
 	height: 620px;
 }
 #search_box {
-	height: 180px;
+	height: 120px;
 	background: white;
 	border-bottom: solid #a9a9a9 1px;
 }
@@ -118,6 +120,13 @@
 }
 .search_bar {
 	height: 50px;
+	padding-left: 25px;
+}
+.category {
+	padding-left: 10px;
+}
+.range {
+	padding-left: 20px;
 }
 .category {
 	width: 250px;
@@ -244,8 +253,43 @@ $(document).ready(function() {
 	});
 	
 	$('#cityList').on('click','.wrap_cityList',function() {
-		var no = $(this).attr('data-no');
-
+		var contentTypeId = $(this).attr('data');
+		var contentId = $(this).attr('data-type');
+		$.ajax({
+	   		   url:"tourDetailJSON.do?contentTypeId="+contentTypeId+"+&contentId="+contentId,
+	           type:"GET",
+	           dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+	           async:false, // 이 한줄만 추가해주시면 됩니다.
+	           success : function(msg) {
+	        	  // console.log(msg.response.body.items.item);
+	        	   var myItem = msg.response.body.items.item;
+	        	   //내용 작성 추후 한 div에 담기
+						var output = '';
+						var img = '';
+						var map = '';
+							
+							mapx = myItem.mapy;
+							mapy = myItem.mapx;
+							img += '<img src="'+myItem.firstimage+'" width="500">';
+							title = '';
+							output += '<h4>개요</h4>';
+							output += myItem.overview +'<br>';
+							       
+								if(myItem.contenttypeid!=25) {
+									title += '<span class="title">' + myItem.title + '</span>';
+									output += '<h4>주소</h4>' + myItem.addr1 + myItem.addr2;
+									output += '<h4>전화번호</h4>' + myItem.tel;
+								}
+							$("#contentBox").html(output);
+							/* $("#contentBox").html(title);
+							$("#contentBox").html(img); */
+							//document.body.innerHTML += output;
+	           },
+	           error : function(xhr, status, error) {
+	                 alert("에러발생!!");
+	           }
+ 	 });
+		
 	});
 	
 	$('#cityList').on('click','.img',function() {
@@ -317,9 +361,63 @@ jq(document).ready(function() {
 				$.each(myItem, function(key, val) {
 					output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
 					if(val.firstimage == null) {
-						output += '<div class="img" fl="'+val.firstmiage+'"><img class="tour_info" src="img/notimage.png" width="100" height="100"></div>'; 
+						output += '<div class="img" fl="'+val.firstmiage+'"><img class="tour_info" src="img/notimage.png" width="80" height="80"></div>'; 
 					} else {
-						output += '<div class="img" fl='+val.firstimage+'"><img class="tour_info" src="'+val.firstimage+'" width="100" height="90"></div>';
+						output += '<div class="img" fl='+val.firstimage+'"><img class="tour_info" src="'+val.firstimage+'" width="80" height="80"></div>';
+					}
+					output += '<div class="info">'+val.title+'</div>';
+					output += '<div class="add"><img  src="img/plan/add_button.png" width="17"></div>';
+					output += '<input type="hidden" name="contentid" value="'+val.contentid+'">';
+					output += '<input type="hidden" name="contentid" value="'+val.contenttypeid+'">';
+					output += '</div>';
+					
+		
+					contentArray[key] = val.title;
+					markerArray[key] = new google.maps.LatLng(val.mapy,val.mapx);
+					inity = val.mapy;
+					initx = val.mapx;
+				});
+				output += '</div>';
+				initMap2();
+				
+				$('#cityList').append(output);
+				/* $("#cityList").html(output); */
+				},
+				error : function(xhr, status, error) {
+					alert("에러발생");
+				}
+			});
+	    });
+	    
+	    jq('.category_item').on('click', function() {
+	    	var contentTypeId = jq(this).attr('data-cate');
+	    	$('.form_cityList').remove();
+	    	
+	    	$.ajax({
+				url:"areaBasedList.do?areaCode=${pdto.plan_place}&cp="+cp+"&contentTypeId="+contentTypeId,
+				type:"GET",
+				dataType:"JSON", // 옵션이므로 JSON으로 받을게 아니면 안써도 됨
+			 	async:false, // 이 한줄만 추가해주시면 됩니다.
+				success : function(msg) {
+				// console.log(msg.response.body.items.item);
+				var myItem = msg.response.body.items.item;
+				
+				
+				var totalCnt = msg.response.body.totalCount;
+				var pageName = 'city.do?areaCode='+ 1;
+				var listSize = 10;
+				var pageSize = 5;
+				
+				var queryStr = '123123';
+				
+				var output ='<div class="form_cityList">';
+				
+				$.each(myItem, function(key, val) {
+					output += '<div class="wrap_cityList ui-draggable" data-no="'+key+'" data-val="'+val.title+'" data="'+val.contentid+'" data-type="'+val.contenttypeid+'">';
+					if(val.firstimage == null) {
+						output += '<div class="img" fl="'+val.firstmiage+'"><img class="tour_info" src="img/notimage.png" width="80" height="80"></div>'; 
+					} else {
+						output += '<div class="img" fl='+val.firstimage+'"><img class="tour_info" src="'+val.firstimage+'" width="80" height="80"></div>';
 					}
 					output += '<div class="info">'+val.title+'</div>';
 					output += '<div class="add"><img  src="img/plan/add_button.png" width="17"></div>';

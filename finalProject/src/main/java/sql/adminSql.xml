@@ -12,8 +12,8 @@
 	select sum(total_pay) from roomreq where roomidx=#{roomIdx}
 	</select>
 	
-	<select id="total2Sql" resultType="String">
-	select * from roomreq
+	<select id="total2Sql" resultType="korea.roomreq.model.RoomreqDTO">
+	select * from roomreq order by reqidx desc
 	</select>
    
 </mapper>

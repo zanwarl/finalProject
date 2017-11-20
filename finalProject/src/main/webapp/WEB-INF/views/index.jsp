@@ -23,7 +23,7 @@
 
 .wrap_content_room_list {
 	width: 1100px;
-	height: 500px;
+	height: 100px;
     position: relative;
     margin: 0 auto;	
 }
