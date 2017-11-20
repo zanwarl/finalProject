@@ -258,7 +258,7 @@ text-align:center;
 	
 <%@ include file="../header.jsp" %>
 <div id="contents">
- <img src="img/gaga.png" width="1000" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+ <img src="img/gaga.png" width="600" height="200" style="margin-left: auto; margin-right: auto; display: block;">
 <div class="reqWrap">
 <H2>Reservation</H2>
 <hr>
@@ -270,11 +270,11 @@ text-align:center;
              
        	<p class="req">
             <label>체크인</label>
-            <input type="text" name="checkindate" id="datepicker" required="required"> 
+            <input type="text" name="checkindate" id="datepicker" required="required" readonly> 
   		</p>
      	<p class="req">
             <label>체크아웃 </label>
-            <input type="text" name="checkoutdate" id="datepicker1" required="required">    	
+            <input type="text" name="checkoutdate" id="datepicker1" required="required" readonly>    	
 		</p>
 		<p class="req">
        		<label>예약인원</label> 
