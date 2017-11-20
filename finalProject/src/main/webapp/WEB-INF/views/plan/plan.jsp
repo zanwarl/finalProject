@@ -53,6 +53,12 @@
 	background: linear-gradient( to top, rgba(0,0,0,0), rgba(0,0,0,0.5));
     float: left;
 }
+.page {
+	float: left;
+}
+.write{
+	padding-left: 900px;
+}
 </style>
 </head>
 <body>
@@ -78,7 +84,8 @@
 		        </a>
 			</c:forEach>	
 		</div>
-		<div class="page">${page }</div>
+		<div class="page">${page } </div>
+		<div class="write"><a href="planMake.do">일정 만들기</a></div>
 	</div>
 </div>
 <%@ include file="../footer.jsp" %>

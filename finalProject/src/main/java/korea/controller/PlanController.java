@@ -345,4 +345,17 @@ public class PlanController {
 		return mav;
 	}
 
+	@RequestMapping("/planDel.do")
+	public ModelAndView planDel(int plan_idx) {
+		System.out.println("삭제");
+		ModelAndView mav = new ModelAndView();
+		
+		int result = pdao.planDel(plan_idx);
+		String str = "plan.do";
+		
+		mav.setViewName("plan/planDetailOk");
+		mav.addObject("url", str);
+		return mav;
+		
+	}
 }	

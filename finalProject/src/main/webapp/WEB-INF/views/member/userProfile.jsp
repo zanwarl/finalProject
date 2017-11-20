@@ -437,6 +437,12 @@ section {
 .unit-4 {
 	width: 25%;
 }
+
+#content {
+	padding-top: 20px;
+    height: 1000px;
+    margin: 0;
+}
 </style>
 <meta charset=UTF-8">
 
@@ -454,7 +460,7 @@ section {
 	<!--  -->
 
 
-	<div id="contents">
+	<div id="content">
 	
 		<h1 align="center">${param.userId }님의 프로필 페이지</h1>
 		<div class="container">

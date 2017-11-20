@@ -48,4 +48,5 @@ public interface PlanDAO {
 	public int planWrite();									
 	public String getPuserId(int pIdx);
 	
+	public int planDel(int plan_idx);
 }

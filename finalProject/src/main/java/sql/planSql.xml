@@ -128,6 +128,10 @@
 		<select id="planDetailDelete" parameterType="int" resultType="int">
 			delete plan_detail where pland_pidx = #{pidx}
 		</select>
+		
+		<select id="planDel" resultType="int">
+			delete plan_main where plan_idx = #{plan_idx}
+		</select>
 	<!-- delete end -->
 	
 	

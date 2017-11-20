@@ -40,6 +40,9 @@ textarea {
 tfoot td {
 	text-align: center;
 }
+.top {
+	text-align: center;
+}
 </style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
@@ -57,7 +60,7 @@ tfoot td {
 
 <!-- ---------본문내용---------------  -->
 
-<h1>${sId }님의 숙소 목록입니다.</h1>
+<span class="top"><h1>${sId }님의 숙소 목록입니다.</h1></span>
 <table>
 
 <!-- 	<thead>

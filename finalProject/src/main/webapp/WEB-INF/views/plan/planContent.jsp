@@ -77,8 +77,9 @@ margin-top: 35px;
     position: relative;
 }
 .bot {
-	width: 1500px;
+	width: 1200px;
 	margin: 0 auto;
+	padding-left: 140px;
 }
 .title_img {
 	position: relative;
@@ -208,10 +209,10 @@ margin-top: 35px;
 				<div class="img">	
 				<c:choose>
 					<c:when test="${list.pland_img eq 'undefined' }">
-						<img src="img/notimage.png" width="100" height="90">${list.pland_subject } <br>
+						<img src="img/notimage.png" width="150" height="120">${list.pland_subject } <br>
 					</c:when>
 					<c:otherwise>
-						<img src="${list.pland_img}" width="100" height="90">${list.pland_subject } <br>
+						<img src="${list.pland_img}" width="150" height="120">${list.pland_subject } <br>
 					</c:otherwise>
 				</c:choose>
 				</div>
@@ -221,7 +222,8 @@ margin-top: 35px;
 	</div>
 </div>
 <c:if test="${pdto.plan_writer eq sIdx }">
-<div class="bot"><a href="planEdit.do?plan_idx=${pdto.plan_idx }">[수정하기] || [삭제하기]</a></div>
+<div class="bot"><a href="planEdit.do?plan_idx=${pdto.plan_idx }">[수정하기] </a>
+|| <a href="planDel.do?plan_idx=${pdto.plan_idx }">[삭제하기]</a></div>
 </c:if>
 </div>
 <%@ include file="../footer.jsp" %>

@@ -8,7 +8,7 @@
 <style>
 .wrap_content_city_list {
 	width: 1263px;
-	height: 1130px;
+	height: 1000px;
     position: relative;
     margin: 0 auto;
 } 
@@ -28,7 +28,7 @@
 	width: 1163px;
 	height: 50px;
     position: relative;
-    padding-left: 100px;
+    padding-left: 110px;
 }
 .item_img_box {
 	width: 230px;
@@ -42,7 +42,7 @@
 }
 .item1{
     width: 1000px;
-    height: 200px;
+    height: 175px;
     border: 1px solid #dfdfdf;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -52,7 +52,7 @@
 }
 .item2{
     width: 1000px;
-    height: 200px;
+    height: 175px;
     border: 1px solid #dfdfdf;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -62,7 +62,7 @@
 }
 .item3{
     width: 1000px;
-    height: 200px;
+    height: 175px;
     border: 1px solid #dfdfdf;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -72,7 +72,7 @@
 }
 .item4{
     width: 1000px;
-    height: 200px;
+    height: 175px;
     border: 1px solid #dfdfdf;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -82,7 +82,7 @@
 }
 .item5{
     width: 1000px;
-    height: 200px;
+    height: 175px;
     border: 1px solid #dfdfdf;
     margin-right: 16px;
     margin-bottom: 16px;
@@ -208,12 +208,12 @@ var cp = ${cp};
 	<div class="contents_top">
 		<div class="city_title"><b>${cityName }</b></div>
 		<div class="menu">
-			<a href="tour.do">홈</a>
-			<a href="area.do">호텔</a>
+			<a href="tour.do">메인으로</a>
+			<!-- <a href="area.do">호텔</a>
 			<a href="attraction.do">관광명소</a>
 			<a href="shopping.do">음식점</a>
 			<a href="shopping.do">쇼핑</a>
-			<a href="plan.do">여행일정 </a>
+			<a href="plan.do">여행일정 </a> -->
 		
 		</div>
 	</div>

@@ -234,8 +234,8 @@ float: left;
 	</div> -->
 	<div id="cmtform">
 	<form class="cmtf" action="tourCmtWrite.do">
-		${sId } : 
-		<textarea name="tour_cmt_content" cols="50" rows="10"></textarea>
+		<%-- ${sId } :  --%>
+		<textarea name="tour_cmt_content" cols="70" rows="10"></textarea>
 		<input type="submit" value="댓글 작성">
 		<input type="hidden" name="tour_cmt_pidx" value="${contentId}">
 		<input type="hidden" name="queryStr" value="${pageContext.request.queryString}">

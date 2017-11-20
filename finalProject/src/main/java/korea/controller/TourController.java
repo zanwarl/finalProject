@@ -344,9 +344,7 @@ public class TourController {
 
 		int result = tDAO.tourcmtWrite(cmtdto);
 
-		String msg = result > 0 ? "댓글 작성 완료" : "댓글 작성 실패";
 
-		mav.addObject("msg", msg);
 		mav.addObject("url", queryStr);
 		mav.setViewName("tour/tourMsgOk");
 

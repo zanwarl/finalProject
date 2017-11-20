@@ -64,7 +64,6 @@
 	float: left;
 }
 #datepicker {
-	width: 70px;
 }
 </style>
 <script type="text/JavaScript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -120,15 +119,6 @@ $(document).ready(function() {
 			$('#plan_city_list').append(html);
 		});
 	});
-	
-	/* var picker = new Pikaday(
-	{
-	    field: document.getElementById('datepicker'),
-	    firstDay: 1,
-	    minDate: new Date(),
-	    maxDate: new Date(2020, 12, 31),
-	    yearRange: [2000,2020]
-	});  */
 });
 </script>
 <script src="js/remodal.js"></script>
@@ -209,8 +199,13 @@ jq(document).ready(function() {
 		dateFormat: 'yy-mm-dd' //데이터포멧(ex - 2012.12.13)
   	});
 	
-	jq(".modal_content #datepicker").datepicker({
+	jq(".modal_content #datepicker2").datepicker({
 		dateFormat: 'yy-mm-dd'
+	});
+	
+	jq('.remodal-bg').on('click',function() {
+		var start = jq('#datepicker').val();
+		$('#datepicker2').val(start);
 	});
 });
 </script>
@@ -249,7 +244,7 @@ jq(document).ready(function() {
 									</tr>
 									<tr>
 										<th>출발일</th>
-										<td><input type="text" name="plan_start" id="datepicker" value=""></td>
+										<td><input type="text" name="plan_start" id="datepicker2" value=""></td>
 									</tr>
 								</tbody>
 								<tfoot>

@@ -57,9 +57,17 @@
 	-ms-transform: scale(1.2);
 	-o-transform: scale(1.2);
 	transition: all 1s ease-in-out; 
-	
+}
+.room_list .bg:hover .room_img {
+	transform: scale(1.2);
+	-webkit-transform: scale(1.2);
+	-moz-transform: scale(1.2);
+	-ms-transform: scale(1.2);
+	-o-transform: scale(1.2);
+	transition: all 1s ease-in-out; 
 }
 .bg {
+	height:120px;
 	overflow:hidden 
 }
 .plan_list {

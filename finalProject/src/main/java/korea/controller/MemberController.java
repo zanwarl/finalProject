@@ -139,13 +139,16 @@ public class MemberController {
 	
 	
 	@RequestMapping ("/memberLogout.do")
-	public String adminLogout (HttpServletRequest req, HttpServletResponse resp){
+	public ModelAndView adminLogout (HttpServletRequest req, HttpServletResponse resp){
 		
 		HttpSession session = req.getSession(); 
 		session.invalidate();
+		ModelAndView mav= new ModelAndView(); 
 		
-		
-		return "main";
+		String goURL = "index.do";
+		mav.addObject("goURL", goURL);
+		mav.setViewName("member/logoutOk");
+		return mav;
 		
 	}
 	

@@ -130,7 +130,10 @@ public class PlanDAOImple implements PlanDAO {
 		//
 	
 		return sqlMap.selectOne("getPuserIdSql", pIdx);
-		
+	}
+	
+	public int planDel(int plan_idx) {
+		return sqlMap.delete("planDel",plan_idx);
 	}
 	
 }
