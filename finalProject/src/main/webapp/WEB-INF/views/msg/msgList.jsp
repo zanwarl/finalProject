@@ -49,7 +49,7 @@ tfoot td {
 
 		<script type="text/javascript">
 			window.alert('로그인하세요');
-			location.href = 'main.do';
+			location.href = 'index.do';
 		</script>
 	</c:if>
 
