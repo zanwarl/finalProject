@@ -53,6 +53,7 @@ width: 1000px;
 }
 .content_top {
 	margin: 0 auto;
+	padding-bottom: 20px;
 }
 .order {
 width: 30px;
@@ -119,7 +120,7 @@ margin-top: 35px;
 }
 .cover_explain {
     z-index: 55;
-    width: 950px;
+    width: 700px;
     height: 50px;
     left: 0px;
     bottom: 0px;
@@ -131,6 +132,23 @@ margin-top: 35px;
     font-size: 24px;
     font-weight: bold;
     background-color: rgba(0, 0, 0, 0.5); 
+    float: left;
+}
+.cover_writer {
+	z-index: 55;
+    width: 200px;
+    height: 50px;
+    left: 750px;
+    bottom: 0px;
+    padding-top: 0px;
+    padding-left: 25px;
+    padding-right: 25px;
+    position: absolute;
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5); 
+    float: left;
 }
 .img_cover {
     
@@ -146,7 +164,7 @@ margin-top: 35px;
 <div id="content">
 
 <div class="content_top">
-<div class="title">${pdto.plan_name }님의 일정</div>
+<div class="title"></div>
 <div class="img_cover">
 	<img class="title_img" src="${src}${pdto.plan_file}" width="960">
 	<div class="cover_bot">
@@ -154,6 +172,9 @@ margin-top: 35px;
 	</div>
 	<div class="cover_explain">
 		${pdto.plan_explain }
+	</div>
+	<div class="cover_writer">
+		${pdto.plan_name }님의 일정
 	</div>
 </div>
 
@@ -164,7 +185,7 @@ margin-top: 35px;
 		<c:forEach var="list" items="${list }">
 		
 		<div class="wrap_item">
-			<div class="day">Day : ${list.pland_day }</div>
+			<div class="day">Day ${list.pland_day }</div>
 			<div class="order">${list.pland_order }</div> &nbsp;
 			<a class="item" href="tourDetail.do?contentTypeId=${list.pland_typeid }&contentId=${list.pland_code }" target="_blank">
 				<div class="img">	

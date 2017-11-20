@@ -107,7 +107,7 @@ public class MemberController {
 		resp.addCookie(ck2);
 		
 		String msg = res? "환영합니다^^": "fail";
-		String goURL = res? "main.do": "memberLogin.do";
+		String goURL = res? "index.do": "memberLogin.do";
 		
 		
 		mav.setViewName("member/loginMsg");
