@@ -46,5 +46,6 @@ public interface PlanDAO {
 	
 	//일정 작성
 	public int planWrite();									
+	public String getPuserId(int pIdx);
 	
 }

@@ -25,5 +25,6 @@ public interface MemberDAO {
 	
 	public List<Map<String, Object>> myRoomListProfile(String userId);
 	public List<Map<String, Object>> myPlanListProfile(String userId);
+	public boolean isBlack (String userid);
 	
 }

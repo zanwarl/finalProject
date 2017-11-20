@@ -110,17 +110,11 @@ public class RoomAddController {
 	@RequestMapping(value = "/roomContent.do")
 	public ModelAndView roomContent(@RequestParam("roomidx") int idx,HttpServletRequest req) {
 		
-		
-		/*HttpSession session = req.getSession();
-		String userId = (String) session.getAttribute("sId");
-		int useridx = mdao.getUserIdx(userId);*/
+
 		RoomAddDTO rdto = radao.roomContent(idx);
 		List<ImageDTO> imageList = radao.fileList(idx);
 		ModelAndView mav = new ModelAndView();
-		
-		/*mav.addObject("useridx", useridx);*/
-	System.out.println(rdto.getUseridx());
-		
+
 		String userid = radao.getUserId(rdto.getUseridx());
 		
 		
@@ -248,6 +242,4 @@ public class RoomAddController {
 		}
 		return new ModelAndView("redirect:home.do");
 	}
-	
-
 }

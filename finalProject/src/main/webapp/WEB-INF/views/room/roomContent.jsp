@@ -42,6 +42,8 @@ html, body {
   <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 
   <script>
+  
+
   var jq = $.noConflict();
   jq(document).ready(function() {
     jq(document).ready(function(){
@@ -118,7 +120,7 @@ html, body {
 	<!-- jsp 페이지에서 contextpath 구한 뒤 img 경로 지정 한 뒤 img 태그로 출력 -->
 	<c:url value="${contextPath }/img/room/" var="src"/>
 	<c:set var="arr" value="${rdto}" />
-
+	
 	<ul class="slider">
 	<c:forEach var="imageList" items="${imageList}">
 		<li><img src="${src }${imageList.filename}" width="40%"></li>
@@ -130,7 +132,7 @@ html, body {
 	숙소이름:${arr.roomname}
 	<br> 설명
 	<br>
-	<textarea rows="10" cols="50">${arr.content}</textarea>
+	<textarea rows="30" cols="200" readonly="readonly">${arr.content}</textarea>
 	<br> conv
 	<br> ${arr.conv}
 	<br> 안전시설
@@ -138,6 +140,12 @@ html, body {
 	<br> 공간
 	<br> ${arr.space}
 	<br>
+	
+<c:url var="profileURL" value="userProfile.do">
+	<c:param name="userId" value="${receiver }"></c:param>
+</c:url>
+	
+	<a href="${profileURL }">${receiver }님의 프로필 보기</a>
 
 	<div id="map" style="width: 100%; height: 350px;">지도</div>
 
@@ -196,19 +204,25 @@ html, body {
 	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
+	
+	<c:if test="${not empty sId }">
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
 
 	<c:url value="sendMsg.do" var="sendMsgURL">
 		<c:param name="receiver" value="${receiver }"></c:param>
 	</c:url>
-	
-	<a href="${sendMsgURL }">메세지보내기</a>
-	
 		<c:url value="comReq.do" var="complainURL">
 		<c:param name="receiver" value="${arr.useridx }"></c:param>
 	</c:url>
+	<input type="button" value="메세지보내기" onclick="window.open('${sendMsgURL}', '_blank', 'width=300, height=300');">
+	<input type="button" value="신고하기" onclick="window.open('${complainURL}', '_blank', 'width=300, height=350');">
+
 	
-	<a href="${complainURL }">신고하기</a>
+	
+	
+	</c:if>
+	
+	
 
 </div>
 <%@ include file="../footer.jsp" %>

@@ -98,5 +98,20 @@ public class MemberDAOImple implements MemberDAO {
 		
 	}
 
+	public boolean isBlack(String userid) {
+		 List<Map<String, Object>> list = sqlMap.selectList("isBLackListSql", userid);
+		 if (list.size()==0){
+			 //no blacklist 
+			 return false; 
+		 }
+		 else {
+//			 blacklsist
+			 return true; 
+		 }
+	
+		
+		
+	}
+
 
 }

@@ -30,7 +30,7 @@ public class IndexController {
 	
 	@RequestMapping("/main.do")
 	public String main() {
-		return "indexbak";
+		return "main";
 	}
 	
 	@RequestMapping("/header.do")
