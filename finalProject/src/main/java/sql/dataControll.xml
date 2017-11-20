@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="dataControll">
+
+
+	<select id="getdata" resultType="korea.data.model.DataDTO">
+		
+		select userid ,nvl(total_pay, 0) as total_pay,
+		(select member_sex from member where member_id = rr.userid) as member_sex ,
+		(select member_birth from member where member_id = rr.userid) as member_birth
+		from roomreq rr
+
+		
+
+	</select>
+
+
+
+
+
+</mapper>

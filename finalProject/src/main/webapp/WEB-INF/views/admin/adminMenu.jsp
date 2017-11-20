@@ -47,7 +47,7 @@
   <a href="superHostList.do" class="w3-bar-item w3-button">슈퍼호스트</a>
   <a href="noticeListAdmin.do" class="w3-bar-item w3-button">공지사항관리</a> 
   <a href="vocListAdmin.do" class="w3-bar-item w3-button">voc관리</a>
-  <a href="total.do" class="w3-bar-item w3-button">매출통계</a>
+  <a href="dataControll.do" class="w3-bar-item w3-button">매출통계</a>
   
 </body>
 </html>
