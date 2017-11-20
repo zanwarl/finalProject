@@ -47,7 +47,7 @@ tr:hover {
 
 <table>	
 
-<tr><td>총매출금액<br>${t2 }원</td></tr>
+<tr><td>총매출금액<br>${t2 }</td></tr>
 <c:if test="${empty t2 }">
 
 						<tr>
