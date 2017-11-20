@@ -190,7 +190,7 @@ html, body {
 	</script>
 
 	<input type="button" value="목록으로" onclick="golist()">
-	<c:if test="${sIdx ==arr.useridx }">
+	<c:if test="${sIdx ==arr.useridx}">
 	
 	<input type="button" value="내용 수정" onclick="goUpdate('${arr.roomidx}')">
 	<input type="button" value="이미지수정" onclick="goImageUpdate('${arr.roomidx}')">
