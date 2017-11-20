@@ -97,7 +97,7 @@ on c.roomidx = roomreq.roomidx
 	<select id="myRoomListSql" resultType="java.util.Map"
 		parameterType="String">
 
-		select roomname, roomidx
+		select roomname, roomidx, (addr1||''||addr2)as addr
 		from roomadd
 		where useridx in (
 		select member_idx

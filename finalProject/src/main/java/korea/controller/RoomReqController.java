@@ -282,8 +282,6 @@ System.out.println(list);
 
 		mav.setViewName("room/roomReqInfo");
 		mav.addObject("event", event);
-		//System.out.println(event);
-		// System.out.println(list);
 		return mav;
 
 	}
