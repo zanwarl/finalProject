@@ -329,7 +329,7 @@ System.out.println(list);
 	@RequestMapping(value="/total.do",
 			method=RequestMethod.GET)
 	public ModelAndView totalForm() {
-		List<RoomreqDTO> listt=rdao.total2();
+		List<Map<String, Object>> listt=rdao.total2();
 		ModelAndView mav=
 				new ModelAndView();
 		mav.addObject("listt",listt);
