@@ -31,6 +31,13 @@ tr:hover {
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
+
+<script type="text/javascript">
+function totalData() {
+    window.open("dataControll.do", "", "width=1000, height=700");
+ }
+
+</script>
 <body>
 <!-- Sidebar -->
 
@@ -49,9 +56,10 @@ tr:hover {
 
 <table>	
 	<tr>
-		<td> 
+		<td>
 		<input type="text" name="roomIdx">
-		<input type="submit" value="숙소번호검색">		
+		<input type="submit" value="숙소번호검색">	
+		<input type="button" value="전체 통계보기" onclick="totalData();">	
 		</td>
 	</tr>
 	<tr>

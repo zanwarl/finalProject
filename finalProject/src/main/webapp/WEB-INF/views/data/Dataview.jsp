@@ -286,10 +286,10 @@ table{
 
 <section class="row">
   <div class="column">
-    <div class="donut-chart" data-donut-chart="1"></div>
+    <div class="donut-chart" data-donut-chart="1"></div><div align="center">연령</div>
   </div>
   <div class="column">
-    <div class="donut-chart" data-donut-chart="2"></div>
+    <div class="donut-chart" data-donut-chart="2"></div><div align="center">금액(단위:만원)</div>
   </div>
 </section>
 
@@ -352,9 +352,10 @@ table{
 	
 	
 	</table>
+	</div>
 </section>
 
-</div>
+
 
 
 
