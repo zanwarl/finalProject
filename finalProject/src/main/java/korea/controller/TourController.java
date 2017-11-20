@@ -176,6 +176,35 @@ public class TourController {
 		mav.addObject("jsonObject", jsonObject);
 		return mav;
 	}
+	
+	
+	@RequestMapping("/nearInfo.do")
+	public ModelAndView nearInfo(
+			@RequestParam(value = "mapx", required = false, defaultValue = " ") String mapx,
+			@RequestParam(value = "mapy", required = false, defaultValue = " ") String mapy) throws ParseException, Exception {
+		
+		System.out.println("넘어온 좌표 : " + mapy + " " + mapx);
+		tour_api_url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/locationBasedList?ServiceKey=" +
+		               "76zE48jtXxj3nqHQhQfsoUjigjZE3n0lRkbHkszP0BJMJNqWzR3p3J2qJKCs7E70RYO9qSOmfM36DkozbFL6Dw%3D%3D" +
+		               "&contentTypeId=39&mapX=" + mapy +"&mapY=" + mapx + "&radius=1000&listYN=Y&MobileOS=ETC&" +
+				       "MobileApp=TourAPI3.0_Guide&arrange=B&numOfRows=5&pageNo=1&_type=json";
+		ModelAndView mav = new ModelAndView();
+		
+		
+		System.out.println(tour_api_url);
+		
+		JSONObject jsonObject = (JSONObject) jsonParser.parse(readUrl(tour_api_url));
+
+		JSONObject json = (JSONObject) jsonObject.get("response");
+		json = (JSONObject) json.get("body");
+		String totalCount = JSONValue.toJSONString(json.get("totalCount"));
+		
+		System.out.println(jsonObject);
+		
+		mav.setViewName("tour/areaBasedList");
+		mav.addObject("jsonObject", jsonObject);
+		return mav;
+	}
 
 	// 실제 페이지 이동
 	@RequestMapping("/city.do")
