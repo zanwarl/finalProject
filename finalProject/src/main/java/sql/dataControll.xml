@@ -5,19 +5,6 @@
 <mapper namespace="dataControll">
 
 
-	<select id="getdata" resultType="korea.data.model.DataDTO">
-		
-		select userid ,nvl(total_pay, 0) as total_pay,
-		(select member_sex from member where member_id = rr.userid) as member_sex ,
-		(select member_birth from member where member_id = rr.userid) as member_birth
-		from roomreq rr
-
-		
-
-	</select>
-
-
-
 
 
 </mapper>
