@@ -42,19 +42,19 @@ tr:hover {
 	<div style="margin-left: 25%">
  
 		<div class="w3-container w3-teal">
-			<h1>총매출통계</h1>
+			<h1>매출통계</h1>
 		</div>
 
 <table>	
 
-<tr><td>매출금액<br>${t2 }원</td></tr>
+<tr><td>총매출금액<br>${t2 }원</td></tr>
 <c:if test="${empty t2 }">
 
 						<tr>
 							<td>잘못입력 했습니다.</td>
 						</tr>
 					</c:if>
-
+<tr><td><a href="total.do">뒤로</a></td></tr>
 	
 </table>
 </div>

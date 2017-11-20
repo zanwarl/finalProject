@@ -352,9 +352,10 @@ table{
 	
 	
 	</table>
+	</div>
 </section>
 
-</div>
+
 
 
 
