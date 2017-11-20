@@ -121,7 +121,7 @@ public class RoomAddController {
 		mav.addObject("imageList",imageList);
 		mav.addObject("rdto", rdto);
 		mav.addObject("receiver", userid);
-		mav.setViewName("room/roomContent1");
+		mav.setViewName("room/roomContent");
 
 		return mav;
 	}
@@ -133,7 +133,7 @@ public class RoomAddController {
 		RoomAddDTO rdto = radao.roomUpdateData(idx);
 
 		mav.addObject("rdto", rdto);
-		mav.setViewName("room/roomUpdateForm");
+		mav.setViewName("room/roomUpdateForm1");
 		return mav;
 	}
 
