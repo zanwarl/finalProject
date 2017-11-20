@@ -107,13 +107,14 @@ margin-top: 35px;
     width: 950px;
     left: 0px;
     bottom: 50px;
-    padding-top: 90px;
+    padding-top: 30px;
     padding-left: 25px;
     padding-right: 25px;
     position: absolute;
     color: white;
     font-size: 24px;
     font-weight: bold;
+    height: 30px;
 	background-color: rgba(0, 0, 0, 0.5); 
 }
 .cover_explain {
