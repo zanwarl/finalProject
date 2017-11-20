@@ -26,26 +26,29 @@
   * --------------------------------------------------
   */
   
-  
-body
+ img{
+    width: 80%;
+    height:80%; 
+ } 
+.table1
 {
     position: relative;
 
     margin: 0;
-
+   width: 100%;
     background: #434a54;
 
     text-rendering: optimizeSpeed;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }  
-table{
-	background-color: white;
-	width: 100%;
-	height: auto;
-	border-color: black;
-	text-align: center;
-	
+.table2{
+   background-color: white;
+   width: 100%;
+   height: auto;
+   border-color: black;
+   text-align: center;
+   
 }
 *,
 *:before,
@@ -284,75 +287,86 @@ table{
 -->
 
 
+<table class="table1">
+<tr>
+<td><img src="img/sdata.png"></td>
+<td>
 <section class="row">
+
+
   <div class="column">
-    <div class="donut-chart" data-donut-chart="1"></div><div align="center">연령</div>
+     
+    <div class="donut-chart" data-donut-chart="1"></div><div font-color="#FFFFFF" align="center"><font color=white>연령</font></div>
   </div>
   <div class="column">
-    <div class="donut-chart" data-donut-chart="2"></div><div align="center">금액(단위:만원)</div>
+  
+    <div class="donut-chart" data-donut-chart="2"></div><div align="center"><font color=white>금액(단위:만원)</font></div>
   </div>
 </section>
-
+<td>
+<td><img src="img/mdata.png"></td>
+</tr>
+</table>
 
 <section>
 <div  id="contents">
-	<table >
-		
-		
-		
-		
-	<thead>
-		<tr>
-		
-			<th>
-		예약자
-		</th>
-		<th>숙소번호</th>
-		<th>인원수</th>
-		<th>예약날짜</th>
-		<th>체크인</th>
-		<th>체크아웃</th>
-		<th>숙박요금</th>
-		
-		</tr>
-	</thead> 
-		
-	
-	<tbody>
-		
-		<c:if test="${empty listt }">
-		
-			<tr>
-				<td>예약내역이 없습니다 </td>
-			</tr>
-		</c:if>
-			<c:forEach var ="dto" items ="${listt }">
-				<tr>
-				<%-- 
-					<td><c:out value="${dto.roomidx }"></c:out></td>
-					<td><c:out value="${dto.roomname }"></c:out></td> --%>
-				
-				
-					<td>${dto.userid}</td>
-		<td>${dto.roomidx}</td>
-		<td>${dto.count}</td>
-		<td>${dto.reqDate}</td>
-		<td>${dto.checkindate}</td>
-		<td>${dto.checkoutdate}</td>
-		<td>${dto.total_pay}</td> 
-				
-				
+   <table class="table2">
+      
+      
+      
+      
+   <thead>
+      <tr>
+      
+         <th>
+      예약자
+      </th>
+      <th>숙소번호</th>
+      <th>인원수</th>
+      <th>예약날짜</th>
+      <th>체크인</th>
+      <th>체크아웃</th>
+      <th>숙박요금</th>
+      
+      </tr>
+   </thead> 
+      
+   
+   <tbody>
+      
+      <c:if test="${empty listt }">
+      
+         <tr>
+            <td>예약내역이 없습니다 </td>
+         </tr>
+      </c:if>
+         <c:forEach var ="dto" items ="${listt }">
+            <tr>
+            <%-- 
+               <td><c:out value="${dto.roomidx }"></c:out></td>
+               <td><c:out value="${dto.roomname }"></c:out></td> --%>
+            
+            
+               <td>${dto.userid}</td>
+      <td>${dto.roomidx}</td>
+      <td>${dto.count}</td>
+      <td>${dto.reqDate}</td>
+      <td>${dto.checkindate}</td>
+      <td>${dto.checkoutdate}</td>
+      <td>${dto.total_pay}</td> 
+            
+            
 
-				</tr>
-				
-			</c:forEach>
-		
-	</tbody>	
-		
-	
-	
-	</table>
-	</div>
+            </tr>
+            
+         </c:forEach>
+      
+   </tbody>   
+      
+   
+   
+   </table>
+   </div>
 </section>
 
 
@@ -610,20 +624,22 @@ var chartContainer2 = document.querySelector('[data-donut-chart="2"]');
 var chartData1a = {
   total:  ${map.mantotal},
   wedges: [
-    { id: 'a', color: '#4FC1E9', value: ${map.man0} },
-    { id: 'b', color: '#A0D468', value: ${map.man1} },
-    { id: 'c', color: '#ED5565', value: ${map.man2} },
-    { id: 'd', color: '#AC92EC', value: ${map.man3} }
+    { id: 'a', color: '#006600', value: ${map.man0} },
+    { id: 'b', color: '#00cc66', value: ${map.man1} },
+    { id: 'c', color: '#00ffff', value: ${map.man2} },
+    { id: 'd', color: '#66ffff', value: ${map.man3} }
   ]
 };
+
+
 //여자꺼
 var chartData1b = {
   total: Number(${map.womantotal}),
   wedges: [
-    { id: 'a', color: '#4FC1E9', value:${map.woman0} },
-    { id: 'b', color: '#A0D468', value: ${map.woman1} },
-    { id: 'c', color: '#ED5565', value: ${map.woman2} },
-    { id: 'd', color: '#AC92EC', value: ${map.woman3} }
+    { id: 'a', color: '#cc0000', value:${map.woman0} },
+    { id: 'b', color: '#ff0000', value: ${map.woman1} },
+    { id: 'c', color: '#ff6600', value: ${map.woman2} },
+    { id: 'd', color: '#ffff00', value: ${map.woman3} }
   ]
 };
 //월별매출
@@ -664,7 +680,7 @@ Chart2.init({
 
 setTimeout(function() {
   setInterval(function() {
-	
+   
     Chart1.update({
       data: chartData1a
     });
