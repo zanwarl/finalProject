@@ -86,6 +86,8 @@
 </head>
 <body>
 <%@ include file="header.jsp" %>
+	<li><a href="dataControll.do">관리</a></li>
+
 	<div class="flicker-example" data-block-text="false">
 		
 		<ul>

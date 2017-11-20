@@ -21,5 +21,7 @@
  		<mapper resource="sql/vocSql.xml"/> 
  		<mapper resource="sql/roomAdd.xml"/>
  		<mapper resource="sql/reBbsSql.xml"/>
+ 		<mapper resource="sql/dataControll.xml"/>
+ 		
  	</mappers>
  </configuration>
