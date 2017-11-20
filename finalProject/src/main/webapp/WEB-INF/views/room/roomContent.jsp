@@ -197,6 +197,19 @@ html, body {
 	<input type="button" value="삭제하기" onclick="goDelete('${arr.roomidx}')">
 	</c:if>
 	<input type="button" value="예약하기" onclick="roomReq('${arr.roomidx}')">
+
+	<c:url value="sendMsg.do" var="sendMsgURL">
+		<c:param name="receiver" value="${receiver }"></c:param>
+	</c:url>
+	
+	<a href="${sendMsgURL }">메세지보내기</a>
+	
+		<c:url value="comReq.do" var="complainURL">
+		<c:param name="receiver" value="${arr.useridx }"></c:param>
+	</c:url>
+	
+	<a href="${complainURL }">신고하기</a>
+
 </div>
 <%@ include file="../footer.jsp" %>
 </body>

@@ -54,5 +54,12 @@
 			WHERE
 				imgaeidx = #{imgaeidx}	
 	</update>
+	
+	<select id="getUserIdSql_room" parameterType="int" resultType="String">
+		select member_id from member where member_idx = #{userIdx}
+	
+	</select>
+	
+	
 
 </mapper>
