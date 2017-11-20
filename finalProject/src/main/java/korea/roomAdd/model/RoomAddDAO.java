@@ -13,6 +13,9 @@ public interface RoomAddDAO {
 
 	public int roomAdd(RoomAddDTO dto);
 	public List<RoomJoinDTO> roomList(int cp,int listSize,String sort); 
+	
+	//메인 페이지용 list
+	public List<RoomJoinDTO> roomList(); 
 	public RoomAddDTO roomContent(int idx);
 	public List<ImageDTO> fileList(int idx);
 	public RoomAddDTO roomUpdateData(int idx);

@@ -34,9 +34,10 @@
 		<select id="favPlanList" resultType="korea.plan.model.PlanDTO">
 			select * from
 			(select rownum as rnum, a.* from
-			(select * from plan_main order by plan_readnum desc) a) b 
+			(select * from plan_main 
+			where plan_public = 'Y' 	order by plan_readnum desc) a) b 
 			<![CDATA[
-				where plan_public = 'Y'	and rnum <=8
+			where rnum <=8
    			]]>
 		</select>
 		

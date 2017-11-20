@@ -28,6 +28,22 @@
 				where rnum >= (#{cp} -1) * #{pageRow} + 1 and rnum <= #{cp} * #{pageRow} 
 		]]>
 	</select>
+	
+	<select id="mainRoomList" resultType="korea.roomAdd.model.RoomJoinDTO">
+		select * from  
+		(select rownum as rnum, a.* from     
+		(
+		select r.roomidx,r.roomprice,r.useridx,r.roomname,
+		    wm_concat(i.filename) as filename,i.del_gb
+		from roomadd r,rimage i 
+		where r.roomidx = i.roomidx and i.DEL_GB = 'N'
+		group by r.roomidx,r.useridx,r.roomname,r.roomprice,i.del_gb
+		order by r.roomidx desc )a)b
+		<![CDATA[
+			where rnum <=8
+		]]>
+	</select>
+	
 	<select id="roomContent" parameterType="int"
 		resultType="korea.roomAdd.model.RoomAddDTO">
 		select * from roomadd where roomidx = #{idx}

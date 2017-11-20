@@ -34,6 +34,11 @@ public class RoomAddDAOImple implements RoomAddDAO {
 		List<RoomJoinDTO> list = sqlMap.selectList("roomList",map);
 		return list;
 	}
+	
+	public List<RoomJoinDTO> roomList() {
+		List<RoomJoinDTO> list = sqlMap.selectList("mainRoomList");
+		return list;
+	}
 
 	public RoomAddDTO roomContent(int idx) {
 		RoomAddDTO rdto = sqlMap.selectOne("roomContent",idx);

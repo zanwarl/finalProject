@@ -9,21 +9,34 @@ import org.springframework.web.servlet.ModelAndView;
 
 import korea.plan.model.PlanDAO;
 import korea.plan.model.PlanDTO;
+import korea.roomAdd.model.RoomAddDAO;
+import korea.roomAdd.model.RoomJoinDTO;
 
 @Controller
 public class IndexController {
 
 	@Autowired
 	PlanDAO pdao;
+	@Autowired
+	private RoomAddDAO radao;
 	
 	@RequestMapping("/index.do")
 	public ModelAndView index() {
 		ModelAndView mav = new ModelAndView();
 		
 		List<PlanDTO> list = pdao.favPlanList();
+		System.out.println("main : " + list.size());
 		int count = pdao.favTotalCnt();
+		
+		List<RoomJoinDTO> roomList = radao.roomList();
+		int roomCount = radao.totalCount();
+		
 		mav.addObject("list", list);
 		mav.addObject("count",count);
+		
+		mav.addObject("roomList", roomList);
+		mav.addObject("roomCount", roomCount);
+		
 		mav.setViewName("index");
 		return mav;
 	}

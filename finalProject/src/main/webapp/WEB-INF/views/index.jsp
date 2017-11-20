@@ -1,7 +1,7 @@
-
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +11,7 @@
 <style>
 #main_contents {
 	width: 1100px;
-	height: 750px;
+	height: 1000px;
 	margin: 0 auto;
 }
 .wrap_content_plan_list {
@@ -20,7 +20,9 @@
     position: relative;
     margin: 0 auto;
 } 
-
+.bot_room_list {
+	text-align: center;
+}
 .wrap_content_room_list {
 	width: 1100px;
 	height: 100px;
@@ -44,6 +46,10 @@
 	width: 250px;
 	height: 120px;
 }
+.bg .room_img {
+	width: 250px;
+	height: 120px;
+}
 .plan_list .bg:hover .plan_img {
 	transform: scale(1.2);
 	-webkit-transform: scale(1.2);
@@ -57,6 +63,17 @@
 	overflow:hidden 
 }
 .plan_list {
+    width: 250px;
+    height: 180px;
+    border: 1px solid #dfdfdf;
+    float: left;
+    margin-right: 16px;
+    margin-bottom: 16px;
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+.room_list {
     width: 250px;
     height: 180px;
     border: 1px solid #dfdfdf;
@@ -135,10 +152,33 @@
 	<!-- 인기 여행일지 정보 게시판 영역 end-->
 	
 	<div class="wrap_content_room_list">
-		<div class="header_room_list">인기 숙소</div>
+		<div class="header_plan_list">숙소</div>
+		<div class="content_plan_list">
+		<c:url value="${contextPath }/img/room/" var="src"/> 
+		<c:forEach var="roomList" items="${roomList }">
+			<a class="room_list" href="roomContent.do?roomidx=${roomList.roomidx}">
+		        <div class="bg">
+		        
+		        <c:set var="checks" value="${roomList.filename}"/>
+		        <c:forEach items="${fn:split(checks, ',') }" var="item" begin="0" end="0">
+			    	<img class="room_img" src="${src }${item}"> 
+				</c:forEach>
+		        
+	        	
+	        	
+	        	</div>
+	        	<div class="name">${roomList.roomname }</div>
+	        	<%-- <div class="explain">${list.plan_explain }</div> --%>
+	        	<div class="bottom">
+	        	</div>
+	        </a>
+		</c:forEach>	
+		</div>
+		<div class="bot_room_list"><a href="home.do">${roomCount }개의 모든 숙소 보기</a></div>
 	</div>
+	
+	
 	</div>
-
 <%@ include file="footer.jsp" %>
 </body>
 </html>
