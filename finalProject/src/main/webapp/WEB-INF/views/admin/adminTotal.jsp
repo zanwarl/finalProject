@@ -56,7 +56,7 @@ function totalData() {
 
 <table>	
 	<tr>
-		<td> 
+		<td>
 		<input type="text" name="roomIdx">
 		<input type="submit" value="숙소번호검색">	
 		<input type="button" value="전체 통계보기" onclick="totalData();">	
