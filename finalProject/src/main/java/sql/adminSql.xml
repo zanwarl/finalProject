@@ -13,7 +13,7 @@
 	</select>
 	
 	<select id="total2Sql" resultType="korea.roomreq.model.RoomreqDTO">
-	select * from roomreq
+	select * from roomreq order by reqidx desc
 	</select>
    
 </mapper>
