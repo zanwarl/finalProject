@@ -104,9 +104,10 @@ public class RoomreqDAOImple implements RoomreqDAO {
 		String t2 = sqlMap.selectOne("totalSql", dill);
 		return t2;
 	}
-	public List<RoomreqDTO> total2(){
-		List<RoomreqDTO> listt=sqlMap.selectList("total2Sql");
-		
+	public List<Map<String, Object>> total2(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<Map<String, Object>> listt=sqlMap.selectList("total2Sql",map);
+		 
 		return listt;
 	}
 
@@ -123,6 +124,12 @@ public class RoomreqDAOImple implements RoomreqDAO {
 	List<	Map<String, Object> >list =  sqlMap.selectList("getBookedDateSql", reqidx);
 		
 		return list; 
+		
+	}
+
+	public String getRoomName(int roomidx) {
+		// TODO Auto-generated method stub
+		return sqlMap.selectOne("getRoomNameSql", roomidx);
 		
 	}
 }

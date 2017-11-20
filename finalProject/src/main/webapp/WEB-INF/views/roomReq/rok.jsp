@@ -9,35 +9,36 @@
 <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.2.js"></script>
 
 <head>
-<style type="text/css">
+<style>
 
-.req1 {
-  width: 30%;
-  height: 30%;
-  margin: 40px auto;
-  background: #CCCCFF;
-  background:rgba(240,120,100,0.2)
+#payMent {
+	width:450px; margin:0 auto; margin-top:20px;
+		
 }
 
-.req2{
-  width: 30%;
-  height: 30%;
-  margin: 40px auto;
+.payy{
+	width:450px;
+	margin:40px auto;
+	margin-top:20px;
+	border-top: 2px solid #333;
+	font-align:center;
+	 		
 }
 
 h1{
- 	width: 30%;
-	height: 30%;
-  	margin: 40px auto;
+ 	width:450px;
+	margin:10px auto;
+	margin-top:20px;
     color: #FCA205;
     font-family: 'Lobster';
     font-size: 30pt;
 }
 
-}
+
 label{
-	font-size: 30pt;
-	align : center;	
+	font-size:20px;
+	color:#000000;
+	font-weight:bold;
 }
 text{
 	font-size: 20pt;
@@ -50,7 +51,7 @@ text{
     color: #fff;
     font-weight: bold;
     background-color: #538fbe;
-    padding: 10px 10px;
+    padding: 10px 30px;
     font-size: 15px;
     border: 1px solid #2d6898;
     background-image: linear-gradient(bottom, rgb(73,132,180) 0%, rgb(97,155,203) 100%);
@@ -124,36 +125,29 @@ function ok(reqIdx, amt){
 <body>
 <%@ include file="../header.jsp" %>
 <div id="contents">
-	<img src="img/reser.PNG" width="350" height="300" style="margin-left: auto; margin-right: auto; display: block;">
+	<img src="img/reser.PNG" width="250" height="200" style="margin-left: auto; margin-right: auto; display: block;">
 	<h1> 확인 및 결제 </h1>
 <form name="payMent" action="payMent.do">
 	
 	<div class=req1>
 	<table>
 	<c:set var="arr" value="${rdto}"/>	
-	
-		<label>예약인원수</label></br>
-		<text> ${arr.count} </text></br>
-		
-		<label>예약일시 </label></br>
-		<text>${arr.reqDate}</text></br>
-		
-		<label>체크인</label></br>
-		<text>${arr.checkindate}</text></br>
-	
-		<label>체크아웃 </label></br>
-		<text>${arr.checkoutdate}</text></br>
-	
-		<label>총 합계</label></br>
-		<text><fmt:formatNumber value="${total_pay}" pattern="#,###,###" /></text></br>
+		<p class="payy">		
+						
+	 	<label>예약인원수  &nbsp;&nbsp;&nbsp;&nbsp;</label> <text> ${arr.count} </text></br>
+		<label>예약일시&nbsp;&nbsp;&nbsp;&nbsp; </label> <text> ${arr.reqDate}</text></br>
+		<label>체크 인&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </label> <text>${arr.checkindate}</text></br>
+		<label>체크아웃&nbsp;&nbsp;&nbsp;&nbsp; </label><text>${arr.checkoutdate}</text></br>
+		<label>총 합계&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>  <text><fmt:formatNumber value="${total_pay}" pattern="#,###,###" /></text></br>
 		
 		</div>
-		<div class=req2>
+		 </p>
+		<div class= "paybt">
 			<label>	 
-				<input type="button" class="reqBtn" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> 
+				<center><input type="button" class="reqBtn" value="결제" onclick="ok('${param.reqidx }', ${total_pay})"> </center>
 			</label>
 		</div>
- 	   
+ 	  
 	</table>
 	</form>
 </div>
