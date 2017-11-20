@@ -51,18 +51,27 @@ tr:hover {
 	<tr>
 		<td> 
 		<input type="text" name="roomIdx">
-		<input type="submit" value="숙소검색">		
+		<input type="submit" value="숙소번호검색">		
 		</td>
 	</tr>
-	<tr><td>
-		${listt }
-		</td></tr>
-	<c:forEach var ="dto" items ="${list }">
+	<tr>
+	<td>
+		예약자
+		</td>
+		<td>숙소번호</td>
+		<td>인원수</td>
+		<td>예약날짜</td>
+		<td>체크인</td>
+		<td>체크아웃</td>
+		<td>숙박요금</td>
+		</tr>
+	<c:forEach var ="dto" items ="${listt }">
 	
 				
 	<tr>
 		
 		<td>${dto.userid}</td>
+		<td>${dto.roomidx}</td>
 		<td>${dto.count}</td>
 		<td>${dto.reqDate}</td>
 		<td>${dto.checkindate}</td>
