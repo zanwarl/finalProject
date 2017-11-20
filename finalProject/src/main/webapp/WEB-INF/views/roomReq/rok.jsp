@@ -26,9 +26,9 @@
 }
 
 h1{
- 	width: 30%;
-	height: 30%;
-  	margin: 40px auto;
+ 	width:450px;
+	margin:10px auto;
+	margin-top:20px;
     color: #FCA205;
     font-family: 'Lobster';
     font-size: 30pt;
