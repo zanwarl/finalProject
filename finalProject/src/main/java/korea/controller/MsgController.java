@@ -60,9 +60,9 @@ public class MsgController {
 		int msgIdx = 0;
 		boolean isFirst = mdao.isFirst(sender, receiver);
 		if (isFirst) {
-			// ���� ��ȭ�� ������
+			// 
 			msgIdx = mdao.getMsgIdx(sender, receiver);
-			// ������
+			//
 		} else {
 			msgIdx = mdao.getMaxMsgIdx(sender);
 
@@ -87,6 +87,47 @@ public class MsgController {
 
 		//
 
+	}
+	@RequestMapping(value = "/sendMsg2.do", method = RequestMethod.POST)
+	public ModelAndView sendMsg2(@RequestParam(value = "receiver") String receiver,
+			MsgDTO dto, 
+			HttpServletRequest req,
+			HttpServletResponse resp) {
+		
+		// int sender = 1 ;
+		HttpSession session = req.getSession();
+		String sender = (String) session.getAttribute("sId");
+		
+		int msgIdx = 0;
+		boolean isFirst = mdao.isFirst(sender, receiver);
+		if (isFirst) {
+			// 
+			msgIdx = mdao.getMsgIdx(sender, receiver);
+			//
+		} else {
+			msgIdx = mdao.getMaxMsgIdx(sender);
+			
+		}
+		
+		dto.setMsgIdx(msgIdx);
+		
+		dto.setSender(sender);
+		dto.setReceiver(receiver);
+		
+		ModelAndView mav = new ModelAndView();
+		int res = mdao.sendMsg(dto);
+	//	String goURL = res > 0 ? "msgContent.do?msgIdx="+dto.getMsgIdx() : "/sendMsg.do?receiver=" + receiver;
+		String msg = res > 0 ? "성공" : "실패";
+		mav.addObject("msg", msg);
+		
+//		mav.addObject("goURL", goURL);
+		
+		mav.setViewName("admin/close2");
+		
+		return mav;
+		
+		//
+		
 	}
 
 	@RequestMapping("/msgList.do")

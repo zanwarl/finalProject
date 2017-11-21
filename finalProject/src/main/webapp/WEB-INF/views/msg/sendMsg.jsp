@@ -36,7 +36,7 @@ input {
 </head>
 <body>
 
-<form action="sendMsg.do" method="post">
+<form action="sendMsg2.do" method="post">
 <input type="hidden" name="sender" value="${sId}" readonly="readonly" >
 
 <table>
@@ -56,17 +56,6 @@ input {
 
 </form>
 
-<%-- sender	
-
-<br>
-receiver
-	<input type="text" name="receiver" value="${param.receiver}">
-	
-	<br>
-	
-		
-	</textarea>
-	 --%>
 
 
 </body>
