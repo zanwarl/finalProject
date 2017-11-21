@@ -11,13 +11,16 @@
 <style>
 table {width:900px; margin:0 auto; margin-bottom:20px;}
 
-td {text-align:center; }
+td {text-align:center; 
+width: 200px;
+height: 300px;
+}
 
 .title {width:100px; margin:0 auto;}
 
 .room_img {
-  	max-width: 100%;
-  	height: auto;
+  	width: 200px;
+  	height: 100px;
 }
 
 .roomName {text-align:center; font-weight:bold;}

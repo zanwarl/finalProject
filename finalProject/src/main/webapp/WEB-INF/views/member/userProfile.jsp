@@ -440,7 +440,7 @@ section {
 
 #content {
 	padding-top: 20px;
-    height: 1000px;
+    height: 1200px;
     margin: 0;
 }
 </style>
