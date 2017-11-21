@@ -32,7 +32,7 @@
 	사원번호: ${adminIdx}
 	
 	<h5>
-	<a href="main.do">메인페이지</a>|
+	<a href="index.do">메인페이지</a>|
 	<a href="adminLogout.do">로그아웃</a></h5>
 </c:if>
 
