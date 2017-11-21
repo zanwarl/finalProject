@@ -21,10 +21,28 @@ function pwd(){
 }
 
 </script>
+<style>
+#content {
+	margin: 0 auto;
+	padding-left: 400px;
+}
+#content_bot {
+	margin: 0 auto;
+	padding-left: 150px;
+}
+.title {
+	padding-left: 200px;
+}
+#bot {
+	padding-left: 400px;
+	padding-bottom: 50px;
+}
+</style>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<h2 align="center">회원가입</h2>
+<div id="content">
+<h2 class="title">회원가입</h2>
 <form name="memberJoin" action="memberJoin.do" method="post">
 <table align="center" style="text-align: left;">
 	<tr>
@@ -134,6 +152,8 @@ function pwd(){
 	
 	
 </table>
+</div>
+<div id="content_bot">
 <br><br><br>
 <table align="center">
 <tr>
@@ -319,13 +339,14 @@ o 로그 기록
 			</tr>
 </table>
 <br>
-<p style="text-align: center;">
+<p id="bot">
 		
 			<input type="submit" value="회원가입">
 			<input type="reset" value="다시작성">
 		
 	</p>
 </form>
+</div>
 </body>
 <%@ include file="../footer.jsp" %>
 </html>

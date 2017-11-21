@@ -20,10 +20,25 @@ function pwd(){
 }
 
 </script>
+<style>
+.content {
+	padding-left: 400px;
+	padding-bottom: 50px;
+}
+#title {
+	padding-bottom: 50px;
+}
+#bot {
+	padding-left: 150px;
+	padding-top: 50px;
+}
+</style>
 </head>
 <body>
 <%@ include file="../header.jsp" %>
-<h2 align="center">회원 정보수정</h2>
+<h2 align="center" id="title">회원 정보수정</h2>
+<div id="contents">
+<div class="content">
 <form name="memberJoin" action="memberUpdate.do" method="post">
 <table align="center" style="text-align: left;">
 	<tr>
@@ -120,13 +135,14 @@ function pwd(){
 	
 </table>
 
-<p style="text-align: center;">
+<p id="bot">
 		
 			<input type="submit" value="회원정보수정">
 			<input type="reset" value="다시작성">
 		
 	</p>
 </form>
+</div></div>
 <%@ include file="../footer.jsp" %>
 </body>
 </html>
