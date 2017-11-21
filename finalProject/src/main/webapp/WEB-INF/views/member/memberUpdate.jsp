@@ -22,6 +22,7 @@ function pwd(){
 </script>
 </head>
 <body>
+<%@ include file="../header.jsp" %>
 <h2 align="center">회원 정보수정</h2>
 <form name="memberJoin" action="memberUpdate.do" method="post">
 <table align="center" style="text-align: left;">
@@ -126,5 +127,6 @@ function pwd(){
 		
 	</p>
 </form>
+<%@ include file="../footer.jsp" %>
 </body>
 </html>
