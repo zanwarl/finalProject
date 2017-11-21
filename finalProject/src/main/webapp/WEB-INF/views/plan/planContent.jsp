@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+
+
 .content_top {
 	width: 1000px;
 	margin: 0 auto;
@@ -184,7 +186,7 @@ margin-top: 35px;
 		<c:param name="userId" value="${pId }"></c:param>
 </c:url>
 	
-	<a href="${profileURL }">${pdto.plan_name}</a>님의 일정
+	<a style="color: white;" href="${profileURL }">${pdto.plan_name}</a>님의 일정
 	</div>
 </div>
 

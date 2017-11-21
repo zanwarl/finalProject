@@ -451,7 +451,7 @@ function goImageUpdate(idx) {
           	<strong>숙박최대인원:</strong>${arr.maxcount}
           	</p>
           	<p>
-          	<strong>conv:</strong>${arr.conv}<br>
+          	<strong>편의용품:</strong>${arr.conv}<br>
           	<strong>안전시설:</strong>${arr.safe}<br>
           	<strong>개인공간:</strong>${arr.space}
           	<p><br>
