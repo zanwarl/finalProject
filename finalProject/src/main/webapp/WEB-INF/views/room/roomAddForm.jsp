@@ -190,7 +190,7 @@ function goList() {
 						}).open();
 			}
 		</script>
-            <label for="conv">Conv</label>
+            <label for="conv">편의용품</label>
             <div class="checkbox">
 			  <label><input type="checkbox" name="conv" value="필수품목">필수품목(수건,침대시트,비누,화장지)</label>
 			  <label><input type="checkbox" name="conv" value="무선인터넷">무선인터넷</label>
