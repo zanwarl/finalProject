@@ -123,6 +123,7 @@ public class RoomAddController {
 		
 
 		RoomAddDTO rdto = radao.roomContent(idx);
+		rdto.setContent(rdto.getContent().replaceAll("\r", "<br>"));
 		List<ImageDTO> imageList = radao.fileList(idx);
 		ModelAndView mav = new ModelAndView();
 
