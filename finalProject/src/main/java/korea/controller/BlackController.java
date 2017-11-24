@@ -43,6 +43,25 @@ public class BlackController {
 		
 	}
 	
+	
+	@RequestMapping ("/deleteBlackList.do")
+	public ModelAndView deleteBlackList(
+			@RequestParam ( value = "idx" )int idx
+			) {
+		
+		int res1 = blackdao.deleteblacklist2(idx);
+		int res = blackdao.deleteblacklist(idx);
+		
+		
+		ModelAndView mav = new ModelAndView(); 
+		mav.setViewName("admin/adminMsg");
+		mav.addObject("msg", "삭제되었습니다.");
+		mav.addObject("goURL", "blackList.do");
+		return mav ; 
+		
+		
+	}
+	
 	@RequestMapping ("/blackSearchList.do")
 	public ModelAndView blackSearchList (
 			@RequestParam(value="cp", defaultValue="1") int cp, 

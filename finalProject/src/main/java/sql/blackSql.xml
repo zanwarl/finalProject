@@ -60,6 +60,15 @@ and member_id = #{id}
 	</insert>
 
 
+	<delete id="delblack" parameterType="int" >
+		delete from blacklist where useridx = #{idx} 
+	</delete>
+
+
+	<update id="delblack2" parameterType="int">
+		update member set member_host_grade = 0 where member_idx = #{idx}
+	
+	</update>
 
 
 

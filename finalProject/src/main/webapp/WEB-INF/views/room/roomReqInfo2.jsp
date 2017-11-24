@@ -5,7 +5,42 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+
+<style type="text/css">
+table, td, th {
+	margin-top: 50px;
+	border: 1px solid #ddd;
+	text-align: left;
+	border: 1px solid #ddd;
+}
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+th, td {
+	padding: 15px;
+}
+
+textarea {
+	height: 100% ; 
+	width: 100%;
+}
+
+input button {
+	border: none;
+}
+
+tfoot td {
+	text-align: center;
+}
+</style>
+
+
 </head>
+
 <body>
 
 <table>

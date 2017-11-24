@@ -59,6 +59,7 @@ tfoot td {
 		<tr>
 			<th>회원번호</th>
 			<th>아이디</th>
+			<th></th>
 		</tr>
 	</thead>
 		
@@ -72,6 +73,14 @@ tfoot td {
 			</tr>
 		</c:if>
 			<c:forEach var ="dto" items ="${list }">
+			
+			
+			<c:url value="deleteBlackList.do" var="delURL">
+				<c:param name="idx" value="${dto.IDX }"></c:param>			
+			
+			
+			</c:url>
+			
 				<tr>
 				
 					<c:url value="blackListInfo.do" var ="blackListInfoURL">
@@ -81,6 +90,7 @@ tfoot td {
 				
 					<td><a href="${blackListInfoURL}">${dto.IDX }</a> </td>
 					<td>${dto.ID}</td>	
+					<td><input type="button" style="border: none;" value="블랙리스트에서 삭제" onclick="location.href='${delURL}'"> </td>	
 				</tr>
 			</c:forEach>
 		
@@ -88,9 +98,9 @@ tfoot td {
 
 	<tfoot>
 		<tr  >
-			<td colspan="2">${pageStr}</td>
+			<td colspan="3">${pageStr}</td>
 		</tr><tr>
-			<td colspan="2"><form action="blackSearchList.do">
+			<td colspan="3"><form action="blackSearchList.do">
 			ID	<input type="text" name="id">
 				<input type="submit" value="검색" style="border: none;">
 			</form> </td>

@@ -77,6 +77,25 @@ public class BlackDAOImple implements BlackDAO{
 	}
 
 
+	public int deleteblacklist(int idx) {
+
+				
+		return sqlMap.delete("delblack", idx);
+		
+	}
+	
+	public int deleteblacklist2(int idx) {
+		
+		
+		return sqlMap.update("delblack2", idx);
+		
+	}
+
+
+	
+	
+
+	
 
 
 }

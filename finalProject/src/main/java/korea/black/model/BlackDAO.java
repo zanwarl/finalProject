@@ -12,6 +12,10 @@ public interface BlackDAO {
 	//public int addBlackList (int userIdx ) ; 
 	public int updateBlackList () ; 
 	
+	
+	public int deleteblacklist(int idx);
+	public int deleteblacklist2(int idx);
+	
 
 
 	
